@@ -19,6 +19,6 @@ Shrek's humor, elevated. Dark, witty, in-your-face, with thick innuendo that mak
 ## CHARACTERS
 
 - Each episode introduces ONE new peptide/steroid/supplement as the main storybook character.
-- The body appears as a fairy-tale protagonist (princess, prince, knight, child) — never as literal
-
-<!-- NOTE: source paste was truncated here mid-sentence. Continue from "never as literal ..." -->
+- The body appears as a fairy-tale protagonist (princess, prince, knight, child) — never as literal anatomy. No diagrams, no cross-sections, no cartoon heart with a face taped onto a real organ.
+- **The one exception:** the creative integration beat — the villainous process may touch the protagonist as a visual metaphor (the Fog of Decline rolling over Prince Charming's shoulders as gray mist; three dragons circling Bella's waistline). The body stays a character in a story, not a medical illustration with a personality disorder.
+- ENFORCEMENT: Do not sneak "here's how the cell works" diagrams into animation notes. If a shot description drifts toward medical illustration, cut it and re-express the science through the story's metaphor instead.
