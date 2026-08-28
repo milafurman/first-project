@@ -1,9 +1,13 @@
 # STORY SLATE — EPISODES 002–006 (PROPOSALS)
 
-Status: Story 1 (Testosterone) is LOCKED — see `001-testosterone.md`. Stories 2–6 below are
-proposals as drafted by Mila, preserved verbatim, each followed by HEAD WRITER NOTES flagging
-golden-rule conflicts, science accuracy issues, and platform-compliance risks to resolve before
-an episode gets its own numbered file with a full science appendix.
+Status: Story 1 (Testosterone) is LOCKED — see `001-testosterone.md`. Story 2 (Retatrutide) is
+PROMOTED to Episode 002 — see `002-retatrutide.md`, which supersedes the draft below and fixes
+the GLP-1 canon: the dragons are now process-villains (Craving, the Hoard, the Cold Furnace),
+GLP-1/GIP/glucagon are never villains, and GLP-1 stays free to be the hero monk of Story 5.
+Stories 3–6 below remain proposals as drafted by Mila, preserved verbatim, each followed by
+HEAD WRITER NOTES flagging golden-rule conflicts, science accuracy issues, and
+platform-compliance risks to resolve before an episode gets its own numbered file with a full
+science appendix.
 
 ---
 
@@ -145,12 +149,11 @@ an episode gets its own numbered file with a full science appendix.
 
 ### HEAD WRITER NOTES — Story 5
 
-- **SERIES CONTINUITY (blocking issue, shared with Story 2):** Here GLP-1 is a hero monk; in
-  Story 2 the GLP-1 dragon is a villain. Same molecule, opposite canon. Recommended resolution:
-  fix Story 2's dragons as process-villains (Craving/Storage/Empty Furnace), which frees GLP-1
-  to be the monk here — and makes retatrutide canonically "the knight who learned the monk's
-  teaching and two more besides." The two episodes then *reinforce* each other instead of
-  contradicting.
+- **SERIES CONTINUITY (RESOLVED in Episode 002):** The Story 2 draft made GLP-1 a villain
+  dragon while this story makes it a hero monk. Episode 002 (`002-retatrutide.md`) resolved it:
+  the dragons are process-villains (Craving, the Hoard, the Cold Furnace) and GLP-1 is
+  canonically heroic. The monk is cleared for this episode — and Sir Reta is now canonically
+  "the knight who speaks the monk's language and two more besides."
 - **GOLDEN RULE CHECK (passes):** "It was a *process*, not a person" — this line IS the series
   thesis said out loud. Keep it forever.
 - **GOLDEN-RULE EDGE:** "The pit isn't the problem, your response is" drifts toward blaming
