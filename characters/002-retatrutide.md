@@ -165,3 +165,24 @@ episodes). Closing thesis + logo beat.
 No receptors, no pancreas, no gut cutaways, no "incretin pathway" arrows. The three sealed
 castle gates ARE the receptor biology. The boiler-room furnace IS energy expenditure. If a
 storyboard sneaks in a GLP-1 molecule, the dragons eat the storyboard.
+
+## HEDRA SHOT PACK — SHORT VERSION (9:16)
+
+Workflow per `production/hedra-pipeline.md`. Portraits: Sir Reta, Princess Bella, Marrow;
+dragons are SCENE characters (group sheet).
+
+| Shot | Type | Audio file | Character / visual | Hedra motion prompt |
+|---|---|---|---|---|
+| S01 (0:00–0:04) | PERFORMANCE | 002-S01-narrator.wav | Sir Reta, hook, direct to camera | insufferable smirk, slow shrug, "and he speaks every one" landed with a wink |
+| S02 (0:04–0:14) | SCENE | 002-S02-narrator.wav (VO under) | Dragons circle Bella's waistline as slow silhouettes; "Cake. Cake. Cake." whisper motif in sound design | — (scene generation; silhouettes only, Bella's figure NEVER changes on screen) |
+| S03 (0:14–0:20) | PERFORMANCE | 002-S03-marrow.wav | Marrow mid-fight (VO: witch verse) | sleeves rolled, ladle swings, magnificent and outnumbered — never defeated |
+| S04 (0:20–0:30) | PERFORMANCE | 002-S04-reta.wav | Reta's arrival + "Ma'am has heard enough this week." | strolls in, bows to no one, clears throat, delivers the line like a brunch order |
+| S05 (0:30–0:38) | SCENE | 002-S05-narrator.wav (VO under) | Craving blinks, Hoard uncurls, Furnace coughs a flame; castle warms, quiet falls | — (three-beat scene; the dragons LEAVE, the kingdom stays) |
+| S06 (0:38–0:44) | PERFORMANCE | 002-S06-bella.wav | Bella, punchline ("…they were the same thing.") | calm morning light, unhurried bite of breakfast, small private smile |
+| S07 (0:44–0:48) | CARD | 002-S07-logo.wav (three seals: hiss, croon, roar) | Series title card | — (Descript/Canva, not Hedra) |
+
+Long version: Act IV monologue is one continuous Character-3 long-form generation (Sir Reta
+portrait + full monologue audio, motion prompt: "cocky exterior cracking into sincerity;
+gestures loosely until 'the princess', where he goes still; ends on the translator line with
+no smirk at all"). Marrow/Reta bickering scenes cut between their two performance generations
+reacting to each other's audio.

@@ -104,3 +104,24 @@ The body. A queen in her prime who built this kingdom herself and has zero inten
 ## ANIMATION NOTES — WHAT IS BANNED
 
 Per series bible: no diagrams, no cross-sections, no cell interiors, no "here's how the androgen receptor works" cutaways. The library-and-building-plans metaphor IS the receptor mechanism. If a storyboard artist sneaks in a cell, the mist gets them.
+
+## HEDRA SHOT PACK — SHORT VERSION (9:16)
+
+Workflow per `production/hedra-pipeline.md`. Portraits from `production/character-sheets/`
+(Sir Osterone, Queen Meridia, The Fade). Motion prompts are the text input alongside portrait +
+audio in Character-3.
+
+| Shot | Type | Audio file | Character / visual | Hedra motion prompt |
+|---|---|---|---|---|
+| S01 (0:00–0:04) | PERFORMANCE | 001-S01-narrator.wav | Queen Meridia, direct to camera | conspiratorial lean-in, raised eyebrow, beckoning "gather round" energy |
+| S02 (0:04–0:12) | PERFORMANCE | 001-S02-narrator.wav | Sir Osterone at forge (VO: "In the Kingdom…hence") | steady hammer rhythm, proud half-smile, one slow wink on "no further comments" |
+| S03 (0:12–0:20) | SCENE | 001-S03-narrator.wav (VO under) | The Fade's mist rolls over Meridia's shoulders on the throne; colors desaturate | — (scene generation / b-roll; mist on shoulders ONLY, per bible) |
+| S04 (0:20–0:28) | PERFORMANCE | 001-S04-meridia.wav | Meridia stands ("I've news. It's not.") | rises from throne, chin lifts, quiet fury turning to resolve |
+| S05 (0:28–0:40) | PERFORMANCE | 001-S05-narrator.wav | Sir Osterone receiving the raven letter (myth-bust verse) | catches letter, breaks wax seal, slow grin building to forge-light flare |
+| S06 (0:40–0:45) | PERFORMANCE | 001-S06-meridia.wav | Meridia, punchline ("…doesn't pay taxes to mist") | dry delivery, single arched brow, zero doubt |
+| S07 (0:45–0:48) | CARD | 001-S07-logo.wav (seal-stamp SFX) | Series title card, wax seal stamps | — (Descript/Canva, not Hedra) |
+
+Long version: the Act IV monologue is ONE continuous Character-3 long-form generation
+(Sir Osterone portrait + full monologue audio, motion prompt: "weathered warmth, forge glow,
+speaks like a man finally asked about his life's work; leans on hammer, eyes shine at 'send
+the raven'"). Acts I–III and V cut between performance shots and scene b-roll per the outline.
