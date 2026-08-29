@@ -1,7 +1,7 @@
 # EPISODE 002 — RETATRUTIDE
 
 **Character:** Sir Reta, the Dragon-Tongued Knight
-**Villains:** The Three Hungry Dragons — Craving, the Hoard, and the Cold Furnace (of the House of Entropy, cousins to The Fade)
+**Villains:** The Three Hungry Dragons — Craving, the Hoard, and the Cold Furnace (of the House of Entropy, cousins to the Fog of Decline)
 **Protagonist:** Princess Bella (the body)
 **Supporting:** Marrow the Kitchen Witch (metabolism — a hero, never a villain)
 
@@ -35,7 +35,7 @@ rare cocky character who's earned it.
 
 ## THE VILLAINS — THE THREE HUNGRY DRAGONS
 
-Cousins of The Fade (Ep. 001), all of the House of Entropy. They don't breathe fire. They
+Cousins of the Fog of Decline (Ep. 001), all of the House of Entropy. They don't breathe fire. They
 breathe *noise*.
 
 - **CRAVING** — a sleek whisper-dragon coiled around the castle towers. Never roars. Just
@@ -66,7 +66,7 @@ emotional spine.
 ## MARROW THE KITCHEN WITCH (metabolism)
 
 The proposal draft made her old and failing — too close to blaming the body. Canon fix: Marrow
-is *magnificent* and *overtaxed*. The Fade (Ep. 001's villain — series continuity) has been
+is *magnificent* and *overtaxed*. The Fog of Decline (Ep. 001's villain — series continuity) has been
 skimming her stores through the kingdom's change of seasons, and three dragons is too many for
 one witch mid-heist. She doesn't get replaced by Sir Reta; she gets *reinforcements*. Their
 bickering-allies chemistry is the long version's comic engine. (Menopause-transition changes in
@@ -107,9 +107,9 @@ weather. Bella tries to eat a salad; Craving's whisper lands on the exact syllab
 timing, then the gut-punch: the court blames Bella. "A princess should simply want less."
 
 **Act II — Villain Origin: House of Entropy (1:30–3:00):** The dragons' family tree — cousins
-of The Fade, all children of Entropy, each assigned a racket: Craving takes the mind's quiet,
+of the Fog of Decline, all children of Entropy, each assigned a racket: Craving takes the mind's quiet,
 the Hoard takes the vaults, the Cold Furnace takes the flame. Marrow the Kitchen Witch's
-one-woman defense, magnificent and outnumbered, her stores skimmed by The Fade through the
+one-woman defense, magnificent and outnumbered, her stores skimmed by the Fog of Decline through the
 kingdom's changing seasons. She never loses; she's *losing ground*. Not the same thing.
 
 **Act III — The Knight of Three Tongues (3:00–4:30):** Sir Reta's arrival, maximally
@@ -128,7 +128,7 @@ Craving is soothed, the Hoard is audited, the Furnace is *reignited*.
 
 **Act V — The Quiet (5:30–6:30):** Not a victory feast — a quiet morning. Bella eats breakfast
 with no whisper on the syllables. Dances because she feels like it. The dragons, off in the
-mountains, sulk beside The Fade (post-credits-style villain-family tag, seeding future
+mountains, sulk beside the Fog of Decline (post-credits-style villain-family tag, seeding future
 episodes). Closing thesis + logo beat.
 
 ---
@@ -166,10 +166,11 @@ No receptors, no pancreas, no gut cutaways, no "incretin pathway" arrows. The th
 castle gates ARE the receptor biology. The boiler-room furnace IS energy expenditure. If a
 storyboard sneaks in a GLP-1 molecule, the dragons eat the storyboard.
 
-## HEDRA SHOT PACK — SHORT VERSION (9:16)
+## LEGACY SHOT PACK (Hedra — superseded)
 
-Workflow per `production/hedra-pipeline.md`. Portraits: Sir Reta, Princess Bella, Marrow;
-dragons are SCENE characters (group sheet).
+The series pipeline is now Suno + Atlabs per `production/pipeline.md`. This episode gets its
+full A–I production package (Suno brief, Atlabs cast bible, music-video scene list) when
+promoted to production. The shot breakdown below is kept as a staging reference only.
 
 | Shot | Type | Audio file | Character / visual | Hedra motion prompt |
 |---|---|---|---|---|

@@ -200,7 +200,7 @@ science appendix.
   bulked up" is the GH-axis story, not an ipamorelin trial result; appendix must say so.
   Note: not FDA-approved; compounding-pharmacy gray zone — same compliance posture as BPC-157.
 - **GOLDEN RULE CHECK (needs a villain):** No named villain — muscle wasting just "happens."
-  Give the process a face: "The Wither" or fold it into The Fade's family (The Fade already
+  Give the process a face: "The Wither" or fold it into the Fog of Decline's family (the Fog of Decline already
   established in Episode 001 as the entropy-tax collector; sarcopenia is a natural second
   business line for the same villain — series-arc opportunity).
 - **What's working:** "Wasting away like a snowman in July." The cursed amulet that promised
@@ -213,9 +213,9 @@ science appendix.
 
 1. **The GLP-1 contradiction (Stories 2 vs 5):** one canon for GLP-1. Recommendation above:
    process-named dragons in Story 2, monk stays hero in Story 5.
-2. **Villain roster:** decide whether each episode gets its own process-villain or whether The
-   Fade (Ep. 001) heads a villain *family* — The Fade, The Dimming, The Wither, the Three
-   Dragons, the Pit — all children of Entropy. A shared villain-house is a franchise asset.
+2. **Villain roster:** decide whether each episode gets its own process-villain or whether the
+   Fog of Decline (Ep. 001) heads a villain *family* — the Fog, The Dimming, The Wither, the
+   Three Dragons, the Pit — all children of Entropy. A shared villain-house is a franchise asset.
 3. **Evidence-tier labeling:** BPC-157 and ipamorelin are preclinical/gray-market; retatrutide is
    investigational (phase 3); GLP-1 agonists and testosterone are approved medicines with human
    RCTs. Decide whether episodes visually signal the tier (e.g. the character's "royal charter"
