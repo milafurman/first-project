@@ -9,6 +9,15 @@ Produced per `production/pipeline.md` (Suno → Atlabs → optional inserts). Se
 are the complete production package. (An earlier, unapproved Episode 1 draft lives in git
 history only.)
 
+## PRODUCTION STATUS
+
+- **Song: DONE** — Suno take selected: https://suno.com/s/8f26my8XCgjrmM2c ("Kick Out the Fog")
+- **Cast portraits: DONE** — all six generated in Runway (Mila's workspace, storybook 3D style);
+  Fog, Gerta, and Testosterone are the approved take-2 versions
+- **Next: Atlabs** — Music Video workflow: paste the Suno link, lock the Cast from section A
+  using the six portraits, generate 9:16 short cut per section D, then 16:9 long cut
+- **Inserts: SKIPPED** for now per Option A budget (section G)
+
 ---
 
 ## A. CHARACTER BIBLE FOR ATLABS CAST

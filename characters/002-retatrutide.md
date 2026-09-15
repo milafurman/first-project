@@ -1,189 +1,203 @@
-# EPISODE 002 — RETATRUTIDE
+# EPISODE 002 — RETATRUTIDE AND THE THREE HUNGRY DRAGONS
 
-**Character:** Sir Reta, the Dragon-Tongued Knight
-**Villains:** The Three Hungry Dragons — Craving, the Hoard, and the Cold Furnace (of the House of Entropy, cousins to the Fog of Decline)
-**Protagonist:** Princess Bella (the body)
-**Supporting:** Marrow the Kitchen Witch (metabolism — a hero, never a villain)
+**Approved story.** Protagonist: Princess Bella — starving not for food but for *control*,
+out-shouted three-to-one for years while the court blamed her. Villains: the Three Hungry
+Dragons — **Craving** (whisper-dragon: "Cake. Cake. Cake."), **the Hoard** (sits on the vaults,
+demands tribute), and **the Cold Furnace** (forgot how to breathe fire) — process-villains of
+the House of Entropy, cousins of the Fog of Decline (Ep. 001). Hero compound: Retatrutide —
+**Sir Reta, the Dragon-Tongued Knight**: slick, swaggering, speaks all three dragon languages,
+never draws a sword. Supporting: **Marrow the Kitchen Witch** (metabolism — magnificent,
+overtaxed, never blamed). Ending: the dragons leave, Bella gets her quiet back.
+Tag: "She didn't find her willpower. She found her quiet. Turns out they were the same thing."
 
-**Canon note:** This episode supersedes the Story 2 proposal draft. The dragons are named for
-*processes*, not hormones — GLP-1, GIP, and glucagon are the body's own messengers and per the
-golden rule can never be villains. This also fixes the mechanism: retatrutide *speaks the
-receptors' languages* (triple agonist); it doesn't silence the body's hormones. GLP-1 remains
-canonically heroic, clearing the path for the monk in Story 5.
+**Canon notes (locked):** GLP-1, GIP, and glucagon are the body's own messengers and are never
+villains — the dragons are named for processes. Retatrutide *speaks the receptors' languages*
+(triple agonist). GLP-1 stays canonically heroic for Story 5's monk. Retatrutide is
+INVESTIGATIONAL (phase 3, not FDA-approved) — in-world, Sir Reta carries a *provisional royal
+charter*, and the long cut says so out loud.
 
----
-
-## THE CHARACTER — SIR RETA
-
-A knight with three royal seals on his chest and an insufferable amount of confidence — the
-rare cocky character who's earned it.
-
-- **His gift:** Every knight before him spoke one dragon language, maybe two. Reta speaks all
-  three — Craving's hiss, the Hoard's croon, and Furnace-tongue, which everyone else thought
-  was a dead language. (Retatrutide is an agonist at the GLP-1, GIP, and glucagon receptors —
-  the first triple agonist to reach late-stage trials. Science Appendix, S1.)
-- **How he fights:** He doesn't. He *negotiates in fluent Dragon*. He tells Craving "she's had
-  enough, stand down" (S2), tells the Hoard "open the vaults, the kingdom needs what you've
-  been sitting on" (S3), and tells the Cold Furnace the one word it's waited years to hear:
-  "*Burn.*" (S4)
-- **Personality:** Slick, swaggering, allergic to effort — walks into a triple dragon standoff
-  like it's a brunch reservation. But underneath: he never takes credit. His exit line every
-  time: "I didn't save the kingdom. I just delivered the messages it stopped being able to send."
-- **His charter (evidence-tier honesty, per series policy):** Sir Reta carries a *provisional*
-  royal charter — knighted, decorated in trials, but not yet sworn to the full court.
-  (Retatrutide is investigational — phase 3 ongoing, not FDA-approved. S1, compliance notes.)
-
-## THE VILLAINS — THE THREE HUNGRY DRAGONS
-
-Cousins of the Fog of Decline (Ep. 001), all of the House of Entropy. They don't breathe fire. They
-breathe *noise*.
-
-- **CRAVING** — a sleek whisper-dragon coiled around the castle towers. Never roars. Just
-  murmurs "Cake. Cake. Cake." at load-bearing moments. (Dysregulated appetite signaling —
-  hunger that doesn't quiet after eating. S2.)
-- **THE HOARD** — a fat, smug dragon sleeping on a mountain of grain it refuses to release,
-  demanding ever more tribute into the vaults. (Dysregulated energy storage — fat accrual,
-  worsened insulin dynamics. S3.)
-- **THE COLD FURNACE** — the saddest dragon: it used to breathe fire and *forgot how*. Sits in
-  the castle's basement boiler-room, hoarding fuel it never burns. (Blunted energy
-  expenditure. S4.)
-- **Integration beat (the ONE allowed metaphor-touch):** The three dragons circling Bella's
-  waistline as slow silhouettes — established series-bible example, now canon in this episode.
-  No anatomy. No "receptor" visuals. Receptors exist in-world only as the three sealed gates of
-  the castle, each opening to one language.
-
-## THE PROTAGONIST — PRINCESS BELLA
-
-Starving — not for food, for *control*. That line survives every draft; it's the episode's
-emotional spine.
-
-- Bella is never weak, lazy, or at fault. She's been out-shouted, three to one, for years, while
-  the whole court told her the noise was her own voice.
-- **Her thesis line:** "I'm not hungry. I'm *interrupted*."
-- Her arc: she doesn't learn discipline — she gets her *quiet* back, and everything she does
-  with it afterward was hers all along.
-
-## MARROW THE KITCHEN WITCH (metabolism)
-
-The proposal draft made her old and failing — too close to blaming the body. Canon fix: Marrow
-is *magnificent* and *overtaxed*. The Fog of Decline (Ep. 001's villain — series continuity) has been
-skimming her stores through the kingdom's change of seasons, and three dragons is too many for
-one witch mid-heist. She doesn't get replaced by Sir Reta; she gets *reinforcements*. Their
-bickering-allies chemistry is the long version's comic engine. (Menopause-transition changes in
-body composition and energy expenditure — S5.)
+Produced per `production/pipeline.md` (Suno → Atlabs → optional inserts).
 
 ---
 
-## SHORT VERSION — TikTok / Reels / Shorts (~45 seconds)
+## A. CHARACTER BIBLE FOR ATLABS CAST
 
-**HOOK (0:00–0:04):**
-> "Three dragons. One knight. And he speaks every one of their filthy languages."
+**PRINCESS BELLA** (the body)
+- Personality: sharp, warm, exhausted by noise that everyone insists is her own voice; never weak, never at fault.
+- Age look: mid-40s and glorious about it.
+- Body type: soft and regal — and her silhouette NEVER changes on screen, first frame to last (golden rule + Meta compliance in one stroke: the dragons leave, she stays).
+- Wardrobe: rose-and-cream gown, practical sleeves (she does things), small gold circlet worn slightly tilted.
+- Signature color: rose gold.
+- Face notes: dark expressive brows, tired-but-defiant hazel eyes, one loose curl that escapes the circlet.
+- NEVER changes: the tilted circlet, the escaped curl, the silhouette.
 
-**RHYME (0:04–0:38):**
-> Princess Bella kept a kingdom with a table always laid,
-> but three dragons rode the towers and they whispered while she prayed:
-> *"Cake,"* hissed Craving. *"Keep it,"* crooned the Hoard upon its gold —
-> and down in the boiler-basement slept a Furnace, dark and cold.
->
-> The kitchen witch fought all three beasts alone, and swore, and frayed —
-> till over the drawbridge rode a knight with three seals on display.
-> He bowed to no one, drew no sword, just cleared his throat to speak —
-> and said, in perfect Dragon: *"Ma'am has heard enough this week."*
->
-> Craving blinked. The Hoard uncurled. The Furnace coughed a flame.
-> And the whisper Bella lived with... simply never came again.
+**SIR RETA** (hero compound)
+- Personality: insufferably smooth — walks into a three-dragon standoff like a brunch reservation; underneath it, never takes credit ("I just deliver the messages").
+- Age look: ageless mid-30s.
+- Body type: lean, immaculate posture, moves like he's already been told he's right.
+- Wardrobe: polished silver-gray half-armor over travel clothes, THREE wax seals across the chest plate — red, blue, gold — one per dragon tongue.
+- Signature color: silver with the three-seal tricolor.
+- Face notes: permanent 15-degree smirk, one raised brow at rest, absurdly good hair (canon).
+- NEVER changes: the three seals in the same order (red-blue-gold, left to right), the hair, the smirk baseline — it drops only once, in the monologue.
 
-**PUNCHLINE (0:38–0:44):**
-> "She didn't find her willpower. She found her *quiet*. Turns out they were the same thing."
+**CRAVING** (villain dragon 1 — a process, not a hormone)
+- Sleek violet whisper-dragon coiled around the towers; never roars — murmurs. Its whispers render as thin curling smoke-script ("cake... cake...").
+- Signature color: dusk violet. NEVER: a loud voice; it always whispers, even when defeated.
 
-**LOGO BEAT (0:44–0:48):**
-> *The Body Is a Fairy Tale.* [three wax seals stamp: hiss, croon, roar]
+**THE HOARD** (villain dragon 2)
+- Fat, smug, moss-green-and-tarnished-gold dragon asleep on a mountain of grain and coin it refuses to release.
+- Signature color: tarnished gold. NEVER: stands fully — it lounges even when scared.
 
-## LONG VERSION — YouTube (outline)
+**THE COLD FURNACE** (villain dragon 3)
+- The saddest dragon — ash-gray with dead ember eyes, hunched in the castle boiler-cellar over fuel it never burns; used to breathe fire and forgot how.
+- Signature color: cold ash with dead-coal orange flecks. NEVER: flies. It relearns fire in the finale; it never becomes cute.
 
-**Act I — The Loudest Castle in the Land (0:00–1:30):** Bella's kingdom, prosperous and noisy.
-Establish the three dragons as *ambient* — they've circled so long the court thinks they're
-weather. Bella tries to eat a salad; Craving's whisper lands on the exact syllable. Comic
-timing, then the gut-punch: the court blames Bella. "A princess should simply want less."
+**MARROW THE KITCHEN WITCH** (metabolism — hero, never blamed)
+- Personality: magnificent, zero patience, total warmth; outnumbered, not outclassed; hates Sir Reta on sight, respects him by the second act.
+- Age look: glorious 60s. Body: solid, sleeves permanently rolled.
+- Wardrobe: layered kitchen-witch aprons, ladle carried like a scepter, potion-steam always faintly rising off her.
+- Signature color: copper. Face: silver hair in a battle bun, one singed eyebrow.
+- NEVER changes: the ladle, the rolled sleeves, the singed eyebrow.
 
-**Act II — Villain Origin: House of Entropy (1:30–3:00):** The dragons' family tree — cousins
-of the Fog of Decline, all children of Entropy, each assigned a racket: Craving takes the mind's quiet,
-the Hoard takes the vaults, the Cold Furnace takes the flame. Marrow the Kitchen Witch's
-one-woman defense, magnificent and outnumbered, her stores skimmed by the Fog of Decline through the
-kingdom's changing seasons. She never loses; she's *losing ground*. Not the same thing.
+**TOMLIN THE PASTRY COOK** (background extra 1)
+- 20s, doughy, carries an enormous cake at the worst possible moments. Signature color: flour white. Never changes: there is always a cake.
 
-**Act III — The Knight of Three Tongues (3:00–4:30):** Sir Reta's arrival, maximally
-irritating: strolls past security, winks at the witch, orders lunch during the dragon standoff.
-Marrow hates him on sight. Then he opens his mouth and speaks Furnace-tongue — the dead
-language — and her jaw drops. Negotiation scenes with each dragon, each in its own register:
-Craving is soothed, the Hoard is audited, the Furnace is *reignited*.
+**LADY PRYNNE** (background extra 2)
+- Court gossip, 50s, towering wig, fan she snaps for punctuation; delivers the court's victim-blaming ("a princess should simply want less") so the audience can hate the *attitude*, not a person. Signature color: pea green. Never changes: the wig, the fan.
 
-**Act IV — Sir Reta's Monologue (4:30–5:30):**
-> "Everyone wants to know my secret. Sword-work? Please. I've never swung one. Here's the
-> secret: the dragons were never disobeying the kingdom. They just stopped *hearing* it.
-> Three gates, three languages, and every year the messages got quieter and the dragons got
-> louder — and everyone blamed the princess. *The princess.* The only one in this castle who
-> never stopped fighting. I don't work miracles, Your Highness. I'm a translator with
-> excellent hair. The orders were always yours. I just made sure they arrived."
+## B. VISUAL STYLE LOCK FOR ATLABS
 
-**Act V — The Quiet (5:30–6:30):** Not a victory feast — a quiet morning. Bella eats breakfast
-with no whisper on the syllables. Dances because she feels like it. The dragons, off in the
-mountains, sulk beside the Fog of Decline (post-credits-style villain-family tag, seeding future
-episodes). Closing thesis + logo beat.
+- **Style:** SAME series lock as Ep. 001 — storybook 3D cartoon, slightly gritty, painterly, Shrek-adjacent exaggeration. Not cutesy, not photoreal.
+- **Lighting:** Bella's castle is warm rose-gold candlelight; wherever a dragon's influence reaches, its color tints the scene (violet murk, tarnished-gold greed-glow, ash-cold gray). Sir Reta carries clean silver daylight with him. Finale: all three dragon tints drain out; warm morning light.
+- **Palette story:** rose gold → violet/tarnish/ash → silver → rose gold at full warmth.
+- **Creative body integration — ALLOWED:** the three dragons circling Bella's waistline as slow SILHOUETTES (the series-bible canonical shot); Craving's smoke-script whispers curling into her ear mid-bite; the Furnace's cold radiating up through the floor tiles.
+- **FORBIDDEN:** organs with faces, receptors, pancreas/gut anything, syringes or injection-pen visuals (extra-critical for a GLP-1-era episode), molecular structures, and — absolute — NO before/after body morphs, no waistline change, no clothes suddenly fitting. Bella's body is identical in frame one and frame last. The dragons leave. That is the entire transformation.
 
----
+## C. SUNO PRODUCTION BRIEF
 
-## SCIENCE APPENDIX — every beat, sourced
+**Song title:** "He Speaks Dragon"
 
-| # | Story beat | The actual science | Source |
-|---|---|---|---|
-| S1 | Knight with three seals; speaks three dragon languages; *provisional* charter | Retatrutide is a single-peptide agonist of the GIP, GLP-1, and glucagon receptors. In a phase 2 trial (obesity, 48 wk), mean weight reduction up to ~24% at the highest dose. Investigational; phase 3 ongoing; not FDA-approved | Jastreboff AM, et al. "Triple-Hormone-Receptor Agonist Retatrutide for Obesity." *N Engl J Med.* 2023;389:514–526 |
-| S2 | Craving is soothed — "Ma'am has heard enough" | GLP-1 receptor agonism promotes satiety and reduces food intake via hypothalamic/brainstem appetite circuits, and slows gastric emptying | Drucker DJ. "Mechanisms of Action and Therapeutic Application of Glucagon-like Peptide-1." *Cell Metab.* 2018;27(4):740–756 |
-| S3 | The Hoard is audited — vaults open | GIP receptor signaling regulates insulin secretion (incretin effect) and adipose-tissue nutrient handling; GIP co-agonism enhances GLP-1's metabolic efficacy | Samms RJ, Coghlan MP, Sloop KW. "How May GIP Enhance the Therapeutic Efficacy of GLP-1?" *Trends Endocrinol Metab.* 2020;31(6):410–421 |
-| S4 | The Cold Furnace relearns fire — "*Burn.*" | Glucagon receptor agonism increases energy expenditure and hepatic fat oxidation — the rationale for adding it to incretin co-agonists | Habegger KM, et al. "The metabolic actions of glucagon revisited." *Nat Rev Endocrinol.* 2010;6(12):689–697 |
-| S5 | Marrow the witch, overtaxed through the kingdom's change of seasons | The menopause transition is associated with increased total and visceral fat and decreased energy expenditure — the witch is reinforced, not replaced, and never blamed | Lovejoy JC, et al. "Increased visceral fat and decreased energy expenditure during the menopausal transition." *Int J Obes.* 2008;32(6):949–958 |
-| S6 | Three sealed gates, one per language | Incretin physiology (nutrient-stimulated gut hormones acting via specific G-protein-coupled receptors) | Hall & Hall, *Guyton and Hall Textbook of Medical Physiology*, 14th ed., ch. 79; Khan Academy, "Gastrointestinal hormones" (physiology unit) |
+**Style tags:** fairy-tale swing, brass-band strut, sly confident male croon verses, sassy female answer vocals, gang-shout chorus, kids-chantable hook, mid-tempo ~100 bpm swagger, upright-bass walk, handclaps, tavern-jazz fairy-tale
 
-## COMPLIANCE GUARDRAILS (Meta ad review / TikTok)
+**Lyrics — 50-second cut:**
 
-- **Investigational-drug posture (the big one for this episode):** retatrutide is not approved
-  anywhere. No efficacy promises in VO ("the whisper never came again" is narrative, scoped by
-  the appendix to trial data); no dosing, no sourcing, no "ask your provider for," no brand-name
-  weight-loss claims. Sir Reta's *provisional charter* is the in-world disclosure — say it in
-  the long version out loud.
-- Proposal draft's "cocky little shit" / "Zero fucks given" removed per series PG-13 ceiling.
-  Replacement punchline carries the same swagger clean.
-- "Speaks every one of their filthy languages" — *filthy* modifies fictional dragon languages;
-  deniable, wink-level, within the double-entendre lane. If Meta review flags the hook, fallback:
-  "...and he speaks all three of their languages. *Fluently.*"
-- No before/after body imagery in any shot. Bella's silhouette never changes on screen — the
-  *dragons* leave. That's the golden rule expressed visually, and it's also what keeps Meta's
-  personal-health policy off our backs.
+```
+[Verse 1 — female lead, wry]
+Princess Bella had a castle and a table always laid,
+But three dragons on the towers hissed at every choice she made:
+"Cake!" sang Craving. "Keep it!" crooned the Hoard upon its gold,
+And down below, a Furnace sat there — hungry, dark, and cold.
 
-## ANIMATION NOTES — WHAT IS BANNED
+[Chorus — gang vocals, brass hits]
+HE SPEAKS DRAGON! (WHAT?) HE SPEAKS DRAGON!
+Three loud lizards — one polite suggestion!
+HE SPEAKS DRAGON! (WHAT?) HE SPEAKS DRAGON!
+Give the girl her quiet back — HE SPEAKS DRAGON!
 
-No receptors, no pancreas, no gut cutaways, no "incretin pathway" arrows. The three sealed
-castle gates ARE the receptor biology. The boiler-room furnace IS energy expenditure. If a
-storyboard sneaks in a GLP-1 molecule, the dragons eat the storyboard.
+[Verse 2 — male croon, smug]
+Then a knight strolled 'cross the drawbridge, three seals upon his chest,
+He didn't bow, he didn't brawl — he wasn't like the rest.
+He cleared his throat, spoke perfect Dragon, smooth as buttered bread:
+"The lady's heard enough this week." ...And not a word was said.
 
-## LEGACY SHOT PACK (Hedra — superseded)
+[Chorus — bigger, Bella joins]
+HE SPEAKS DRAGON! (WHAT?) HE SPEAKS DRAGON!
+Three loud lizards — one polite suggestion!
+HE SPEAKS DRAGON! (WHAT?) HE SPEAKS DRAGON!
+Quiet in the castle now — HE SPEAKS DRAGON!
 
-The series pipeline is now Suno + Atlabs per `production/pipeline.md`. This episode gets its
-full A–I production package (Suno brief, Atlabs cast bible, music-video scene list) when
-promoted to production. The shot breakdown below is kept as a staging reference only.
+[Spoken tag — Bella, calm, warm]
+"I didn't find my willpower. I found my quiet.
+Turns out... they were the same thing."
+```
 
-| Shot | Type | Audio file | Character / visual | Hedra motion prompt |
-|---|---|---|---|---|
-| S01 (0:00–0:04) | PERFORMANCE | 002-S01-narrator.wav | Sir Reta, hook, direct to camera | insufferable smirk, slow shrug, "and he speaks every one" landed with a wink |
-| S02 (0:04–0:14) | SCENE | 002-S02-narrator.wav (VO under) | Dragons circle Bella's waistline as slow silhouettes; "Cake. Cake. Cake." whisper motif in sound design | — (scene generation; silhouettes only, Bella's figure NEVER changes on screen) |
-| S03 (0:14–0:20) | PERFORMANCE | 002-S03-marrow.wav | Marrow mid-fight (VO: witch verse) | sleeves rolled, ladle swings, magnificent and outnumbered — never defeated |
-| S04 (0:20–0:30) | PERFORMANCE | 002-S04-reta.wav | Reta's arrival + "Ma'am has heard enough this week." | strolls in, bows to no one, clears throat, delivers the line like a brunch order |
-| S05 (0:30–0:38) | SCENE | 002-S05-narrator.wav (VO under) | Craving blinks, Hoard uncurls, Furnace coughs a flame; castle warms, quiet falls | — (three-beat scene; the dragons LEAVE, the kingdom stays) |
-| S06 (0:38–0:44) | PERFORMANCE | 002-S06-bella.wav | Bella, punchline ("…they were the same thing.") | calm morning light, unhurried bite of breakfast, small private smile |
-| S07 (0:44–0:48) | CARD | 002-S07-logo.wav (three seals: hiss, croon, roar) | Series title card | — (Descript/Canva, not Hedra) |
+**Optional extra verse block — YouTube cut (before final chorus):**
 
-Long version: Act IV monologue is one continuous Character-3 long-form generation (Sir Reta
-portrait + full monologue audio, motion prompt: "cocky exterior cracking into sincerity;
-gestures loosely until 'the princess', where he goes still; ends on the translator line with
-no smirk at all"). Marrow/Reta bickering scenes cut between their two performance generations
-reacting to each other's audio.
+```
+[Verse 3 — female lead]
+Now the dragons weren't born wicked — they're just noise that found a throne,
+Three loud cousins of the Fog that taxes kingdoms fully grown.
+And the kitchen witch said, "FINALLY, some help around this place!"
+He said, "Ma'am, I just translate." ...with that insufferable face.
+
+[Bridge — half-time, sparse, upright bass only]
+(Instrumental under Sir Reta's spoken monologue — see section F)
+```
+
+**Negative style notes:** no EDM drop, no rap flex, no sexy/breathy vocals, no lullaby softness, no medical-lecture cadence, no children's-TV saccharine; keep the brass loose and live, not marching-band stiff.
+
+## D. ATLABS MUSIC-VIDEO BRIEF
+
+**Target lengths:** Short cut 48 seconds (under 50 hard). Long cut ~2:20–2:40 (Verse 3 + bridge + monologue).
+
+**Scene list — SHORT CUT:**
+
+| # | Scene name | Seconds | On screen | Action | Camera | Caption line |
+|---|---|---|---|---|---|---|
+| 1 | Three Shadows | 0–3 | Bella, dragon silhouettes | Bella at a laden table; three dragon shadows slide across it; text hook | slow overhead tilt-down | "She was never hungry. She was outnumbered." |
+| 2 | The Whisper | 3–10 | Bella, Craving | Bella lifts a fork; Craving coils down the tower, smoke-script "cake... cake..." curls into her ear | side profile, shallow focus | ""Cake!" sang Craving" |
+| 3 | Hoard & Furnace | 10–16 | The Hoard, the Cold Furnace | Hoard lounging on grain mountain, pulls more sacks in; cut to cellar — Furnace hunched over unburned fuel, breath fogging | two-shot cut on beat | ""Keep it!" crooned the Hoard" |
+| 4 | The Circling | 16–18 | Bella + all three (silhouettes) | THE canonical shot: three dragons circling Bella's waistline as slow silhouettes; her figure unchanged, chin up | wide, regal | "hungry, dark, and cold" |
+| 5 | Chorus 1 — The Arrival Rumor | 18–28 | Court crowd, Marrow, Tomlin, Lady Prynne | Court erupts into the chant; Marrow fighting all three directions with a ladle; Tomlin's cake wobbles on the beat | rhythmic cuts | "HE SPEAKS DRAGON!" (karaoke) |
+| 6 | The Drawbridge | 28–36 | Sir Reta, dragons | Reta strolls across the drawbridge mid-standoff, three seals glinting; clears his throat; speaks — smoke-script in DRAGON glyphs leaves his mouth, polite and precise | hero tracking shot | "He didn't bow, he didn't brawl" |
+| 7 | The Silence | 36–40 | All three dragons | Craving blinks and uncoils skyward; the Hoard shoves the grain mountain toward the granary doors and lumbers off; the Furnace coughs — one small TRUE flame | triptych, then push on the flame | "...And not a word was said." |
+| 8 | Chorus 2 — Quiet Castle | 40–46 | Everyone | Warm light floods; Bella eats one unhurried bite IN PEACE; Marrow and Reta trade a grudging nod; court dances | crane-up celebration | "Quiet in the castle now" (karaoke) |
+| 9 | Tag + Logo | 46–48 | Bella → card | Bella to camera, calm: the willpower/quiet line; smash to title card, three wax seals stamp (red, blue, gold) | static | "The Body Is a Fairy Tale" |
+
+**Cast mapping:** Bella → 1, 2, 4, 8, 9. Craving → 2, 4, 7. Hoard → 3, 4, 7. Cold Furnace → 3, 4, 7. Sir Reta → 6, 7, 8. Marrow → 5, 8. Tomlin + Lady Prynne → 5, 8 (front row in crowd scenes for consistency).
+
+**Caption / karaoke notes:** same storybook serif system as Ep. 001; karaoke fill color this episode is **wax-seal red** (each episode's karaoke color = its hero's signature accent). Craving's whispers additionally render diegetically as smoke-script in-scene — do not duplicate them in captions. All-caps chorus only.
+
+**Reframe notes:** master 16:9; 9:16 center-punches scenes 1, 2, 6, 9; re-stage 4 vertically (dragons stack in a spiral above/below Bella's waist — reads even better in 9:16); crowd scenes 5 and 8 re-staged on castle steps. Captions inside 9:16 safe zone, clear of bottom 15%.
+
+## E. SHORT-CUT SCRIPT (48 seconds)
+
+- **0:00–0:03 — HOOK (spoken):** "She was never hungry. She was outnumbered."
+- **0:03–0:18 — STORY (Verse 1):** the three dragons established — whisper, hoard, cold. Scenes 2–4.
+- **0:18–0:28 — CHORUS 1:** the court chants; Marrow holds the line. Scene 5.
+- **0:28–0:40 — TURN (Verse 2):** Sir Reta arrives, speaks Dragon, silence falls. Scenes 6–7.
+- **0:40–0:46 — CHORUS 2:** quiet castle; Bella's unhurried bite. Scene 8.
+- **0:46–0:48 — PUNCHLINE + LOGO:** "I didn't find my willpower. I found my quiet. Turns out they were the same thing." Title card, three seals stamp.
+
+## F. YOUTUBE ADD-ON ONLY
+
+**Extra scenes:**
+1. **The Salad Ambush (cold open):** Bella tries to eat a salad; Craving's whisper lands on the exact first bite; Tomlin trips through the door with a cake at that precise second. Comedy, then the gut-punch — Lady Prynne, fan-snap: "A princess should simply *want less*." The court murmurs agreement. Bella's jaw sets.
+2. **Dragons' origin (one line, narrator over the three circling the mountains):** "The dragons weren't born — they're what a kingdom's own messages sound like after years of shouting into the Fog."
+3. **Marrow's Last Stand:** the kitchen-witch fighting all three at once — ladle in one hand, potion in the other — magnificent and visibly losing ground. She never looks defeated. She looks *understaffed*.
+4. **The Three Gates:** Reta at the castle's three sealed gates, greeting each in its own tongue — a hiss, a croon, a low furnace-rumble — each gate's seal glowing as it recognizes its language. (This IS the receptor biology; nothing anatomical, ever.)
+5. **The Bickering Allies:** Marrow refuses to thank him; Reta orders lunch mid-negotiation; she threatens him with the ladle; he compliments the soup. Grudging-respect handshake by scene's end.
+6. **The Provisional Charter (compliance beat, in-world):** at court, the herald reads Reta's charter: "Knighted in the trials... *not yet sworn to the full court*." Reta, shrugging: "The paperwork's still riding here. Good paperwork takes years. That's how you know it's real."
+
+**Sir Reta's monologue (over the bridge instrumental, smirk drops here):**
+> "Everyone wants to know my secret. Sword-work? I've never swung one.
+> The dragons were never disobeying this kingdom — they just stopped *hearing* it.
+> Three gates, three languages, and every year the messages got quieter, and the dragons got louder — and everyone blamed the princess. *The princess.* The only one who never stopped fighting.
+> I don't do miracles, Your Highness. I'm a translator with excellent hair.
+> The orders were always yours. I just made sure they arrived."
+
+## G. OPTIONAL INSERT SHOTS — **SKIPPED FOR NOW (Option A budget)**
+
+Per the series' current spending rule (minimum stack until three episodes prove signal), generate NO paid insert shots for this episode. Listed for later, if the series earns them:
+
+1. **"The Circling" cinematic (5–6s):** dusk, three dragon silhouettes spiraling a tower where Bella stands lit in a window, rose-gold against violet sky. Must match: violet/tarnished-gold/ash dragon colors, Bella's silhouette unchanged, tilted circlet.
+2. **"First True Flame" (4–5s):** macro on the Cold Furnace's dead-ember eye as one real flame reflects in it and the eye warms. Must match: ash-gray scales, dead-coal flecks, cellar setting.
+
+## H. SCIENCE CARD (educational only — no dosing, no how-to-obtain)
+
+1. **One knight, three languages — literally:** retatrutide is a single molecule that activates three different hormone receptors — GLP-1, GIP, and glucagon receptors. In a 48-week phase 2 obesity trial it produced up to ~24% average weight reduction at the highest dose. **It is investigational — still in phase 3 trials, not approved anywhere.** — Jastreboff AM, et al. *N Engl J Med.* 2023;389:514–526.
+2. **The Craving dragon quiets:** activating GLP-1 receptors increases satiety and reduces food intake through appetite circuits in the brain, and slows stomach emptying. — Drucker DJ. *Cell Metab.* 2018;27(4):740–756.
+3. **The Hoard opens the vaults:** GIP receptor signaling helps regulate insulin release after meals and how fat tissue handles nutrients — and pairing it with GLP-1 boosts the effect. — Samms RJ, Coghlan MP, Sloop KW. *Trends Endocrinol Metab.* 2020;31(6):410–421.
+4. **The Furnace relearns fire:** activating glucagon receptors increases energy expenditure and fat burning in the liver — the reason it was added to the trio. — Habegger KM, et al. *Nat Rev Endocrinol.* 2010;6(12):689–697.
+5. **Why Marrow is outnumbered, not failing:** the menopause transition is associated with increased total and visceral fat and decreased energy expenditure — the body's defenses get taxed; the body is not to blame. — Lovejoy JC, et al. *Int J Obes.* 2008;32(6):949–958.
+
+**Compliance posture (this episode is the highest-risk one — hold the line):** retatrutide is investigational; no efficacy promises in captions or VO (the story shows dragons leaving; the science card scopes claims to trial data); no dosing, sourcing, or brand-name weight-loss claims; no injection imagery; Bella's silhouette never changes on screen — that single rule keeps both the golden rule and Meta's personal-health ad policies satisfied.
+
+## I. WHAT THE HUMAN DOES NEXT
+
+1. Paste the section C lyrics + style tags into Suno; pick the take where the brass swings loosest.
+2. Lock the Cast in Atlabs from section A (eight cards; the dragons are full characters, Craving's whisper is smoke-script not voice-boom).
+3. Paste the Suno link into the Atlabs Music Video workflow with the section D scene list.
+4. Generate the SHORT CUT first (9:16). Check it lands at 48 seconds.
+5. Generate the YouTube cut (16:9) from the SAME cast, adding section F scenes + monologue.
+6. Skip section G inserts entirely for now — Option A budget. Revisit after three episodes.
