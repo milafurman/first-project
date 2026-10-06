@@ -28,6 +28,21 @@ def place(tr, body, vb, x, y, w, fill):
     return (f'<g transform="translate({x:.3f},{y:.3f}) scale({s:.6f})">'
             f'<g transform="{tr}" fill="{fill}" stroke="none">{body}</g></g>')
 
+
+def lockup_asset(path):
+    """Read a finished lockup SVG and return (inner markup, width, height) in its own units."""
+    raw = open(path).read()
+    vb  = [float(x) for x in re.search(r'viewBox="([^"]+)"', raw).group(1).split()]
+    inner = re.sub(r'^.*?<svg[^>]*>', '', raw, flags=re.S)
+    inner = re.sub(r'</svg>\s*$', '', inner, flags=re.S)
+    return inner, vb[2], vb[3]
+
+LOCKUP, LOCK_W, LOCK_H = lockup_asset("vec/truemg-labs-compact-onink.svg")
+
+def lockup_at(x, y, w):
+    s = w / LOCK_W
+    return f'<g transform="translate({x:.3f},{y:.3f}) scale({s:.6f})">{LOCKUP}</g>'
+
 def mark(x, y, w, fill):  return place(MARK_TR, MARK_BODY, MARK_VB, x, y, w, fill)
 def word(x, y, w, fill):  return place(WORD_TR, WORD_BODY, WORD_VB, x, y, w, fill)
 
@@ -52,7 +67,7 @@ def label(name, strength, net, lot="__________", guides=False):
 
     # --- identity row ---
     g.append(mark(cx, top - 0.2, 5.6, GOLD))
-    g.append(word(cx + 7.0, top + 1.0, 16.5, PAPER))
+    g.append(lockup_at(cx + 7.0, top + 0.5, 17.0))
     g.append(f'<text x="{right:.2f}" y="{top+4.6:.2f}" text-anchor="end" '
              f'font-family="{MONO}" font-size="1.75" letter-spacing="0.05" '
              f'fill="{MUTED}">truemglabs.com</text>')

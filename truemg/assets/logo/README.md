@@ -51,3 +51,38 @@ The paths are clean but they were traced, not drawn. Before this goes on a
 printed label, an illustrator should open it once and true up the curves by
 hand — particularly where the crest tapers meet the jaw. It is production-ready
 for screen today.
+
+---
+
+# TrueMG **Labs** — the full lockup
+
+| File | Use |
+|---|---|
+| `truemg-labs-onink.svg` | **Primary.** TRUE paper, MG gold, hairline, LABS tracked to the full wordmark width |
+| `truemg-labs-onpaper.svg` | The same on a light ground, MG in the deeper gold so it holds contrast |
+| `truemg-labs-compact-onink.svg` / `-onpaper.svg` | Tighter tracking, no rule. **Use below ~200px** and on the vial label |
+| `truemg-labs-ink.svg` / `-paper.svg` | One colour, for foil, embossing and single-colour print |
+
+`trace_labs.py` rebuilds all six.
+
+## Why LABS is not in the wordmark's typeface
+
+It cannot be. The original wordmark uses a very wide chamfered face that is not
+Helvetica, Archivo, Saira, Chakra Petch or Oxanium — all were set beside it and
+compared, and none match. It is not in the Canva account either, so the source
+file could not be recovered. Drawing four matching glyphs by hand, including an
+S, would be guesswork dressed as craft.
+
+So LABS is deliberately **not** trying to match. It is set in Archivo Black,
+small and letterspaced across the exact width of the wordmark, which is how a
+descriptor is normally handled: the difference in face reads as hierarchy rather
+than as a mistake. The hairline between them makes that reading explicit.
+
+**If the original typeface is ever identified, this is a ten-minute change** —
+set LABS in it, trace, and re-run `trace_labs.py`. Worth asking whoever made the
+original wordmark.
+
+## Tracking is set twice, on purpose
+At full width the letterspacing is extreme, which is correct at hero size and
+unreadable at header size. The compact cut tracks about half as far. Both are
+traced from rendered type, so neither depends on a font being installed.
