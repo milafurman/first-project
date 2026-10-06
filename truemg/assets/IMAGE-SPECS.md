@@ -52,3 +52,44 @@ supply it large and let the platform scale down.
 `seoImageUrl` — 1200 × 630. Currently pointed at the raw brand logo PNG, which
 renders as a small mark on a wide white field in every share preview. Needs a
 real composed card.
+
+---
+
+# UPDATE — the white background is baked into the files
+
+Verified 2026-10-06 against the live source files, not assumed.
+
+The product images are PNGs at 2000 × 2000 in **RGB mode — no alpha channel at
+all** — with pure `#FFFFFF` in every corner. The white is inside the file.
+
+This was tested properly: setting `productImageBg` to the brand's near-black
+turned the card dark and **the white rectangles stayed**. No palette, no CSS, no
+platform setting can remove them. New files are the only fix.
+
+**This is why the brand palette cannot go live yet.** On the ink ground, white
+rectangles behind every vial look markedly worse than the current light theme.
+The order is: transparent images first, palette second.
+
+## The good news: these cut out cleanly
+
+2000 × 2000 on pure white is close to ideal input. A background removal on
+`TMG-3RT 10MG` produced a real alpha channel (range 0–255) with the glass body,
+the crimped cap and the label all intact and no halo. Composited on `#0A0A0B`
+the vial floats correctly.
+
+So this is **a background-removal pass over existing art, not a reshoot.** All
+17 products already exist at full resolution in the Canva library — the test
+file came back already named "TrueMGLabs Branding - 7", so the set is there.
+
+## What transparency does and does not buy
+
+Removing the white delivers *"clean images without white backdrops."* It does
+**not** deliver *"make the vials look dynamic."* These are shot dead-straight,
+centred and flat. Dynamism comes from one of two places:
+
+1. **CSS** — a cast shadow, a few degrees of rotation, a hover lift, a gold rim
+   light. Agent-reachable, ships this week, works on the existing art once it is
+   transparent.
+2. **New renders** — angled, floating, lit. Better, slower, not a Friday job.
+
+Do 1 now. Schedule 2 after launch.
