@@ -1,5 +1,5 @@
 """TrueMG vial label artwork — print-ready SVG at true millimetre scale."""
-import os, re, json, html
+import os, re, json, html, shutil
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
 
@@ -88,13 +88,27 @@ def fit(text, avail, ratio, cap):
     return min(cap, avail / max(1e-6, ratio * len(text)))
 
 def label_side(name, strength, net, lot="__________", guides=False, palette="paper-blue"):
-    """Mila's original arrangement: wordmark rotated up the right edge of the front panel."""
+    """Mila's own arrangement, kept: product name top left, strength under it, the
+    Gila mark standing alone mid-left, the wordmark rotated up the right edge, and
+    the compliance block across the bottom. Nothing of hers moves. What is added —
+    the slogan, the lot and manufacture line, the third compliance line, and LABS
+    on the wordmark — goes into the white space beside the mark, which was empty.
+
+    The mark is 11.0mm here against the 7.4mm of the first pass: on the original
+    vial it reads about half the width of the product name, and at 7.4 it had
+    shrunk to a bullet point next to the text it used to stand apart from."""
     P = PALETTES[palette]
     e = html.escape
     g = [f'<rect x="0" y="0" width="{W}" height="{H}" fill="{P["bg"]}"/>']
     cx, top = OX + SAFE, OY + SAFE
+    bot   = OY + TRIM_H - SAFE
     right = cx + PANEL
     COL = PANEL - 7.0                      # the vertical wordmark takes the last 7mm
+
+    MARK_W   = 11.0                        # standalone, mid-left, as on the original vial
+    MARK_Y   = OY + 11.6
+    ASIDE_X  = cx + MARK_W + 1.2           # the column of added text beside the mark
+    ASIDE_W  = COL - (MARK_W + 1.2)
 
     # vertical wordmark, reading bottom to top
     wx, wy = right - 2.2, OY + TRIM_H - SAFE
@@ -102,30 +116,46 @@ def label_side(name, strength, net, lot="__________", guides=False, palette="pap
     inner, lw, _ = lockup_for(P)
     g.append(f'<g transform="translate({wx:.2f},{wy:.2f}) rotate(-90) scale({wlen/lw:.6f})">{inner}</g>')
 
+    NAME_Y, STR_Y = OY + 7.0, OY + 10.9
     ns = fit(name, COL, 0.62, 4.6)
-    g.append(f'<text x="{cx}" y="{OY+11.4:.2f}" font-family="{DISPLAY}" font-weight="900" '
+    g.append(f'<text x="{cx}" y="{NAME_Y:.2f}" font-family="{DISPLAY}" font-weight="900" '
              f'font-size="{ns:.2f}" letter-spacing="-0.12" fill="{P["accent"]}">{e(name)}</text>')
-    ss = fit(strength, COL, 0.62, 3.1)
-    g.append(f'<text x="{cx}" y="{OY+15.6:.2f}" font-family="{MONO}" font-weight="600" '
-             f'font-size="{ss:.2f}" letter-spacing="0.14" fill="{P["fg"]}">{e(strength)}</text>')
+    # the display face, not the mono one: on the original vial the strength is set
+    # in the same heavy sans as the product name, a half-step down, and the mono
+    # version read as a caption rather than the second half of the heading
+    ss = fit(strength, COL, 0.60, 3.1)
+    g.append(f'<text x="{cx}" y="{STR_Y:.2f}" font-family="{DISPLAY}" font-weight="900" '
+             f'font-size="{ss:.2f}" letter-spacing="-0.04" fill="{P["fg"]}">{e(strength)}</text>')
 
-    g.append(mark(cx, OY + 17.4, 7.4, P['accent']))
-    sl = min(fit(SLOGAN, COL - 9.2, 0.60, 1.75), 1.75)
-    g.append(f'<text x="{cx+9.2:.2f}" y="{OY+20.0:.2f}" font-family="{MONO}" '
+    g.append(mark(cx, MARK_Y, MARK_W, P['accent']))
+
+    SLOG_Y, LOT_Y = OY + 14.6, OY + 17.4
+    sl = min(fit(SLOGAN, ASIDE_W, 0.60, 1.5), 1.5)
+    g.append(f'<text x="{ASIDE_X:.2f}" y="{SLOG_Y:.2f}" font-family="{MONO}" '
              f'font-size="{sl:.2f}" letter-spacing="0.1" fill="{P["accent"]}">{e(SLOGAN)}</text>')
+    dl = f"LOT {lot}  MFG __________"
+    dz = min(fit(dl, ASIDE_W, 0.60, 1.35), 1.35)
+    g.append(f'<text x="{ASIDE_X:.2f}" y="{LOT_Y:.2f}" font-family="{MONO}" '
+             f'font-size="{dz:.2f}" letter-spacing="0.05" fill="{P["muted"]}">{e(dl)}</text>')
 
-    lines = ["FOR LABORATORY RESEARCH USE ONLY",
-             "NOT FOR HUMAN OR VETERINARY USE",
+    lines = ["NOT FOR HUMAN OR VETERINARY USE",
+             "FOR LABORATORY RESEARCH USE ONLY",
              "NOT FOR DIAGNOSTIC USE"]
-    cs = min(fit(max(lines, key=len), COL - 9.2, 0.60, 1.7), 1.7)
+    CMP_Y, LEAD = OY + 24.2, 1.55
+    cs = min(fit(max(lines, key=len), COL, 0.60, 1.5), 1.5)
     for i, ln in enumerate(lines):
-        g.append(f'<text x="{cx+9.2:.2f}" y="{OY+22.6 + i*1.95:.2f}" font-family="{MONO}" '
+        g.append(f'<text x="{cx}" y="{CMP_Y + i*LEAD:.2f}" font-family="{MONO}" '
                  f'font-size="{cs:.2f}" letter-spacing="0.03" '
                  f'fill="{P["fg"] if i == 0 else P["muted"]}">{e(ln)}</text>')
-    dl = f"LOT {lot}   MFG __________"
-    g.append(f'<text x="{cx}" y="{OY+28.9:.2f}" font-family="{MONO}" '
-             f'font-size="{min(fit(dl, COL, 0.60, 1.7), 1.7):.2f}" letter-spacing="0.05" '
-             f'fill="{P["muted"]}">{e(dl)}</text>')
+
+    # Every baseline inside the safe box, and the mark clear of the block below it.
+    for tag, y in [("name", NAME_Y), ("strength", STR_Y), ("slogan", SLOG_Y),
+                   ("lot", LOT_Y), ("compliance", CMP_Y + 2*LEAD)]:
+        assert top <= y <= bot, "%s baseline %.2f outside the safe box" % (tag, y)
+    assert MARK_Y + MARK_W <= CMP_Y - cs, "the mark runs into the compliance block"
+    assert MARK_Y >= STR_Y + 0.6, "the mark runs into the strength line"
+    assert SLOG_Y - sl >= MARK_Y, "the slogan sits above the mark it should sit beside"
+
     if guides:
         g.append(f'<g fill="none" stroke-width="0.12">'
                  f'<rect x="{OX}" y="{OY}" width="{TRIM_W}" height="{TRIM_H}" stroke="#FF3B6B" stroke-dasharray="1.2 .8"/>'
@@ -199,11 +229,12 @@ PRODUCTS = [
  ("SELANK","10 MG","10 mg"), ("SEMAX","10 MG","10 mg"), ("SS-31","10 MG","10 mg"),
  ("SS-31","50 MG","50 mg"), ("TESAMORELIN","20 MG","20 mg"), ("THYMOSIN ALPHA-1","10 MG","10 mg"),
  ("TMG-2TZ","10 MG","10 mg"), ("TMG-2TZ","20 MG","20 mg"), ("TMG-3RT","10 MG","10 mg"),
- ("TMG-3RT","20 MG","20 mg"), ("TMG-BAC RESEARCH SOLUTION","10 ML","10 ml"), ("VITAMIN B12","10 ML","10 ml"),
+ ("TMG-3RT","20 MG","20 mg"), ("TMG-BAC","10 ML RESEARCH SOLUTION","10 ml"), ("VITAMIN B12","10 ML","10 ml"),
 ]
 
 if __name__ == "__main__":
     PALETTE = "paper-blue"          # confirmed: the brand blue, on white
+    shutil.rmtree("labels", ignore_errors=True)   # stale artwork has shipped before
     os.makedirs("labels/side", exist_ok=True)
     os.makedirs("labels/top", exist_ok=True)
     open("labels/_TEMPLATE-with-guides.svg","w").write(
@@ -214,6 +245,12 @@ if __name__ == "__main__":
         open(f"labels/side/{slug}.svg","w").write(label_side(n,st,net,palette=PALETTE))
         open(f"labels/top/{slug}.svg","w").write(label(n,st,net,palette=PALETTE))
         man.append({"product":n,"strength":st,"file":f"{slug}.svg"})
+    # the palette set, kept reproducible so it can never go stale against the layout
+    os.makedirs("labels/palettes", exist_ok=True)
+    for pal in PALETTES:
+        for n, st, _net in [("GHK-CU","50 MG","50 mg"), ("NAD+","1000 MG","1000 mg")]:
+            slug = re.sub(r'[^a-z0-9]+','-', n.lower()).strip('-')
+            open(f"labels/palettes/{pal}--{slug}.svg","w").write(label_side(n,st,_net,palette=pal))
     json.dump(man, open("labels/manifest.json","w"), indent=1)
     print(f"{len(man)} products x 2 layouts, palette {PALETTE}")
     print(f"artwork {W}x{H}mm (trim {TRIM_W}x{TRIM_H}, bleed {BLEED}, safe {SAFE}, wrap {WRAP})")
