@@ -116,7 +116,7 @@ def label_side(name, strength, net, lot="__________", guides=False, palette="pap
 
     lines = ["FOR LABORATORY RESEARCH USE ONLY",
              "NOT FOR HUMAN OR VETERINARY USE",
-             "NOT FOR DIAGNOSTIC USE \u00b7 STORE \u221220\u00b0C"]
+             "NOT FOR DIAGNOSTIC USE"]
     cs = min(fit(max(lines, key=len), COL - 9.2, 0.60, 1.7), 1.7)
     for i, ln in enumerate(lines):
         g.append(f'<text x="{cx+9.2:.2f}" y="{OY+22.6 + i*1.95:.2f}" font-family="{MONO}" '
@@ -168,7 +168,7 @@ def label(name, strength, net, lot="__________", guides=False, palette="ink-gold
     # --- compliance. Non-negotiable; sized to stay inside the panel. ---
     lines = ["FOR LABORATORY RESEARCH USE ONLY",
              "NOT FOR HUMAN OR VETERINARY USE",
-             "NOT FOR DIAGNOSTIC USE \u00b7 STORE AT \u221220\u00b0C"]
+             "NOT FOR DIAGNOSTIC USE"]
     cs = min(fit(max(lines, key=len), PANEL, 0.60, 1.9), 1.9)
     for i, ln in enumerate(lines):
         g.append(f'<text x="{cx}" y="{OY+20.8 + i*1.8:.2f}" font-family="{MONO}" '

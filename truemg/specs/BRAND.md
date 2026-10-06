@@ -70,6 +70,7 @@ claim about a body.
 | **Slogan** | **Research · Purity · Precision** |
 | **Banned word** | **"Performance."** It is a claim word and it never ships, anywhere |
 | **TMG-BAC** | Reads **"Research Solution"**, never "bacteriostatic water" |
+| **Storage** | **No storage temperature on the label.** Removed |
 
 The gold and teal explorations are kept in `../assets/labels/palettes/` as a
 record, but the blue is the decision.
@@ -78,6 +79,12 @@ record, but the blue is the decision.
 repository and across the live store's copy. It appears in neither — only inside
 the compliance agent's own list of claims to refuse. So it is coming from a
 source outside this project. It is recorded here as a standing rule regardless.
+
+**On removing the storage line:** a single printed temperature cannot be right
+across this catalogue. A lyophilised peptide and a 10 ml research solution do not
+want the same conditions, so one blanket figure on every label would have been
+wrong on some of them. Storage guidance belongs on the product page or the
+certificate, where it can differ per item.
 
 **On the rename:** "bacteriostatic water" is a specific regulated drug product.
 Calling the item a research solution is the correct framing for a research-use
