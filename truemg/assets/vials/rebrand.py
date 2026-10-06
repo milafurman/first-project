@@ -3,7 +3,7 @@ import numpy as np
 from scipy import ndimage
 from PIL import Image, ImageFilter
 
-GOLD_DEEP = np.array([156,124,52], float)   # #9C7C34 — the brand's accent ON PAPER
+BRAND_BLUE = np.array([40,102,205], float)   # #2866CD — the decided brand accent
 LIZARD_BOX = (725, 1185, 950, 1420)         # old mark on the 2000px label, measured
 
 def blue_mask(a):
@@ -25,7 +25,7 @@ def rebrand(path, mark_img):
     type_blue = blue & ~inbox
     if type_blue.any():
         lum = rgb[type_blue].astype(float).max(axis=1, keepdims=True) / 255.0
-        a[:,:,:3][type_blue] = np.clip(GOLD_DEEP * (0.55 + 0.45*lum), 0, 255).astype(np.uint8)
+        a[:,:,:3][type_blue] = np.clip(BRAND_BLUE * (0.55 + 0.45*lum), 0, 255).astype(np.uint8)
 
     # 2. erase the old dragon. The label carries a soft vertical gradient, so a flat
     #    median fill leaves a visible patch — reconstruct it row by row instead.
@@ -58,7 +58,7 @@ def rebrand(path, mark_img):
 
 if __name__ == "__main__":
     D=os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
-    mark = Image.open("mark-ink-600.png").convert("RGBA")
+    mark = Image.open("mark-blue-600.png").convert("RGBA")
     os.makedirs("cut/brand", exist_ok=True)
     for f in sys.argv[1:]:
         rebrand("cut/out/"+f, mark).save("cut/brand/"+f)
