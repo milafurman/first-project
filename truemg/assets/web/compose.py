@@ -85,3 +85,20 @@ for name, names, a, bcol in TILES:
               int(H4*(.74 if i==1 else .62)), (-11, 3, 13)[i], (20, 24, .26))
     t.convert("RGB").save(f"{OUT}/tile-{name}.jpg", quality=86, optimize=True)
     print(f"tile-{name}.jpg", os.path.getsize(f"{OUT}/tile-{name}.jpg")//1024, "KB")
+
+# ---------------- revive: a plain field for the background, vials as the media ----------------
+W5, H5 = 2560, 1150
+field(W5, H5, ((255, 255, 255), (232, 240, 253))).save(f"{OUT}/hero-field.jpg", quality=84, optimize=True)
+print("hero-field.jpg", os.path.getsize(f"{OUT}/hero-field.jpg")//1024, "KB")
+
+W6, H6 = 1700, 1450
+m = Image.new("RGBA", (W6, H6), (0, 0, 0, 0))
+place(m, vial("tmg-3rt"),        int(W6*.26), int(H6*.50),  820, -13)
+place(m, vial("ghk-cu"),         int(W6*.52), int(H6*.45),  980,   6)
+place(m, vial("nad"),            int(W6*.78), int(H6*.52),  770,  17)
+place(m, vial("bpc-157-tb-500"), int(W6*.40), int(H6*.67),  560,  -4, (18, 20, .22))
+m.save(f"{OUT}/hero-media.png", optimize=True)
+print("hero-media.png", os.path.getsize(f"{OUT}/hero-media.png")//1024, "KB")
+
+field(1080, 1500, ((255, 255, 255), (231, 238, 251))).save(f"{OUT}/hero-field-mobile.jpg", quality=84, optimize=True)
+print("hero-field-mobile.jpg", os.path.getsize(f"{OUT}/hero-field-mobile.jpg")//1024, "KB")
