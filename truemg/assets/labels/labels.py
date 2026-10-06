@@ -19,6 +19,14 @@ PALETTES = {
  "paper-blue": dict(bg="#FCFBF8", fg="#0A0A0B", accent="#2866CD", muted="#6E6A63", lock="onpaper"),
  "paper-teal": dict(bg="#FCFBF8", fg="#0A0A0B", accent="#0E7A8C", muted="#6E6A63", lock="onpaper"),
  "ink-blue":   dict(bg="#0A0A0B", fg="#FCFBF8", accent="#4C8BE8", muted="#9A948A", lock="onink"),
+ # Gold on paper. #9C7C34 is the brand book's "accent on paper" and measures 3.80:1
+ # against #FCFBF8 — under AA for small text. #866A2C is the same hue one step down
+ # at 4.94:1 and is the safe choice for the strength line and the hairline.
+ "paper-gold":     dict(bg="#FCFBF8", fg="#0A0A0B", accent="#9C7C34", muted="#6E6A63", lock="onpaper"),
+ "paper-gold-aa":  dict(bg="#FCFBF8", fg="#0A0A0B", accent="#866A2C", muted="#5F5B54", lock="onpaper"),
+ # Teal on ink, brightened to 10.02:1 — the same contrast the gold carries on ink,
+ # so it reads with identical weight rather than merely being "a teal".
+ "ink-teal":       dict(bg="#0A0A0B", fg="#FCFBF8", accent="#45C9DB", muted="#9A948A", lock="onink"),
 }
 
 def asset(path, want_viewbox=False):
