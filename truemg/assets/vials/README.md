@@ -48,3 +48,41 @@ It delivers **"clean images without white backdrops"**. It does not deliver
 is the next step and it is CSS: a cast shadow, a few degrees of rotation, a
 hover lift, a gold rim light. That works on these files now that they are
 transparent. Genuinely new renders — angled, floating, lit — are a later job.
+
+---
+
+# UPDATE — the labels still carried the old blue brand
+
+Removing the white background did nothing about what is **printed on the label**.
+The blue product name, the blue MG, and the old blue dragon mark were all inside
+the artwork, and the first pass shipped all three. Caught on review, fixed here.
+
+`rebrand.py` runs after `cutout.py` and does three things:
+
+1. **Recolours the blue type** — product name and the MG — to `#9C7C34`, the
+   brand's gold for a paper ground. Each pixel keeps its own lightness so
+   anti-aliased letter edges stay smooth instead of going chunky.
+2. **Erases the old dragon.** Its pixels are reconstructed row by row from the
+   label stock either side, because the label carries a soft vertical gradient
+   and a flat median fill leaves a visible rectangle. The seam is then feathered.
+3. **Drops the new Gila mark in**, rendered from `truemg/assets/logo/truemg-mark-ink.svg`,
+   centred in the space the old one occupied.
+
+Verified: **zero** pixels matching the brand blue survive in any of the 17.
+
+## The limit of this, stated plainly
+
+This fixes **the images on the website**. It does not change **the labels on the
+bottles**. These are product mockups, so retouching them is legitimate for a
+storefront — but if physical vials have already been printed with the blue
+label, the site would then show a product that does not match what ships, and
+that is a worse problem than an off-brand photo.
+
+Two things follow, and neither is an agent job:
+
+- **Confirm whether any labels are printed.** If they are, either the site keeps
+  the old artwork until stock turns over, or the labels get reprinted.
+- **The real deliverable is a label design file**, not a retouched mockup —
+  flat artwork in the brand, set for the actual die line, which a printer can
+  run. That is a separate piece of work and it should happen before any
+  significant print run.
