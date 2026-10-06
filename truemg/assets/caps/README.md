@@ -56,3 +56,13 @@ are separate components, so the sheet shows all three: gold crimp with a blue
 cap, blue crimp with a gold cap, and a blue crimp carrying a gold ring at the
 top (`RING`, the top third of the crimp band, recoloured after the band so it
 sits over it). `x0`–`x2` are those frames.
+
+## Decided
+
+**Blue crimp, white cap.** Mila's call, and it is now on all seventeen vials in
+`truemg/assets/vials/`. `bluecrimp.py` is what rolled it across the line; the
+cap is left exactly as photographed rather than recoloured to a nominal white,
+since it is already white and a recolour would only cost it shading.
+
+The family cap-coding set above stays on the table as a phase two, once volume
+justifies more than one colour minimum.
