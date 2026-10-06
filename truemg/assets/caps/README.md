@@ -43,3 +43,16 @@ family colours get added at the next reorder once volume justifies five.
 
 `caps-sheet.jpg` is the comparison sheet. `opt0`–`opt5` are the six crimp/cap
 combinations; `fam0`–`fam4` are the five family codes.
+
+## Every aluminium colour, one per frame
+
+`crimps.py` builds `crimp-sheet.jpg`: the same vial, the same label, the same
+white cap, with only the crimp changing — silver (what is on the vial now),
+brand blue, gold, deep gold, gold-over-blue, black, gunmetal, copper and pearl
+white. `c0`–`c8` are the individual frames.
+
+Gold and blue can combine on either part, because the crimp and the flip-disc
+are separate components, so the sheet shows all three: gold crimp with a blue
+cap, blue crimp with a gold cap, and a blue crimp carrying a gold ring at the
+top (`RING`, the top third of the crimp band, recoloured after the band so it
+sits over it). `x0`–`x2` are those frames.
