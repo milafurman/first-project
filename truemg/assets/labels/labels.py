@@ -13,6 +13,14 @@ OX, OY = BLEED, BLEED           # trim origin inside the bleed box
 
 INK, GOLD, PAPER, MUTED = "#0A0A0B", "#D8B46A", "#FCFBF8", "#9A948A"
 
+# Ground / text / accent / muted / which lockup cut to place.
+PALETTES = {
+ "ink-gold":   dict(bg="#0A0A0B", fg="#FCFBF8", accent="#D8B46A", muted="#9A948A", lock="onink"),
+ "paper-blue": dict(bg="#FCFBF8", fg="#0A0A0B", accent="#2866CD", muted="#6E6A63", lock="onpaper"),
+ "paper-teal": dict(bg="#FCFBF8", fg="#0A0A0B", accent="#0E7A8C", muted="#6E6A63", lock="onpaper"),
+ "ink-blue":   dict(bg="#0A0A0B", fg="#FCFBF8", accent="#4C8BE8", muted="#9A948A", lock="onink"),
+}
+
 def asset(path, want_viewbox=False):
     s = open(path).read()
     g = re.search(r'<g transform="([^"]+)"[^>]*>(.*?)</g>', s, re.S)
@@ -37,11 +45,23 @@ def lockup_asset(path):
     inner = re.sub(r'</svg>\s*$', '', inner, flags=re.S)
     return inner, vb[2], vb[3]
 
-LOCKUP, LOCK_W, LOCK_H = lockup_asset("vec/truemg-labs-compact-onink.svg")
+_LOCK_CACHE = {}
+def lockup_for(pal):
+    key = (pal["lock"], pal["accent"], pal["fg"])
+    if key not in _LOCK_CACHE:
+        inner, w, h = lockup_asset("vec/truemg-labs-compact-%s.svg" % pal["lock"])
+        if pal["lock"] == "onink":
+            inner = inner.replace("#D8B46A", pal["accent"]).replace("#EDEBE6", pal["fg"])
+        else:
+            inner = inner.replace("#9C7C34", pal["accent"]).replace("#0A0A0B", pal["fg"])
+        _LOCK_CACHE[key] = (inner, w, h)
+    return _LOCK_CACHE[key]
 
-def lockup_at(x, y, w):
-    s = w / LOCK_W
-    return f'<g transform="translate({x:.3f},{y:.3f}) scale({s:.6f})">{LOCKUP}</g>'
+def lockup_at(x, y, w, pal):
+    inner, lw, _ = lockup_for(pal)
+    s = w / lw
+    return f'<g transform="translate({x:.3f},{y:.3f}) scale({s:.6f})">{inner}</g>'
+
 
 def mark(x, y, w, fill):  return place(MARK_TR, MARK_BODY, MARK_VB, x, y, w, fill)
 def word(x, y, w, fill):  return place(WORD_TR, WORD_BODY, WORD_VB, x, y, w, fill)
@@ -56,32 +76,33 @@ def fit(text, avail, ratio, cap):
     """Largest font size (mm) at which `text` still fits `avail` mm."""
     return min(cap, avail / max(1e-6, ratio * len(text)))
 
-def label(name, strength, net, lot="__________", guides=False):
+def label(name, strength, net, lot="__________", guides=False, palette="ink-gold"):
+    P = PALETTES[palette]
     """Explicit vertical budget. Content box is 25mm tall; every baseline is placed,
     not derived, so nothing can collide as text lengths change."""
     e = html.escape
-    g = [f'<rect x="0" y="0" width="{W}" height="{H}" fill="{INK}"/>']
+    g = [f'<rect x="0" y="0" width="{W}" height="{H}" fill="{P['bg']}"/>']
     cx   = OX + SAFE
     top  = OY + SAFE
     right = cx + PANEL            # right edge of the readable front panel
 
     # --- identity row ---
-    g.append(mark(cx, top - 0.2, 5.6, GOLD))
-    g.append(lockup_at(cx + 7.0, top + 0.5, 17.0))
+    g.append(mark(cx, top - 0.2, 5.6, P['accent']))
+    g.append(lockup_at(cx + 7.0, top + 0.5, 17.0, P))
     g.append(f'<text x="{right:.2f}" y="{top+4.6:.2f}" text-anchor="end" '
              f'font-family="{MONO}" font-size="1.75" letter-spacing="0.05" '
-             f'fill="{MUTED}">truemglabs.com</text>')
+             f'fill="{P["muted"]}">truemglabs.com</text>')
 
     # --- compound name + strength ---
     ns = fit(name, PANEL, 0.68, 4.8)
     g.append(f'<text x="{cx}" y="{OY+12.2:.2f}" font-family="{DISPLAY}" font-weight="900" '
-             f'font-size="{ns:.2f}" letter-spacing="-0.12" fill="{PAPER}">{e(name)}</text>')
+             f'font-size="{ns:.2f}" letter-spacing="-0.12" fill="{P["fg"]}">{e(name)}</text>')
     ss = fit(strength, PANEL, 0.62, 3.1)
     g.append(f'<text x="{cx}" y="{OY+16.0:.2f}" font-family="{MONO}" font-weight="600" '
-             f'font-size="{ss:.2f}" letter-spacing="0.14" fill="{GOLD}">{e(strength)}</text>')
+             f'font-size="{ss:.2f}" letter-spacing="0.14" fill="{P["accent"]}">{e(strength)}</text>')
 
     # --- rule ---
-    g.append(f'<rect x="{cx}" y="{OY+17.4:.2f}" width="{PANEL:.2f}" height="0.26" fill="{GOLD}"/>')
+    g.append(f'<rect x="{cx}" y="{OY+17.4:.2f}" width="{PANEL:.2f}" height="0.26" fill="{P["accent"]}"/>')
 
     # --- compliance. Non-negotiable; sized to stay inside the panel. ---
     lines = ["FOR LABORATORY RESEARCH USE ONLY",
@@ -91,13 +112,13 @@ def label(name, strength, net, lot="__________", guides=False):
     for i, ln in enumerate(lines):
         g.append(f'<text x="{cx}" y="{OY+19.4 + i*2.1:.2f}" font-family="{MONO}" '
                  f'font-size="{cs:.2f}" letter-spacing="0.04" '
-                 f'fill="{PAPER if i == 0 else MUTED}">{e(ln)}</text>')
+                 f'fill="{P['fg'] if i == 0 else P['muted']}">{e(ln)}</text>')
 
     # --- variable data, last line, clear of everything above ---
     dline = f"LOT {lot}   MFG __________"
     ds = min(fit(dline, PANEL, 0.60, 1.8), 1.8)
     g.append(f'<text x="{cx}" y="{OY+26.6:.2f}" font-family="{MONO}" '
-             f'font-size="{ds:.2f}" letter-spacing="0.05" fill="{MUTED}">{e(dline)}</text>')
+             f'font-size="{ds:.2f}" letter-spacing="0.05" fill="{P["muted"]}">{e(dline)}</text>')
 
     if guides:
         g.append(f'<g fill="none" stroke-width="0.12">'

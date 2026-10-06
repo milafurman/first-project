@@ -1,5 +1,6 @@
 """Trace LABS and compose the TrueMG Labs lockups as font-free vector."""
 import subprocess, os, re
+import numpy as np
 from PIL import Image
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
@@ -9,6 +10,13 @@ WORD_W, WORD_H = 5634, 681
 labs = {}
 for tag in ["labs-wide", "labs-compact"]:
     im = Image.open(tag + ".png").convert("L")
+    # CSS letter-spacing leaves a trailing gap after the final S. Left in, it becomes
+    # ~20% dead canvas, and scaling to the wordmark width then shoves LABS to the left.
+    arr = np.asarray(im)
+    ink = arr < 128
+    cols = np.where(ink.any(axis=0))[0]
+    rows = np.where(ink.any(axis=1))[0]
+    im = im.crop((cols.min(), rows.min(), cols.max() + 1, rows.max() + 1))
     bw = im.point(lambda v: 0 if v < 128 else 255).convert("1")   # glyphs black for potrace
     bw.save("vec/%s.pbm" % tag)
     subprocess.run(["potrace", "-s", "-a", "0.4", "-t", "8", "-u", "40", "-O", "0.2",
