@@ -23,13 +23,21 @@ end. Some product slugs resolve (`bpc-157-tb-500-r20n`, `tesamorelin-9ruh`), so 
 catalog is generating at least one link that does not match its own product.
 Admin-side; needs Mila or Lapis support.
 
-## P1 — the site cannot sell even once stock is on
+## P1 — the site is not ready to open
 
-### 3. The funnel is flat on its face
-30 days: **310 sessions → 4 add-to-cart (1.3%) → 2 checkouts → 0 orders → $0.**
-306 of 310 visitors leave the grid without touching anything. Partly #1, but the
-grid gives nobody a reason: no strike-through price, no purity number, no COA
-badge, no urgency, no bundle, no reason to want it.
+### 3. There is no funnel data, and that is not the same as bad funnel data
+30 days reads: 310 sessions → 4 add-to-cart (1.3%) → 2 checkouts → 0 orders.
+
+**Do not optimise against these numbers.** This store has never opened. 100% of
+that traffic is Direct — no organic, no referral, no campaign — which is the exact
+signature of a handful of people typing the URL in while they build the thing. It
+is Mila and whoever else has the link. It is not a customer funnel that is leaking;
+it is a pre-launch store with no customers yet.
+
+What this changes: the conversion work is **designing an opening**, not diagnosing
+a decline. There is no baseline to beat and no A/B history to respect. Treat the
+reference competitor's mechanics as the target to build toward, and treat the
+first real orders as the first data point that means anything.
 
 ### 4. There is no front door
 **100% of traffic is Direct.** Zero organic, zero referral, zero campaign. The

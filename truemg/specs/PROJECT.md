@@ -7,6 +7,10 @@ on a site that looks and behaves 90% finished.
 
 Today is Tuesday 2026-10-06. **Three working days.**
 
+**This store has never opened.** Nothing has ever been sold through it. The 30-day
+analytics are the build team typing the URL in, not customers — so this is a launch,
+not a turnaround, and there is no baseline to protect or beat.
+
 ---
 
 ## The teams
