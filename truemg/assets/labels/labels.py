@@ -16,6 +16,7 @@ INK, GOLD, PAPER, MUTED = "#0A0A0B", "#D8B46A", "#FCFBF8", "#9A948A"
 # Ground / text / accent / muted / which lockup cut to place.
 PALETTES = {
  "ink-gold":   dict(bg="#0A0A0B", fg="#FCFBF8", accent="#D8B46A", muted="#9A948A", lock="onink"),
+ # THE brand blue, sampled from the original wordmark. Confirmed by Mila.
  "paper-blue": dict(bg="#FCFBF8", fg="#0A0A0B", accent="#2866CD", muted="#6E6A63", lock="onpaper"),
  "paper-teal": dict(bg="#FCFBF8", fg="#0A0A0B", accent="#0E7A8C", muted="#6E6A63", lock="onpaper"),
  "ink-blue":   dict(bg="#0A0A0B", fg="#FCFBF8", accent="#4C8BE8", muted="#9A948A", lock="onink"),
@@ -74,6 +75,8 @@ def lockup_at(x, y, w, pal):
 def mark(x, y, w, fill):  return place(MARK_TR, MARK_BODY, MARK_VB, x, y, w, fill)
 def word(x, y, w, fill):  return place(WORD_TR, WORD_BODY, WORD_VB, x, y, w, fill)
 
+SLOGAN = "RESEARCH \u00b7 PURITY \u00b7 PRECISION"
+
 DISPLAY = "Archivo Black, Archivo, Helvetica Neue, Arial, sans-serif"
 MONO    = "IBM Plex Mono, SF Mono, Menlo, monospace"
 
@@ -83,6 +86,54 @@ PANEL = TRIM_W - 2*SAFE - WRAP
 def fit(text, avail, ratio, cap):
     """Largest font size (mm) at which `text` still fits `avail` mm."""
     return min(cap, avail / max(1e-6, ratio * len(text)))
+
+def label_side(name, strength, net, lot="__________", guides=False, palette="paper-blue"):
+    """Mila's original arrangement: wordmark rotated up the right edge of the front panel."""
+    P = PALETTES[palette]
+    e = html.escape
+    g = [f'<rect x="0" y="0" width="{W}" height="{H}" fill="{P["bg"]}"/>']
+    cx, top = OX + SAFE, OY + SAFE
+    right = cx + PANEL
+    COL = PANEL - 7.0                      # the vertical wordmark takes the last 7mm
+
+    # vertical wordmark, reading bottom to top
+    wx, wy = right - 2.2, OY + TRIM_H - SAFE
+    wlen = TRIM_H - 2*SAFE
+    inner, lw, _ = lockup_for(P)
+    g.append(f'<g transform="translate({wx:.2f},{wy:.2f}) rotate(-90) scale({wlen/lw:.6f})">{inner}</g>')
+
+    ns = fit(name, COL, 0.62, 4.6)
+    g.append(f'<text x="{cx}" y="{OY+11.4:.2f}" font-family="{DISPLAY}" font-weight="900" '
+             f'font-size="{ns:.2f}" letter-spacing="-0.12" fill="{P["accent"]}">{e(name)}</text>')
+    ss = fit(strength, COL, 0.62, 3.1)
+    g.append(f'<text x="{cx}" y="{OY+15.6:.2f}" font-family="{MONO}" font-weight="600" '
+             f'font-size="{ss:.2f}" letter-spacing="0.14" fill="{P["fg"]}">{e(strength)}</text>')
+
+    g.append(mark(cx, OY + 17.4, 7.4, P['accent']))
+    sl = min(fit(SLOGAN, COL - 9.2, 0.60, 1.75), 1.75)
+    g.append(f'<text x="{cx+9.2:.2f}" y="{OY+20.0:.2f}" font-family="{MONO}" '
+             f'font-size="{sl:.2f}" letter-spacing="0.1" fill="{P["accent"]}">{e(SLOGAN)}</text>')
+
+    lines = ["FOR LABORATORY RESEARCH USE ONLY",
+             "NOT FOR HUMAN OR VETERINARY USE",
+             "NOT FOR DIAGNOSTIC USE \u00b7 STORE \u221220\u00b0C"]
+    cs = min(fit(max(lines, key=len), COL - 9.2, 0.60, 1.7), 1.7)
+    for i, ln in enumerate(lines):
+        g.append(f'<text x="{cx+9.2:.2f}" y="{OY+22.6 + i*1.95:.2f}" font-family="{MONO}" '
+                 f'font-size="{cs:.2f}" letter-spacing="0.03" '
+                 f'fill="{P["fg"] if i == 0 else P["muted"]}">{e(ln)}</text>')
+    dl = f"LOT {lot}   MFG __________"
+    g.append(f'<text x="{cx}" y="{OY+28.9:.2f}" font-family="{MONO}" '
+             f'font-size="{min(fit(dl, COL, 0.60, 1.7), 1.7):.2f}" letter-spacing="0.05" '
+             f'fill="{P["muted"]}">{e(dl)}</text>')
+    if guides:
+        g.append(f'<g fill="none" stroke-width="0.12">'
+                 f'<rect x="{OX}" y="{OY}" width="{TRIM_W}" height="{TRIM_H}" stroke="#FF3B6B" stroke-dasharray="1.2 .8"/>'
+                 f'<rect x="{OX+SAFE}" y="{OY+SAFE}" width="{TRIM_W-2*SAFE}" height="{TRIM_H-2*SAFE}" stroke="#36C9F0" stroke-dasharray=".8 .8"/>'
+                 f'<line x1="{right}" y1="{OY}" x2="{right}" y2="{OY+TRIM_H}" stroke="#F0B24A" stroke-dasharray=".6 .6"/></g>')
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}mm" height="{H}mm" '
+            f'viewBox="0 0 {W} {H}">{"".join(g)}</svg>')
+
 
 def label(name, strength, net, lot="__________", guides=False, palette="ink-gold"):
     P = PALETTES[palette]
@@ -110,7 +161,9 @@ def label(name, strength, net, lot="__________", guides=False, palette="ink-gold
              f'font-size="{ss:.2f}" letter-spacing="0.14" fill="{P["accent"]}">{e(strength)}</text>')
 
     # --- rule ---
-    g.append(f'<rect x="{cx}" y="{OY+17.4:.2f}" width="{PANEL:.2f}" height="0.26" fill="{P["accent"]}"/>')
+    g.append(f'<text x="{cx}" y="{OY+18.0:.2f}" font-family="{MONO}" font-size="1.7" '
+             f'letter-spacing="0.1" fill="{P["accent"]}">{e(SLOGAN)}</text>')
+    g.append(f'<rect x="{cx}" y="{OY+19.1:.2f}" width="{PANEL:.2f}" height="0.26" fill="{P["accent"]}"/>')
 
     # --- compliance. Non-negotiable; sized to stay inside the panel. ---
     lines = ["FOR LABORATORY RESEARCH USE ONLY",
@@ -118,14 +171,14 @@ def label(name, strength, net, lot="__________", guides=False, palette="ink-gold
              "NOT FOR DIAGNOSTIC USE \u00b7 STORE AT \u221220\u00b0C"]
     cs = min(fit(max(lines, key=len), PANEL, 0.60, 1.9), 1.9)
     for i, ln in enumerate(lines):
-        g.append(f'<text x="{cx}" y="{OY+19.4 + i*2.1:.2f}" font-family="{MONO}" '
+        g.append(f'<text x="{cx}" y="{OY+20.8 + i*1.8:.2f}" font-family="{MONO}" '
                  f'font-size="{cs:.2f}" letter-spacing="0.04" '
                  f'fill="{P['fg'] if i == 0 else P['muted']}">{e(ln)}</text>')
 
     # --- variable data, last line, clear of everything above ---
     dline = f"LOT {lot}   MFG __________"
     ds = min(fit(dline, PANEL, 0.60, 1.8), 1.8)
-    g.append(f'<text x="{cx}" y="{OY+26.6:.2f}" font-family="{MONO}" '
+    g.append(f'<text x="{cx}" y="{OY+26.9:.2f}" font-family="{MONO}" '
              f'font-size="{ds:.2f}" letter-spacing="0.05" fill="{P["muted"]}">{e(dline)}</text>')
 
     if guides:
@@ -146,17 +199,21 @@ PRODUCTS = [
  ("SELANK","10 MG","10 mg"), ("SEMAX","10 MG","10 mg"), ("SS-31","10 MG","10 mg"),
  ("SS-31","50 MG","50 mg"), ("TESAMORELIN","20 MG","20 mg"), ("THYMOSIN ALPHA-1","10 MG","10 mg"),
  ("TMG-2TZ","10 MG","10 mg"), ("TMG-2TZ","20 MG","20 mg"), ("TMG-3RT","10 MG","10 mg"),
- ("TMG-3RT","20 MG","20 mg"), ("TMG-BAC","10 ML","10 ml"), ("VITAMIN B12","10 ML","10 ml"),
+ ("TMG-3RT","20 MG","20 mg"), ("TMG-BAC RESEARCH SOLUTION","10 ML","10 ml"), ("VITAMIN B12","10 ML","10 ml"),
 ]
 
 if __name__ == "__main__":
-    os.makedirs("labels", exist_ok=True)
-    open("labels/_TEMPLATE-with-guides.svg","w").write(label("GHK-CU","50 MG","50 mg",guides=True))
+    PALETTE = "paper-blue"          # confirmed: the brand blue, on white
+    os.makedirs("labels/side", exist_ok=True)
+    os.makedirs("labels/top", exist_ok=True)
+    open("labels/_TEMPLATE-with-guides.svg","w").write(
+        label_side("GHK-CU","50 MG","50 mg", guides=True, palette=PALETTE))
     man=[]
-    for n,s,net in PRODUCTS:
-        slug = re.sub(r'[^a-z0-9]+','-', f"{n} {s}".lower()).strip('-')
-        open(f"labels/{slug}.svg","w").write(label(n,s,net))
-        man.append({"product":n,"strength":s,"file":f"{slug}.svg"})
+    for n,st,net in PRODUCTS:
+        slug = re.sub(r'[^a-z0-9]+','-', f"{n} {st}".lower()).strip('-')
+        open(f"labels/side/{slug}.svg","w").write(label_side(n,st,net,palette=PALETTE))
+        open(f"labels/top/{slug}.svg","w").write(label(n,st,net,palette=PALETTE))
+        man.append({"product":n,"strength":st,"file":f"{slug}.svg"})
     json.dump(man, open("labels/manifest.json","w"), indent=1)
-    print(f"{len(man)} labels + template")
-    print(f"artwork {W}×{H}mm (trim {TRIM_W}×{TRIM_H}, bleed {BLEED}, safe {SAFE}, wrap {WRAP})")
+    print(f"{len(man)} products x 2 layouts, palette {PALETTE}")
+    print(f"artwork {W}x{H}mm (trim {TRIM_W}x{TRIM_H}, bleed {BLEED}, safe {SAFE}, wrap {WRAP})")

@@ -61,6 +61,29 @@ the other three. The device survives the edit intact — arguably it gets strong
 because every remaining row is a verifiable fact about the material rather than a
 claim about a body.
 
+## Decided
+
+| | |
+|---|---|
+| **Accent** | **`#2866CD`** — the brand blue, sampled from the original wordmark. Not teal, not gold |
+| **Ground** | White |
+| **Slogan** | **Research · Purity · Precision** |
+| **Banned word** | **"Performance."** It is a claim word and it never ships, anywhere |
+| **TMG-BAC** | Reads **"Research Solution"**, never "bacteriostatic water" |
+
+The gold and teal explorations are kept in `../assets/labels/palettes/` as a
+record, but the blue is the decision.
+
+**On the banned word:** "performance" was searched for across every file in this
+repository and across the live store's copy. It appears in neither — only inside
+the compliance agent's own list of claims to refuse. So it is coming from a
+source outside this project. It is recorded here as a standing rule regardless.
+
+**On the rename:** "bacteriostatic water" is a specific regulated drug product.
+Calling the item a research solution is the correct framing for a research-use
+catalogue, and the label now reads that way. The product's name in the Lapis
+admin still says TMG-BAC and only the owner can change it.
+
 ## The mark — resolved
 
 **The blue is dead.** The only element carried forward from the old logo is the
