@@ -61,17 +61,45 @@ the other three. The device survives the edit intact — arguably it gets strong
 because every remaining row is a verifiable fact about the material rather than a
 claim about a body.
 
-## Two open conflicts
+## The mark — resolved
 
-**1. The vial labels are blue.** The physical product labels use a blue wordmark
-and a blue seahorse mark. The brand system is black, white and gold with no blue
-anywhere. On the current site the blue is the only colour on the page. Either the
-system is aspirational and the blue stays for now, or the labels get reworked —
-which is a print job, not a Friday job. Decide, and record it here.
+**The blue is dead.** The only element carried forward from the old logo is the
+lizard, and it was never a seahorse: it is a **Gila monster**, and it is the most
+defensible idea this company owns.
 
-**2. The logo disappears on black.** The published logo is dark artwork. Flipping
-the site to the ink ground makes "TRUE" vanish and leaves a floating blue "MG".
-A light or inverted logo file is required before the palette can go live.
+In 1992 a Bronx VA endocrinologist, **John Eng**, isolated a peptide from Gila
+monster venom and named it **exendin-4**. Human GLP-1 breaks down in the blood in
+about two minutes, which made it useless as a medicine. The lizard's version
+lasted hours — because a Gila monster eats only a few times a year and evolved a
+hormone patient enough to wring every calorie from a rare meal. The VA declined
+to patent the finding. Eng patented it himself, licensed it, and it reached the
+market as Byetta in 2005. Every GLP-1 since descends from it.
+
+The mark is therefore not decoration and not a mascot. It is a citation.
+
+Three directions are drawn and published at `../assets/gila-mark.html`:
+
+| | Direction | Where it belongs |
+|---|---|---|
+| A | **Beaded silhouette** — flat gold, tubercular scales knocked out | The brand mark. The only one that holds at favicon size |
+| B | **Banded specimen** — the real blotched cross-banding | About page, printed large. Dies below ~28px |
+| C | **The seal** — silhouette in a hairline ring reading `EXENDIN-4 · 1992` | The vial label and beside the certificate block |
+
+All three are vector and recolour to any token in the system. The drawing is a
+first pass: the beading is the right idea and the proportions are close, but a
+mark this load-bearing is worth an illustrator's hand before it is final.
+
+### The one hard limit on the story
+On the storefront, the Gila monster is **provenance for the name and the mark,
+only**. The history of exendin-4 is a fact about a scientific discovery. It must
+never be placed where it reads as a claim about what any compound sold here does
+in a person — not in copy, not in a caption, not in alt text, not in a meta
+description. The lizard explains where the science came from. It does not
+describe the product.
+
+### Still open: the logo on the ink ground
+The published logo is dark artwork, so on black "TRUE" vanishes and the old blue
+"MG" floats alone. The palette stays held until the new mark lands.
 
 ## Where it does NOT apply
 
