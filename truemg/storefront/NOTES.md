@@ -1,69 +1,76 @@
 # Storefront — what is live
 
-Applied through the Lapis design endpoint on the `arcane` template. The endpoint
-reaches the palette, ~281 copy keys and one scoped `customCss` string. It cannot
-reach products, stock, prices, images, checkout or settings.
+**Template: `revive`.** Switched from `arcane`, which was a catalogue page with a
+colour scheme. `revive` is a shop: hero with artwork and proof chips, product
+cards that carry a description, size chips and a price, a numbered how-it-works,
+a dark quality band, an FAQ accordion on the home page and a closing CTA.
 
-## Palette
+## The unlock: images by URL
 
-| key | value | why |
-|---|---|---|
-| `accent`, `themeAccent` | `#2866CD` | the brand blue, sampled off the original wordmark |
-| `themeAccentDeep` | `#16397C` | the dark end of the button and band gradient |
-| `background` | `#FBFCFE` | a cool near-white, so pure-white cards still read as cards |
-| `card` | `#FFFFFF` | |
-| `border` | `#E3E8F0` | cool enough to sit under the blue without going grey |
-| `foreground` | `#10131A` | |
-| `primary` | `#0A0A0B` | the footer and the promo band |
+The repository is public, so `cdn.jsdelivr.net/gh/...` serves it. Several copy
+keys take an image URL, which means real artwork went on the site without
+anything being uploaded into the Lapis product catalogue:
 
-It was `#2563eb` (stock Tailwind blue) running into `#0c03b5` (a purple-navy),
-which is why every button read as somebody else's brand.
-
-## The white boxes
-
-Every product photograph has white baked into the file, and the theme sat it on
-the muted band `#ecebee`, so the white read as a rectangle floating in a grey
-tile. Two fixes together: `productImageBg: "#ffffff"` and
-`.lf-card .arcane-lozenge{background:#fff}`.
-
-**A drop-shadow on those images makes it worse, not better.** `drop-shadow`
-follows the alpha channel, and these files have none, so it casts a shadow of
-the bounding box and draws the exact rectangle the rest of the work removes. It
-goes in only once the transparent cut-outs in `truemg/assets/vials/` are
-uploaded.
-
-## Keys that save but do not render on `arcane`
-
-These validate, save and read back correctly, and the live page ignores them.
-Same class of problem as the `entryGate*` keys. Worth raising with Lapis.
-
-| key | what happens |
+| key | file |
 |---|---|
-| `faq` | Ten questions are stored; `/faq` renders the theme's own seven. |
-| `homeSectionOrder` | Accepted; the section order on the page does not change. |
-| `heroHeadlineAccent` | Accepted; the phrase does not pick up the accent colour. |
-| `comparisonTable` | Renders, but inside a second `main.lf-store` that is injected *after* the footer, in a different layout wrapper from the rest of the page. Nothing in `homeSectionOrder` moves it. It is hidden in CSS and the same argument now runs in the discovery section, which does render mid-page. |
+| `heroMediaUrl` | `hero-media.webp` — the transparent vial cluster; replaces the theme's product carousel |
+| `heroBackgroundUrl` | `hero-field.jpg` — a plain blue field, 21KB |
+| `heroBackgroundMobileUrl` | `hero-field-mobile.jpg` |
+| `seoImageUrl` | `hero-desktop.jpg` — the share card |
 
-`aboutBody` does not parse markdown either — `**bold**` prints as literal
-asterisks, so the sub-heads are set as plain capitalised lines.
+**Pin the URL to a commit SHA, not a branch.** jsDelivr caches a branch's file
+listing for about twelve hours, so a file added to an already-cached branch
+returns 404 until that expires. `@<sha>` is immutable, resolves immediately and
+never serves a stale copy. `raw.githubusercontent.com` is correct at once but is
+not a CDN and should not carry storefront traffic.
+
+The art is built by `truemg/assets/web/compose.py` from the transparent cut-outs.
+These are the one place a drop shadow is right: the cut-outs have a real alpha
+channel, so the shadow follows the glass. On the product cards, where the
+uploaded catalogue photographs are still white-backed, the same effect draws a
+rectangle.
+
+A phone-sized trap: `heroMediaUrl` also renders on phones, so a mobile
+background that contains vials paints a second set behind the first. The mobile
+background is a plain field.
+
+## Copy keys are per template
+
+`arcane` and `revive` share maybe half their keys and the overlap is not
+guessable — `browse1Href` exists on one and is rejected by the other. There is
+no way to read a template's keys before switching to it, so: apply the template,
+then `get_store_design` for the real list.
+
+Three keys that were dead on `arcane` work on `revive`: `heroHeadlineAccent`
+(the second line in brand blue), the FAQ, and the hero media. The FAQ moved from
+one JSON blob to five `faqNQ`/`faqNA` pairs that render on the home page, which
+is the better surface anyway.
+
+Limits are tighter than they look and over-long values are silently truncated
+rather than rejected — `productTrust1` is 30 characters, `faqNA` is 400,
+`quality1Body` is 140. Check `schema.copyKeys[key].max` before writing.
+
+## Still unresolved
+
+`comparisonTable` renders into a wrapper injected after the footer on both
+templates, and nothing moves it; it is hidden in CSS. `homeSectionOrder` is
+inert. `aboutBody` does not parse markdown.
 
 ## The compliance screen
 
-Server-side, on every string, and it is blunt rather than contextual. It
-rejected an About draft for the words **"patient"** (used as an adjective
-meaning unhurried) and **"testimonials"** (in a sentence promising there would
-be none), and it objects to second-person "you" in long-form body copy while
-allowing it in the FAQ. Write long-form in the third person and pick synonyms
-that have no clinical reading.
+Server-side on every string, blunt rather than contextual. It rejected an About
+draft for **"patient"** (used as an adjective meaning unhurried) and
+**"testimonials"** (in a sentence promising there would be none), and objects to
+second-person "you" in long-form body copy while allowing it in FAQ answers.
 
 ## Custom CSS
 
-Selectors come from the live DOM, not from guessing: `.lf-card`,
-`.arcane-lozenge` (the theme uses the same class for the product image frame
-*and* for buttons), `.arcane-fill-grad`, `.lf-section-*`, `.bg-arcane-band`.
+The sanitizer strips the child combinator `>`, so write descendant selectors
+that stay correct when widened. `storefront.css` is the applied string.
 
-The sanitizer strips the child combinator `>`, so `.lf-promo-banner>*` became
-`.lf-promo-banner *` and painted the gradient onto every text node inside the
-banner. Write descendant selectors that are safe when widened.
+## Owner-side, still blocking
 
-`storefront.css` is the applied string.
+Stock on six products. Every card reads *Out of stock*, so nothing can be bought
+no matter how the page looks. Anchor pricing (a struck-through compare-at price)
+and volume tiers are admin-side too — the reference site never shows a bare
+number, and that is the single biggest selling mechanic still missing.
