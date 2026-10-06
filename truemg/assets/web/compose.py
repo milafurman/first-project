@@ -102,3 +102,15 @@ print("hero-media.png", os.path.getsize(f"{OUT}/hero-media.png")//1024, "KB")
 
 field(1080, 1500, ((255, 255, 255), (231, 238, 251))).save(f"{OUT}/hero-field-mobile.jpg", quality=84, optimize=True)
 print("hero-field-mobile.jpg", os.path.getsize(f"{OUT}/hero-field-mobile.jpg")//1024, "KB")
+
+# ---------------- coming-soon background ----------------
+# The theme centres its text and lays a white wash over this image, so the
+# artwork has to keep out of the middle entirely rather than rely on contrast.
+W7, H7 = 2560, 1440
+c7 = field(W7, H7, ((255, 255, 255), (234, 241, 253))).convert("RGBA")
+place(c7, vial("ghk-cu"),         int(W7*.845), int(H7*.78),  640,   6)
+place(c7, vial("tmg-3rt"),        int(W7*.735), int(H7*.845), 500, -13)
+place(c7, vial("nad"),            int(W7*.945), int(H7*.86),  470,  17)
+place(c7, vial("bpc-157-tb-500"), int(W7*.072), int(H7*.885), 400,  -7, (18, 20, .22))
+c7.convert("RGB").save(f"{OUT}/coming-soon.jpg", quality=86, optimize=True)
+print("coming-soon.jpg", os.path.getsize(f"{OUT}/coming-soon.jpg")//1024, "KB")
