@@ -100,3 +100,28 @@ Stock on six products. Every card reads *Out of stock*, so nothing can be bought
 no matter how the page looks. Anchor pricing (a struck-through compare-at price)
 and volume tiers are admin-side too — the reference site never shows a bare
 number, and that is the single biggest selling mechanic still missing.
+
+## Two hard limits, found the hard way
+
+**`customCss` is capped at 10,000 characters.** Over that the endpoint refuses
+the whole request with the count and the limit, and saves nothing. The header
+lockup as a base64 data URI is 7.2KB, so it fits alongside the motion rules
+with room to spare. The header *and* footer lockups together are 14.4KB of
+base64 before a single other rule, so **both logos cannot coexist in CSS.** Only
+an upload in the Lapis admin gets the mark into both places.
+
+**A preview URL dies well before that.** Roughly 8,000 characters is the
+practical ceiling; past it the server returns `URI_TOO_LONG` or simply hangs. So
+any `customCss` big enough to carry an image can be applied but never previewed.
+
+## The storefront renders empty on roughly one cold load in four
+
+Not caused by anything here. Measured on the live coming-soon page over eight
+cold loads with a fresh context and a cache-buster each time: 6 rendered, 2 came
+back as an empty shell (HTTP 200, no images, `Skip to content` and nothing
+else, no JavaScript error on the page). **The same 6/2 split appears with
+`customCss` cleared entirely**, which is what rules out the custom styling.
+
+It is worth raising with Lapis. It also means a single page load is not evidence
+of anything: verify through several, or a pass that reports "no logo" is really
+just a load that never rendered.
