@@ -4,7 +4,7 @@ The storefront's header logo is an upload in the Lapis admin, which this
 integration cannot reach. The lockup therefore ships as an SVG served off the
 public repository and swapped in with CSS `content: url(...)`.
 """
-import os, re
+import os, re, shutil, subprocess
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
 
@@ -45,5 +45,44 @@ def svg(mark_fill, true_fill, accent, rule, out):
     open(out, "w").write(s)
     print("%-34s %6.0f x %4.0f  %5d bytes" % (out, W, H, len(s)))
 
+def web(true_fill, accent, rule, out):
+    """The site header: wordmark and LABS, no Gila mark.
+
+    Mila's instruction is that the lizard appears in exactly two places, the
+    browser tab and the vial, and nowhere on the site itself. This is also what
+    makes the header affordable: the storefront has no logo copy key, so the
+    file ships inlined as a base64 data URI inside customCss, and customCss is
+    capped at 10,000 characters. With the mark it minifies to 9,464 characters
+    of base64 and the rest of the CSS no longer fits. Without it, it fits with
+    room to spare."""
+    l = labs.replace(BLUE, accent).replace(INK, true_fill).replace("#D8DEE9", rule)
+    s = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %.0f %.0f" '
+         'role="img" aria-label="TrueMG Labs">%s</svg>' % (lvb[2], H, l))
+    open(out, "w").write(s)
+    print("%-34s %6.0f x %4.0f  %5d bytes" % (out, lvb[2], H, len(s)))
+
+# with the mark: for print, Canva, and anywhere that is not the storefront
 svg(BLUE,    INK,     BLUE,    "#D8DEE9", "truemg-lockup-header.svg")
 svg("#FFFFFF","#FFFFFF","#65A0F5","#2B3344", "truemg-lockup-onink.svg")
+# without it: the storefront header and footer
+web(INK,      BLUE,    "#D8DEE9", "truemg-lockup-web.svg")
+web("#FFFFFF","#65A0F5","#2B3344", "truemg-lockup-web-onink.svg")
+
+
+# The .min.svg beside each lockup is what actually ships: it is base64'd into
+# customCss, where the budget is 10,000 characters. Minifying was a command
+# somebody typed by hand, so a rebuilt lockup and its .min could disagree —
+# and did, for as long as the header carried the old Gila drawing. svgo does
+# the work because a hand-rolled regex once produced a file that rendered
+# nothing at all; this only automates *calling* it.
+SVGO = shutil.which("svgo") or shutil.which("npx")
+for name in ("truemg-lockup-header", "truemg-lockup-onink",
+             "truemg-lockup-web", "truemg-lockup-web-onink"):
+    src, out = name + ".svg", name + ".min.svg"
+    if not SVGO:
+        print("  ! svgo not found - %s is now STALE. `npm i -g svgo`, then re-run." % out)
+        continue
+    cmd = [SVGO] + (["-y", "svgo"] if SVGO.endswith("npx") else [])
+    subprocess.run(cmd + ["--precision=0", "--quiet", "-i", src, "-o", out], check=True)
+    b64 = (os.path.getsize(out) + 2) // 3 * 4
+    print("  %-30s %5d bytes -> %5d base64 chars" % (out, os.path.getsize(out), b64))
