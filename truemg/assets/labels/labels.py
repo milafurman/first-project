@@ -17,7 +17,7 @@ INK, GOLD, PAPER, MUTED = "#0A0A0B", "#D8B46A", "#FCFBF8", "#9A948A"
 PALETTES = {
  "ink-gold":   dict(bg="#0A0A0B", fg="#FCFBF8", accent="#D8B46A", muted="#9A948A", lock="onink"),
  # THE brand blue, sampled from the original wordmark. Confirmed by Mila.
- "paper-blue": dict(bg="#FCFBF8", fg="#0A0A0B", accent="#2866CD", muted="#6E6A63", lock="onpaper"),
+ "paper-blue": dict(bg="#FCFBF8", fg="#0A0A0B", accent="#2365CD", muted="#6E6A63", lock="onpaper"),
  "paper-teal": dict(bg="#FCFBF8", fg="#0A0A0B", accent="#0E7A8C", muted="#6E6A63", lock="onpaper"),
  "ink-blue":   dict(bg="#0A0A0B", fg="#FCFBF8", accent="#4C8BE8", muted="#9A948A", lock="onink"),
  # Gold on paper. #9C7C34 is the brand book's "accent on paper" and measures 3.80:1

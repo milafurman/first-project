@@ -16,7 +16,7 @@ H = 108 + rows * CH + 24
 c = Image.new("RGB", (W, H), INK)
 d = ImageDraw.Draw(c)
 d.text((36, 28), "VIALS — cut out, rebranded, blue crimp", font=BOLD, fill=(237, 235, 230))
-d.text((36, 60), "%d files · transparent PNG · Gila mark and crimp in #2866CD, cap as photographed"
+d.text((36, 60), "%d files · transparent PNG · Gila mark and crimp in #2365CD, cap as photographed"
        % len(files), font=MONO, fill=MUT)
 
 # checkerboard tile so transparency is visible

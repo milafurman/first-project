@@ -8,7 +8,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
 CRIMP = (0.085, 0.170)
-BLUE  = "#2866CD"
+BLUE  = "#2365CD"
 hexrgb = lambda h: tuple(int(h.lstrip('#')[i:i+2], 16) for i in (0, 2, 4))
 
 def recolour(im, band, target):
@@ -42,7 +42,7 @@ rows = (len(files) + COLS - 1) // COLS
 W, H = 40 + COLS * CW + 20, 108 + rows * CH + 24
 c = Image.new("RGB", (W, H), INK); d = ImageDraw.Draw(c)
 d.text((36, 28), "BLUE CRIMP, WHITE CAP — the whole line", font=BOLD, fill=(237, 235, 230))
-d.text((36, 60), "%d vials · crimp #2866CD · cap as photographed · transparent PNG"
+d.text((36, 60), "%d vials · crimp #2365CD · cap as photographed · transparent PNG"
        % len(files), font=MONO, fill=MUT)
 tile = Image.new("RGB", (16, 16), (30, 30, 32))
 ImageDraw.Draw(tile).rectangle([8, 0, 15, 7], fill=(38, 38, 41))

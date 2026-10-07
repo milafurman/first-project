@@ -65,7 +65,7 @@ claim about a body.
 
 | | |
 |---|---|
-| **Accent** | **`#2866CD`** — the brand blue, sampled from the original wordmark. Not teal, not gold |
+| **Accent** | **`#2365CD`** — the brand blue, sampled from the original wordmark. Not teal, not gold |
 | **Ground** | White |
 | **Slogan** | **Research · Purity · Precision** |
 | **Banned word** | **"Performance."** It is a claim word and it never ships, anywhere |

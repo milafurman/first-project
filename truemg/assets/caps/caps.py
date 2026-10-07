@@ -34,7 +34,7 @@ def vial(crimp, cap):
     im = recolour(im, DISC,  cap)
     return im
 
-BLUE, INK, PAPER = "#2866CD", "#141418", "#F2F2F0"
+BLUE, INK, PAPER = "#2365CD", "#141418", "#F2F2F0"
 OPTIONS = [
     ("now — silver + white",      None,   None),
     ("blue crimp + white cap",    BLUE,   PAPER),
@@ -49,7 +49,7 @@ for i,(name,c,k) in enumerate(OPTIONS):
     print(f"  {name}")
 
 # family coding: one constant blue crimp, cap colour carries the group
-FAMILY = [("Metabolic","#2866CD"),("Repair","#F2F2F0"),("Longevity","#141418"),
+FAMILY = [("Metabolic","#2365CD"),("Repair","#F2F2F0"),("Longevity","#141418"),
           ("Cognitive","#5A9E86"),("Supplies","#9AA0A6")]
 for i,(n,c) in enumerate(FAMILY):
     vial(BLUE, c).save(f"caps/fam{i}.png")

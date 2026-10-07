@@ -22,7 +22,7 @@ a sticker, not a cap.
 
 **Blue crimp on every vial, cap colour as the family code.**
 
-The crimp is the constant — brand blue, `#2866CD`, the same blue as the
+The crimp is the constant — brand blue, `#2365CD`, the same blue as the
 wordmark and the Gila mark — so any two vials photographed together read as one
 company. The flip-disc then groups what gets bought together:
 

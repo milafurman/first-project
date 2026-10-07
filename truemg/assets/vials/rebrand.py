@@ -3,7 +3,7 @@ import numpy as np
 from scipy import ndimage
 from PIL import Image, ImageFilter
 
-BRAND_BLUE = np.array([40,102,205], float)   # #2866CD — the decided brand accent
+BRAND_BLUE = np.array([35,101,205], float)   # #2365CD — the decided brand accent
 LIZARD_BOX = (725, 1185, 950, 1420)         # old mark on the 2000px label, measured
 
 def blue_mask(a):

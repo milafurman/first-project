@@ -8,7 +8,7 @@ import os, re
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
 
-INK, BLUE = "#0A0A0B", "#2866CD"
+INK, BLUE = "#0A0A0B", "#2365CD"
 
 def inner(path):
     """Everything between the <svg> wrapper, plus the viewBox."""

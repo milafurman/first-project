@@ -40,14 +40,14 @@ def vial(crimp=None, cap=None, ring=None):
     im = recolour(im, DISC,  cap)
     return im
 
-BLUE, GOLD, GOLD_D = "#2866CD", "#D8B46A", "#9C7C34"
+BLUE, GOLD, GOLD_D = "#2365CD", "#D8B46A", "#9C7C34"
 INK, PAPER, GUN, COPPER = "#141418", "#F2F2F0", "#5A6068", "#B87333"
 
 # one photograph per aluminium colour; the white cap is held constant so the
 # crimp is the only thing changing from frame to frame
 CRIMPS = [
     ("silver",        None,   "what you have now"),
-    ("brand blue",    BLUE,   "#2866CD · our blue"),
+    ("brand blue",    BLUE,   "#2365CD · our blue"),
     ("gold",          GOLD,   "#D8B46A · bright"),
     ("deep gold",     GOLD_D, "#9C7C34 · antique"),
     ("gold + blue",   BLUE,   "blue band, gold ring"),
@@ -78,7 +78,7 @@ print("crimps:", len(imgs), " combos:", len(combos))
 F = lambda n, s: ImageFont.truetype("/usr/share/fonts/truetype/dejavu/" + n, s)
 MONO, MONO_S, BOLD, H2 = F("DejaVuSansMono.ttf", 14), F("DejaVuSansMono.ttf", 12), \
                          F("DejaVuSans-Bold.ttf", 23), F("DejaVuSans-Bold.ttf", 19)
-PAGE, TXT, MUT, ACC = (247, 246, 243), (18, 18, 20), (128, 124, 116), (40, 102, 205)
+PAGE, TXT, MUT, ACC = (247, 246, 243), (18, 18, 20), (128, 124, 116), (35,101,205)
 
 def tile(im, box_w, box_h):
     """Crop to the artwork, fit inside the box, return an RGB tile on the page colour."""
