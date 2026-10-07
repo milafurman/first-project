@@ -113,3 +113,22 @@ is an admin upload. Two routes were tested against the CSS sanitizer:
 
 A raw (non-base64) `data:image/svg+xml;utf8,<svg…>` URI loses its angle
 brackets to the sanitizer. Base64 is the only form that survives.
+
+### What shipped
+
+The header carries `truemg-lockup-header.min.svg` as a base64 `data:` URI
+inside `customCss`. svgo at `--precision=0` takes the file from 19.8KB to
+5.4KB, which is 7.2KB of base64, and at the 42px the header renders it is
+indistinguishable from the full-precision file. A hand-rolled regex that tried
+to do the same thing produced a file that rendered nothing at all, so the
+optimizer does this, not a script.
+
+It still cannot be previewed. A preview URL carrying 7.2KB of base64 runs to
+~9,800 characters and the server either refuses it with `URI_TOO_LONG` or times
+out; the working previews in this project sit around 8,000. The change was
+applied and then verified through a short preview URL that only lifts the
+coming-soon page.
+
+The footer logo is untouched and still shows the old wordmark. Replacing it too
+would double the inline CSS on every page load, which is not worth it for a
+stopgap. Both go away the moment the PNGs are uploaded in the Lapis admin.
