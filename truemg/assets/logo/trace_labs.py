@@ -1,4 +1,13 @@
-"""Trace LABS and compose the TrueMG Labs lockups as font-free vector."""
+"""SUPERSEDED by relabs.py. Kept for provenance; do not run.
+
+This cannot execute: it needs labs-wide.png / labs-compact.png and a vec/
+directory, none of which were ever committed. It is also the source of the
+stretched LABS — `scale = WORD_W / lw` forced the word to span the wordmark.
+relabs.py replaces it and lays the glyphs out from their real bounding boxes.
+
+Original docstring: Trace LABS and compose the TrueMG Labs lockups as
+font-free vector.
+"""
 import subprocess, os, re
 import numpy as np
 from PIL import Image

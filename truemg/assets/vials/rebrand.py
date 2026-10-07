@@ -1,3 +1,13 @@
+"""SUPERSEDED by render.py. Kept for provenance; do not run.
+
+This cannot execute: it needs mark-blue-600.png, which was never committed.
+It is also where the product type was darkened — it multiplied the brand
+colour by each pixel's own lightness (0.55 + 0.45*lum), a factor that never
+exceeds 1, so the result could only ever come out darker than the colour
+asked for. That is how #2365CD rendered as #2560C1.
+
+render.py replaces this and the cutout -> rebrand -> bluecrimp chain.
+"""
 import sys, os
 import numpy as np
 from scipy import ndimage

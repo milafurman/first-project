@@ -12,7 +12,25 @@ import json, os, re, subprocess, sys, tempfile
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
 WORD_W, WORD_H = 5634, 681
-GROUP = re.compile(r'<g transform="translate\(([^)]+)\) scale\(([^)]+)\)">(.*?)</g></g>', re.S)
+GROUP_OPEN = re.compile(r'<g transform="translate\(([^)]+)\) scale\(([^)]+)\)">')
+
+
+def group_span(s, m):
+    """End index of the <g> that m opens, found by counting nested tags.
+
+    The old pattern ended at the first literal '</g></g>'. That held only while
+    the group was two levels deep, which is how trace_labs.py first emitted it.
+    This script nests one <g> per glyph, so on a second run the pattern stopped
+    short and left the outer '</g>' behind — an unmatched tag, and malformed SVG.
+    Counting makes the extraction independent of how deeply nested it already is,
+    so re-running is safe.
+    """
+    depth, i = 1, m.end()
+    for t in re.finditer(r'<g\b[^>]*>|</g>', s[m.end():]):
+        depth += 1 if t.group(0) != '</g>' else -1
+        if depth == 0:
+            return m.end() + t.end()
+    raise ValueError("unclosed <g>")
 
 LOCKUPS = ["truemg-labs-onink.svg", "truemg-labs-onpaper.svg",
            "truemg-labs-ink.svg", "truemg-labs-paper.svg",
@@ -22,14 +40,15 @@ LOCKUPS = ["truemg-labs-onink.svg", "truemg-labs-onpaper.svg",
 def parse(src):
     """Pull the LABS group out of a lockup: its y, inner transform, and paths."""
     s = open(src).read()
-    m = GROUP.search(s)
-    inner = m.group(3)
+    m = GROUP_OPEN.search(s)
+    end = group_span(s, m)
+    inner = s[m.end():end - len('</g>')]
     tr = re.search(r'<g transform="([^"]+)"', inner).group(1)
     colour = re.search(r'fill="([^"]+)"', inner).group(1)
     paths = re.findall(r'<path d="([^"]+)"/>', inner)
     unit = abs(float(re.search(r"scale\(([\d.]+)", tr).group(1)))
     top = float(re.search(r"translate\([\d.]+,([\d.]+)\)", tr).group(1))
-    return s, m, tr, colour, paths, unit, top, float(m.group(1).split(",")[1])
+    return s, m, end, tr, colour, paths, unit, top, float(m.group(1).split(",")[1])
 
 
 def measure(tr, paths):
@@ -50,7 +69,7 @@ def measure(tr, paths):
 
 
 def rebuild(src, dst, cap_ratio, tracking_em):
-    s, m, tr, colour, paths, unit, top, labs_y = parse(src)
+    s, m, end, tr, colour, paths, unit, top, labs_y = parse(src)
     paths, boxes = measure(tr, paths)
     cap = max(b["h"] for b in boxes)
     scale = cap_ratio * WORD_H / (cap * unit)
@@ -65,7 +84,7 @@ def rebuild(src, dst, cap_ratio, tracking_em):
     g = ('<g transform="translate(%.1f,%.1f) scale(%.6f)">'
          '<g transform="%s" fill="%s" stroke="none">%s</g></g>'
          % ((WORD_W - width) / 2, labs_y, scale, tr, colour, "".join(placed)))
-    out = s[:m.start()] + g + s[m.end():]
+    out = s[:m.start()] + g + s[end:]
 
     # a taller LABS overruns the inherited viewBox and gets clipped at the foot
     need = labs_y + scale * top + 14

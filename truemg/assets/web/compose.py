@@ -100,6 +100,13 @@ place(m, vial("bpc-157-tb-500"), int(W6*.40), int(H6*.67),  560,  -4, (18, 20, .
 m.save(f"{OUT}/hero-media.png", optimize=True)
 print("hero-media.png", os.path.getsize(f"{OUT}/hero-media.png")//1024, "KB")
 
+# The webp is what the storefront actually loads. It used to be converted by hand
+# outside this script, so it kept the crimp colour of whatever vials existed on the
+# day someone remembered to run the conversion — it was still carrying #317EFF long
+# after the vials were fixed. Writing it here ties it to the same source.
+m.save(f"{OUT}/hero-media.webp", quality=88, method=6)
+print("hero-media.webp", os.path.getsize(f"{OUT}/hero-media.webp")//1024, "KB")
+
 field(1080, 1500, ((255, 255, 255), (231, 238, 251))).save(f"{OUT}/hero-field-mobile.jpg", quality=84, optimize=True)
 print("hero-field-mobile.jpg", os.path.getsize(f"{OUT}/hero-field-mobile.jpg")//1024, "KB")
 

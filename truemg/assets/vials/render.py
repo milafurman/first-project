@@ -15,9 +15,13 @@ already-recoloured output and drifted away from the brand blue twice over:
 Both are now mapped onto a ramp built from the brand colour itself, so the
 mid-tone lands exactly on brand and the extremes stay believable.
 
-Run from this directory, with the original photographs in cut/src/.
+Run from this directory. The original photographs are fetched into cut/src/ on
+first run from the URLs in manifest.json, because cut/ is gitignored (17 MB of
+source photography) and a fresh clone would otherwise have nothing to render.
 """
+import json
 import os
+import urllib.request
 import numpy as np
 from scipy import ndimage
 from PIL import Image, ImageFilter
@@ -139,7 +143,21 @@ def render(name, mark):
     return recolour_crimp(swap_mark(a, mark))
 
 
+def fetch_sources():
+    """Pull any missing original photograph from the store's CDN."""
+    os.makedirs("cut/src", exist_ok=True)
+    got = 0
+    for e in json.load(open("manifest.json")):
+        p = "cut/src/" + e["file"]
+        if not os.path.exists(p):
+            urllib.request.urlretrieve(e["url"], p)
+            got += 1
+    if got:
+        print("  fetched %d original photograph(s)" % got)
+
+
 if __name__ == "__main__":
+    fetch_sources()
     mark = Image.open("mark-2365CD.png").convert("RGBA")
     names = sorted(os.listdir("cut/src"))
     for n in names:

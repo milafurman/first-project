@@ -38,8 +38,8 @@ def asset(path, want_viewbox=False):
     vb = re.search(r'viewBox="([^"]+)"', s).group(1)
     return (g.group(1), g.group(2).strip(), [float(x) for x in vb.split()])
 
-MARK_TR, MARK_BODY, MARK_VB = asset("vec/truemg-mark-ink.svg")
-WORD_TR, WORD_BODY, WORD_VB = asset("vec/truemg-wordmark-ink.svg")
+MARK_TR, MARK_BODY, MARK_VB = asset("../logo/truemg-mark-ink.svg")
+WORD_TR, WORD_BODY, WORD_VB = asset("../logo/truemg-wordmark-ink.svg")
 
 def place(tr, body, vb, x, y, w, fill):
     """Drop a traced asset at (x,y) in mm, scaled to width w, recoloured."""
@@ -60,7 +60,7 @@ _LOCK_CACHE = {}
 def lockup_for(pal):
     key = (pal["lock"], pal["accent"], pal["fg"])
     if key not in _LOCK_CACHE:
-        inner, w, h = lockup_asset("vec/truemg-labs-compact-%s.svg" % pal["lock"])
+        inner, w, h = lockup_asset("../logo/truemg-labs-compact-%s.svg" % pal["lock"])
         if pal["lock"] == "onink":
             inner = inner.replace("#D8B46A", pal["accent"]).replace("#EDEBE6", pal["fg"])
         else:
@@ -236,23 +236,28 @@ PRODUCTS = [
 
 if __name__ == "__main__":
     PALETTE = "paper-blue"          # confirmed: the brand blue, on white
-    shutil.rmtree("labels", ignore_errors=True)   # stale artwork has shipped before
-    os.makedirs("labels/side", exist_ok=True)
-    os.makedirs("labels/top", exist_ok=True)
-    open("labels/_TEMPLATE-with-guides.svg","w").write(
+    # Write to the directories the artwork actually ships from. These paths used to
+    # be prefixed "labels/", which resolved to labels/labels/ since this script already
+    # chdir's here — so re-running it produced a nested copy and left the real artwork
+    # untouched. That is how the stretched LABS survived a fix that claimed to cover it.
+    for sub in ("side", "top", "palettes"):
+        shutil.rmtree(sub, ignore_errors=True)   # stale artwork has shipped before
+    os.makedirs("side", exist_ok=True)
+    os.makedirs("top", exist_ok=True)
+    open("_TEMPLATE-with-guides.svg","w").write(
         label_side("GHK-CU","50 MG","50 mg", guides=True, palette=PALETTE))
     man=[]
     for n,st,net in PRODUCTS:
         slug = re.sub(r'[^a-z0-9]+','-', f"{n} {st}".lower()).strip('-')
-        open(f"labels/side/{slug}.svg","w").write(label_side(n,st,net,palette=PALETTE))
-        open(f"labels/top/{slug}.svg","w").write(label(n,st,net,palette=PALETTE))
+        open(f"side/{slug}.svg","w").write(label_side(n,st,net,palette=PALETTE))
+        open(f"top/{slug}.svg","w").write(label(n,st,net,palette=PALETTE))
         man.append({"product":n,"strength":st,"file":f"{slug}.svg"})
     # the palette set, kept reproducible so it can never go stale against the layout
-    os.makedirs("labels/palettes", exist_ok=True)
+    os.makedirs("palettes", exist_ok=True)
     for pal in PALETTES:
         for n, st, _net in [("GHK-CU","50 MG","50 mg"), ("NAD+","1000 MG","1000 mg")]:
             slug = re.sub(r'[^a-z0-9]+','-', n.lower()).strip('-')
-            open(f"labels/palettes/{pal}--{slug}.svg","w").write(label_side(n,st,_net,palette=pal))
-    json.dump(man, open("labels/manifest.json","w"), indent=1)
+            open(f"palettes/{pal}--{slug}.svg","w").write(label_side(n,st,_net,palette=pal))
+    json.dump(man, open("manifest.json","w"), indent=1)
     print(f"{len(man)} products x 2 layouts, palette {PALETTE}")
     print(f"artwork {W}x{H}mm (trim {TRIM_W}x{TRIM_H}, bleed {BLEED}, safe {SAFE}, wrap {WRAP})")
