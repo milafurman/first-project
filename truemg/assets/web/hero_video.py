@@ -14,7 +14,10 @@ SRC = "/home/user/first-project/truemg/assets/vials"
 OUT = "/tmp/claude-0/-home-user-first-project/a0f52b12-8e20-5aa6-91f8-6e19eeb1c139/scratchpad/frames"
 os.makedirs(OUT, exist_ok=True)
 
-W, H, FPS, SECONDS = 1920, 864, 24, 8
+# 2.6:1 matches the hero box, so `cover` barely crops. The cluster sits only
+# slightly right of centre so a portrait crop on a phone still catches it, and
+# the vials are small in frame because the hero scales the video up to fit.
+W, H, FPS, SECONDS = 1920, 740, 24, 8
 N = FPS * SECONDS
 
 def vial(name):
@@ -37,10 +40,10 @@ field = Image.composite(Image.new("RGB", (W, H), (211, 227, 251)), field, bloom)
 
 # ---- the cluster, prepared once: name, centre, height, tilt, drift, phase ----
 CAST = [
-    ("tmg-3rt",        .585, .50, 540, -13, 17, 0.00),
-    ("ghk-cu",         .728, .45, 650,   6, 25, 0.38),
-    ("nad",            .870, .52, 505,  17, 20, 0.72),
-    ("bpc-157-tb-500", .663, .635, 370, -4, 13, 0.18),
+    ("tmg-3rt",        .545, .50, 320, -13, 11, 0.00),
+    ("ghk-cu",         .650, .45, 386,   6, 16, 0.38),
+    ("nad",            .752, .52, 300,  17, 13, 0.72),
+    ("bpc-157-tb-500", .600, .635, 220, -4,  9, 0.18),
 ]
 PREP = []
 for name, fx, fy, h, ang, amp, phase in CAST:
@@ -49,7 +52,7 @@ for name, fx, fy, h, ang, amp, phase in CAST:
     v = v.resize((max(1, int(v.width * k)), h), Image.LANCZOS).rotate(ang, resample=Image.BICUBIC, expand=True)
     sh = Image.new("RGBA", v.size, (12, 24, 56, 0))
     sh.putalpha(v.getchannel("A").point(lambda p: int(p * 0.30)))
-    sh = sh.filter(ImageFilter.GaussianBlur(24))
+    sh = sh.filter(ImageFilter.GaussianBlur(16))
     PREP.append((v, sh, int(W * fx), int(H * fy), amp, phase))
 
 # ---- the light sweep, one soft band that crosses exactly once per loop ----
@@ -68,7 +71,7 @@ for f in range(N):
         dx = 5 * math.sin(2 * math.pi * (2 * t + phase))
         x = cx - v.width // 2 + int(round(dx))
         y = cy - v.height // 2 + int(round(dy))
-        frame.paste(sh, (x, y + 30 - int(round(dy * 0.6))), sh)   # shadow lags the lift
+        frame.paste(sh, (x, y + 18 - int(round(dy * 0.6))), sh)   # shadow lags the lift
         frame.paste(v, (x, y), v)
     # Two copies of the band, one a full period behind, combined with a MAX so the
     # wrap blends. Pasting the second one would overwrite the first with its own
