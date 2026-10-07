@@ -3,7 +3,7 @@ alpha so a stray white halo shows up instead of hiding against a white page."""
 from PIL import Image, ImageDraw, ImageFont
 import os, glob, json
 
-R = "/home/user/first-project/truemg/assets/vials"
+R = os.path.dirname(os.path.abspath(__file__))   # the vials live beside this script
 F = lambda n, s: ImageFont.truetype("/usr/share/fonts/truetype/dejavu/" + n, s)
 MONO, BOLD = F("DejaVuSansMono.ttf", 13), F("DejaVuSans-Bold.ttf", 21)
 INK, MUT, BLUE = (10, 10, 11), (138, 133, 125), (64, 126, 224)

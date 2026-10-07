@@ -9,8 +9,8 @@ import numpy as np
 from PIL import Image, ImageFilter, ImageDraw
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
-SRC = "/home/user/first-project/truemg/assets/vials"
-OUT = "/home/user/first-project/truemg/assets/web"
+SRC = "../vials"   # relative to D, above: an absolute path here wrote into whichever
+OUT = "."          # checkout it was typed in, no matter where the script was run from
 os.makedirs(OUT, exist_ok=True)
 
 def vial(name):

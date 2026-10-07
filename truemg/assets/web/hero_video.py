@@ -5,13 +5,21 @@ exactly where the first one started and the loop has no visible seam. The
 shadows travel at a fraction of their vial's drift, which is what sells the
 vials as floating rather than as a sticker sliding around.
 """
-import os, math
+import os, math, shutil, subprocess, tempfile
 import numpy as np
+from scipy import ndimage
 from PIL import Image, ImageFilter, ImageDraw, ImageEnhance
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
-SRC = "/home/user/first-project/truemg/assets/vials"
-OUT = "/tmp/claude-0/-home-user-first-project/a0f52b12-8e20-5aa6-91f8-6e19eeb1c139/scratchpad/frames"
+SRC = "../vials"          # relative to D: an absolute path here pointed at one checkout
+
+# The frames are scratch — 192 PNGs, about 60 MB — so they go to a temp directory
+# that is wiped afterwards. Set HERO_FRAMES to a path to keep them for inspection;
+# either way the directory is emptied first, because a short run leaving a long
+# run's leftovers behind would hand stale frames to the encoder.
+OUT = os.environ.get("HERO_FRAMES") or tempfile.mkdtemp(prefix="hero-frames-")
+KEEP = bool(os.environ.get("HERO_FRAMES"))
+shutil.rmtree(OUT, ignore_errors=True)
 os.makedirs(OUT, exist_ok=True)
 
 # 2.6:1 matches the hero box, so `cover` barely crops. The cluster sits only
@@ -48,9 +56,20 @@ for name, fx, fy, h, ang, amp, phase in CAST:
     k = h / v.height
     v = v.resize((max(1, int(v.width * k)), h), Image.LANCZOS)
     # The theme lays a white wash over the hero video, which drains clear glass to
-    # nearly nothing. Pre-lifting contrast and saturation is what survives it.
-    rgb = ImageEnhance.Contrast(v.convert("RGB")).enhance(1.22)
-    rgb = ImageEnhance.Color(rgb).enhance(1.35)
+    # nearly nothing, so the glass is pre-lifted in contrast and saturation to survive
+    # it. The printed blue and the crimp are held OUT of that lift. They are #2365CD by
+    # construction, and 1.35x saturation on a colour already that saturated just clips
+    # it — the video was shipping a #0050F8 neon crimp for exactly this reason, which
+    # is the drift Mila caught in the stills reappearing one step further down the line.
+    # A wash lightens; it does not shift hue, so the brand blue needs no help from here.
+    base = v.convert("RGB")
+    lift = ImageEnhance.Color(ImageEnhance.Contrast(base).enhance(1.22)).enhance(1.35)
+    px = np.asarray(base).astype(int)
+    r_, g_, b_ = px[:, :, 0], px[:, :, 1], px[:, :, 2]
+    brand = (b_ - r_ > 45) & (b_ - g_ > 25) & (b_ > 90)        # same test as vials/render.py
+    hold = Image.fromarray((ndimage.gaussian_filter(brand.astype(float), 1.2) * 255)
+                           .clip(0, 255).astype(np.uint8))     # feathered: no hard seam
+    rgb = Image.composite(base, lift, hold)
     v = Image.merge("RGBA", (*rgb.split(), v.getchannel("A")))
     v = v.rotate(ang, resample=Image.BICUBIC, expand=True)
     sh = Image.new("RGBA", v.size, (12, 24, 56, 0))
@@ -89,3 +108,36 @@ for f in range(N):
     frame.save(f"{OUT}/f{f:04d}.png")
     if f % 48 == 0: print("frame", f, "/", N, flush=True)
 print("done", N, "frames at", W, "x", H)
+
+# ---- encode ----
+# This used to be an ffmpeg command somebody typed by hand, which is exactly how
+# hero-loop.mp4, hero-loop.webm and hero-poster.jpg ended up carrying the old neon
+# crimp long after the vials they are made of had been fixed: the frames were
+# regenerated, the videos were not. Encoding here means there is no step left to
+# forget.
+#
+# Two codecs because neither one covers the field on its own: Safari needs H.264,
+# and some Chromium builds ship without it and need VP9.
+def run(*cmd):
+    print(" ", " ".join(cmd[:6]), "...", flush=True)
+    subprocess.run(cmd, check=True, capture_output=True)
+
+SEQ = f"{OUT}/f%04d.png"
+run("ffmpeg", "-y", "-loglevel", "error", "-framerate", str(FPS), "-i", SEQ,
+    "-c:v", "libx264", "-preset", "slow", "-crf", "30",
+    "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-an", "hero-loop.mp4")
+run("ffmpeg", "-y", "-loglevel", "error", "-framerate", str(FPS), "-i", SEQ,
+    "-c:v", "libvpx-vp9", "-crf", "36", "-b:v", "0", "-row-mt", "1",
+    "-pix_fmt", "yuv420p", "-an", "hero-loop.webm")
+
+# Frame 0 is the first frame the video paints, so using it as the poster means the
+# swap from still to video is invisible rather than a jump.
+Image.open(f"{OUT}/f0000.png").convert("RGB").save("hero-poster.jpg", quality=86, optimize=True)
+
+for f in ("hero-loop.mp4", "hero-loop.webm", "hero-poster.jpg"):
+    print(f"  {f:18s} {os.path.getsize(f)//1024} KB")
+
+if not KEEP:
+    shutil.rmtree(OUT, ignore_errors=True)
+else:
+    print("  frames kept in", OUT)
