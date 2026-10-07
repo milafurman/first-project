@@ -86,3 +86,30 @@ original wordmark.
 At full width the letterspacing is extreme, which is correct at hero size and
 unreadable at header size. The compact cut tracks about half as far. Both are
 traced from rendered type, so neither depends on a font being installed.
+
+## The header lockup
+
+`truemg-lockup-header.svg` is the mark beside the wordmark for a light header;
+`truemg-lockup-onink.svg` is the same thing for the dark footer. Both are built
+by `build_lockup.py` from the traced mark and the TrueMG Labs wordmark, so
+recolouring is a one-line change rather than a redraw.
+
+`truemg-lockup-light-1200.png` and `truemg-lockup-dark-1200.png` are
+transparent PNGs at 1200x204, which is roughly 3x the header's rendered size.
+**These are the ones to upload in the Lapis admin.**
+
+### Why it cannot be done from the storefront integration
+
+There is no copy key for the logo on any template — only `logoScale`. The image
+is an admin upload. Two routes were tested against the CSS sanitizer:
+
+- `content: url(...)` and `background-image: url(...)` — **every** external URL
+  is rewritten to `url(#)`, in every property. No image can be pulled in from
+  outside, from jsDelivr or anywhere else.
+- A base64 `data:` URI **does** survive the sanitizer, so the lockup can be
+  inlined into `customCss`. It costs 26KB of base64, and a preview URL carrying
+  it is refused with `URI_TOO_LONG`, so that route can be applied but never
+  previewed first.
+
+A raw (non-base64) `data:image/svg+xml;utf8,<svg…>` URI loses its angle
+brackets to the sanitizer. Base64 is the only form that survives.
