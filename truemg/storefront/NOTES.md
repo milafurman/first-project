@@ -68,6 +68,32 @@ second-person "you" in long-form body copy while allowing it in FAQ answers.
 The sanitizer strips the child combinator `>`, so write descendant selectors
 that stay correct when widened. `storefront.css` is the applied string.
 
+**It also strips `@keyframes` blocks while keeping the `animation:` property.**
+A custom animation therefore validates, saves, and shows the right
+`animationName` in the browser, pointing at a rule that does not exist. Nothing
+moves, and a screenshot looks identical to a working version. The only way to
+catch it is to sample an element's position over several seconds.
+
+Use the keyframes the theme already ships instead. Available on `revive`:
+`float` (translateY 0 to -4px), `pulse`, `bounce`, `spin`, `rev-fade-up`,
+`fade-up`, and the per-theme marquees. The hero cluster rides `float`.
+
+Do not override `animation` on `.lf-section-hero .justify-center`. That wrapper
+uses `rev-fade-up` to go from `opacity: 0` to `1`, so replacing the animation
+leaves it at zero and the entire hero visual becomes invisible.
+
+## Voice
+
+Copy runs through the TELLS SCRUB in the `viral-formula` skill before it ships.
+The first pass failed it badly: em dashes throughout, not one contraction on the
+whole site, every body paragraph the same two sentences, threes everywhere.
+
+The angle that makes this category work under a research-use-only constraint is
+that **the fear is commercial, not medical**. Nothing may imply an outcome in a
+person or an animal, but "most vendors post one certificate and sell a dozen
+batches behind it" is specific, checkable and entirely compliant. The named
+mechanic is **the lot match**.
+
 ## Owner-side, still blocking
 
 Stock on six products. Every card reads *Out of stock*, so nothing can be bought
