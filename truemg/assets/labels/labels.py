@@ -16,7 +16,9 @@ INK, GOLD, PAPER, MUTED = "#0A0A0B", "#D8B46A", "#FCFBF8", "#9A948A"
 # Ground / text / accent / muted / which lockup cut to place.
 PALETTES = {
  "ink-gold":   dict(bg="#0A0A0B", fg="#FCFBF8", accent="#D8B46A", muted="#9A948A", lock="onink"),
- # THE brand blue, sampled from the original wordmark. Confirmed by Mila.
+ # The brand blue. Sampled from the TRUEMG Labels artwork in Canva, where it is
+ # the literal fill on the product-name text. An earlier value here, #2866CD, was
+ # invented and wrongly annotated as confirmed by Mila; it never was.
  "paper-blue": dict(bg="#FCFBF8", fg="#0A0A0B", accent="#2365CD", muted="#6E6A63", lock="onpaper"),
  "paper-teal": dict(bg="#FCFBF8", fg="#0A0A0B", accent="#0E7A8C", muted="#6E6A63", lock="onpaper"),
  "ink-blue":   dict(bg="#0A0A0B", fg="#FCFBF8", accent="#4C8BE8", muted="#9A948A", lock="onink"),
