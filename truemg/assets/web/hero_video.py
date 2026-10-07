@@ -7,7 +7,7 @@ vials as floating rather than as a sticker sliding around.
 """
 import os, math
 import numpy as np
-from PIL import Image, ImageFilter, ImageDraw
+from PIL import Image, ImageFilter, ImageDraw, ImageEnhance
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
 SRC = "/home/user/first-project/truemg/assets/vials"
@@ -26,30 +26,33 @@ def vial(name):
     return im.crop((xs.min(), ys.min(), xs.max() + 1, ys.max() + 1))
 
 # ---- the field, rendered once ----
+# A flat vertical gradient, white to #EFF4FC, which is the hero's own background.
+# A bloom here looked like a seam on the page: the video covers the section, so any
+# shape in its field reads as an edge against the theme's gradient around it.
 field = Image.new("RGB", (W, H))
 d = ImageDraw.Draw(field)
 for y in range(H):
     t = y / (H - 1)
-    d.line([(0, y), (W, y)], fill=(255 - int(14 * t), 255 - int(9 * t), 255 - int(2 * t)))
-bloom = Image.new("L", (W, H), 0)
-bd = ImageDraw.Draw(bloom)
-bd.ellipse([int(W * .40), int(-H * .34), int(W * 1.22), int(H * .98)], fill=165)
-bd.ellipse([int(W * .02), int(H * .56), int(W * .60), int(H * 1.5)], fill=92)
-bloom = bloom.filter(ImageFilter.GaussianBlur(W * 0.10))
-field = Image.composite(Image.new("RGB", (W, H), (211, 227, 251)), field, bloom)
+    d.line([(0, y), (W, y)], fill=(255 - int(16 * t), 255 - int(11 * t), 255 - int(3 * t)))
 
 # ---- the cluster, prepared once: name, centre, height, tilt, drift, phase ----
 CAST = [
-    ("tmg-3rt",        .545, .50, 320, -13, 11, 0.00),
-    ("ghk-cu",         .650, .45, 386,   6, 16, 0.38),
-    ("nad",            .752, .52, 300,  17, 13, 0.72),
-    ("bpc-157-tb-500", .600, .635, 220, -4,  9, 0.18),
+    ("tmg-3rt",        .690, .50, 320, -13, 11, 0.00),
+    ("ghk-cu",         .795, .45, 386,   6, 16, 0.38),
+    ("nad",            .897, .52, 300,  17, 13, 0.72),
+    ("bpc-157-tb-500", .745, .635, 220, -4,  9, 0.18),
 ]
 PREP = []
 for name, fx, fy, h, ang, amp, phase in CAST:
     v = vial(name)
     k = h / v.height
-    v = v.resize((max(1, int(v.width * k)), h), Image.LANCZOS).rotate(ang, resample=Image.BICUBIC, expand=True)
+    v = v.resize((max(1, int(v.width * k)), h), Image.LANCZOS)
+    # The theme lays a white wash over the hero video, which drains clear glass to
+    # nearly nothing. Pre-lifting contrast and saturation is what survives it.
+    rgb = ImageEnhance.Contrast(v.convert("RGB")).enhance(1.22)
+    rgb = ImageEnhance.Color(rgb).enhance(1.35)
+    v = Image.merge("RGBA", (*rgb.split(), v.getchannel("A")))
+    v = v.rotate(ang, resample=Image.BICUBIC, expand=True)
     sh = Image.new("RGBA", v.size, (12, 24, 56, 0))
     sh.putalpha(v.getchannel("A").point(lambda p: int(p * 0.30)))
     sh = sh.filter(ImageFilter.GaussianBlur(16))
@@ -57,7 +60,7 @@ for name, fx, fy, h, ang, amp, phase in CAST:
 
 # ---- the light sweep, one soft band that crosses exactly once per loop ----
 band = Image.new("L", (W, H), 0)
-ImageDraw.Draw(band).polygon([(0, 0), (int(W * .17), 0), (int(W * .30), H), (int(W * .13), H)], fill=120)
+ImageDraw.Draw(band).polygon([(0, 0), (int(W * .17), 0), (int(W * .30), H), (int(W * .13), H)], fill=72)
 band = band.filter(ImageFilter.GaussianBlur(90))
 sweep = Image.new("RGB", (W, H), (255, 255, 255))
 BAND = np.asarray(band)
