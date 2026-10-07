@@ -46,4 +46,4 @@ def svg(mark_fill, true_fill, accent, rule, out):
     print("%-34s %6.0f x %4.0f  %5d bytes" % (out, W, H, len(s)))
 
 svg(BLUE,    INK,     BLUE,    "#D8DEE9", "truemg-lockup-header.svg")
-svg("#FFFFFF","#FFFFFF","#6FA3F2","#2B3344", "truemg-lockup-onink.svg")
+svg("#FFFFFF","#FFFFFF","#65A0F5","#2B3344", "truemg-lockup-onink.svg")
