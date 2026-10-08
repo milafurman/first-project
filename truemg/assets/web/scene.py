@@ -62,6 +62,91 @@ def noise(w, h, scale, seed):
     return ndimage.gaussian_filter(big, scale * 0.35)
 
 
+def leaf(d, cx, cy, length, width, angle, fill):
+    """One leaf: a pointed oval, drawn as a polygon.
+
+    Pointed at both ends, widest a little past the middle. The two cusps are
+    what make it read as a leaf rather than a blob — an ellipse at this blur
+    is indistinguishable from noise, which is exactly what the first attempt
+    at this scene produced.
+    """
+    ca, sa = math.cos(angle), math.sin(angle)
+    pts = []
+    for side in (1, -1):
+        rng_t = np.linspace(0, 1, 22)[::side]
+        for t in rng_t:
+            w = math.sin(math.pi * t) ** 0.62 * width * side
+            u, v = (t - 0.5) * length, w
+            pts.append((cx + u * ca - v * sa, cy + u * sa + v * ca))
+    d.polygon(pts, fill=fill)
+
+
+def sprig(d, ox, oy, span, scale, angle, fill, rng, leaves=7):
+    """A stem with leaves alternating off it. Clusters read as a plant; lone
+    leaves read as litter."""
+    for i in range(leaves):
+        t = (i + 1) / (leaves + 1)
+        side = 1 if i % 2 else -1
+        px = ox + math.cos(angle) * span * t
+        py = oy + math.sin(angle) * span * t
+        la = angle + side * rng.uniform(0.55, 1.05)
+        ln = scale * rng.uniform(0.72, 1.15) * (1.15 - 0.45 * t)
+        leaf(d, px + math.cos(la) * ln * 0.5, py + math.sin(la) * ln * 0.5,
+             ln, ln * rng.uniform(0.26, 0.34), la, fill)
+
+
+def gobo(W, H, hz, seed=23):
+    """Light coming through leaves — the single strongest cue in the frame.
+
+    Not an object: the absence of light in leaf-shaped patches. Built once at
+    full size, then resampled twice, because the wall and the stone are two
+    different planes. On the wall the pattern is seen more or less head on. On
+    the stone it is a floor seen at a grazing angle, so it compresses towards
+    the horizon and shears away from the light. Skipping that second sampling
+    is what made the first version read as a stain: the same pattern laid flat
+    over both planes has no geometry in it, and the eye reads the absence.
+    """
+    rng = np.random.default_rng(seed)
+    m = Image.new("L", (W, H), 255)
+    d = ImageDraw.Draw(m)
+    for _ in range(13):                                   # the canopy
+        ox = rng.uniform(-0.15, 0.95) * W
+        oy = rng.uniform(-0.25, 0.85) * H
+        sprig(d, ox, oy, rng.uniform(0.16, 0.34) * W, rng.uniform(0.07, 0.13) * W,
+              rng.uniform(-0.5, 1.9), 0, rng, leaves=rng.integers(5, 9))
+    g = np.asarray(m.filter(ImageFilter.GaussianBlur(W * 0.0055))).astype(float) / 255.0
+
+    out = np.empty_like(g)
+    out[:hz] = g[:hz]                                     # the wall, head on
+    yy = np.arange(hz, H)
+    # the stone: compressed towards the horizon, sheared away from the light
+    src_y = np.clip(hz + (yy - hz) * 0.42, 0, H - 1).astype(int)
+    shift = ((yy - hz) * 0.30).astype(int)
+    xx = np.arange(W)
+    for i, y in enumerate(yy):
+        out[y] = g[src_y[i]][(xx - shift[i]) % W]
+    return out
+
+
+def canopy(W, H, seed=41):
+    """Leaves in front of the camera, not in front of the light.
+
+    A frond entering top-left, close enough to be well outside the focal
+    plane. It costs one corner of the frame and buys the whole depth cue: a
+    photograph with something soft and dark in the near foreground reads as
+    taken through a room, and a clean rectangle reads as rendered.
+    """
+    rng = np.random.default_rng(seed)
+    m = Image.new("L", (W, H), 0)
+    d = ImageDraw.Draw(m)
+    for ox, oy, span, sc, ang, n in (
+            (-0.08, -0.10, 0.30, 0.17, 0.75, 7),
+            (-0.02, -0.16, 0.26, 0.14, 1.15, 6),
+            (0.16, -0.14, 0.22, 0.12, 1.45, 5)):
+        sprig(d, ox * W, oy * H, span * W, sc * W, ang, 255, rng, leaves=n)
+    return m.filter(ImageFilter.GaussianBlur(W * 0.011))
+
+
 def room(W, H):
     """Wall behind, stone in front, lit from one side."""
     hz = int(H * HORIZON)
@@ -106,6 +191,15 @@ def room(W, H):
     # and a wider ambient darkening just under it, where light does not reach
     tuck = np.exp(-((yy - hz - H * 0.012) ** 2) / (2 * (H * 0.030) ** 2)) * (yy > hz)
     a += (np.array(SHADOW, float) - a) * (tuck * 0.12)[..., None]
+
+    # leaf shadows on the wall and the stone. Strongest where the light is,
+    # because that is the only place there is light to interrupt.
+    g = gobo(W, H, hz)
+    lit = np.clip(pool * 1.9, 0, 1)                   # only where there is light to block
+    a += (np.array(SHADOW, float) - a) * ((1 - g) * lit * 0.42)[..., None]
+    # and the gaps between the leaves are brighter than the open wall would be,
+    # because that is what a hard source behind foliage does
+    a += (255 - a) * (np.clip(g - 0.85, 0, 1) * lit * 0.55)[..., None]
 
     out = Image.fromarray(a.clip(0, 255).astype(np.uint8))
     # the wall is a long way behind the bottles
@@ -213,11 +307,22 @@ CAST = [
 ]
 
 
-def compose(W, H, out):
+# The square crop is narrower, so the same fractional positions bunch the
+# bottles and NAD+ ends up hiding behind TMG-3RT. Its own spacing, wider and
+# a little shorter, so all four read.
+SQUARE_CAST = [
+    ("nad",            .455, .234,  0, 2.6),
+    ("tmg-3rt",        .585, .269,  0, 1.1),
+    ("ghk-cu",         .728, .328,  0, 0.0),
+    ("bpc-157-tb-500", .872, .257,  0, 1.4),
+]
+
+
+def compose(W, H, out, cast=None):
     scene, hz = room(W, H)
     scene = scene.convert("RGBA")
 
-    for name, fx, fh, ang, dof in CAST:
+    for name, fx, fh, ang, dof in (cast or CAST):
         v = vial(name)
         h = max(1, int(H * fh))
         v = v.resize((max(1, int(v.width * h / v.height)), h), Image.LANCZOS)
@@ -241,10 +346,18 @@ def compose(W, H, out):
 
         scene.alpha_composite(v, (x, y))
 
+    # the near leaves go on last, because they are in front of the camera and
+    # therefore in front of the bottles too. Unlit, so they are dark and
+    # desaturated rather than green — foreground foliage in a bright room is
+    # almost a silhouette.
+    near = Image.new("RGBA", (W, H), (58, 64, 52, 0))
+    near.putalpha(canopy(W, H).point(lambda q: int(q * 0.80)))
+    scene.alpha_composite(near)
+
     scene.convert("RGB").save(out, quality=90, optimize=True)
     print(f"  {out:28s} {W}x{H}  {os.path.getsize(out) // 1024} KB")
 
 
 if __name__ == "__main__":
     compose(2560, 1440, "scene-hero.jpg")
-    compose(1600, 1400, "scene-square.jpg")
+    compose(1600, 1400, "scene-square.jpg", SQUARE_CAST)
