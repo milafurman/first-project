@@ -71,23 +71,33 @@ BASE_M, BASE_C = 0.222, 529.0              # the line their bases sit on
 # ordinary product-photography cheat and it survives because the background is
 # defocused: a soft background reads as distant, and a distant background
 # stops the eye auditing absolute scale.
-SCALE = 0.76
+SCALE = 0.92
 
 # --- defocus ----------------------------------------------------------------
 # Peak blur radius, at the far wall. The near edge of the counter stays sharp.
 # Swept at 6 / 10 / 16: 16 destroys the orchids, 10 softens the canopy more
 # than asked, 6 leaves the top leaves sharp enough to compete with the product.
 # 8 is the dial — turn it, nothing else in the frame moves.
-BLUR_MAX = 6.0
+BLUR_MAX = 13.0
 BLUR_LEVELS = 12
 
-# name, x centre, height relative to the tallest vial
-CAST = [
-    ("nad",             480, 0.715),
-    ("tmg-3rt",         700, 0.820),
-    ("ghk-cu",          940, 1.000),
-    ("bpc-157-tb-500", 1190, 0.785),
-]
+# The four vials, left to right. No per-bottle size, on purpose.
+#
+# An earlier version carried a height ratio per name — 0.715, 0.82, 1.0, 0.785
+# — inherited from older code and never checked. It has no basis: all four
+# sprites are 652x1589 pixels. They are the same vial photographed once, with
+# a different label. Making them different sizes was invention, and it was the
+# single loudest thing wrong with the composite.
+CAST = ["nad", "tmg-3rt", "ghk-cu", "bpc-157-tb-500"]
+
+# They stand in a row at CONSTANT DEPTH, which is what keeps them identical in
+# size. On a receding plane a line of constant image-y is a line of constant
+# distance from the camera, so a horizontal row sits flat on the counter AND
+# renders every bottle at the same height. A row following the counter's own
+# diagonal would be equally correct and would vary them by about 28%, which is
+# exactly the thing being fixed.
+ROW_Y = 800.0
+ROW_X = (560, 740, 920, 1100)      # inside the band where ROW_Y is on the top
 
 
 def depth_blur(im, horizon):
@@ -182,10 +192,31 @@ def view():
     return k, front, base, (HORIZON_Y - CROP[1]) * k
 
 
-def place(scene, name, cx, rel, k, baseline, horizon):
-    """One bottle, with its shadow, standing on the plane at cx."""
-    base = baseline(cx)
-    h = max(8, int(SCALE * rel * (base - horizon)))
+def settle(im, horizon):
+    """Take the room down so the product can come up.
+
+    Nurish's hero works because the vials are dark teal glass on a dark, nearly
+    monochrome background: the product is the only contrast in the frame. These
+    vials are clear glass with white labels, and a bright cream room gives them
+    almost nothing to separate against. Since the glass cannot be changed, the
+    room is: pulled down, pulled toward neutral, and pulled down harder the
+    further it is from the camera, which is also what a real exposure set for
+    the product would do to a background.
+    """
+    a = np.asarray(im).astype(float)
+    H, W = a.shape[:2]
+    yy = np.mgrid[0:H, 0:W][0].astype(float)
+    far = np.clip((ROW_Y - yy) / max(ROW_Y - horizon, 1.0), 0, 1) ** 0.8
+    k = 1.0 - 0.30 * far                                   # exposure, by distance
+    grey = a.mean(axis=2, keepdims=True)
+    a = (a * 0.80 + grey * 0.20) * k[..., None]            # and a little saturation
+    return Image.fromarray(a.clip(0, 255).astype(np.uint8))
+
+
+def place(scene, name, cx, k, horizon):
+    """One bottle, with its shadow, standing on the row."""
+    base = ROW_Y
+    h = max(8, int(SCALE * (base - horizon)))
 
     v = S.vial(name)
     v = v.resize((max(1, int(v.width * h / v.height)), h), Image.LANCZOS)
@@ -201,7 +232,7 @@ def place(scene, name, cx, rel, k, baseline, horizon):
     # The curtain is a hard, low source, so the shadows in this room are long
     # and definite — look at what the orchid throws on the wall. The first pass
     # used scene.py's soft studio shadow and the bottles floated because of it.
-    lean = 1.35 + (cx - CAST[0][1]) / 2000.0
+    lean = 1.35 + (cx - ROW_X[0]) / 2000.0
     for length, blur, n in ((0.95, 0.055, 2), (0.34, 0.016, 3)):
         cs, pad = S.cast_shadow(v, length, lean, max(4, int(h * blur)))
         for _ in range(n):                            # deepen: one pass is too pale
@@ -216,11 +247,11 @@ def place(scene, name, cx, rel, k, baseline, horizon):
 
 def compose(out="spa-hero.jpg"):
     plate = Image.open(PLATE).convert("RGB").crop(CROP)
-    k, _, baseline, horizon = view()
+    k, _, _, horizon = view()
     plate = plate.resize((OUT_W, int(plate.height * k)), Image.LANCZOS)
-    scene = depth_blur(plate, horizon).convert("RGBA")
-    for name, cx, rel in CAST:
-        place(scene, name, cx, rel, k, baseline, horizon)
+    scene = settle(depth_blur(plate, horizon), horizon).convert("RGBA")
+    for name, cx in zip(CAST, ROW_X):
+        place(scene, name, cx, k, horizon)
     scene.convert("RGB").save(out, quality=90, optimize=True)
     print(f"  {out:24s} {scene.width}x{scene.height}  {os.path.getsize(out) // 1024} KB")
 
