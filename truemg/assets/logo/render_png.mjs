@@ -22,7 +22,13 @@ const DIR = path.dirname(new URL(import.meta.url).pathname);
 process.chdir(DIR);
 
 const WIDTH = 1200;
+// Both cuts, because the Design studio's Logo slot is a real upload now. The
+// markless pair was built when the logo had to be smuggled in as base64 inside
+// a 10,000-character customCss budget, where the Gila did not fit. That
+// constraint is gone, so the choice is Mila's rather than the platform's.
 const PNGS = [
+  ['truemg-lockup-header.svg', 'truemg-lockup-mark-light-1200.png'],
+  ['truemg-lockup-onink.svg', 'truemg-lockup-mark-dark-1200.png'],
   ['truemg-lockup-web.svg', 'truemg-lockup-light-1200.png'],
   ['truemg-lockup-web-onink.svg', 'truemg-lockup-dark-1200.png'],
 ];
