@@ -96,8 +96,8 @@ CAST = ["nad", "tmg-3rt", "ghk-cu", "bpc-157-tb-500"]
 # renders every bottle at the same height. A row following the counter's own
 # diagonal would be equally correct and would vary them by about 28%, which is
 # exactly the thing being fixed.
-ROW_Y = 809.0
-ROW_X = (661, 882, 1102, 1323)      # inside the band where ROW_Y is on the top
+ROW_PLATE_Y = 728.0
+ROW_PLATE_X = (850, 967, 1083, 1200)      # inside the band where ROW_Y is on the top
 
 
 def depth_blur(im, horizon):
@@ -197,15 +197,23 @@ def relight(v, rim=1.0, blur=0.0):
     return out.filter(ImageFilter.GaussianBlur(blur)) if blur else out
 
 
-def view():
-    """The crop, and the transform that carries the measured plane through it."""
-    k = OUT_W / (CROP[2] - CROP[0])
-    front = lambda x: (FRONT_M * (x / k + CROP[0]) + FRONT_C - CROP[1]) * k
-    base = lambda x: (BASE_M * (x / k + CROP[0]) + BASE_C - CROP[1]) * k
-    return k, front, base, (HORIZON_Y - CROP[1]) * k
+def view(crop=None, out_w=None):
+    """A crop, and everything measured off the plate carried through it.
+
+    The row used to be stored in output-frame pixels, which quietly tied it to
+    one crop: reframing for the hero moved the bottles off the counter. It is
+    stored in PLATE pixels now and projected per crop, so any framing puts them
+    on the same physical spot on the same counter.
+    """
+    crop = crop or CROP
+    k = (out_w or OUT_W) / (crop[2] - crop[0])
+    horizon = (HORIZON_Y - crop[1]) * k
+    row_y = (ROW_PLATE_Y - crop[1]) * k
+    row_x = tuple((x - crop[0]) * k for x in ROW_PLATE_X)
+    return k, horizon, row_y, row_x
 
 
-def settle(im, horizon, row=None):
+def settle(im, horizon, row):
     """Take the room down so the product can come up.
 
     Nurish's hero works because the vials are dark teal glass on a dark, nearly
@@ -219,7 +227,7 @@ def settle(im, horizon, row=None):
     a = np.asarray(im).astype(float)
     H, W = a.shape[:2]
     yy = np.mgrid[0:H, 0:W][0].astype(float)
-    r = ROW_Y if row is None else row
+    r = row
     far = np.clip((r - yy) / max(r - horizon, 1.0), 0, 1) ** 0.8
     # Exposure only. An earlier pass also pulled 20% of the saturation out,
     # which separated the product but drained exactly the warmth this plate was
@@ -309,9 +317,8 @@ def mirror(v, h):
     return out
 
 
-def place(scene, name, cx, k, horizon):
+def place(scene, name, cx, k, horizon, base, row_x):
     """One bottle, with its shadow, standing on the row."""
-    base = ROW_Y
     h = max(8, int(SCALE * (base - horizon)))
 
     v = S.vial(name)
@@ -321,7 +328,7 @@ def place(scene, name, cx, k, horizon):
     # The curtain is off-frame left, so the nearer a bottle is to it the harder
     # it is rimmed. Four identically lit bottles is a product sheet; a row lit
     # by one window is a photograph.
-    near_window = 1.0 - (cx - ROW_X[0]) / max(ROW_X[-1] - ROW_X[0], 1) 
+    near_window = 1.0 - (cx - row_x[0]) / max(row_x[-1] - row_x[0], 1) 
     v = relight(v, rim=0.72 + 0.55 * near_window,
                 blur=max(0.0, BLUR_MAX * k * 0.05 * (1 - (base - horizon) / 620.0)))
     # take the knife-edge off the cut-out: a real lens has no perfect edge
@@ -336,7 +343,7 @@ def place(scene, name, cx, k, horizon):
     # The curtain is a hard, low source, so the shadows in this room are long
     # and definite — look at what the orchid throws on the wall. The first pass
     # used scene.py's soft studio shadow and the bottles floated because of it.
-    lean = 1.35 + (cx - ROW_X[0]) / 2000.0
+    lean = 1.35 + (cx - row_x[0]) / (2000.0 * k / 1.89)
     for length, blur, n in ((0.95, 0.055, 2), (0.34, 0.016, 3)):
         cs, pad = S.cast_shadow(v, length, lean, max(4, int(h * blur)))
         for _ in range(n):                            # deepen: one pass is too pale
@@ -350,7 +357,7 @@ def place(scene, name, cx, k, horizon):
     scene.alpha_composite(transmit(v, under), (x, y))
 
 
-def compose(out="spa-hero.jpg", product=True):
+def compose(out="spa-hero.jpg", product=True, crop=None, out_w=None):
     """The room, with the bottles on it or without.
 
     The empty version is not a debug view. The vial art is a flat mockup shot
@@ -360,12 +367,14 @@ def compose(out="spa-hero.jpg", product=True):
     real option rather than a fallback. It is generated here rather than by
     hand so it cannot drift from the framing and defocus the composite uses.
     """
-    plate = Image.open(PLATE).convert("RGB").crop(CROP)
-    k, _, _, horizon = view()
-    plate = plate.resize((OUT_W, int(plate.height * k)), Image.LANCZOS)
-    scene = settle(depth_blur(plate, horizon), horizon).convert("RGBA")
-    for name, cx in (zip(CAST, ROW_X) if product else ()):
-        place(scene, name, cx, k, horizon)
+    crop = crop or CROP
+    out_w = out_w or OUT_W
+    k, horizon, row_y, row_x = view(crop, out_w)
+    plate = Image.open(PLATE).convert("RGB").crop(crop)
+    plate = plate.resize((out_w, int(plate.height * k)), Image.LANCZOS)
+    scene = settle(depth_blur(plate, horizon), horizon, row_y).convert("RGBA")
+    for name, cx in (zip(CAST, row_x) if product else ()):
+        place(scene, name, cx, k, horizon, row_y, row_x)
     scene.convert("RGB").save(out, quality=90, optimize=True)
     print(f"  {out:24s} {scene.width}x{scene.height}  {os.path.getsize(out) // 1024} KB")
 
@@ -420,17 +429,19 @@ def hero_media(src="hero-media.webp", out="hero-media-warm.webp"):
 # composite's own crop, so re-framing the render would move them off it. The
 # phone crop takes the right three — a four-bottle row cannot fit a portrait
 # frame without slicing one down the middle.
+# Hero crops, re-rendered rather than cut out of the composite. Both reach
+# further LEFT across the plate than the composite does, which is what slides
+# the bottles into the right half of the frame — the headline owns the left
+# third of this hero, and a bottle sitting under it loses both.
 HERO_PRODUCT = (
-    ("hero-spa-product.jpg",        (0, 90, 1680, 845),  (2560, 1150)),
-    ("hero-spa-product-mobile.jpg", (780, 0, 1460, 945), (1080, 1500)),
+    ("hero-spa-product.jpg",        (247, 300, 1389, 814), 2560),
+    ("hero-spa-product-mobile.jpg", (900, 300, 1260, 800), 1080),   # the right three
 )
 
 
-def hero_product(src="spa-hero.jpg"):
-    im = Image.open(src).convert("RGB")
-    for out, box, size in HERO_PRODUCT:
-        im.crop(box).resize(size, Image.LANCZOS).save(out, quality=86, optimize=True)
-        print(f"  {out:30s} {size[0]}x{size[1]}  {os.path.getsize(out) // 1024} KB")
+def hero_product():
+    for out, crop, w in HERO_PRODUCT:
+        compose(out, product=True, crop=crop, out_w=w)
 
 
 def hero_backgrounds():
@@ -441,7 +452,7 @@ def hero_backgrounds():
         k = size[0] / im.width
         im = im.resize(size, Image.LANCZOS)
         horizon = (HORIZON_Y - box[1]) * k
-        im = settle(depth_blur(im, horizon), horizon, row=size[1] * 0.86)
+        im = settle(depth_blur(im, horizon), horizon, size[1] * 0.86)
         im.save(out, quality=86, optimize=True)
         print(f"  {out:24s} {size[0]}x{size[1]}  {os.path.getsize(out) // 1024} KB")
 
