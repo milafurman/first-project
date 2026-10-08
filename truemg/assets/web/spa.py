@@ -205,7 +205,7 @@ def view():
     return k, front, base, (HORIZON_Y - CROP[1]) * k
 
 
-def settle(im, horizon):
+def settle(im, horizon, row=None):
     """Take the room down so the product can come up.
 
     Nurish's hero works because the vials are dark teal glass on a dark, nearly
@@ -219,7 +219,8 @@ def settle(im, horizon):
     a = np.asarray(im).astype(float)
     H, W = a.shape[:2]
     yy = np.mgrid[0:H, 0:W][0].astype(float)
-    far = np.clip((ROW_Y - yy) / max(ROW_Y - horizon, 1.0), 0, 1) ** 0.8
+    r = ROW_Y if row is None else row
+    far = np.clip((r - yy) / max(r - horizon, 1.0), 0, 1) ** 0.8
     # Exposure only. An earlier pass also pulled 20% of the saturation out,
     # which separated the product but drained exactly the warmth this plate was
     # chosen for. Stopping the light down is what a camera exposing for the
@@ -369,6 +370,66 @@ def compose(out="spa-hero.jpg", product=True):
     print(f"  {out:24s} {scene.width}x{scene.height}  {os.path.getsize(out) // 1024} KB")
 
 
+# The hero background is a different job from the composite above. Nothing
+# stands on the counter, so the framing does not have to keep a row of bottles
+# on a measured plane — it only has to be a room with somewhere quiet for a
+# headline to sit. So it is cropped wider and shallower, to the shapes the
+# storefront already serves.
+HERO = (
+    ("hero-spa.jpg",        (0, 105, 1680, 859), (2560, 1150)),   # desktop
+    ("hero-spa-mobile.jpg", (250, 0, 930, 944),  (1080, 1500)),   # portrait
+)
+
+
+def hero_media(src="hero-media.webp", out="hero-media-warm.webp"):
+    """The floating vial cluster, graded to sit over the warm room.
+
+    This one is a much easier problem than the row on the counter, because it
+    floats. Nothing has to agree with a measured surface, a horizon or a
+    reflection — it only has to be lit like the room it hangs in front of. So
+    the same three moves as relight(): the studio key comes down, warm ambient
+    goes in, and the whole cluster falls off from left to right because the
+    window is on the left.
+
+    The soft white halo baked around the group is the one thing that cannot
+    stay. On white it is invisible; over a warm room it is a grey fog with a
+    bottle-shaped hole in it. It lives in the partially transparent pixels, so
+    pushing those toward either fully on or fully off removes it without
+    touching the bottles themselves.
+    """
+    im = Image.open(src).convert("RGBA")
+    a = np.asarray(im).astype(float)
+    rgb, al = a[:, :, :3], a[:, :, 3]
+
+    H0, W0 = rgb.shape[:2]
+    gx = np.mgrid[0:H0, 0:W0][1] / max(W0 - 1, 1)
+    lit = rgb * 0.80
+    lit += (np.array((124, 108, 88), float) - lit) * 0.15
+    lit *= (1.0 + 0.22 * (0.5 - gx))[..., None]
+
+    # kill the halo: harden the soft shroud, keep the anti-aliased edge
+    al = np.clip((al / 255.0 - 0.34) / 0.52, 0, 1) ** 0.85 * 255.0
+
+    Image.fromarray(np.dstack([lit, al]).clip(0, 255).astype(np.uint8)).save(
+        out, quality=88, method=6)
+    print(f"  {out:24s} {W0}x{H0}  {os.path.getsize(out) // 1024} KB")
+
+
+def hero_backgrounds():
+    """The room on its own, at the sizes the storefront's hero keys expect."""
+    src = Image.open(PLATE).convert("RGB")
+    for out, box, size in HERO:
+        im = src.crop(box)
+        k = size[0] / im.width
+        im = im.resize(size, Image.LANCZOS)
+        horizon = (HORIZON_Y - box[1]) * k
+        im = settle(depth_blur(im, horizon), horizon, row=size[1] * 0.86)
+        im.save(out, quality=86, optimize=True)
+        print(f"  {out:24s} {size[0]}x{size[1]}  {os.path.getsize(out) // 1024} KB")
+
+
 if __name__ == "__main__":
     compose("spa-hero.jpg")
     compose("spa-plate-hero.jpg", product=False)
+    hero_backgrounds()
+    hero_media()
