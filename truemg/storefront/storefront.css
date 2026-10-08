@@ -13,6 +13,6 @@ a.inline-flex,button.inline-flex{transition:transform .2s ease,box-shadow .25s e
 a.inline-flex:hover,button.inline-flex:hover{transform:translateY(-2px);filter:brightness(1.06)}
 .lf-section-comparison{display:none}
 @media (prefers-reduced-motion:reduce){.lf-section-hero img[src*="hero-media"]{animation:none}}
-/* the theme washes the hero photo out under a flat 72/55/78% white scrim. Swapped for a horizontal one: still opaque under the headline on the left, clearing to almost nothing on the right so the room is actually visible. A phone has no left and right to trade, so it keeps an even scrim. */
-.lf-section-hero .z-0>div.absolute.inset-0{background-image:linear-gradient(90deg,rgba(255,255,255,.88) 0%,rgba(255,255,255,.8) 30%,rgba(255,255,255,.4) 60%,rgba(255,255,255,.16) 100%)!important}
-@media(max-width:767px){.lf-section-hero .z-0>div.absolute.inset-0{background-image:linear-gradient(rgba(255,255,255,.82) 0%,rgba(255,255,255,.74) 55%,rgba(255,255,255,.86) 100%)!important}}
+/* the theme washes the hero photo out under a flat 72/55/78% white scrim, which is enough to hide the product standing in it. Swapped for a horizontal one: opaque under the headline on the left, then clearing fast so the vials on the right read at full strength. A phone has no left and right to trade, so it keeps an even scrim. */
+.lf-section-hero .z-0>div.absolute.inset-0{background-image:linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.84) 30%,rgba(255,255,255,.55) 46%,rgba(255,255,255,.18) 62%,rgba(255,255,255,.06) 100%)!important}
+@media(max-width:767px){.lf-section-hero .z-0>div.absolute.inset-0{background-image:linear-gradient(rgba(255,255,255,.8) 0%,rgba(255,255,255,.66) 50%,rgba(255,255,255,.84) 100%)!important}}
