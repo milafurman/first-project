@@ -435,7 +435,13 @@ def hero_media(src="hero-media.webp", out="hero-media-warm.webp"):
 # third of this hero, and a bottle sitting under it loses both.
 HERO_PRODUCT = (
     ("hero-spa-product.jpg",        (247, 300, 1389, 814), 2560),
-    ("hero-spa-product-mobile.jpg", (900, 300, 1260, 800), 1080),   # the right three
+    # The phone crop is built for what the theme actually SHOWS, not for its own
+    # aspect. A 1080x1500 image in a hero box nearer 0.58 is cover-cropped to
+    # roughly its middle 78%, so anything in the outer fifth is thrown away: the
+    # first attempt put three bottles across the full width and the phone sliced
+    # the outer two in half. Two bottles sit inside the surviving window, with
+    # the third running off the left edge the way product does in a real frame.
+    ("hero-spa-product-mobile.jpg", (867, 179, 1416, 941), 1080),
 )
 
 
