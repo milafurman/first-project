@@ -215,6 +215,86 @@ def settle(im, horizon):
     return Image.fromarray((a * k[..., None]).clip(0, 255).astype(np.uint8))
 
 
+# Where the bottle is glass rather than cap or label, as fractions of sprite
+# height. All four sprites are the same photograph, so one set of bands serves
+# all of them. The upper band deliberately starts inside the stopper: the
+# transmission below is driven by brightness, so the dark stopper keeps itself
+# opaque without needing its own boundary.
+GLASS_BANDS = ((0.18, 0.395), (0.86, 1.0))
+
+
+def transmit(v, under):
+    """Let the room show through the glass.
+
+    This is the one that mattered. The sprite is 92% fully opaque: it was
+    photographed on a white background and the white got baked into the glass,
+    so the clear shoulder arrives as a solid grey panel. Composited over a
+    room, nothing behind the bottle shows through it — and clear glass that
+    does not transmit is the loudest possible signal that something was pasted
+    on top of a picture rather than photographed in it. No amount of grading,
+    shadow or reframing fixes it, which is why none of those passes did.
+
+    The inversion is approximate and has to be: the plate behind the glass was
+    white, so a pixel is roughly 255 x transmission + the glass's own
+    scattering, and one equation cannot recover two unknowns. But brightness is
+    a good enough proxy — where the glass let the white through it reads near
+    white, and where it has structure (the neck ring, the meniscus, the
+    stopper, the dark edges that give it its shape) it reads dark. So
+    brightness drives transmission and the structure survives untouched.
+
+    What shows through is blurred a little further than the plate behind it,
+    because curved glass is a bad lens.
+    """
+    a = np.asarray(v).astype(float)
+    H_, W_ = a.shape[:2]
+    yy = np.mgrid[0:H_, 0:W_][0] / max(H_ - 1, 1)
+
+    band = np.zeros((H_, W_))
+    for lo, hi in GLASS_BANDS:
+        band[(yy >= lo) & (yy <= hi)] = 1.0
+    band = ndimage.gaussian_filter(band, H_ * 0.012)       # no hard seam at the label
+
+    lum = a[:, :, :3].mean(axis=2)
+    t = np.clip((lum - 120.0) / 115.0, 0, 1) ** 1.1        # bright glass transmits
+    t = t * band * 0.80
+
+    seen = np.asarray(under.filter(ImageFilter.GaussianBlur(max(1.0, W_ * 0.010)))).astype(float)
+    a[:, :, :3] = seen * t[..., None] + a[:, :, :3] * (1 - t[..., None])
+    return Image.fromarray(a.clip(0, 255).astype(np.uint8))
+
+
+def mirror(v, h):
+    """The bottle in the stone.
+
+    scene.py's version is a dim ghost at a fixed 3.5px blur, which was written
+    for bottles a third of this size and reads as a smudge at this one. A honed
+    stone counter is not a mirror, but it is reflective enough that four glass
+    bottles standing on it HAVE to appear in it, and the absence of that is one
+    of the things that makes them look placed rather than photographed.
+
+    Foreshortened, because the surface is seen at a grazing angle, and blurred
+    progressively with distance from the contact point, because the stone
+    scatters more the further the light has to travel across it.
+    """
+    r = v.transpose(Image.FLIP_TOP_BOTTOM)
+    r = r.resize((r.width, max(2, int(h * 0.46))), Image.LANCZOS)
+    H_ = r.height
+    a = np.asarray(r.getchannel("A")).astype(float)
+    a *= (np.linspace(1, 0, H_)[:, None] ** 1.35) * 0.44
+    r.putalpha(Image.fromarray(a.clip(0, 255).astype(np.uint8)))
+
+    out = Image.new("RGBA", r.size, (0, 0, 0, 0))
+    steps = 5
+    for i in range(steps):
+        lo, hi = int(H_ * i / steps), int(H_ * (i + 1) / steps)
+        if hi <= lo:
+            continue
+        band = r.crop((0, lo, r.width, hi)).filter(
+            ImageFilter.GaussianBlur(h * 0.006 + h * 0.022 * (i / steps)))
+        out.paste(band, (0, lo))
+    return out
+
+
 def place(scene, name, cx, k, horizon):
     """One bottle, with its shadow, standing on the row."""
     base = ROW_Y
@@ -224,7 +304,15 @@ def place(scene, name, cx, k, horizon):
     v = v.resize((max(1, int(v.width * h / v.height)), h), Image.LANCZOS)
     # defocus to match the plane the bottle stands on — nearer than the wall
     # behind it, so a fraction of the plate's blur at this depth
-    v = relight(v, rim=1.0, blur=max(0.0, BLUR_MAX * k * 0.05 * (1 - (base - horizon) / 620.0)))
+    # The curtain is off-frame left, so the nearer a bottle is to it the harder
+    # it is rimmed. Four identically lit bottles is a product sheet; a row lit
+    # by one window is a photograph.
+    near_window = 1.0 - (cx - ROW_X[0]) / max(ROW_X[-1] - ROW_X[0], 1) 
+    v = relight(v, rim=0.72 + 0.55 * near_window,
+                blur=max(0.0, BLUR_MAX * k * 0.05 * (1 - (base - horizon) / 620.0)))
+    # take the knife-edge off the cut-out: a real lens has no perfect edge
+    av = v.getchannel("A").filter(ImageFilter.GaussianBlur(max(0.6, h * 0.0022)))
+    v.putalpha(av)
 
     x, y = int(cx - v.width / 2), int(base - h)
 
@@ -240,11 +328,12 @@ def place(scene, name, cx, k, horizon):
         for _ in range(n):                            # deepen: one pass is too pale
             scene.alpha_composite(cs, (x - pad, int(base) - pad))
 
-    scene.alpha_composite(S.reflection(v, drop=0.34, strength=0.22), (x, int(base)))
+    scene.alpha_composite(mirror(v, h), (x, int(base)))
     cp, band = S.contact(v, max(4, int(h * 0.018)))
     for _ in range(2):
         scene.alpha_composite(cp, (x, int(base) - band))
-    scene.alpha_composite(v, (x, y))
+    under = scene.crop((x, y, x + v.width, y + v.height)).convert("RGB")
+    scene.alpha_composite(transmit(v, under), (x, y))
 
 
 def compose(out="spa-hero.jpg"):
