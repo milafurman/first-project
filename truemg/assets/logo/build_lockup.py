@@ -19,6 +19,7 @@ def inner(path):
     return body, vb
 
 mark, mvb = inner("truemg-mark-ink.svg")
+inline_mark, _ = inner("truemg-mark-inline.svg")   # same drawing, lighter trace
 labs, lvb = inner("truemg-labs-onpaper.svg")
 
 # the mark is drawn in ink; on the header it is the brand blue
@@ -61,12 +62,33 @@ def web(true_fill, accent, rule, out):
     open(out, "w").write(s)
     print("%-34s %6.0f x %4.0f  %5d bytes" % (out, lvb[2], H, len(s)))
 
+def inline_svg(out):
+    """The header lockup again, built from the lighter trace, for customCss.
+
+    The storefront's Logo slot is an upload, and when that upload is in place
+    this file is not needed. It exists because customCss is the only route this
+    integration can drive itself, and there the budget is 10,000 characters:
+    the full-fidelity lockup costs 9,464 of base64 and leaves no room for the
+    rest of the stylesheet, while this one costs 7,288 and leaves 1,226 spare.
+    """
+    m = inline_mark.replace(INK, BLUE)
+    l = labs.replace(BLUE, BLUE).replace(INK, INK).replace("#D8DEE9", "#D8DEE9")
+    s = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %.0f %.0f" '
+         'role="img" aria-label="TrueMG Labs">'
+         '<g transform="scale(%.6f)">%s</g>'
+         '<g transform="translate(%.0f,%.0f)">%s</g></svg>'
+         % (W, MARK, S, m, MARK + GAP, DY, l))
+    open(out, "w").write(s)
+    print("%-34s %6.0f x %4.0f  %5d bytes" % (out, W, H, len(s)))
+
 # with the mark: for print, Canva, and anywhere that is not the storefront
 svg(BLUE,    INK,     BLUE,    "#D8DEE9", "truemg-lockup-header.svg")
 svg("#FFFFFF","#FFFFFF","#65A0F5","#2B3344", "truemg-lockup-onink.svg")
 # without it: the storefront header and footer
 web(INK,      BLUE,    "#D8DEE9", "truemg-lockup-web.svg")
 web("#FFFFFF","#65A0F5","#2B3344", "truemg-lockup-web-onink.svg")
+# and the budget cut, for inlining
+inline_svg("truemg-lockup-inline.svg")
 
 
 # The .min.svg beside each lockup is what actually ships: it is base64'd into
@@ -77,7 +99,8 @@ web("#FFFFFF","#65A0F5","#2B3344", "truemg-lockup-web-onink.svg")
 # nothing at all; this only automates *calling* it.
 SVGO = shutil.which("svgo") or shutil.which("npx")
 for name in ("truemg-lockup-header", "truemg-lockup-onink",
-             "truemg-lockup-web", "truemg-lockup-web-onink"):
+             "truemg-lockup-web", "truemg-lockup-web-onink",
+             "truemg-lockup-inline"):
     src, out = name + ".svg", name + ".min.svg"
     if not SVGO:
         print("  ! svgo not found - %s is now STALE. `npm i -g svgo`, then re-run." % out)

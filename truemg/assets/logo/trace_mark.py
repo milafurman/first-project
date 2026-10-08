@@ -38,6 +38,13 @@ UPSAMPLE = 2          # 2x: 99.66% silhouette match. 4x buys 0.14% for 2.5x the 
                       # character customCss budget, so the bytes are not free.
 ALPHAMAX = 0.9        # corner threshold: high enough to keep the mane's points
 QUANTIZE = 1          # potrace -u: coordinates on the pixel grid, not tenths
+
+# A second, lighter trace, for the one place bytes are rationed: the lockup that
+# gets base64'd into customCss, which is capped at 10,000 characters. At 1x the
+# mark is 3,822 bytes against 10,434 and the silhouette match drops from 99.66%
+# to 99.22% — a difference that does not survive being drawn 42px tall in a site
+# header. That saving is what lets the Gila into the header at all.
+INLINE_UPSAMPLE = 1
 VIEWBOX = 1600        # the coordinate space every other script expects
 
 # fill, filename. `currentColor` lets CSS colour it; the rest are literal.
@@ -91,4 +98,11 @@ if __name__ == "__main__":
     print("traced %d paths in a %.0f-unit space" % (paths.count("<path"), space))
     for fill, out in VARIANTS:
         write(paths, space, fill, out)
-        print("  %-28s %5d bytes  %s" % (out, os.path.getsize(out), fill))
+        print("  %-30s %5d bytes  %s" % (out, os.path.getsize(out), fill))
+
+    globals()["UPSAMPLE"] = INLINE_UPSAMPLE
+    bitmap(MASTER, "_trace/mark-inline.pbm")
+    paths, space = trace("_trace/mark-inline.pbm")
+    write(paths, space, "#0A0A0B", "truemg-mark-inline.svg")
+    print("  %-30s %5d bytes  for the customCss lockup"
+          % ("truemg-mark-inline.svg", os.path.getsize("truemg-mark-inline.svg")))
