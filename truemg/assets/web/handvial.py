@@ -33,6 +33,13 @@ PLATE = "hand-vial.jpg"
 NAME = "ghk-cu"                            # any sprite in ../vials
 OUT = "hand-vial-labelled.jpg"
 
+# The hero's headline owns the left, so a hero cut of this needs the hand
+# entering from the right. Mirroring costs nothing in the photograph — no text,
+# no handedness that reads as wrong — but it MUST happen before the label goes
+# on, not after. Flipping the finished composite flips the artwork with it and
+# "GHK-CU" comes out backwards, which is exactly what the first attempt did.
+MIRROR = False
+
 # The blank panel, measured off the plate.
 BOX = (748, 390, 873, 562)                 # left, top, right, bottom
 
@@ -86,10 +93,10 @@ def relight(art, panel):
     return np.asarray(art).astype(float) * lum[..., None]
 
 
-def recolour_crimp(im):
+def recolour_crimp(im, crimp):
     """Move the crimp ring's hue to the brand blue without flattening it."""
     a = np.asarray(im).astype(float)
-    x0, y0, x1, y1 = CRIMP
+    x0, y0, x1, y1 = crimp
     reg = a[y0:y1, x0:x1]
     r, g, b = reg[:, :, 0], reg[:, :, 1], reg[:, :, 2]
     blue = (b > r + 12) & (b > 60)                             # the ring, not the fingers
@@ -101,12 +108,23 @@ def recolour_crimp(im):
     return Image.fromarray(a.clip(0, 255).astype(np.uint8))
 
 
-if __name__ == "__main__":
+def plate():
+    """The photograph, flipped first if the hero cut needs it, with the panel
+    and crimp boxes mirrored to match."""
     im = Image.open(PLATE).convert("RGB")
-    x0, y0, x1, y1 = BOX
+    if not MIRROR:
+        return im, BOX, CRIMP
+    W = im.width
+    mx = lambda b: (W - b[2], b[1], W - b[0], b[3])
+    return im.transpose(Image.FLIP_LEFT_RIGHT), mx(BOX), mx(CRIMP)
+
+
+def build(out=None):
+    im, box, crimp = plate()
+    x0, y0, x1, y1 = box
     w, h = x1 - x0, y1 - y0
 
-    panel = im.crop(BOX)
+    panel = im.crop(box)
     art = relight(fit(label_art(), w, h), panel)
 
     # feather the panel's edge so the artwork meets the glass the way the
@@ -116,6 +134,19 @@ if __name__ == "__main__":
     mask = mask.filter(ImageFilter.GaussianBlur(1.1))
 
     im.paste(Image.fromarray(art.clip(0, 255).astype(np.uint8)), (x0, y0), mask)
-    im = recolour_crimp(im)
-    im.save(OUT, quality=93, optimize=True)
-    print(f"  {OUT:26s} {im.width}x{im.height}  {os.path.getsize(OUT) // 1024} KB  [{NAME}]")
+    im = recolour_crimp(im, crimp)
+    out = out or OUT
+    im.save(out, quality=93, optimize=True)
+    print(f"  {out:26s} {im.width}x{im.height}  {os.path.getsize(out) // 1024} KB  [{NAME}]")
+    return im
+
+
+if __name__ == "__main__":
+    build()
+    globals()["MIRROR"] = True
+    m = build("hand-vial-mirrored.jpg")
+    # the hero shapes, cut from the correctly-mirrored composite
+    for name, bx, size in (("hero-hand.jpg", (0, 0, 1920, 862), (2560, 1150)),
+                           ("hero-hand-mobile.jpg", (980, 0, 1620, 862), (1080, 1455))):
+        m.crop(bx).resize(size, Image.LANCZOS).save(name, quality=88, optimize=True)
+        print(f"  {name:26s} {size[0]}x{size[1]}  {os.path.getsize(name) // 1024} KB")
