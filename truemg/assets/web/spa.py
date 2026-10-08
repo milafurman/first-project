@@ -349,16 +349,26 @@ def place(scene, name, cx, k, horizon):
     scene.alpha_composite(transmit(v, under), (x, y))
 
 
-def compose(out="spa-hero.jpg"):
+def compose(out="spa-hero.jpg", product=True):
+    """The room, with the bottles on it or without.
+
+    The empty version is not a debug view. The vial art is a flat mockup shot
+    dead-on against white, which is right for a product tile and wrong for a
+    photographic hero, so the room on its own — headline over the clear left
+    third, product left to the tiles where flat lighting is expected — is a
+    real option rather than a fallback. It is generated here rather than by
+    hand so it cannot drift from the framing and defocus the composite uses.
+    """
     plate = Image.open(PLATE).convert("RGB").crop(CROP)
     k, _, _, horizon = view()
     plate = plate.resize((OUT_W, int(plate.height * k)), Image.LANCZOS)
     scene = settle(depth_blur(plate, horizon), horizon).convert("RGBA")
-    for name, cx in zip(CAST, ROW_X):
+    for name, cx in (zip(CAST, ROW_X) if product else ()):
         place(scene, name, cx, k, horizon)
     scene.convert("RGB").save(out, quality=90, optimize=True)
     print(f"  {out:24s} {scene.width}x{scene.height}  {os.path.getsize(out) // 1024} KB")
 
 
 if __name__ == "__main__":
-    compose()
+    compose("spa-hero.jpg")
+    compose("spa-plate-hero.jpg", product=False)
