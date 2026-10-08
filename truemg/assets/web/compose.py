@@ -39,11 +39,22 @@ def place(canvas, v, cx, cy, height, angle, shadow=(26, 34, 0.30)):
     v = v.resize((max(1, int(v.width * k)), height), Image.LANCZOS)
     v = v.rotate(angle, resample=Image.BICUBIC, expand=True)
     blur, dy, op = shadow
-    sh = Image.new("RGBA", v.size, (12, 24, 56, 0))
-    sh.putalpha(v.getchannel("A").point(lambda p: int(p * op)))
+
+    # The shadow is built on a canvas padded by three blur radii, NOT on one the
+    # size of the vial. `vial()` crops the sprite tight to its own alpha, so the
+    # glass touches all four edges; blurring inside that rectangle clips the
+    # Gaussian's falloff square, leaving the corners at roughly 30/255 instead
+    # of 0. The result is a hard-edged navy box behind every vial, which is what
+    # these images shipped with. The pad gives the blur somewhere to fade out.
+    pad = blur * 3
+    mask = Image.new("L", (v.width + pad * 2, v.height + pad * 2), 0)
+    mask.paste(v.getchannel("A").point(lambda p: int(p * op)), (pad, pad))
+    sh = Image.new("RGBA", mask.size, (12, 24, 56, 0))
+    sh.putalpha(mask)
     sh = sh.filter(ImageFilter.GaussianBlur(blur))
+
     x, y = cx - v.width // 2, cy - v.height // 2
-    canvas.alpha_composite(sh, (x, y + dy))
+    canvas.alpha_composite(sh, (x - pad, y + dy - pad))
     canvas.alpha_composite(v, (x, y))
 
 # ---------------- hero, desktop ----------------
