@@ -167,6 +167,19 @@ def relight(v, rim=1.0, blur=0.0):
     lit = px * 0.78                                        # 1. kill the studio key
     lit += (np.array((120, 104, 86), float) - lit) * 0.16  # ambient, warm not grey
 
+    # 1b. ACROSS the body, not just at its edge. This was the piece missing
+    # after the rim went in: a rim alone puts a bright line on the silhouette
+    # and leaves everything inside it evenly lit, which is a studio softbox,
+    # not a window. One source to the left means the whole bottle — label
+    # included — falls off continuously from left to right, and a little from
+    # top to bottom. Without it the label reads as a flat white rectangle
+    # pasted on a lit scene, because that is exactly what it is.
+    H0, W0 = px.shape[:2]
+    gy, gx = np.mgrid[0:H0, 0:W0]
+    across = 1.0 + 0.26 * (0.5 - gx / max(W0 - 1, 1))      # window is to the left
+    down = 1.0 + 0.07 * (0.5 - gy / max(H0 - 1, 1))        # and a little above
+    lit *= (across * down)[..., None]
+
     H_, W_ = a.shape
     sh = max(2, int(W_ * 0.034))
     left = np.clip(a - np.pad(a, ((0, 0), (sh, 0)))[:, :W_], 0, 1)      # 2. the wrap
