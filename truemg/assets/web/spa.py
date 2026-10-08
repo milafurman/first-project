@@ -415,6 +415,24 @@ def hero_media(src="hero-media.webp", out="hero-media-warm.webp"):
     print(f"  {out:24s} {W0}x{H0}  {os.path.getsize(out) // 1024} KB")
 
 
+# The composite, cut to the two shapes the storefront's hero keys want. Cut
+# rather than re-rendered: the bottles stand on a plane measured for the
+# composite's own crop, so re-framing the render would move them off it. The
+# phone crop takes the right three — a four-bottle row cannot fit a portrait
+# frame without slicing one down the middle.
+HERO_PRODUCT = (
+    ("hero-spa-product.jpg",        (0, 90, 1680, 845),  (2560, 1150)),
+    ("hero-spa-product-mobile.jpg", (780, 0, 1460, 945), (1080, 1500)),
+)
+
+
+def hero_product(src="spa-hero.jpg"):
+    im = Image.open(src).convert("RGB")
+    for out, box, size in HERO_PRODUCT:
+        im.crop(box).resize(size, Image.LANCZOS).save(out, quality=86, optimize=True)
+        print(f"  {out:30s} {size[0]}x{size[1]}  {os.path.getsize(out) // 1024} KB")
+
+
 def hero_backgrounds():
     """The room on its own, at the sizes the storefront's hero keys expect."""
     src = Image.open(PLATE).convert("RGB")
@@ -432,4 +450,5 @@ if __name__ == "__main__":
     compose("spa-hero.jpg")
     compose("spa-plate-hero.jpg", product=False)
     hero_backgrounds()
+    hero_product()
     hero_media()
