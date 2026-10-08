@@ -35,9 +35,7 @@ one. Mila picked the second. `../vials/mark-2365CD.png` is the master.
 | `truemg-mark-current.svg` | `currentColor` | For CSS — inherits from its container |
 
 `trace_mark.py` rebuilds all four from the master. Three paths, 10KB, 99.66%
-silhouette match. **The favicon is still the other drawing** — it is an upload
-in the Lapis admin, which this integration cannot reach, so it needs replacing
-by hand with `truemg-mark-brand.svg`.
+silhouette match. The storefront favicon now carries this drawing too.
 
 ### Tracing notes
 
@@ -108,31 +106,49 @@ traced from rendered type, so neither depends on a font being installed.
 
 ## The lockups
 
-`build_lockup.py` builds four, and they split on one rule: **the Gila mark
-appears on the browser tab and on the vial, and nowhere on the site itself.**
+`build_lockup.py` builds four: with the Gila mark and without, each on a light
+and a dark ground.
 
 | File | Use |
 |---|---|
-| `truemg-lockup-web.svg` | **The site header.** Wordmark and LABS, no mark |
-| `truemg-lockup-web-onink.svg` | The site footer |
-| `truemg-lockup-header.svg` | Mark + wordmark, light ground. Print, Canva, decks |
+| `truemg-lockup-header.svg` | **The site logo.** Mark + wordmark + LABS, light ground |
 | `truemg-lockup-onink.svg` | The same on a dark ground |
+| `truemg-lockup-web.svg` | Wordmark and LABS, no mark |
+| `truemg-lockup-web-onink.svg` | The same on a dark ground |
+
+The markless pair exists because of a constraint that no longer applies — see
+the customCss note below. It is kept for anywhere the mark would be redundant
+or too small to read, not because the mark is barred from the site.
 
 Each has a `.min.svg` beside it, produced by svgo at `--precision=0`. A
 hand-rolled regex that tried to do the same thing produced a file that rendered
 nothing at all, so the optimizer does this, not a script.
 
-`truemg-lockup-light-1200.png` and `-dark-1200.png` are transparent PNGs of the
-**web** lockup at 1200px wide, roughly 3x the header's rendered size. **These
-are the ones to upload in the Lapis admin.** `render_png.mjs` makes them, and
-`lockup-preview.jpg`, from the SVGs — they used to be exported by hand, which is
-exactly how they came to be carrying the old drawing and the stretched LABS
-after the SVGs had already been fixed.
+`render_png.mjs` renders four transparent PNGs at 1200px wide, roughly 3x the
+header's rendered size, plus `lockup-preview.jpg`:
 
-### Why the header cannot be done from the storefront integration
+| File | |
+|---|---|
+| `truemg-lockup-mark-light-1200.png` | **The one in the Lapis admin's Logo slot** |
+| `truemg-lockup-mark-dark-1200.png` | the same on a dark ground |
+| `truemg-lockup-light-1200.png` / `-dark-1200.png` | the markless pair |
 
-There is no copy key for the logo on any template — only `logoScale`. The image
-is an admin upload. Two routes were tested against the CSS sanitizer:
+They used to be exported by hand, which is exactly how they came to be carrying
+the old drawing and the stretched LABS after the SVGs had already been fixed.
+
+The Lapis admin takes one logo file and uses it in both the header and the
+footer. The footer is near-black and the logo is dark ink, so the theme lays a
+white rounded plate behind it rather than inverting it.
+
+### The customCss route, and why it is retired
+
+The logo lives in **Design studio -> Manual -> Logo**, as an upload. Before that
+was found, the header was driven from `customCss` instead, and the notes below
+are kept because the sanitizer findings still hold for anything else inlined
+there.
+
+There is no copy key for the logo on any template — only `logoScale`. Two
+routes were tested against the CSS sanitizer:
 
 - `content: url(...)` and `background-image: url(...)` — **every** external URL
   is rewritten to `url(#)`, in every property. No image can be pulled in from
@@ -143,7 +159,9 @@ is an admin upload. Two routes were tested against the CSS sanitizer:
 A raw (non-base64) `data:image/svg+xml;utf8,<svg…>` URI loses its angle brackets
 to the sanitizer. Base64 is the only form that survives.
 
-`customCss` is capped at 10,000 characters. That cap is the other reason the
-site header carries the markless lockup: with the mark it minifies to 9,464
-characters of base64 and the rest of the CSS no longer fits. Without it, 4,148,
-which leaves room. Both go away the moment the PNGs are uploaded in the admin.
+`customCss` is capped at 10,000 characters, and that cap is why the markless
+lockup exists at all: with the Gila the file minifies to 9,464 characters of
+base64 and the rest of the stylesheet no longer fits; without it, 4,148. Since
+the logo is an upload the cap no longer applies to it, and whether the mark
+sits beside the wordmark is a design choice rather than a platform limit. The
+logo rule has been removed from `customCss` accordingly.
