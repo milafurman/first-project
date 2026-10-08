@@ -41,7 +41,7 @@ PLATE = "plate-spa.jpg"
 # measured plane below stays in ORIGINAL plate coordinates and is transformed
 # through this crop in code, so the geometry cannot drift out of step with the
 # framing the way hand-copied numbers would.
-CROP = (400, 120, 1680, 840)               # left, top, right, bottom
+CROP = (500, 300, 1389, 800)               # left, top, right, bottom
 OUT_W = 1680
 
 # --- the counter plane, measured off the plate ------------------------------
@@ -96,8 +96,8 @@ CAST = ["nad", "tmg-3rt", "ghk-cu", "bpc-157-tb-500"]
 # renders every bottle at the same height. A row following the counter's own
 # diagonal would be equally correct and would vary them by about 28%, which is
 # exactly the thing being fixed.
-ROW_Y = 800.0
-ROW_X = (560, 740, 920, 1100)      # inside the band where ROW_Y is on the top
+ROW_Y = 809.0
+ROW_X = (661, 882, 1102, 1323)      # inside the band where ROW_Y is on the top
 
 
 def depth_blur(im, horizon):
@@ -207,10 +207,12 @@ def settle(im, horizon):
     H, W = a.shape[:2]
     yy = np.mgrid[0:H, 0:W][0].astype(float)
     far = np.clip((ROW_Y - yy) / max(ROW_Y - horizon, 1.0), 0, 1) ** 0.8
-    k = 1.0 - 0.30 * far                                   # exposure, by distance
-    grey = a.mean(axis=2, keepdims=True)
-    a = (a * 0.80 + grey * 0.20) * k[..., None]            # and a little saturation
-    return Image.fromarray(a.clip(0, 255).astype(np.uint8))
+    # Exposure only. An earlier pass also pulled 20% of the saturation out,
+    # which separated the product but drained exactly the warmth this plate was
+    # chosen for. Stopping the light down is what a camera exposing for the
+    # product would do; desaturating is not, and it showed.
+    k = 1.0 - 0.22 * far
+    return Image.fromarray((a * k[..., None]).clip(0, 255).astype(np.uint8))
 
 
 def place(scene, name, cx, k, horizon):
