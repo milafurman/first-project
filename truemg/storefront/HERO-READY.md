@@ -64,6 +64,20 @@ still holds a leftover `img[src*="brand-logos"]` rule that the logo README
 already describes as retired — redundant, worth removing next time the
 stylesheet is touched, which would also free about 8,000 characters.)
 
+## The blank render, measured
+
+Previously noted as roughly 1 in 10. Measured properly on 2026-10-09 against
+the hero preview: five cold loads in a real browser, **three rendered, two
+came back blank** — a blank page with the chrome but no content. A sixth and
+seventh bare `?peek=1` load returned "upstream request failed" outright.
+
+So it is nearer 40% than 10%, it is server-side, and it is not caused by the
+length of the `?ov=` payload: the same URL alternates between rendering and
+blanking with nothing changed. Reloading clears it.
+
+This belongs in the Lapis mail with hard numbers rather than "it sometimes
+goes blank".
+
 ## Still blocked
 
 A band above the footer, like the Nurish one Mila asked for. The section is
