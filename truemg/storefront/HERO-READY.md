@@ -33,6 +33,37 @@ three trust lines fill all of it. Three attempts at fitting product in ended
 with vials sliced down the middle and text sitting on them. The phone gets the
 room without product; the product is a thumb-flick below in the grid.
 
+## There is no staging store
+
+Worth writing down, because it was assumed otherwise for a while. Lapis has one
+store. `truemglabs.com` is live on the internet right now; the public sees a
+coming-soon page because `comingSoonEnabled` is `"1"`, not because the site is
+somewhere else.
+
+So "go live" means two separate things and they must not be confused:
+
+- **Applying a design change** saves to the real store, but the curtain is
+  still down, so the public still sees the coming-soon page. Reversible in one
+  call.
+- **Clearing `comingSoonEnabled`** opens the store to the world. That is the
+  launch, and it is gated on the attorney review, stock on all 20 variants and
+  the rest of the open list.
+
+`?peek=1` is Lapis's own door past the curtain — the schema says so: "The
+Design preview and ?peek=1 links still show the real store." It works, and it
+combines with `?ov=`, so a preview link can be opened without signing in.
+Treat it as owner-only: anyone holding the link sees the store early.
+
+## Correction: the logo preview caveat was wrong
+
+Previews were described as showing a stock logo because the real one is too
+large to ride inside a `?ov=` link. That is wrong. The logo is an UPLOAD in
+Design studio -> Manual -> Logo, not a `customCss` rule, so it renders
+correctly in previews whatever the stylesheet carries. (The live `customCss`
+still holds a leftover `img[src*="brand-logos"]` rule that the logo README
+already describes as retired — redundant, worth removing next time the
+stylesheet is touched, which would also free about 8,000 characters.)
+
 ## Still blocked
 
 A band above the footer, like the Nurish one Mila asked for. The section is
