@@ -98,3 +98,33 @@ Two things follow, and neither is an agent job:
   flat artwork in the brand, set for the actual die line, which a printer can
   run. That is a separate piece of work and it should happen before any
   significant print run.
+
+## float/ — the catalog set, with a shadow
+
+Mila pointed at a competitor's product page: the bottles there look 3D and
+floating, and ours did not. `float.py` renders the difference.
+
+What it is NOT: a size change. The uploaded sprites are 652x1589 of ink in a
+2000x2000 canvas, which looks like wasted room — but the product card is
+square, `object-contain` fits the square, and the vial is already at 79% of the
+binding dimension. Measuring that before writing the code saved shipping a
+"bigger" that delivered nothing.
+
+What it IS: a cast shadow, in two parts. A contact pool carrying the vial's own
+squashed silhouette, and a much wider, fainter ambient pool further out. Both
+start a little BELOW the glass rather than at it, which is the whole trick —
+touching reads as standing, a gap reads as hovering. Both lean right, because
+the photographs are lit from the upper left.
+
+The shadow has to be baked in. The uploaded product images come back from the
+store CDN as RGB with the alpha flattened, so a CSS `drop-shadow` on one
+outlines the white SQUARE, not the bottle. Measured, not assumed.
+
+`float.py` also builds the marketing cluster (`web/hero-float*.jpg`): four
+vials, mixed tilts, staged in depth. Tilt is where a photograph shows its
+limits — the cap's ellipse and the label's wrap were fixed when the shutter
+fired and cannot open to match a new angle — so the cluster stays inside about
+22 degrees, where nobody reads the discrepancy.
+
+These are upload candidates. Products are owner-only; nothing here reaches the
+store without Mila uploading it.
