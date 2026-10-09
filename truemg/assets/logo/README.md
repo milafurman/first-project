@@ -196,3 +196,22 @@ base64 and the rest of the stylesheet no longer fits; without it, 4,148. Since
 the logo is an upload the cap no longer applies to it, and whether the mark
 sits beside the wordmark is a design choice rather than a platform limit. The
 logo rule has been removed from `customCss` accordingly.
+
+## favicon/
+
+There was no favicon in this repo, which is why the one on the store is
+whichever drawing was last uploaded by hand. `favicon.py` makes a real one
+from the spiky mark.
+
+A favicon is 32 logical pixels wide, and the mark's mane is fine separated
+strokes. Shrunk straight down they collapse into a blue smear — not an ugly
+smear, an unidentifiable one. So there are two cuts and the choice is real:
+
+  * KNOCKED OUT — mark in white on a solid brand-blue rounded square. One
+    shape, maximum contrast, still legible at 16px, and it holds its own in a
+    row of twenty tabs. This is the default, because being FOUND is the job.
+  * PLAIN — blue mark on white. Prettier large, invisible small against a
+    light browser chrome.
+
+The 180px cut is opaque and square-cornered on purpose: iOS strips alpha,
+composites what is left onto black, and applies its own corner radius.
