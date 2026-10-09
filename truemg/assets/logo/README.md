@@ -25,7 +25,17 @@ the logo files and the product disagreed about which one was the logo:
   vials and in the Canva label pages
 
 As silhouettes they overlap 53%, so they are two drawings, not two exports of
-one. Mila picked the second. `../vials/mark-2365CD.png` is the master.
+one.
+
+**Mila picked the FIRST — the spiky one — on 2026-10-09**, and because no vials
+had been printed yet the label artwork moved with it rather than diverging from
+it. `../marks/mark-original.png` is the master. The smooth drawing is kept at
+`../vials/mark-2365CD.png` as the record of what the labels used to carry.
+
+> An earlier version of this file said the second drawing was the master and
+> the storefront favicon had been changed to match. That was true for two days.
+> If you find a smooth-crested TrueMG mark anywhere outside
+> `truemg-mark-smooth-*.svg`, it predates this and should not be used.
 
 | File | Fill | Use |
 |---|---|---|
@@ -34,8 +44,29 @@ one. Mila picked the second. `../vials/mark-2365CD.png` is the master.
 | `truemg-mark-paper.svg` | `#FCFBF8` | Knocked out of a dark photograph |
 | `truemg-mark-current.svg` | `currentColor` | For CSS — inherits from its container |
 
-`trace_mark.py` rebuilds all four from the master. Three paths, 10KB, 99.66%
-silhouette match. The storefront favicon now carries this drawing too.
+`trace_original.py` rebuilds all four from the master and writes the CANONICAL
+filenames, so `build_lockup.py` and `render_png.mjs` follow the mark without an
+edit and cannot quietly disagree with it. Five paths, 15KB, 98.06% silhouette
+match against the master.
+
+That master is a 900px screenshot — soft edges, JPEG mush, paper texture in the
+ground — which is why it is traced rather than filtered. Filtering adds no
+detail that is not there; unsharp masking a blurry edge only haloes it. The
+trace takes the inked area from 22.0% fuzzy-edge pixels to 1.9%, and that 1.9%
+is real anti-aliasing at render time rather than blur baked into a file.
+
+`trace_mark.py` still builds the smooth drawing, under `-smooth-` names, so the
+two can sit side by side without one overwriting the other.
+
+### Separating ink from ground
+
+The two masters need different methods and this is the whole difference between
+the scripts. The vial master is a PNG with a real alpha channel, so its
+silhouette is simply the alpha. This one is flat RGB on a mottled off-white with
+no alpha, so the ink is separated by COLOUR — blue minus the stronger of red and
+green. Brightness would not do: it would eat the white shapes INSIDE the mark —
+the eye, the gap under the jaw, the splits between the mane strokes — because
+those are the same white as the background.
 
 ### Tracing notes
 

@@ -35,6 +35,14 @@ LIZARD_BOX = (725, 1185, 950, 1420)           # old mark on the 2000px label, me
 CRIMP = (0.085, 0.170)                        # aluminium band, as a fraction of height
 PAPER = np.array([246, 246, 247], float)      # the label stock
 
+# The mark printed on the label. Mila went back to the ORIGINAL Gila — the
+# spiky crest with the feathered mane — and no vials had been printed yet, so
+# the label artwork moves with the brand rather than diverging from it. The two
+# drawings overlap only 53% as silhouettes, so this is a real change, not a
+# re-export. mark-2365CD.png (the smooth drawing) stays in the tree as the
+# record of what the labels used to carry.
+MARK = "mark-og-2365CD.png"
+
 
 def blue_mask(rgb):
     """The printed blue: strongly blue-dominant, unlike white, black or grey."""
@@ -90,7 +98,14 @@ def swap_mark(a, mark):
 
     out = Image.fromarray(a, "RGBA")
     bw, bh = x1 - x0, y1 - y0
-    m = mark.resize((int(bw * 0.94), int(bh * 0.94)), Image.LANCZOS)
+    # FIT inside the box, do not fill it. The box is 225x235 and was being used
+    # as the output size directly, which stretched whatever mark it was handed
+    # by about 4%. That was invisible while one mark was in use and its own
+    # proportions were baked into the master; it stops being invisible the
+    # moment the mark changes shape.
+    ms = mark.crop(mark.getbbox())
+    k = min(bw * 0.94 / ms.width, bh * 0.94 / ms.height)
+    m = ms.resize((max(1, int(ms.width * k)), max(1, int(ms.height * k))), Image.LANCZOS)
     out.alpha_composite(m, (x0 + (bw - m.width) // 2, y0 + (bh - m.height) // 2))
     return out
 
@@ -158,7 +173,7 @@ def fetch_sources():
 
 if __name__ == "__main__":
     fetch_sources()
-    mark = Image.open("mark-2365CD.png").convert("RGBA")
+    mark = Image.open(MARK).convert("RGBA")
     names = sorted(os.listdir("cut/src"))
     for n in names:
         render(n, mark).save(n)

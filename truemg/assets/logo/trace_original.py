@@ -45,11 +45,16 @@ ALPHAMAX = 0.9        # corner threshold: high enough to keep the crest's points
 QUANTIZE = 1
 VIEWBOX = 1600
 
+# These are the CANONICAL mark filenames. build_lockup.py and render_png.mjs
+# read them by name, so writing them here means the lockups, the PNGs and the
+# specimen sheet all follow the mark without a single edit — and, more to the
+# point, cannot quietly disagree with it later. That disagreement is exactly
+# what happened the first time two Gila drawings were loose in this project.
 VARIANTS = [
-    ("#2365CD",      "truemg-mark-og-brand.svg"),
-    ("#0A0A0B",      "truemg-mark-og-ink.svg"),
-    ("#FCFBF8",      "truemg-mark-og-paper.svg"),
-    ("currentColor", "truemg-mark-og-current.svg"),
+    ("#2365CD",      "truemg-mark-brand.svg"),
+    ("#0A0A0B",      "truemg-mark-ink.svg"),
+    ("#FCFBF8",      "truemg-mark-paper.svg"),
+    ("currentColor", "truemg-mark-current.svg"),
 ]
 
 
@@ -112,6 +117,6 @@ if __name__ == "__main__":
 
     bitmap("_trace/og-inline.pbm", INLINE_UPSAMPLE)
     p2, s2 = trace("_trace/og-inline.pbm")
-    write(p2, s2, "#0A0A0B", "truemg-mark-og-inline.svg")
+    write(p2, s2, "#0A0A0B", "truemg-mark-inline.svg")
     print("  %-32s %6d bytes  for the customCss lockup"
-          % ("truemg-mark-og-inline.svg", os.path.getsize("truemg-mark-og-inline.svg")))
+          % ("truemg-mark-inline.svg", os.path.getsize("truemg-mark-inline.svg")))

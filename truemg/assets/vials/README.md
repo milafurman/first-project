@@ -1,5 +1,17 @@
 # Vial images — transparent, all 17
 
+> **2026-10-09 — the mark on the label changed.** Mila went back to the
+> ORIGINAL Gila, the spiky crest with the feathered mane. No vials had been
+> printed yet, so the label artwork moved with the brand instead of diverging
+> from it. `render.py` now stamps `mark-og-2365CD.png`; `mark-2365CD.png` (the
+> smooth drawing) stays as the record of what the labels used to carry. All 17
+> have been re-rendered, and so has everything downstream that contains a vial.
+>
+> `swap_mark` was also fixed while doing it: it resized the mark to the label
+> box as an output SIZE, which stretched it about 4%. Invisible while one mark
+> was in use and its proportions were baked into the master; not invisible the
+> moment the mark changes shape. It fits inside the box now.
+
 Every product image with the baked-in white background removed. **These are the
 files that unblock the brand palette.** Upload them in Lapis to replace the
 current ones; no agent can do that step.

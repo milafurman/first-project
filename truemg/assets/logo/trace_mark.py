@@ -1,4 +1,12 @@
-"""Trace the Gila mark from the master raster and write the four mark SVGs.
+"""SUPERSEDED by trace_original.py. Kept runnable, for the record.
+
+Mila has gone back to the ORIGINAL Gila — the spiky crest with the feathered
+mane — and no vials had been printed yet, so the label artwork moved with the
+brand instead of diverging from it. trace_original.py now writes the canonical
+mark files; this one writes `-smooth-` names so the two can sit side by side
+without one silently overwriting the other.
+
+Trace the Gila mark from the master raster and write the four mark SVGs.
 
 Run from this directory.
 
@@ -49,10 +57,10 @@ VIEWBOX = 1600        # the coordinate space every other script expects
 
 # fill, filename. `currentColor` lets CSS colour it; the rest are literal.
 VARIANTS = [
-    ("#2365CD",      "truemg-mark-brand.svg"),    # the brand blue. What ships
-    ("#0A0A0B",      "truemg-mark-ink.svg"),      # on paper, and for one-colour print
-    ("#FCFBF8",      "truemg-mark-paper.svg"),    # knocked out of a dark photograph
-    ("currentColor", "truemg-mark-current.svg"),  # inherits from its CSS container
+    ("#2365CD",      "truemg-mark-smooth-brand.svg"),    # the brand blue
+    ("#0A0A0B",      "truemg-mark-smooth-ink.svg"),      # on paper, and for one-colour print
+    ("#FCFBF8",      "truemg-mark-smooth-paper.svg"),    # knocked out of a dark photograph
+    ("currentColor", "truemg-mark-smooth-current.svg"),  # inherits from its CSS container
 ]
 
 
@@ -103,6 +111,6 @@ if __name__ == "__main__":
     globals()["UPSAMPLE"] = INLINE_UPSAMPLE
     bitmap(MASTER, "_trace/mark-inline.pbm")
     paths, space = trace("_trace/mark-inline.pbm")
-    write(paths, space, "#0A0A0B", "truemg-mark-inline.svg")
+    write(paths, space, "#0A0A0B", "truemg-mark-smooth-inline.svg")
     print("  %-30s %5d bytes  for the customCss lockup"
-          % ("truemg-mark-inline.svg", os.path.getsize("truemg-mark-inline.svg")))
+          % ("truemg-mark-smooth-inline.svg", os.path.getsize("truemg-mark-smooth-inline.svg")))
