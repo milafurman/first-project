@@ -25,6 +25,12 @@ reconstructed from a conversation.
 
 ### Copy keys
 
+Hero images were re-pointed to `@507a6a0` on 2026-10-09 after the mark change,
+because the earlier build carried the smooth Gila on the vial and the brand is
+spiky now. Same hero, corrected artwork. Verified live: the hero image served
+is from that commit, and the public still gets the coming-soon page.
+
+
 | key | value |
 |---|---|
 | `heroBackgroundUrl` | `…@a2e36e7/truemg/assets/web/hero-hand.jpg` |
