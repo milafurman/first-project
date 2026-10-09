@@ -44,7 +44,7 @@ header .flex.items-center.gap-1 a,header .flex.items-center.gap-1 button{color:#
    laboratory. Column heads go to small caps on wide tracking so they rank
    clearly below the links they label, which is the whole job of a heading
    that small. */
-footer{background:#0B1626!important;margin-top:4.5rem!important}
+footer{margin-top:4.5rem!important}
 footer .mx-auto{padding-top:4.5rem!important;padding-bottom:3.25rem!important}
 footer .grid{gap:3rem 2.5rem!important}
 footer p.font-display{text-transform:uppercase;font-size:.6875rem!important;font-weight:600!important;letter-spacing:.145em!important;color:rgba(255,255,255,.52)!important;margin-bottom:1.15rem!important}
@@ -63,3 +63,29 @@ footer .border-t{border-color:rgba(255,255,255,.12)!important;margin-top:3.5rem!
 footer .border-t>p:first-child{border-left:2px solid #C9A227;padding:.1rem 0 .1rem .9rem;color:rgba(255,255,255,.88)!important;font-size:.75rem!important}
 footer .border-t>p:first-child::before{content:"Research use only";display:block;text-transform:uppercase;letter-spacing:.14em;font-size:.625rem;font-weight:700;color:#C9A227;margin-bottom:.4rem}
 footer .border-t>p+p{color:rgba(255,255,255,.5)!important;margin-top:1.5rem!important}
+
+/* ---- the band rhythm ---------------------------------------------------
+   The reference storefront never runs two bands of the same colour in a row:
+   lavender, mint, cream, ice, navy, each one a pale wash. Ours ran white,
+   white, white, white, black, which is why it read flat however good the
+   individual sections were.
+
+   Restrained version, because a pastel rainbow would fight #2365CD rather
+   than serve it: every wash but one is the brand blue at 3-6% strength, and
+   the single warm note (the FAQ's cream) is there to stop the page going
+   monochrome-cold. The catalog band stays white on purpose — the product
+   cards are the colour in that section.
+
+   Full-bleed via the shadow-spread trick rather than width:100vw. The
+   sections are max-w-7xl centred containers, so a plain background paints a
+   tinted box with white gutters; 100vw would bleed correctly but counts the
+   scrollbar and gives the whole page a horizontal scroll. A 100vmax shadow
+   clipped back to the section's own vertical bounds costs neither. */
+.lf-section-howItWorks,.lf-section-faq,.lf-section-ctaBanner{clip-path:inset(0 -100vmax);margin-block:0!important}
+.lf-section-howItWorks{background:#F3F6FC!important;box-shadow:0 0 0 100vmax #F3F6FC}
+.lf-section-faq{background:#F8F6F1!important;box-shadow:0 0 0 100vmax #F8F6F1}
+.lf-section-ctaBanner{background:#EDF2FB!important;box-shadow:0 0 0 100vmax #EDF2FB;padding-block:5rem!important}
+/* the dark band and the footer were two different near-blacks, which reads as
+   two accidents rather than one navy */
+.lf-section-quality{background:#0A192F!important}
+footer{background:#0A192F!important}
