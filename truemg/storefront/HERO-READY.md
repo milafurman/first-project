@@ -1,10 +1,29 @@
-# Hero: ready to apply, not applied
+# Hero: APPLIED 2026-10-09
+
+Applied on Mila's direct word. The coming-soon curtain was NOT touched and
+remains `"1"`; verified after applying that an ordinary visitor still gets
+"TrueMG Labs opens soon."
+
+The stylesheet below is now 2,148 characters rather than 9,542: the
+`img[src*="brand-logos"]` rule was dropped when applying. It carried an 8,000
+character base64 copy of the logo and was redundant — the logo is served from
+the upload in Design studio, which is why it renders correctly in previews
+that carry no stylesheet at all. Verified again after applying: the header
+logo loads from a Lapis-hosted PNG, not from CSS. The full previous stylesheet
+remains in git history if it is ever needed back.
+
+That also frees about 8,000 characters of the 10,000 cap, which is most of
+what a footer band would need if Lapis ever gives that section an image.
+
+---
+
+## What was applied
 
 Mila's standing rule: nothing goes live without her direct word. This records
 exactly what to apply when it comes, so the decision does not have to be
 reconstructed from a conversation.
 
-## Copy keys
+### Copy keys
 
 | key | value |
 |---|---|
@@ -19,7 +38,7 @@ Base: `https://cdn.jsdelivr.net/gh/milafurman/first-project`
 left empty — empty falls back to the first featured product's image — and the
 hero's own photograph already carries the product.
 
-## Custom styling
+### Custom styling
 
 Apply `storefront.css` in full (9,542 of the 10,000 character cap). It is the
 live stylesheet plus the two hero-scrim rules. The scrim rules alone are what
