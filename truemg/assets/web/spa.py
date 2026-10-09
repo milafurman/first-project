@@ -131,7 +131,7 @@ def depth_blur(im, horizon):
     return Image.fromarray(out.clip(0, 255).astype(np.uint8))
 
 
-def relight(v, rim=1.0, blur=0.0):
+def relight(v, rim=1.0, blur=0.0, key=0.78):
     """Light the bottle with the room's light instead of the studio's.
 
     This is the difference between a composite and a collage. The vial PNGs
@@ -164,7 +164,13 @@ def relight(v, rim=1.0, blur=0.0):
     brand = (b_ - r_ > 45) & (b_ - g_ > 25) & (b_ > 90)
     hold = ndimage.gaussian_filter(brand.astype(float), 1.2)[..., None]
 
-    lit = px * 0.78                                        # 1. kill the studio key
+    # `key` is how much of the studio light survives. 0.78 is the hero's
+    # value and the one this function was tuned against: a bottle 200px tall
+    # in a warm room, where anything brighter reads as pasted on. A product
+    # TILE is the opposite brief — the bottle is the subject, not set dressing,
+    # and the same 0.78 leaves the white label reading grey. Tiles pass a
+    # higher value; the hero does not pass one at all, so it cannot drift.
+    lit = px * key                                         # 1. kill the studio key
     lit += (np.array((120, 104, 86), float) - lit) * 0.16  # ambient, warm not grey
 
     # 1b. ACROSS the body, not just at its edge. This was the piece missing
@@ -317,7 +323,7 @@ def mirror(v, h):
     return out
 
 
-def place(scene, name, cx, k, horizon, base, row_x):
+def place(scene, name, cx, k, horizon, base, row_x, key=0.78):
     """One bottle, with its shadow, standing on the row."""
     h = max(8, int(SCALE * (base - horizon)))
 
@@ -329,7 +335,7 @@ def place(scene, name, cx, k, horizon, base, row_x):
     # it is rimmed. Four identically lit bottles is a product sheet; a row lit
     # by one window is a photograph.
     near_window = 1.0 - (cx - row_x[0]) / max(row_x[-1] - row_x[0], 1) 
-    v = relight(v, rim=0.72 + 0.55 * near_window,
+    v = relight(v, rim=0.72 + 0.55 * near_window, key=key,
                 blur=max(0.0, BLUR_MAX * k * 0.05 * (1 - (base - horizon) / 620.0)))
     # take the knife-edge off the cut-out: a real lens has no perfect edge
     av = v.getchannel("A").filter(ImageFilter.GaussianBlur(max(0.6, h * 0.0022)))

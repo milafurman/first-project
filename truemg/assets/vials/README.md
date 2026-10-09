@@ -128,3 +128,40 @@ fired and cannot open to match a new angle — so the cluster stays inside about
 
 These are upload candidates. Products are owner-only; nothing here reaches the
 store without Mila uploading it.
+
+## ledge/ — the product tiles
+
+Mila, on the reference storefront: colour-code only the photo BACKGROUND, and
+stand the vial on the spa ledge. Those are one note. Their product panel is a
+tinted wash with the bottle floating on it and the tint is always the panel,
+never the label — look at their related-products row, six tiles, six different
+pale grounds, six identical cream labels.
+
+`web/ledge.py` builds it. The crop is deliberately tight: counter, the lit
+niche behind it, nothing else. The orchids and the monstera are the best part
+of that plate and have no business in a 240px tile, where they fight the vial
+and neither wins. They stay in the hero.
+
+Order of operations is the part that is not obvious. The plate is graded FIRST
+and the vial placed into it afterwards, so the colour lands on the room and
+never on the white label — the thing Mila explicitly ruled out. It also means
+`spa.relight` still runs against the room it was tuned against.
+
+Two things the first pass got wrong, both fixed:
+
+  * mixing a sage tint into a warm cream room gives OLIVE, because the cream
+    is still in there fighting it. Every family came out a variant of the same
+    khaki. The plate is pulled to its own luminance first, which throws the
+    cream away and keeps the light, and only then colourised.
+  * `spa.relight` kills 22% of the studio key, which is right for a bottle
+    200px tall in a warm hero and wrong for a tile where the bottle IS the
+    subject — it left the white label reading grey. `relight` and `place` now
+    take a `key`, defaulting to the hero's 0.78 so the hero cannot drift.
+
+Soft background, sharp subject: a 330px crop of the plate blown to 1200 is a
+3.6x upscale, but that region is defocused stone and a glow with no detail to
+lose, while the vial composites at full resolution. That is what a real
+product photograph looks like anyway.
+
+Upload candidates. Products are owner-only; nothing here reaches the store
+without Mila uploading it.
