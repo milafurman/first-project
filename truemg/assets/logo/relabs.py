@@ -11,6 +11,9 @@ the run centred under the wordmark.
 import json, os, re, subprocess, sys, tempfile
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
+import json as _json
+_b = _json.load(open("../brand.json"))
+BRAND_HEX, LEGACY = _b["brand"], _b["legacyBrand"]
 WORD_W, WORD_H = 5634, 681
 GROUP_OPEN = re.compile(r'<g transform="translate\(([^)]+)\) scale\(([^)]+)\)">')
 
@@ -39,7 +42,7 @@ LOCKUPS = ["truemg-labs-onink.svg", "truemg-labs-onpaper.svg",
 
 def parse(src):
     """Pull the LABS group out of a lockup: its y, inner transform, and paths."""
-    s = open(src).read()
+    s = normalise_brand(open(src).read())
     m = GROUP_OPEN.search(s)
     end = group_span(s, m)
     inner = s[m.end():end - len('</g>')]
@@ -66,6 +69,20 @@ def measure(tr, paths):
     boxes = json.loads(out)
     order = sorted(range(len(boxes)), key=lambda i: boxes[i]["x"])
     return [paths[i] for i in order], [boxes[i] for i in order]
+
+
+
+def normalise_brand(svg):
+    """Bring any legacy brand blue in traced artwork up to the current one.
+
+    The -onpaper cuts were traced once with the accent baked into their paths,
+    and this script rewrites their letter-spacing while preserving colour — so
+    on a brand-colour change nothing recolours them, and the lockup ends up
+    with a new-blue Gila beside an old-blue MG. Caught exactly that way.
+    """
+    for old in LEGACY:
+        svg = svg.replace(old, BRAND_HEX).replace(old.lower(), BRAND_HEX)
+    return svg
 
 
 def rebuild(src, dst, cap_ratio, tracking_em):
