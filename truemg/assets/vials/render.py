@@ -15,9 +15,13 @@ already-recoloured output and drifted away from the brand blue twice over:
 Both are now mapped onto a ramp built from the brand colour itself, so the
 mid-tone lands exactly on brand and the extremes stay believable.
 
-Run from this directory. The original photographs are fetched into cut/src/ on
-first run from the URLs in manifest.json, because cut/ is gitignored (17 MB of
-source photography) and a fresh clone would otherwise have nothing to render.
+Run from this directory. The original photographs live in cut/src/ and are
+COMMITTED. They used to be gitignored and fetched from the URLs in
+manifest.json on first run, which quietly made the whole visual system depend
+on files that are also the live product images in the store admin — replacing
+those could have taken the masters with them, and nothing could be re-rendered
+again without a reshoot. fetch_sources() stays as a fallback for a file that
+somehow goes missing; it is no longer the normal path.
 """
 import json
 import os
@@ -161,7 +165,13 @@ def render(name, mark):
 
 
 def fetch_sources():
-    """Pull any missing original photograph from the store's CDN."""
+    """Fallback: pull any missing original photograph from the store's CDN.
+
+    Normally a no-op, because cut/src/ is committed. Kept because the URLs are
+    a second copy and cost nothing to keep working — but do not rely on them.
+    They point at the live product images, which are replaceable from the
+    admin, so they can stop resolving without warning.
+    """
     os.makedirs("cut/src", exist_ok=True)
     got = 0
     for e in json.load(open("manifest.json")):
