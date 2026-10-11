@@ -100,6 +100,21 @@ Two things follow, and neither is an agent job:
   run. That is a separate piece of work and it should happen before any
   significant print run.
 
+## cut/src/ — the master photography
+
+Seventeen 2000x2000 photographs: one vial shot once and re-labelled seventeen
+times, confirmed pixel-identical apart from the label. **Everything in this
+project that shows a vial is built from these** — the renders in this folder,
+the ledge product tiles, the floating set, the hand shot, the spa composites,
+the cluster hero.
+
+They are committed. They used to be gitignored and fetched from the store's
+CDN on first run, which made the whole visual system depend on files that are
+simultaneously the live product images in the Lapis admin. Replacing those
+images could have taken the masters with them, and no vial could have been
+re-rendered again — for a colour change, a mark change, a new composite —
+without reshooting. 22MB is cheap against that.
+
 ## float/ — the catalog set, with a shadow
 
 Mila pointed at a competitor's product page: the bottles there look 3D and

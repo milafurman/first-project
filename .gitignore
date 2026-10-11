@@ -6,5 +6,17 @@ PREVIEW-LINK.txt
 *preview-link*
 *.ov.txt
 __pycache__/
-truemg/assets/vials/cut/
+# cut/ holds the vial pipeline's working directories. The intermediates stay
+# out of the repo; the SOURCE PHOTOGRAPHS do not.
+#
+# src/ is the master studio shoot — one vial photographed once and re-labelled
+# seventeen times. Every vial render, every ledge product tile, the floating
+# set, the hand shot and the spa composites are built from it. It used to be
+# ignored and fetched from the store's CDN on demand, which quietly made the
+# whole visual system depend on files that are ALSO the live product images:
+# replacing those in the admin could have taken the masters with them, and
+# nothing could be re-rendered again without a reshoot. 22MB is a cheap
+# insurance premium against that.
+truemg/assets/vials/cut/out/
+truemg/assets/vials/cut/brand/
 truemg/assets/web/hero-media.png
