@@ -1,0 +1,244 @@
+<title>The Gila Mark</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap">
+<style>
+/* Layout: a dark specimen sheet. Each direction gets a full-bleed plate on ink,
+   a paper-ground repeat, and a size ladder down to favicon. */
+:root{
+  --ink:#000; --ink-2:#0A0A0B; --ink-3:#141416;
+  --paper:#FCFBF8;
+  --gold:#D8B46A; --gold-deep:#9C7C34; --gold-soft:#ECD6A0;
+  --fg:#EDEBE6; --fg-2:#C7C4BC; --mut:#8A857D;
+  --line:#23221F; --line-2:#33322D;
+  --display:"Helvetica Neue","Arial Black",Helvetica,Arial,sans-serif;
+  --serif:"Newsreader","Iowan Old Style",Palatino,Georgia,serif;
+  --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ink);color:var(--fg);font-family:var(--display);font-weight:500;
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding-inline:16px;padding-block:0 80px}
+h1,h2,h3{margin:0;text-wrap:balance}
+
+.mast{padding-block:52px 32px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:11px;margin-bottom:20px}
+.eyebrow::before{content:"";width:22px;height:1.5px;background:var(--gold)}
+h1{font-size:clamp(38px,8vw,76px);font-weight:900;letter-spacing:-.045em;line-height:.93}
+h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--gold-soft);letter-spacing:-.01em}
+.mast p{font-family:var(--serif);font-size:19px;line-height:1.55;color:var(--fg-2);max-width:56ch;margin:16px 0 0}
+.mast p b{color:var(--fg);font-weight:500}
+
+.story{margin-top:30px;padding:20px 22px;border:1px solid var(--line);border-left:2px solid var(--gold);
+  background:var(--ink-2);border-radius:0 10px 10px 0}
+.story .k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:9px}
+.story p{font-family:var(--serif);font-size:16.5px;line-height:1.6;color:var(--fg-2);max-width:62ch;margin:0}
+.story p + p{margin-top:9px}
+.story b{color:var(--fg);font-weight:500}
+
+section{padding-block:56px;border-top:1px solid var(--line)}
+.lbl{display:flex;align-items:baseline;gap:13px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.lbl .n{color:var(--gold-deep);flex:none}
+.lbl .dash{flex:1;height:1px;background:var(--line);align-self:center}
+h2{font-size:clamp(25px,4.2vw,36px);font-weight:900;letter-spacing:-.03em;line-height:1.02}
+h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--gold-soft)}
+.note{font-family:var(--serif);font-size:16.5px;line-height:1.6;color:var(--fg-2);max-width:60ch;margin:13px 0 0}
+.note b{color:var(--fg);font-weight:500}
+
+.plates{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);
+  border:1px solid var(--line);margin-top:26px}
+@media (max-width:560px){.plates{grid-template-columns:1fr}}
+.plate{display:grid;place-items:center;padding:40px 20px;min-height:220px}
+.plate.on-ink{background:var(--ink-2)}
+.plate.on-paper{background:var(--paper)}
+.plate svg{width:138px;height:138px;display:block}
+
+.ladder{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap;margin-top:20px;
+  padding:22px;border:1px solid var(--line);background:var(--ink-2)}
+.rung{display:flex;flex-direction:column;align-items:center;gap:8px}
+.rung .cap{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--mut)}
+
+.lockup{margin-top:20px;padding:30px 24px;border:1px solid var(--line);background:var(--ink-2);
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.lockup svg{flex:none}
+.wordmark{font-family:var(--display);font-weight:900;font-size:clamp(30px,5.4vw,52px);
+  letter-spacing:-.045em;line-height:1;color:var(--fg)}
+.wordmark .mg{color:var(--gold)}
+.tagline{font-family:var(--display);font-weight:900;font-size:17px;letter-spacing:-.03em;
+  color:var(--fg);margin-top:9px}
+.tagline em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--gold-soft);letter-spacing:0}
+
+.verdict{margin-top:40px;padding:22px 24px;border:1px solid var(--gold-deep);background:var(--ink-2);border-radius:12px}
+.verdict .k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold-soft);margin-bottom:10px}
+.verdict p{font-family:var(--serif);font-size:17px;line-height:1.6;color:var(--fg-2);max-width:64ch;margin:0}
+.verdict p b{color:var(--fg);font-weight:500}
+footer{padding-top:44px;border-top:1px solid var(--line);margin-top:56px;font-family:var(--mono);
+  font-size:11px;color:var(--mut);line-height:1.7}
+footer b{color:var(--gold-soft);font-weight:600}
+</style>
+
+<!-- ============ reusable mark geometry ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="gila-body">
+      <ellipse cx="50" cy="15.4" rx="11.2" ry="9.2"/>
+      <ellipse cx="50" cy="24.6" rx="6.6"  ry="5.2"/>
+      <ellipse cx="50" cy="40.4" rx="13.2" ry="16.4"/>
+      <ellipse cx="50" cy="54.6" rx="11.8" ry="9.6"/>
+      <path d="M50 49 C57.4 49 60.6 55.6 60.2 65 C59.8 74.6 57.4 85 55.2 91.4 C54.2 94.6 52.4 96.2 50 96.2 C47.6 96.2 45.8 94.6 44.8 91.4 C42.6 85 40.2 74.6 39.8 65 C39.4 55.6 42.6 49 50 49 Z"/>
+    </g>
+    <g id="gila-legs" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke-width="5" d="M38 32 L27 35.4 L21.4 43.4"/>
+      <path stroke-width="2.6" d="M21.4 43.4 L16 47"/><path stroke-width="2.6" d="M21.4 43.4 L18 50.5"/><path stroke-width="2.6" d="M21.4 43.4 L22.5 51.5"/>
+      <path stroke-width="5" d="M62 32 L73 35.4 L78.6 43.4"/>
+      <path stroke-width="2.6" d="M78.6 43.4 L84 47"/><path stroke-width="2.6" d="M78.6 43.4 L82 50.5"/><path stroke-width="2.6" d="M78.6 43.4 L77.5 51.5"/>
+      <path stroke-width="5" d="M38.4 55 L27.4 59.4 L22.6 68.4"/>
+      <path stroke-width="2.6" d="M22.6 68.4 L17 72.5"/><path stroke-width="2.6" d="M22.6 68.4 L19.5 76.5"/><path stroke-width="2.6" d="M22.6 68.4 L24 77.5"/>
+      <path stroke-width="5" d="M61.6 55 L72.6 59.4 L77.4 68.4"/>
+      <path stroke-width="2.6" d="M77.4 68.4 L83 72.5"/><path stroke-width="2.6" d="M77.4 68.4 L80.5 76.5"/><path stroke-width="2.6" d="M77.4 68.4 L76 77.5"/>
+    </g>
+    <clipPath id="clip-gila" clipPathUnits="userSpaceOnUse">
+      <ellipse cx="50" cy="15.4" rx="11.2" ry="9.2"/>
+      <ellipse cx="50" cy="24.6" rx="6.6"  ry="5.2"/>
+      <ellipse cx="50" cy="40.4" rx="13.2" ry="16.4"/>
+      <ellipse cx="50" cy="54.6" rx="11.8" ry="9.6"/>
+      <path d="M50 49 C57.4 49 60.6 55.6 60.2 65 C59.8 74.6 57.4 85 55.2 91.4 C54.2 94.6 52.4 96.2 50 96.2 C47.6 96.2 45.8 94.6 44.8 91.4 C42.6 85 40.2 74.6 39.8 65 C39.4 55.6 42.6 49 50 49 Z"/>
+    </clipPath>
+    <pattern id="beads-ink" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="2.6" cy="2.6" r="2.1" fill="#000"/><circle cx="7.6" cy="7.6" r="2.1" fill="#000"/>
+    </pattern>
+    <pattern id="beads-paper" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="2.6" cy="2.6" r="2.1" fill="#FCFBF8"/><circle cx="7.6" cy="7.6" r="2.1" fill="#FCFBF8"/>
+    </pattern>
+    <g id="gila-bands">
+      <path d="M41 12.4 Q50 9.8 59 12.4 L59 17 Q50 14.4 41 17 Z"/>
+      <path d="M36 30 Q50 25.6 64 30 L64 35.6 Q50 31.2 36 35.6 Z"/>
+      <path d="M36.5 42 Q50 37.6 63.5 42 L63.5 47.6 Q50 43.2 36.5 47.6 Z"/>
+      <path d="M38 54 Q50 50 62 54 L62 59.6 Q50 55.6 38 59.6 Z"/>
+      <path d="M42.5 68 Q50 65.2 57.5 68 L57 73.4 Q50 70.6 43 73.4 Z"/>
+      <path d="M45 81 Q50 79 55 81 L54.4 86 Q50 84 45.6 86 Z"/>
+    </g>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="eyebrow">Mark exploration · three directions</p>
+  <h1>The Gila<br><em>Mark.</em></h1>
+  <p>Only one thing survives from the old logo, and it was never a seahorse. It is a <b>Gila monster</b> — and it is the single most defensible idea this brand owns.</p>
+
+  <div class="story">
+    <div class="k">Why the lizard earns its place</div>
+    <p>In 1992 a Bronx VA endocrinologist named <b>John Eng</b> isolated a peptide from Gila monster venom and called it <b>exendin-4</b>. Human GLP-1 falls apart in the blood in about two minutes, which made it useless. The lizard's version lasted hours.</p>
+    <p>The reason is the animal itself. A Gila monster <b>eats only a few times a year</b>, so it evolved a hormone patient enough to wring every calorie out of a rare meal. The VA declined to patent the finding. Eng patented it himself, licensed it, and in 2005 it reached the market as Byetta. <b>Every GLP-1 since descends from that lizard.</b></p>
+    <p>So the mark is not decoration and not a mascot. It is a citation.</p>
+  </div>
+</header>
+
+<section>
+  <div class="lbl"><span class="n">A</span><span>The beaded silhouette</span><span class="dash"></span><span>Recommended</span></div>
+  <h2>The skin <em>is</em> the mark.</h2>
+  <p class="note">Top-down silhouette in flat gold, with the tubercular scales knocked out as negative space. A Gila monster is a <b>beaded lizard</b> — the texture is the identifying feature, so the texture does the identifying. Survives to 16px, reads at a glance, one colour, no gradient. Gold once per view, exactly as the system says.</p>
+  <div class="plates">
+    <div class="plate on-ink"><svg viewBox="0 0 100 100" role="img" aria-label="TrueMG Gila monster mark, gold on ink">
+      <use href="#gila-body" fill="#D8B46A"/><use href="#gila-legs" stroke="#D8B46A"/>
+      <g clip-path="url(#clip-gila)"><rect width="100" height="100" fill="url(#beads-ink)"/></g>
+      <circle cx="44.8" cy="13.2" r="1.8" fill="#000"/><circle cx="55.2" cy="13.2" r="1.8" fill="#000"/>
+    </svg></div>
+    <div class="plate on-paper"><svg viewBox="0 0 100 100" role="img" aria-label="TrueMG Gila monster mark, ink on paper">
+      <use href="#gila-body" fill="#0A0A0B"/><use href="#gila-legs" stroke="#0A0A0B"/>
+      <g clip-path="url(#clip-gila)"><rect width="100" height="100" fill="url(#beads-paper)"/></g>
+      <circle cx="44.8" cy="13.2" r="1.8" fill="#FCFBF8"/><circle cx="55.2" cy="13.2" r="1.8" fill="#FCFBF8"/>
+    </svg></div>
+  </div>
+  <div class="ladder">
+    <div class="rung"><svg viewBox="0 0 100 100" width="76" height="76" aria-hidden="true"><use href="#gila-body" fill="#D8B46A"/><use href="#gila-legs" stroke="#D8B46A"/><g clip-path="url(#clip-gila)"><rect width="100" height="100" fill="url(#beads-ink)"/></g></svg><span class="cap">76 · nav</span></div>
+    <div class="rung"><svg viewBox="0 0 100 100" width="44" height="44" aria-hidden="true"><use href="#gila-body" fill="#D8B46A"/><use href="#gila-legs" stroke="#D8B46A"/><g clip-path="url(#clip-gila)"><rect width="100" height="100" fill="url(#beads-ink)"/></g></svg><span class="cap">44 · header</span></div>
+    <div class="rung"><svg viewBox="0 0 100 100" width="28" height="28" aria-hidden="true"><use href="#gila-body" fill="#D8B46A"/><use href="#gila-legs" stroke="#D8B46A"/><g clip-path="url(#clip-gila)"><rect width="100" height="100" fill="url(#beads-ink)"/></g></svg><span class="cap">28 · inline</span></div>
+    <div class="rung"><svg viewBox="0 0 100 100" width="16" height="16" aria-hidden="true"><use href="#gila-body" fill="#D8B46A"/><use href="#gila-legs" stroke="#D8B46A"/></svg><span class="cap">16 · favicon</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="lbl"><span class="n">B</span><span>The banded specimen</span><span class="dash"></span><span>Most editorial</span></div>
+  <h2>Drawn like a <em>field plate.</em></h2>
+  <p class="note">The same animal carrying its real blotched cross-banding instead of the bead texture. Closer to a scientific illustration than to a logo, which suits a company whose entire pitch is documentation. <b>Costs you legibility below about 28px</b> — the bands close up and it turns into a blob. Would need the silhouette as its small-size fallback.</p>
+  <div class="plates">
+    <div class="plate on-ink"><svg viewBox="0 0 100 100" role="img" aria-label="Gila monster mark with banding, gold on ink">
+      <use href="#gila-body" fill="#D8B46A"/><use href="#gila-legs" stroke="#D8B46A"/>
+      <g clip-path="url(#clip-gila)"><use href="#gila-bands" fill="#000"/></g>
+      <circle cx="44.8" cy="13.2" r="1.8" fill="#000"/><circle cx="55.2" cy="13.2" r="1.8" fill="#000"/>
+    </svg></div>
+    <div class="plate on-paper"><svg viewBox="0 0 100 100" role="img" aria-label="Gila monster mark with banding, ink on paper">
+      <use href="#gila-body" fill="#0A0A0B"/><use href="#gila-legs" stroke="#0A0A0B"/>
+      <g clip-path="url(#clip-gila)"><use href="#gila-bands" fill="#FCFBF8"/></g>
+      <circle cx="44.8" cy="13.2" r="1.8" fill="#FCFBF8"/><circle cx="55.2" cy="13.2" r="1.8" fill="#FCFBF8"/>
+    </svg></div>
+  </div>
+</section>
+
+<section>
+  <div class="lbl"><span class="n">C</span><span>The seal</span><span class="dash"></span><span>Best on a label</span></div>
+  <h2>A stamp of <em>record.</em></h2>
+  <p class="note">The silhouette inside a hairline ring carrying the citation: <b>exendin-4 · 1992</b>. It reads as a certification seal, which is precisely the thing this company sells — the named lab, the printed lot, the attached COA. Strongest use is on the vial label and beside the certificate block, not in the header.</p>
+  <div class="plates">
+    <div class="plate on-ink"><svg viewBox="0 0 120 120" role="img" aria-label="TrueMG seal mark, gold on ink">
+      <circle cx="60" cy="60" r="57" fill="none" stroke="#9C7C34" stroke-width="1"/>
+      <circle cx="60" cy="60" r="51.5" fill="none" stroke="#D8B46A" stroke-width="2"/>
+      <g transform="translate(60 60) scale(.68) translate(-50 -50)">
+        <use href="#gila-body" fill="#D8B46A"/><use href="#gila-legs" stroke="#D8B46A"/>
+        <g clip-path="url(#clip-gila)"><rect width="100" height="100" fill="url(#beads-ink)"/></g>
+      </g>
+      <path id="arc-i" d="M60 103 m-33 0 a33 33 0 0 0 66 0" fill="none"/>
+      <text font-family="SF Mono, Menlo, monospace" font-size="7.2" fill="#ECD6A0" letter-spacing="2.4">
+        <textPath href="#arc-i" startOffset="50%" text-anchor="middle">EXENDIN-4 · 1992</textPath>
+      </text>
+    </svg></div>
+    <div class="plate on-paper"><svg viewBox="0 0 120 120" role="img" aria-label="TrueMG seal mark, ink on paper">
+      <circle cx="60" cy="60" r="57" fill="none" stroke="#9C7C34" stroke-width="1"/>
+      <circle cx="60" cy="60" r="51.5" fill="none" stroke="#0A0A0B" stroke-width="2"/>
+      <g transform="translate(60 60) scale(.68) translate(-50 -50)">
+        <use href="#gila-body" fill="#0A0A0B"/><use href="#gila-legs" stroke="#0A0A0B"/>
+        <g clip-path="url(#clip-gila)"><rect width="100" height="100" fill="url(#beads-paper)"/></g>
+      </g>
+      <path id="arc-p" d="M60 103 m-33 0 a33 33 0 0 0 66 0" fill="none"/>
+      <text font-family="SF Mono, Menlo, monospace" font-size="7.2" fill="#9C7C34" letter-spacing="2.4">
+        <textPath href="#arc-p" startOffset="50%" text-anchor="middle">EXENDIN-4 · 1992</textPath>
+      </text>
+    </svg></div>
+  </div>
+</section>
+
+<section>
+  <div class="lbl"><span class="n">D</span><span>The lockup</span><span class="dash"></span><span>Mark + wordmark</span></div>
+  <h2>With the line it <em>deserves.</em></h2>
+  <p class="note">Heavy grotesk at weight 900, tracking tightened to −0.045em, gold carried by the <b>MG</b> alone so the accent still appears once. The tagline is already written — it is sitting in your own brand doc.</p>
+  <div class="lockup">
+    <svg viewBox="0 0 100 100" width="70" height="70" aria-hidden="true">
+      <use href="#gila-body" fill="#D8B46A"/><use href="#gila-legs" stroke="#D8B46A"/>
+      <g clip-path="url(#clip-gila)"><rect width="100" height="100" fill="url(#beads-ink)"/></g>
+    </svg>
+    <div>
+      <div class="wordmark">TRUE<span class="mg">MG</span></div>
+      <div class="tagline">TRUE <em>to the</em> MILLIGRAM.</div>
+    </div>
+  </div>
+</section>
+
+<div class="verdict">
+  <div class="k">My call</div>
+  <p><b>Direction A for the brand, C on the vial label.</b> A is the only one that holds at favicon size, and a store header needs a mark that survives being small. C is wasted in a header and excellent next to a certificate — it turns the citation into the packaging. B is the most beautiful and the least practical; keep it for the About page, printed large, where it can breathe.</p>
+  <p style="margin-top:10px">These are vector, so nothing here is a mock-up — whichever you pick ships as-is at any size, and recolours to any token in the system.</p>
+</div>
+
+<footer>
+  <b>Palette:</b> ink #000000 · gold #D8B46A · gold deep #9C7C34 · gold soft #ECD6A0 · paper #FCFBF8<br>
+  <b>Source of the story:</b> Eng, J. — exendin-4 isolated from <i>Heloderma suspectum</i> venom, 1992; exenatide (Byetta) marketed 2005.<br>
+  <b>Not on the storefront:</b> the lizard is brand provenance, never a product claim. No page may connect this history to what any compound does in a person.
+</footer>
+
+</div>

@@ -1,0 +1,17 @@
+{
+  "_": "The single source of truth for TrueMG's colours. Every generator in this tree reads it; nothing hardcodes a hex. Change it here, re-run the generators, done.",
+  "brand": "#1C8CD0",
+  "brandDeep": "#0F547E",
+  "ink": "#0A0A0B",
+  "paper": "#FCFBF8",
+  "legacyBrand": [
+    "#2365CD",
+    "#2866CD",
+    "#2560C1"
+  ],
+  "_legacyBrand": "Brand blues this project has used before. Some artwork \u2014 the -onpaper wordmark and LABS cuts \u2014 was traced ONCE with the accent baked into the paths, and relabs.py rewrites their letter-spacing while preserving colour, so nothing recolours them on a rebuild. The generators normalise any hex in this list to `brand`. Append to it, never remove: dropping one silently resurrects a two-colour logo. #2866CD was an invented value wrongly recorded as approved; #2560C1 was #2365CD mangled by an old multiply-based recolour.",
+  "_brand": "Measured off Mila's actual flip-off caps, 11 Oct 2026. Two independent sources agreed: a bulk-bag photo gave #0A89C6, and a 7-second video of one cap in hand gave #1C8CD0 across 15 face-on frames (spread R\u00b116 G\u00b116 B\u00b122). The video wins because the cap's own white plastic sits beside the blue band, which allows a LOCAL white balance rather than a guess at the room. The physical stock is the authority here, not any file.",
+  "_brandDeep": "Derived from brand, not invented: the old pair (#2365CD / #13387C) sat at a lightness ratio of 0.596 and a saturation ratio of 1.037, and those ratios are carried over.",
+  "_previous": "#2365CD was the brand until 11 Oct 2026. It was sampled from the Canva label artwork and was never wrong for what it was \u2014 it simply predated the caps existing. It reads violet beside the real stock.",
+  "_warning": "Anodised aluminium has no single colour: the band runs bright cyan where it catches the light and deep blue where it does not. #1C8CD0 is the mid-tone, which is what a brand colour should be. If the cap supplier provides a standard colour reference, that beats this measurement and should replace it."
+}

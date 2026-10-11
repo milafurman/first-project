@@ -1,0 +1,10 @@
+
+# Lapis preview links encode the whole storefront config in the URL, including
+# comingSoonEnabled. A committed one is a public bypass of the coming-soon page,
+# and this repository is public. Previews get handed over in chat, never here.
+PREVIEW-LINK.txt
+*preview-link*
+*.ov.txt
+__pycache__/
+truemg/assets/vials/cut/
+truemg/assets/web/hero-media.png
