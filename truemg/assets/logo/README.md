@@ -32,7 +32,7 @@ one.
 **Mila picked the FIRST — the spiky one — on 2026-10-09**, and because no vials
 had been printed yet the label artwork moved with it rather than diverging from
 it. `../marks/mark-original.png` is the master. The smooth drawing is kept at
-`../vials/mark-2365CD.png` as the record of what the labels used to carry.
+`../_archive/smooth-mark/` as the record of what the labels used to carry.
 
 > An earlier version of this file said the second drawing was the master and
 > the storefront favicon had been changed to match. That was true for two days.

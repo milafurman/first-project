@@ -95,10 +95,17 @@ def rebuild(src, dst, cap_ratio, tracking_em):
     return width
 
 
+# The values LABS actually ships at. They lived only in a commit message, which
+# meant the wordmark could not be rebuilt without going digging — the same
+# shape of problem as a hand-made PNG that nothing can regenerate. Defaults now,
+# still overridable from the command line for tuning.
+CAP, TRACKING = 0.38, 0.65          # cap height, and tracking in em
+
 if __name__ == "__main__":
-    cap, trk = float(sys.argv[1]), float(sys.argv[2])
-    targets = LOCKUPS if "--all" in sys.argv[3:] else ["truemg-labs-onpaper.svg"]
+    cap = float(sys.argv[1]) if len(sys.argv) > 1 and sys.argv[1] != "--all" else CAP
+    trk = float(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2] != "--all" else TRACKING
+    targets = LOCKUPS if "--all" in sys.argv[1:] else ["truemg-labs-onpaper.svg"]
     for f in targets:
-        dst = sys.argv[3] if targets == ["truemg-labs-onpaper.svg"] and len(sys.argv) > 3 else f
+        dst = f
         w = rebuild(f, dst, cap, trk)
         print("  %-36s LABS %.0f (%.0f%% of wordmark)" % (dst, w, 100 * w / WORD_W))

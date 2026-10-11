@@ -1,19 +1,36 @@
-# Gila mark — candidates
+# The Gila mark
+
+**`mark-original.png` is the master.** Everything in this project that carries
+the Gila traces from this one file — the vector mark, the lockups, the
+favicon, and the artwork stamped on all seventeen vial labels. It is the
+spiky-crest drawing with the feathered mane.
+
+There is exactly one mark drawing loose in this tree, on purpose. For a day in
+October there were two, and the storefront ended up showing one animal while
+the product showed another.
+
+The eight candidates from the round that chose it are in
+`../_archive/rejected-marks/`, with the reads on each. The current mark is the
+end of the "stencil" branch in that set rather than a rejection of it.
+
+---
+
+## Original candidate notes, kept for the record
 
 Three head marks, gold on ink. Canva media ids are in the owner's own library.
 
 | File | Canva id | Read |
 |---|---|---|
-| `profile.jpg` | `MAHXNS2q76U` | Lean profile. Handsome, but the long snout reads monitor lizard |
-| `blunt.jpg` | `MAHXNXwf8cQ` | **Recommended.** Short blunt snout, deep jaw — reads Gila |
-| `dorsal.jpg` | `MAHXNcm_TMI` | Top-down. Symmetrical and striking, but reads as a mask, and the eyes disappear |
-| `regal-head.jpg` | `MAHXNfELBio` | Heraldic bust. Chin lifted, crest ridge of larger beads along the skull, jewelled goldwork |
-| `regal-coin.jpg` | `MAHXNfEzB7I` | **Recommended.** The bust struck on a coin, double hairline rim |
+| `_archive/rejected-marks/profile.jpg` | `MAHXNS2q76U` | Lean profile. Handsome, but the long snout reads monitor lizard |
+| `_archive/rejected-marks/blunt.jpg` | `MAHXNXwf8cQ` | **Recommended.** Short blunt snout, deep jaw — reads Gila |
+| `_archive/rejected-marks/dorsal.jpg` | `MAHXNcm_TMI` | Top-down. Symmetrical and striking, but reads as a mask, and the eyes disappear |
+| `_archive/rejected-marks/regal-head.jpg` | `MAHXNfELBio` | Heraldic bust. Chin lifted, crest ridge of larger beads along the skull, jewelled goldwork |
+| `_archive/rejected-marks/regal-coin.jpg` | `MAHXNfEzB7I` | **Recommended.** The bust struck on a coin, double hairline rim |
 
-`regal-sheet.jpg` compares the regal pair against the flat mark, with the size
+`_archive/rejected-marks/regal-sheet.jpg` compares the regal pair against the flat mark, with the size
 ladder and the one-colour reduction.
 
-`marks-sheet.jpg` is the comparison, including the size ladder and the mark on paper.
+`_archive/rejected-marks/marks-sheet.jpg` is the comparison, including the size ladder and the mark on paper.
 
 ## What was tried first, and why it failed
 Hand-authored SVG, three rounds. A full-body top-down lizard read as a newt; a

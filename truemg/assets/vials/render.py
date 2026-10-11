@@ -41,8 +41,8 @@ PAPER = np.array([246, 246, 247], float)      # the label stock
 # spiky crest with the feathered mane — and no vials had been printed yet, so
 # the label artwork moves with the brand rather than diverging from it. The two
 # drawings overlap only 53% as silhouettes, so this is a real change, not a
-# re-export. mark-2365CD.png (the smooth drawing) stays in the tree as the
-# record of what the labels used to carry.
+# re-export. The smooth drawing is archived at ../_archive/smooth-mark/ as
+# the record of what the labels used to carry.
 MARK = "mark-og.png"
 
 

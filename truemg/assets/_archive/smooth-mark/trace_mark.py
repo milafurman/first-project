@@ -1,4 +1,11 @@
-"""SUPERSEDED by trace_original.py. Kept runnable, for the record.
+"""ARCHIVED 11 Oct 2026 — superseded by ../../logo/trace_original.py.
+
+Mila went back to the ORIGINAL spiky-crest drawing. This traced the SMOOTH
+one, which was the mark on the labels until then. Kept as the record of
+what the labels used to carry; it will not run from the live tree and is
+not meant to.
+
+SUPERSEDED by trace_original.py. Kept runnable, for the record.
 
 Mila has gone back to the ORIGINAL Gila — the spiky crest with the feathered
 mane — and no vials had been printed yet, so the label artwork moved with the
@@ -17,7 +24,7 @@ vials and in the Canva label pages: a smoother head with bolder strokes and a
 heavier ring. Measured as silhouettes they overlap only 53%, so they are not
 two exports of one drawing, they are two drawings.
 
-Mila picked the vial one. `../vials/mark-2365CD.png` is therefore the master
+Mila picked the vial one. `mark-2365CD.png` (beside this file) is therefore the master
 here: it is what is printed on the product, it has a real alpha channel, and
 97% of its opaque pixels are a single colour, so the trace is taken from a
 clean edge rather than from a JPEG-ish blue-vs-grey threshold.
@@ -36,7 +43,7 @@ from PIL import Image
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
 
-MASTER = "../vials/mark-2365CD.png"
+MASTER = "mark-2365CD.png"
 # Upsample the master's ANTI-ALIASED alpha and threshold after, never the other
 # way round. Enlarging an already-hard-edged mask just magnifies its staircase,
 # and potrace then spends hundreds of segments tracing the steps: that route gave
