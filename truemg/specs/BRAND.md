@@ -65,7 +65,8 @@ claim about a body.
 
 | | |
 |---|---|
-| **Accent** | **`#2365CD`** — the brand blue, sampled from the TRUEMG Labels artwork in Canva, where it is the literal fill on the product-name text. Not teal, not gold |
+| **Accent** | **`#1C8CD0`** — the brand blue, MEASURED OFF THE PHYSICAL FLIP-OFF CAPS (11 Oct 2026). Not teal, not gold, and no longer violet. See below |
+| **Accent, deep** | `#0F547E` — derived from the accent at the lightness and saturation ratios the previous pair used; for gradients under the accent |
 | **Ground** | White |
 | **Slogan** | **Research · Purity · Precision** |
 | **Banned word** | **"Performance."** It is a claim word and it never ships, anywhere |
@@ -136,3 +137,41 @@ The published logo is dark artwork, so on black "TRUE" vanishes and the old blue
 The Peptide Files is a private reference document containing dosing tables,
 reconstitution maths and cycling protocols. **None of that content goes near the
 storefront.** Take the visual system. Leave the contents.
+
+
+## The accent moved, 11 Oct 2026: `#2365CD` → `#1C8CD0`
+
+`#2365CD` was sampled from the Canva label artwork and was correct for what it
+was. It simply predated the caps existing. Once the crimps were manufactured
+the physical object became the authority, and beside a real cap `#2365CD`
+reads violet.
+
+Measured twice, from two independent sources, which is the only reason to
+trust it:
+
+| source | method | result |
+|---|---|---|
+| photo of a bulk bag | white-balanced on the cap tops, exposure-corrected, haze subtracted | `#0A89C6` |
+| 7s video of one cap in hand | per-frame local white balance off the cap's own white skirt, 15 face-on frames | `#1C8CD0` |
+
+The video wins. The cap's white plastic sits directly beside the blue band, so
+the white balance is taken from the same surface at the same angle in the same
+light rather than guessed at from the room. Spread across the 15 frames was
+R±16 G±16 B±22.
+
+Anodised aluminium has no single colour — the band runs bright cyan where it
+catches the light and deep blue where it does not. `#1C8CD0` is the mid-tone,
+which is what a brand colour should be.
+
+**If the cap supplier provides a standard colour reference, it beats this
+measurement.** These ship in standard colours with a code; one email replaces a
+photographic estimate with the manufacturer's own number.
+
+### Where the colour lives
+
+`assets/brand.json`, and nowhere else. Every generator in the tree reads it —
+the vial renderer, the mark tracer, the lockup builder, the favicon builder,
+the print-label artwork, the cap sheets, the foil spec, the hand composite.
+Changing the colour is one edit plus a re-run. Before this it was thirteen
+hardcoded copies across the tree, which is precisely how two different Gila
+drawings were loose in the project at the same time.

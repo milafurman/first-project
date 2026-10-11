@@ -29,8 +29,10 @@ from PIL import Image, ImageFilter
 import cutout
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
+import json
+BRAND_HEX = json.load(open("../brand.json"))["brand"]   # one source of truth
 
-BRAND = np.array([0x23, 0x65, 0xCD], float)   # #2365CD, sampled from the Canva labels
+BRAND = np.array([int(BRAND_HEX[i:i + 2], 16) for i in (1, 3, 5)], float)
 LIZARD_BOX = (725, 1185, 950, 1420)           # old mark on the 2000px label, measured
 CRIMP = (0.085, 0.170)                        # aluminium band, as a fraction of height
 PAPER = np.array([246, 246, 247], float)      # the label stock
@@ -41,7 +43,7 @@ PAPER = np.array([246, 246, 247], float)      # the label stock
 # drawings overlap only 53% as silhouettes, so this is a real change, not a
 # re-export. mark-2365CD.png (the smooth drawing) stays in the tree as the
 # record of what the labels used to carry.
-MARK = "mark-og-2365CD.png"
+MARK = "mark-og.png"
 
 
 def blue_mask(rgb):

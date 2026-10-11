@@ -2,6 +2,8 @@
 import os, re, json, html, shutil
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
+import json
+BRAND_HEX = json.load(open("../brand.json"))["brand"]   # one source of truth
 
 # ---- geometry (mm). CONFIRM WITH THE LABEL PRINTER BEFORE ANY RUN. ----
 TRIM_W, TRIM_H = 60.0, 30.0     # finished label
@@ -19,7 +21,7 @@ PALETTES = {
  # The brand blue. Sampled from the TRUEMG Labels artwork in Canva, where it is
  # the literal fill on the product-name text. An earlier value here, #2866CD, was
  # invented and wrongly annotated as confirmed by Mila; it never was.
- "paper-blue": dict(bg="#FCFBF8", fg="#0A0A0B", accent="#2365CD", muted="#6E6A63", lock="onpaper"),
+ "paper-blue": dict(bg="#FCFBF8", fg="#0A0A0B", accent=BRAND_HEX, muted="#6E6A63", lock="onpaper"),
  "paper-teal": dict(bg="#FCFBF8", fg="#0A0A0B", accent="#0E7A8C", muted="#6E6A63", lock="onpaper"),
  "ink-blue":   dict(bg="#0A0A0B", fg="#FCFBF8", accent="#4289EB", muted="#9A948A", lock="onink"),
  # Gold on paper. #9C7C34 is the brand book's "accent on paper" and measures 3.80:1

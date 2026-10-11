@@ -4,10 +4,12 @@ Real vector. Every file here is SVG with live paths, not a traced-looking raster
 in an SVG wrapper. Scales to any size, recolours by editing one attribute, and
 foil-stamps, embosses and screen-prints because it is flat and single-colour.
 
-**The brand colour is `#2365CD`.** It is sampled from the TRUEMG Labels artwork
+**The brand colour is `#1C8CD0`**, and it lives in `../brand.json`, not here.
+It is measured off the physical flip-off caps; see `specs/BRAND.md`. It replaced
+`#2365CD`, which was sampled from the TRUEMG Labels artwork
 in Canva, where it is the literal fill on the product-name text, so the printed
 label and everything here are the same blue by construction. On a dark ground
-the accent lightens to `#65A0F5`, because `#2365CD` on near-black does not hold.
+the accent lightens to `#65A0F5`, because a mid-tone blue on near-black does not hold.
 
 > An earlier version of this file described a **gold** palette (`#D8B46A` /
 > `#9C7C34`) as the brand and said "the blue is gone". That was true for about
@@ -39,7 +41,7 @@ it. `../marks/mark-original.png` is the master. The smooth drawing is kept at
 
 | File | Fill | Use |
 |---|---|---|
-| `truemg-mark-brand.svg` | `#2365CD` | The default |
+| `truemg-mark-brand.svg` | the brand blue from `brand.json` | The default |
 | `truemg-mark-ink.svg` | `#0A0A0B` | On paper, and for foil, emboss or one-colour print |
 | `truemg-mark-paper.svg` | `#FCFBF8` | Knocked out of a dark photograph |
 | `truemg-mark-current.svg` | `currentColor` | For CSS — inherits from its container |
@@ -86,7 +88,7 @@ are preserved exactly.
 | File | Use |
 |---|---|
 | `truemg-wordmark-onink.svg` | TRUE in `#EDEBE6`, MG in `#65A0F5` |
-| `truemg-wordmark-onpaper.svg` | TRUE in `#0A0A0B`, MG in `#2365CD` |
+| `truemg-wordmark-onpaper.svg` | TRUE in `#0A0A0B`, MG in the brand blue |
 | `truemg-wordmark-ink.svg` / `-paper.svg` / `-current.svg` | Single colour, for stamping and CSS |
 
 `_source-wordmark.png` is the original, kept for reference.
@@ -105,7 +107,7 @@ for screen today.
 | File | Use |
 |---|---|
 | `truemg-labs-onink.svg` | TRUE paper, MG `#65A0F5`, hairline, LABS tracked to the full wordmark width |
-| `truemg-labs-onpaper.svg` | The same on a light ground, MG `#2365CD` |
+| `truemg-labs-onpaper.svg` | The same on a light ground, MG in the brand blue |
 | `truemg-labs-compact-onink.svg` / `-onpaper.svg` | Tighter tracking, no rule. **Use below ~200px** and on the vial label |
 | `truemg-labs-ink.svg` / `-paper.svg` | One colour, for foil, embossing and single-colour print |
 

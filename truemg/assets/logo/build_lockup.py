@@ -7,8 +7,10 @@ public repository and swapped in with CSS `content: url(...)`.
 import os, re, shutil, subprocess
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
+import json
+BRAND_HEX = json.load(open("../brand.json"))["brand"]   # one source of truth
 
-INK, BLUE = "#0A0A0B", "#2365CD"
+INK, BLUE = "#0A0A0B", BRAND_HEX
 
 def inner(path):
     """Everything between the <svg> wrapper, plus the viewBox."""

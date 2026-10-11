@@ -15,11 +15,13 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
+import json
+BRAND_HEX = json.load(open("../brand.json"))["brand"]   # one source of truth
 
 SRC = "tmg-nad.png"
 CRIMP = (0.085, 0.170)      # the band, as a fraction of the subject's height
 SEAL_BOTTOM = 0.178         # just below the skirt, where the glass shoulder starts
-BRAND = "#2365CD"
+BRAND = BRAND_HEX
 
 
 def subject_box(a):

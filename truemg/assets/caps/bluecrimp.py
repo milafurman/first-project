@@ -28,7 +28,10 @@ def recolour(im, band, target):
     return Image.fromarray(a.clip(0, 255).astype(np.uint8), "RGBA")
 
 os.makedirs("blue", exist_ok=True)
-files = sorted(glob.glob("cut/brand/tmg-*.png"))
+# The old rebrand pipeline wrote cut/brand/, which render.py replaced and
+# which is gitignored anyway, so this pointed at nothing in a fresh clone.
+# The live renders are the right source and are in the repo.
+files = sorted(glob.glob("../vials/tmg-*.png"))
 for f in files:
     recolour(Image.open(f).convert("RGBA"), CRIMP, BLUE).save("blue/" + os.path.basename(f))
 print("recoloured", len(files))

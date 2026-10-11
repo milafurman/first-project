@@ -2,8 +2,13 @@
 import numpy as np, colorsys, os
 from PIL import Image
 D=os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
+import json
+BRAND_HEX = json.load(open("../brand.json"))["brand"]   # one source of truth
 
-SRC = "cut/brand/tmg-ghk-cu.png"
+# The old rebrand pipeline wrote cut/brand/, which render.py replaced and
+# which is gitignored anyway, so this pointed at nothing in a fresh clone.
+# The live renders are the right source and are in the repo.
+SRC = "../vials/tmg-ghk-cu.png"
 DISC = (0.000, 0.085)      # white plastic flip-top, as fractions of vial height
 CRIMP= (0.085, 0.170)      # aluminium crimp band
 
@@ -34,7 +39,7 @@ def vial(crimp, cap):
     im = recolour(im, DISC,  cap)
     return im
 
-BLUE, INK, PAPER = "#2365CD", "#141418", "#F2F2F0"
+BLUE, INK, PAPER = BRAND_HEX, "#141418", "#F2F2F0"
 OPTIONS = [
     ("now — silver + white",      None,   None),
     ("blue crimp + white cap",    BLUE,   PAPER),
@@ -49,7 +54,7 @@ for i,(name,c,k) in enumerate(OPTIONS):
     print(f"  {name}")
 
 # family coding: one constant blue crimp, cap colour carries the group
-FAMILY = [("Metabolic","#2365CD"),("Repair","#F2F2F0"),("Longevity","#141418"),
+FAMILY = [("Metabolic",BRAND_HEX),("Repair","#F2F2F0"),("Longevity","#141418"),
           ("Cognitive","#5A9E86"),("Supplies","#9AA0A6")]
 for i,(n,c) in enumerate(FAMILY):
     vial(BLUE, c).save(f"caps/fam{i}.png")

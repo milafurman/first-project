@@ -36,6 +36,8 @@ import numpy as np
 from PIL import Image
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
+import json
+BRAND_HEX = json.load(open("../brand.json"))["brand"]   # one source of truth
 
 MASTER = "../marks/mark-original.png"
 UPSAMPLE = 3          # the master is only 900px and soft, so it needs more room
@@ -51,7 +53,7 @@ VIEWBOX = 1600
 # point, cannot quietly disagree with it later. That disagreement is exactly
 # what happened the first time two Gila drawings were loose in this project.
 VARIANTS = [
-    ("#2365CD",      "truemg-mark-brand.svg"),
+    (BRAND_HEX,      "truemg-mark-brand.svg"),
     ("#0A0A0B",      "truemg-mark-ink.svg"),
     ("#FCFBF8",      "truemg-mark-paper.svg"),
     ("currentColor", "truemg-mark-current.svg"),

@@ -107,6 +107,21 @@ def build(path, out, tilt=TILT, size=SIZE):
     return canvas
 
 
+def contact_sheet(src, out, cols=6, cell=330, ext=".png"):
+    """A sheet of the whole set. Built here rather than by hand, because a
+    hand-made sheet is one more artifact that can quietly disagree with what
+    it is a sheet OF — which is the mistake this project has already paid for
+    twice (the mark PNG, and the lockup PNGs)."""
+    names = sorted(n for n in os.listdir(src) if n.endswith(ext) and not n.startswith("contact"))
+    rows = (len(names) + cols - 1) // cols
+    s = Image.new("RGB", (cols * cell, rows * cell), (255, 255, 255))
+    for i, n in enumerate(names):
+        im = Image.open(os.path.join(src, n)).convert("RGBA").resize((cell, cell), Image.LANCZOS)
+        s.paste(im, ((i % cols) * cell, (i // cols) * cell), im)
+    s.save(out, quality=90)
+    print("  %-36s %dx%d  %d items" % (out, s.width, s.height, len(names)))
+
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     names = sorted(n for n in os.listdir(".") if n.startswith("tmg-") and n.endswith(".png"))
@@ -115,6 +130,7 @@ if __name__ == "__main__":
         im = build(n, o)
         print("  %-36s %dx%d  %d KB" % (o, im.width, im.height, os.path.getsize(o) // 1024))
     print("%d floated" % len(names))
+    contact_sheet(OUT, os.path.join(OUT, "contact-sheet.jpg"))
 
 
 # ---------------------------------------------------------------------------

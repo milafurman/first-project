@@ -25,9 +25,11 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
+import json
+BRAND_HEX = json.load(open("../brand.json"))["brand"]   # one source of truth
 
-MARK = "../vials/mark-og-2365CD.png"
-BRAND = (0x23, 0x65, 0xCD)
+MARK = "../vials/mark-og.png"
+BRAND = tuple(int(BRAND_HEX[i:i + 2], 16) for i in (1, 3, 5))
 SIZES = (512, 180, 32, 16)
 RADIUS = 0.22                      # of the square's width, iOS-ish
 INSET_KNOCK = 0.17                 # the mark's margin inside the blue square

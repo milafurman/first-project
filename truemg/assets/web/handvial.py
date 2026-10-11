@@ -28,6 +28,8 @@ import numpy as np
 from PIL import Image, ImageFilter
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
+import json
+BRAND_HEX = json.load(open("../brand.json"))["brand"]   # one source of truth
 
 PLATE = "hand-vial.jpg"
 NAME = "ghk-cu"                            # any sprite in ../vials
@@ -52,7 +54,7 @@ LABEL_INSET = 8                            # px of glass either side of the labe
 # printed crimp on the real vial is that blue. Nudged, not repainted: the
 # highlight and the shading stay, only the hue moves.
 CRIMP = (752, 283, 870, 322)
-BRAND = np.array((35, 101, 205), float)
+BRAND = np.array([int(BRAND_HEX[i:i + 2], 16) for i in (1, 3, 5)], float)
 
 
 def label_art():

@@ -3,7 +3,8 @@
 > **2026-10-09 — the mark on the label changed.** Mila went back to the
 > ORIGINAL Gila, the spiky crest with the feathered mane. No vials had been
 > printed yet, so the label artwork moved with the brand instead of diverging
-> from it. `render.py` now stamps `mark-og-2365CD.png`; `mark-2365CD.png` (the
+> from it. `render.py` now stamps `mark-og.png`, which `logo/render_png.mjs`
+> rasterises from `truemg-mark-brand.svg` so it cannot drift; `mark-2365CD.png` (the
 > smooth drawing) stays as the record of what the labels used to carry. All 17
 > have been re-rendered, and so has everything downstream that contains a vial.
 >

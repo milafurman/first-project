@@ -8,7 +8,12 @@ import numpy as np, colorsys, os
 from PIL import Image, ImageDraw, ImageFont
 
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
-SRC   = "cut/brand/tmg-ghk-cu.png"
+import json
+BRAND_HEX = json.load(open("../brand.json"))["brand"]   # one source of truth
+# The old rebrand pipeline wrote cut/brand/, which render.py replaced and
+# which is gitignored anyway, so this pointed at nothing in a fresh clone.
+# The live renders are the right source and are in the repo.
+SRC   = "../vials/tmg-ghk-cu.png"
 DISC  = (0.000, 0.085)      # white plastic flip-top, as fractions of vial height
 CRIMP = (0.085, 0.170)      # aluminium crimp band
 RING  = (0.085, 0.118)      # the top third of the crimp, where a second colour reads as a ring
@@ -40,14 +45,14 @@ def vial(crimp=None, cap=None, ring=None):
     im = recolour(im, DISC,  cap)
     return im
 
-BLUE, GOLD, GOLD_D = "#2365CD", "#D8B46A", "#9C7C34"
+BLUE, GOLD, GOLD_D = BRAND_HEX, "#D8B46A", "#9C7C34"
 INK, PAPER, GUN, COPPER = "#141418", "#F2F2F0", "#5A6068", "#B87333"
 
 # one photograph per aluminium colour; the white cap is held constant so the
 # crimp is the only thing changing from frame to frame
 CRIMPS = [
     ("silver",        None,   "what you have now"),
-    ("brand blue",    BLUE,   "#2365CD · our blue"),
+    ("brand blue",    BLUE,   BLUE + " · our blue"),
     ("gold",          GOLD,   "#D8B46A · bright"),
     ("deep gold",     GOLD_D, "#9C7C34 · antique"),
     ("gold + blue",   BLUE,   "blue band, gold ring"),
@@ -78,7 +83,7 @@ print("crimps:", len(imgs), " combos:", len(combos))
 F = lambda n, s: ImageFont.truetype("/usr/share/fonts/truetype/dejavu/" + n, s)
 MONO, MONO_S, BOLD, H2 = F("DejaVuSansMono.ttf", 14), F("DejaVuSansMono.ttf", 12), \
                          F("DejaVuSans-Bold.ttf", 23), F("DejaVuSans-Bold.ttf", 19)
-PAGE, TXT, MUT, ACC = (247, 246, 243), (18, 18, 20), (128, 124, 116), (35,101,205)
+PAGE, TXT, MUT, ACC = (247, 246, 243), (18, 18, 20), (128, 124, 116), tuple(int(BRAND_HEX[i:i+2],16) for i in (1,3,5))
 
 def tile(im, box_w, box_h):
     """Crop to the artwork, fit inside the box, return an RGB tile on the page colour."""

@@ -120,3 +120,5 @@ if __name__ == "__main__":
         tile(n, o)
         print("  %-40s %-10s %d KB" % (o, family(n)[0], os.path.getsize(o) // 1024))
     print("%d tiles" % len(names))
+    import float as _f
+    _f.contact_sheet(OUT, os.path.join(OUT, "contact-sheet.jpg"), ext=".jpg")

@@ -26,7 +26,12 @@ const WIDTH = 1200;
 // markless pair was built when the logo had to be smuggled in as base64 inside
 // a 10,000-character customCss budget, where the Gila did not fit. That
 // constraint is gone, so the choice is Mila's rather than the platform's.
+// mark-og.png is what render.py stamps on every vial label. It used to be made
+// by hand, which is the same hazard the lockups had: a mark PNG that disagrees
+// with the SVG it is supposedly an export of puts the wrong artwork on 17
+// products. It renders here now, from the same SVG, in the same pass.
 const PNGS = [
+  ['truemg-mark-brand.svg', '../vials/mark-og.png'],
   ['truemg-lockup-header.svg', 'truemg-lockup-mark-light-1200.png'],
   ['truemg-lockup-onink.svg', 'truemg-lockup-mark-dark-1200.png'],
   ['truemg-lockup-web.svg', 'truemg-lockup-light-1200.png'],
