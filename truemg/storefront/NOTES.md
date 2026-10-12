@@ -125,3 +125,49 @@ else, no JavaScript error on the page). **The same 6/2 split appears with
 It is worth raising with Lapis. It also means a single page load is not evidence
 of anything: verify through several, or a pass that reports "no logo" is really
 just a load that never rendered.
+
+## The Layouts page: "Meridian" is `revive`
+
+`/admin/templates` and the MCP name the same 21 layouts in two different
+vocabularies — the admin shows **display names**, the MCP takes **template ids**.
+Six coincide (Arcane/`arcane`, Halo/`halo`, Dune/`dune`, Infinity/`infinity`,
+Dispatch/`dispatch`, Modern/`mdrn`); the rest were renamed, which is what makes
+the screen look out of sync with the store.
+
+**Meridian is the display name for `revive`.** Its card reads "Bespoke: clean
+clinical white, brand blue + gold, Poppins display", and the live store's `h1`
+computes to `Poppins, Inter, system-ui, sans-serif`. Meridian is the only
+Poppins layout in the list, and the admin already marks it *Current*. One live
+template, two names. Nothing is broken.
+
+What *is* stale is **"your main design"** — a saved revert target still holding
+`arcane`, the template that was live before the switch. `apply_design_change`
+writes the live template but never updates that bookmark, so the admin reports
+the disagreement as "You're previewing Meridian." It is not a preview and it is
+not an A/B test (`/admin/experiments` says "No tests yet").
+
+So **"Return to my main" really would apply `arcane`** and take out half the copy
+keys and every `.lf-section-*` rule in the stylesheet. The defusing click is the
+one beside it — *"Make this my main design"* on the Meridian card — after which
+main equals current and the dangerous button becomes a no-op. Unknown until
+someone does it: whether that also re-runs a template apply and wipes
+`customCss` the way a Design studio save does. Capture the stylesheet first.
+
+## Two measurements worth keeping
+
+**The whole stylesheet still round-trips clean** (dry-run, 12 Oct 2026): 22
+rules, 2,029 characters, zero rejected — including `display:none` on
+`.lf-section-comparison`, which the tool's own description now says is
+disallowed. Re-dry-run before trusting that again.
+
+**`?peek=1` needs no login.** It bypasses the coming-soon curtain for anyone,
+which is the only practical way to test the real store on a phone: Chrome on
+Mila's machine reports a 4320px viewport and cannot emulate one, while the
+built-in browser's mobile preset drives `truemglabs.com/?peek=1` at a true
+375x812.
+
+**Rule 1 of the stylesheet is dead.** It targets
+`.lf-section-hero img[src*="hero-media"]`, but `heroMediaUrl` is now `pixel.png`
+— a deliberate 1x1 that removes the floating cluster, since `hero-hand.jpg`
+already carries a vial. The selector matches nothing and the `float` animation
+rides nothing.
