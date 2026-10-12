@@ -103,21 +103,18 @@ vial, frontal, zero perspective, identical bounding box in every frame, label
 typeset as crisp type directly on teal glass, transparent background. The glass
 colour *is* their brand colour.
 
-- [ ] **1B.1 `BUILD` Re-render the cut-outs on the current brand blue — FIRST.**
-  `truemg/assets/vials/cut/src/*.png` and `vials/tinted/*.png` are
-  **pre-rebrand**: sampling `cut/src/tmg-ghk-cu.png` returns `#2365CD` across
-  12,927 pixels — the legacy blue `brand.json` lists as a bug. The live `ledge`
-  photos are correct (`~#348BC1`, in the `#1C8CD0` family). **Uploading the
-  existing cut-outs as-is would put the old blue back on the storefront.**
-  Re-run `vials/render.py` against `#1C8CD0` before anything else in 1B.
-- [ ] **1B.2 `BUILD` Then switch the catalog to the transparent cut-outs.** All
-  17 at 2000×2000 RGBA, framed identically — that alone removes the seventeen
-  mismatched pastel backgrounds, which is the single biggest "this is a real
-  brand" signal and the cheapest item on this list.
-- [ ] **1B.2b `BUILD` Decide the glass treatment.** Nurish carries the brand
-  colour in the glass itself, which is what makes their 20 products read as one
-  family. Evaluate a tinted-glass pass against plain clear glass on the new
-  brand blue.
+- [x] **1B.1 Checked 12 Oct 2026 — the shippable vials are ALREADY correct.**
+  All 17 at `truemg/assets/vials/tmg-*.png` sample top blue `#1C8CD0` with
+  **zero** legacy-blue pixels, 2000x2000 RGBA, 60-90% transparent. Re-running
+  `render.py` reproduced them identically, so no re-render is needed.
+  An earlier note here claimed otherwise; that was wrong. The legacy `#2365CD`
+  lives only in `cut/src/*.png` — the ORIGINAL PHOTOGRAPHS, which are inputs to
+  `render.py`, not outputs, and are correctly pre-rebrand — and in the older
+  `tinted/` treatment. Neither ships.
+  Note: `render.py` needs `scipy`, which is not in the system Python.
+- [ ] **1B.2 `ADMIN` Upload the 17 — this is now the whole job.** They are ready
+  as they stand. Watch the per-size-photo trap: a size's own photo beats the
+  product's main picture on the catalog card.
 - [ ] **1B.3 `BUILD` Re-render at 3× density.** Cards display at 344px, so ship
   ≥1024×1024 and let Lapis downscale. Current 640px is the softness.
 - [ ] **1B.4 `BUILD` Rebuild the label composition.** Product name large and
