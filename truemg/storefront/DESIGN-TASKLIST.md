@@ -373,3 +373,41 @@ come back to this repo — this section is the record.
   add LABS to it, or rebuild the label around the official horizontal lockup.
   If LABS is added, note 1C.2 — it previously landed in the wrap strip that
   curves out of sight.
+
+- [ ] **1E.4 ⚠️ WRONG LIZARD ON ALL 20 LABELS.** Raised by Mila 12 Oct 2026,
+  confirmed by side-by-side render. The labels carry the **smooth-head** mark
+  from `assets/_archive/smooth-mark/` — no crest, thinner strokes, simpler mane.
+  The real mark (`assets/logo/truemg-mark-brand.svg`) has a **spiked crest along
+  the top of the head**, a fuller mane and heavier strokes. Different drawings.
+
+  The archive file is named `mark-2365CD.png` — the legacy blue — which is
+  exactly why the labels carried the wrong blue. **Task 1E.1 recoloured the
+  wrong lizard.** The recolour is not wasted (it also covered the MG block and
+  the product names) but the mark itself must be replaced, not tinted.
+
+  Fix: upload `truemg-mark-brand.svg` to Canva, then `update_fill` on the mark
+  element on each of the 20 pages. Blocked only on Mila confirming the official
+  mark is the one she wants — `_archive/rejected-marks/marks-sheet.jpg` holds
+  other options she may prefer.
+
+- [ ] **1E.5 The warning block's third line is out of rhythm.** The warning is
+  **two** text boxes, not one: "not for human consumption" wraps to two lines in
+  box one, "research use only" is a separate box below. Measured on page 1 —
+  lines 1→2 sit 28.75 apart, lines 2→3 sit 33.81 apart, so the last line drops
+  **5.06 too far, an 18% wider gap**. That is the unevenness Mila saw by eye.
+  Fix: one box, three lines, single line-height. **The wording is not to be
+  touched — this is a position change only.**
+
+- [ ] **1E.6 Three left edges where there should be one, and the block roams.**
+  Measured across all 18 pages whose geometry was read:
+  - The **lizard sits 4.006 right of the product name on every single page.**
+    Worse than a plain offset: a circle must hang slightly *left* to look level
+    against straight-edged text, so the error reads double.
+  - The **strength** sits 4.006 right of the name on pages 1, 3, 5 and 13, and
+    flush on the rest — so the labels are not even wrong consistently.
+  - The whole block starts at **five different left edges across the set**
+    (537.77, 576.70, 587.82, 593.38, 602.46), so the labels do not line up with
+    each other when seen together.
+
+  Fix: one left edge per label, same edge on every label, lizard nudged left to
+  sit optically flush.
