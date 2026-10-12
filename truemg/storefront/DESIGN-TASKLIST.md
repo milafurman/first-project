@@ -315,6 +315,35 @@ come back to this repo — this section is the record.
     the same batch as the selection click never registers; it needs its own
     round trip.
 
-- [ ] **1E.2 The batch field.** Still open. Where it goes is a design decision,
-  not a mechanical one, and the Canva API cannot set a typeface — text added
-  that way lands in the default font and will not match. Do it in the editor.
+- [x] **1E.2 The batch field — DONE 12 Oct 2026.** `BATCH:` plus an empty line
+  to write on, on all 20 pages, at (left 1040, top 455): the open right margin
+  beside the wordmark, first line level with the compliance block. 28px bold
+  `#070707`, matching the compliance block's size and colour.
+
+  **No batch number was invented.** The field is blank by design — the value is
+  per print run and is not AI's to write.
+
+  **Where "the right" actually is.** The artwork occupies only x 602–1015 of a
+  1654px canvas, roughly centred, so there is ~640px of empty canvas to its
+  right. The wordmark is the rightmost artwork at x 926.68–1003.46 (both halves
+  are rotation-90 rects; rendered extents come from the centre, not top/left).
+  The margin was chosen over the one print-guaranteed gap — inside the artwork,
+  right of the Gila at x 742–926 — on Mila's explicit call.
+
+  ⚠️ **Unresolved: whether that margin prints.** The repo's approved side label
+  is 66×36mm (1.83:1); the Canva artwork region is 413×487px (0.85:1). They do
+  not correspond, so the repo cannot locate Canva's trim. If the printer crops
+  to the artwork, the batch field falls off the label. **Settle this with 1C.5
+  (Sam's spec).** Moving it inside is one `position_element` call.
+
+  **Font mismatch, accepted.** The label is `fontRef YAFdJvSyp_k,3`; API-added
+  text can only be Canva's default `YACgEZ1cb1Q,0`. `format_text` has no font
+  family. Size, weight and colour were matched to narrow the gap. To make it
+  exact, restyle the 20 elements by hand in the editor.
+
+  **What made this tractable via the API.** One `edit-design` call carries
+  operations for *many* pages — `page_index` only selects which page's document
+  comes back, it does not restrict the ops. 20 pages took one add call, one
+  format call. But `add_text` does not return the new element's locator_id for
+  any page other than `page_index`, so the ids have to be collected with
+  `read-design` before formatting.
