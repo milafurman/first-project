@@ -1,5 +1,7 @@
-.lf-section-hero img[src*="hero-media"]{max-height:560px!important;animation:float 5s ease-in-out infinite;will-change:transform}
-.lf-card .aspect-square{background:#fff!important}
+/* the vials are transparent cut-outs now, so the card carries the brand field
+   instead of white. This is the single change that makes the grid read as one
+   family rather than seventeen separate photographs. */
+.lf-card .aspect-square{background:#EDF4FB!important}
 .lf-card:hover{border-color:#1C8CD0;box-shadow:0 22px 44px -20px rgba(14,24,48,.38)}
 .lf-section-quality .rounded-2xl:hover{background-color:rgba(28,140,208,.12);box-shadow:0 20px 40px -20px rgba(28,140,208,.55)}
 .lf-section-howItWorks .rounded-2xl:hover{border-color:#1C8CD0;box-shadow:0 20px 40px -20px rgba(14,24,48,.3)}
@@ -32,3 +34,20 @@ footer .border-t>p:first-child{border-left:2px solid #C9A227;padding:.1rem 0 .1r
 .lf-section-faq{background-color:#F8F6F1;border-radius:1.5rem;padding-block:4rem!important;padding-inline:3rem!important;max-width:60rem}
 .lf-section-ctaBanner{background-color:#EDF2FB;border-radius:1.5rem;padding-block:4rem!important}
 .lf-section-quality{background-color:#0A192F!important}
+
+/* Catalog was the only interior page whose title sat a step down from the rest
+   (36px against 48px on About, FAQ and Lab Results). Targeted by the catalog
+   heading's own classes, because the obvious container selector also catches
+   the home hero headline. */
+h1.font-display.text-3xl{font-size:2.25rem!important;letter-spacing:-.02em}
+@media(min-width:640px){h1.font-display.text-3xl{font-size:3rem!important}}
+/* The FDA line's heading was 10px. Note the selector carries no `.lf-store`
+   prefix: Lapis nests the whole sheet inside `:where(.lf-store)`, so a rule
+   that starts with `.lf-store` would need a second one nested inside itself
+   and silently matches nothing. Colour is left alone — it is white on the
+   navy band, and the deep blue first tried here would have been unreadable. */
+h2.uppercase{font-size:.8125rem!important;letter-spacing:.12em!important}
+/* Lab Results with no COAs posted: the empty notice was a grey box that read
+   as broken. Same tinted panel the home page uses, with a brand-blue edge, so
+   it reads as "nothing here yet" rather than "this failed". */
+.max-w-5xl .rounded-2xl.text-center{background-color:#EDF4FB!important;border-color:#1C8CD0!important;border-radius:1.25rem;padding-top:2.75rem!important;padding-bottom:2.75rem!important}
