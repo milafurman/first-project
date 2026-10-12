@@ -76,18 +76,24 @@ line, hairline rules — one centred axis, top to bottom.
 
 ## Phase 1 — The four things Mila called out
 
+> **Applied live 12 Oct 2026.** The styling pass shipped: card field, catalog
+> title, FDA heading, Lab Results panel, dead rule removed, banner slowed and
+> cut to one message, second marquee hidden. The entry gate (1D.6) was held
+> back deliberately — it has no stable class to target, so any rule risks
+> leaking onto buttons and cards elsewhere, and it is under attorney review.
+
 ### 1A. The scrolling banner (too fast)
 
-- [ ] **1A.1 `MCP` Slow the marquee.** `announcementBarSpeed` is currently `26`.
+- [x] **1A.1 `MCP` Slow the marquee.** `announcementBarSpeed` is currently `26`.
   Determine the unit by dry-running `40` and `60` and measuring the loop, then
   set the value that lands near a comfortable reading pace. Amino Club's bar does
   not race.
-- [ ] **1A.2 `MCP` Kill one of the two marquees.** There are two scrolling
+- [x] **1A.2 `MCP` Kill one of the two marquees.** There are two scrolling
   strips stacked above a white header: `announcementBar` and `promoStrip`. On a
   phone the announcement wraps to two lines and the pair eats the first ~100px
   of every page. Keep one. Recommend keeping `announcementBar` and setting
   `hide:promoStrip` to `1`.
-- [ ] **1A.3 `MCP` Give the bar one job.** Three claims separated by `·` is a
+- [x] **1A.3 `MCP` Give the bar one job.** Three claims separated by `·` is a
   list, not a message. Amino Club runs one offer plus a deadline. Ours should
   run the single strongest line — the lot match.
 - [ ] **1A.4 — open question for Mila.** Amino Club's bar carries a *live
@@ -191,16 +197,16 @@ on the browser tab and the vial, not in the site header."* Its 23px-left /
   is out of the connector's scope. Target: one specific line each, under
   ~15 words, no "is a … classified within". Research-use framing intact; no
   mechanism-in-a-person claims.
-- [ ] **1D.2 `MCP` Fix the catalog type scale.** Catalog `h1` is 36px with 0px
+- [x] **1D.2 `MCP` Fix the catalog type scale.** Catalog `h1` is 36px with 0px
   top padding and no max-width container, where About, FAQ and Lab Results are
   all 48px / 80px / 768px. The commercial page is the least considered one.
-- [ ] **1D.3 `MCP` Raise the 10px "FDA & Legal Disclaimer" heading** on catalog
+- [x] **1D.3 `MCP` Raise the 10px "FDA & Legal Disclaimer" heading** on catalog
   and FAQ. It is in the page body, not the protected footer, so it is
   restyleable.
-- [ ] **1D.4 `MCP` Delete the dead rule.** `.lf-section-hero img[src*="hero-media"]`
+- [x] **1D.4 `MCP` Delete the dead rule.** `.lf-section-hero img[src*="hero-media"]`
   matches nothing — `heroMediaUrl` is now `pixel.png`. The `float` animation
   rides nothing.
-- [ ] **1D.5 `MCP` Make Lab Results look deliberate.** Decent bones already
+- [x] **1D.5 `MCP` Make Lab Results look deliberate.** Decent bones already
   (intro, empty notice, CTA, a 4-step explainer) sitting as a grey box in a lot
   of white. Give the notice the tinted-panel treatment the home page uses and
   let the 4-step explainer carry weight, so the page earns its place before a
