@@ -154,9 +154,41 @@ much earlier batch:
 They are the pre-render photographs; they were never swapped when the other
 fourteen were. The correct renders already exist and are already right.
 
-- [ ] **1H.1 `ADMIN` Replace those three product images** with the matching
-  renders from `truemg/assets/vials/`. Admin UI work — drivable through the
-  browser, as the earlier vial uploads were. Changes live product images.
+- [ ] **1H.1 `ADMIN` Replace those three product images** — **ON HOLD, see 1I.**
+  The renders that would replace them carry a cap defect. Doing this now spreads
+  the defect to three more cards and means uploading twice.
+
+### 1I. ⚠️ THE CAP IS WRONG ON ALL 17 RENDERS
+
+Spotted by Mila 12 Oct 2026, looking at `tmg-ss-31.png` — *"the blue doesn't go
+all the way to the white, and the white looks crooked."* Both are real.
+
+**Fault 1 — the blue band stops short of the white.** A bare silver-metallic
+ring sits between the underside of the white plastic flip-off disc and the top
+of the blue anodised band. On a real crimped flip-off cap the blue runs up to
+and under the white; there is no exposed aluminium there. This strip is clearly
+visible at 3x.
+
+**Fault 2 — the white disc sits tilted.** Its lower edge is **10 px lower on
+the right than on the left** on the 2000px master (sampled at x=760 vs x=1240).
+That also makes the silver strip wedge-shaped, which exaggerates the lean.
+
+> A quick colour-classifier attempt to measure the silver strip's thickness
+> across the cap returned garbage (0–134 px) because it mistook the specular
+> highlight on the blue band for white. **Do not quote a thickness from it.**
+> The 10 px slope figure is sound; the strip is documented visually.
+
+**It is in the master, so it is in all seventeen.** Verified by cropping the cap
+from `tmg-ss-31`, `tmg-epithalon`, `tmg-ghk-cu` and `tmg-nad`: identical cap,
+identical faults. The seventeen renders are one vial photographed once and
+re-labelled, so every live product image on the store has this.
+
+**This is part of the answer to 1B ("ours look generated").** It is a geometry
+error the eye catches before it can name it — a cap that could not be assembled
+that way.
+
+- [ ] **1I.1 Fix the cap in the master, then re-render all 17 and upload all 17
+  once.** Folds 1H.1 into it. This is the big 1B vial job, not a quick pass.
 
 ### 1B. The vials (ours look generated, Nurish looks smooth)
 

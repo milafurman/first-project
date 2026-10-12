@@ -214,3 +214,15 @@ anything a stylesheet can reach. The product page renders the full text, so
 nothing is lost in storage. Merging each pair into one sentence with a comma or
 an em dash fixes the card and costs nothing elsewhere. See `DESIGN-TASKLIST.md`
 1D.1b.
+
+
+## The slowness is Lapis's, not ours — the admin does it too (12 Oct 2026)
+
+Went into `app.uselapis.io/admin` → Products → Catalog to swap three product
+images. **The product list sat on "Loading…" for over 20 seconds, twice**, on a
+connection that loaded `example.com` in 0.22 s.
+
+That matters for 1G. The storefront being slow could plausibly have been our
+`customCss` or the theme. Their own admin hanging on its own product list
+cannot be. The delay is on Lapis's side of the line, which makes 1G a support
+report rather than something to fix here.
