@@ -411,3 +411,41 @@ come back to this repo — this section is the record.
 
   Fix: one left edge per label, same edge on every label, lizard nudged left to
   sit optically flush.
+
+- [x] **1E.7 LABEL REBUILD — DONE 12 Oct 2026.** All four faults fixed on all
+  20 pages, verified in the live editor after a reload.
+
+  **Mark.** `truemg-mark-brand.svg` rendered at 1600px on transparency, trimmed
+  to the ink, squared, uploaded, swapped into all 20. Canva forces an image to
+  *cover* its box, and the box was 135.48 x 137.12 — taller than wide — so it
+  shaved the circle's edges. Fixed by squaring the element to 137.122 and
+  cropping 1:1. The SVG was already brand blue, so no recolour was needed.
+
+  **One left edge.** Everything on every label now starts at 537.766; the mark
+  at 535.766, 2 left, because a circle must overhang slightly to read flush
+  against straight-edged text.
+
+  ⚠️ **The shared edge had to be the LEFTMOST, not the most common.** First
+  attempt used 602.46 (14 of 20 pages) and TESAMORELIN immediately collided
+  with the wordmark — the long names had been pushed left deliberately. At
+  537.766 every name clears at its existing size, so no type was resized.
+
+  **Warning rhythm.** Third line lifted from 512.228 to 507.169. Still two
+  boxes, deliberately: merging them would mean retyping the compliance words,
+  which is forbidden. Moving a box touches no text.
+
+  **Batch field.** `BATCH:` plus a blank line, in Inter at 28 bold, on all 20
+  at (1040, 455). Count verified: exactly one per page.
+
+- **The font trap, and the way through it.** `add_text` always lands in Canva's
+  default (Arimo); `format_text` has no font family. But **a pasted element
+  keeps its font** — so the method is: set one element's font by hand in the
+  editor, then copy/paste it to every page.
+
+  Pasting is unreliable about *which* page receives it: Canva's "current page"
+  lags the scroll, so a paste can land on the previous page, as a duplicate, or
+  dumped at page centre. Clicking inside the target page first helps but does
+  not guarantee it. **Do not fight it — position is fixable by API, font is
+  not.** Paste freely, then read every page, delete the duplicates and set every
+  keeper's position in one call. This run produced 8 duplicates and 4 strays;
+  all were cleaned up by data afterwards.
