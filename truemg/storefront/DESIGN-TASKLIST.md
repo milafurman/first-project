@@ -112,9 +112,28 @@ colour *is* their brand colour.
   `render.py`, not outputs, and are correctly pre-rebrand — and in the older
   `tinted/` treatment. Neither ships.
   Note: `render.py` needs `scipy`, which is not in the system Python.
-- [ ] **1B.2 `ADMIN` Upload the 17 — this is now the whole job.** They are ready
-  as they stand. Watch the per-size-photo trap: a size's own photo beats the
-  product's main picture on the catalog card.
+- [x] **1B.2 `ADMIN` 14 of 17 uploaded and live — 12 Oct 2026.** Verified on the
+  rendered catalog: 14 `.png` against 3 `.jpg` across 17 cards. Each product was
+  title-checked at upload, so the exact-text row matching correctly separated
+  `IPAMORELIN` from `CJC-1295 (No DAC) + IPAMORELIN`.
+- [ ] **1B.2b `ADMIN` The three multi-size products are the per-size-photo trap.**
+  SS-31 (10/50MG), TMG-2TZ (10/20MG) and TMG-3RT (10/20MG) each have sizes that
+  **already carry their own photos**, and Lapis says plainly: *"the storefront
+  swaps the product image when a shopper picks that size. Sizes without a photo
+  use the main product picture."* Replacing only the main picture would leave
+  their cards unchanged — which is exactly why the other 14 were safe, their
+  size slots being empty. Three ways out, in preference order:
+  **(a)** render per-size vials — `labels.py` already holds the per-size label
+  artwork, so `render.py` can emit a 10MG and a 50MG variant for their own
+  slots. Only option where the picture matches the size selected.
+  **(b)** clear the size photos so all sizes fall back to the new main picture —
+  fast, but every size then shows the same mg on the label.
+  **(c)** leave them on the old ledge photo.
+  **How to drive a Lapis upload from a session:** the file inputs are hidden, so
+  surface them first (set `aria-label` + a visible style via JS), then `find`
+  that label and `file_upload` with `paths` — the client reads the file, so no
+  base64 passes through context. Staging the file is not enough: click that
+  card's own Upload button, then Save.
 - [ ] **1B.3 `BUILD` Re-render at 3× density.** Cards display at 344px, so ship
   ≥1024×1024 and let Lapis downscale. Current 640px is the softness.
 - [ ] **1B.4 `BUILD` Rebuild the label composition.** Product name large and
