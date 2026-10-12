@@ -49,8 +49,13 @@ is a genuinely different drawing rather than a re-export.
 `trace_mark.py` traced it. Its master path is rewritten to point beside it, so
 it is readable, but it is not wired into anything and should not be run.
 
-This is also the artwork still sitting on the product images uploaded to the
-store, until those are replaced.
+It was also still on the **Canva label artwork** — all 20 pages — until
+12 Oct 2026, three days after the mark was chosen, because nothing syncs this
+repo to Canva. Replaced there now; see `../logo/README.md`.
+
+It may still be on **product images already uploaded to the store**, which were
+exported before the change. Anything re-rendered from `../vials/mark-og.png`
+carries the correct spiky mark.
 
 ## `superseded/`
 
