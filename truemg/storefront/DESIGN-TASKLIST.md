@@ -347,3 +347,29 @@ come back to this repo — this section is the record.
   format call. But `add_text` does not return the new element's locator_id for
   any page other than `page_index`, so the ids have to be collected with
   `read-design` before formatting.
+
+- [ ] **1E.3 The label wordmark is not in the logo set.** Raised 12 Oct 2026.
+  Each label carries two logo pieces: the Gila mark (correct — the standard
+  mark, now in brand blue) and a **vertical** TRUE MG with **no LABS**. The
+  vertical one matches no file in `assets/logo/`.
+
+  Checked by viewBox across all 26 logo SVGs — **every one is wider than tall**,
+  so nothing vertical exists anywhere in the set:
+  - marks `1600×1600`
+  - wordmark, no LABS `5634×681`
+  - with LABS `5634×1086`
+  - full lockups, mark + text `7078×1260`
+
+  So the non-standard thing is the **orientation, not the missing LABS** — a
+  LABS-less wordmark is already sanctioned, it is just horizontal. An earlier
+  note that said every official version carries LABS was wrong.
+
+  The label's source image is also not the official wordmark: its fill box is
+  ~`534×267` (2:1), against the official wordmark's 8.27:1. Two crops of that
+  one 2:1 image give the black TRUE and the blue MG, so it is a stacked
+  two-line composition made for the labels and nothing else.
+
+  Decision is Mila's: leave it (it fits the vial better than a wide lockup),
+  add LABS to it, or rebuild the label around the official horizontal lockup.
+  If LABS is added, note 1C.2 — it previously landed in the wrap strip that
+  curves out of sight.
