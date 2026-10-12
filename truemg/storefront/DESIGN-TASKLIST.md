@@ -197,6 +197,41 @@ vial, frontal, zero perspective, identical bounding box in every frame, label
 typeset as crisp type directly on teal glass, transparent background. The glass
 colour *is* their brand colour.
 
+> ### ⚠️ Why ours still reads "generated" — the reference compared, 12 Oct 2026
+>
+> Mila asked why we were not emulating the reference. Fair. **1B.1 below was
+> ticked off on COLOUR and FILE SIZE. The look — the actual brief — was never
+> compared.** That is the drift. Verified first-hand against Nurish's own hero
+> image (`hero-shop-glp3rt-opt-v2.webp`) rather than from this note.
+>
+> **Their vial is one object in one colour.** Dark green glass, dark green cap,
+> a single thin silver crimp ring, type printed directly onto the glass in
+> white. Brand small at the top, product name large, mg in a small chip,
+> "Purity ≥ 99%", one tiny footer line.
+>
+> **Ours is four materials with three junctions.** Clear glass + white paper
+> label + white plastic cap + blue anodised band. Every junction is a place a
+> render can fail — **and the cap fault in 1I is exactly one of them.** Nurish
+> cannot have that fault: their cap is the same colour as their bottle, so the
+> junction does not exist.
+>
+> **So the gap is not render quality. Their bottle is a simpler object to
+> depict.** We have been rendering a complicated thing imperfectly; they
+> designed a thing that is hard to render badly.
+>
+> That splits the work in two, and it is Mila's call which:
+>
+> **(a) Copy the discipline, keep the product.** Fix the cap junction, lock all
+> 17 to one frame and one lighting setup, drop the paper-label shading that
+> reads as fake. Her physical vials are unchanged. **Recommended** — the site
+> should show what is in the box, and her real labels are white paper.
+>
+> **(b) Copy the design.** Brand-blue glass, type on glass, matching cap. This
+> is what actually produces their shelf. But the site would stop matching the
+> product being shipped, and the Canva label artwork (finished 12 Oct) would
+> have to be redone. **This is a PRODUCT decision, not a website one, and it is
+> far cheaper before a print run than after.**
+
 - [x] **1B.1 Checked 12 Oct 2026 — the shippable vials are ALREADY correct.**
   All 17 at `truemg/assets/vials/tmg-*.png` sample top blue `#1C8CD0` with
   **zero** legacy-blue pixels, 2000x2000 RGBA, 60-90% transparent. Re-running
