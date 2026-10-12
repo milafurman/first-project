@@ -292,6 +292,11 @@ come back to this repo — this section is the record.
   mark and the MG half of the vertical wordmark. **TRUE stays black** — it is a
   separate element and was never wrong. Verified page by page at zoom, then
   across all 20 thumbnails in grid view. Canva reports all changes saved.
+  **Do not verify this through `read-design` thumbnails** — they lag the
+  document badly. Page 20's came back on render version 6 against a design
+  on version 32, flagged `fallbackstale=T`, and showed the *old* blue on the
+  MG. Re-checking page 20 live in the editor at zoom showed correct brand
+  blue. The stale thumbnail was the only thing wrong.
 
 - **How it had to be done.** The Canva *API* refuses this: `recolor_element`
   returns `not_permitted` on images, so the Gila and the MG block — both images,
