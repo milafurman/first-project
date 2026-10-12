@@ -219,6 +219,46 @@ colour *is* their brand colour.
 > depict.** We have been rendering a complicated thing imperfectly; they
 > designed a thing that is hard to render badly.
 >
+> ### ⚠️ CORRECTION, same day — the above generalises from ONE reference
+>
+> Mila: *"What about the amino peptides bottles? Those are multicolored. Go
+> look."* She is right, and Amino Club is the reference she sent **first**.
+>
+> Checked three of their live product pages. **Amino Club's bottle is TrueMG's
+> bottle**: clear glass, plain silver crimped cap, and a **paper label** — not
+> coloured glass. What changes is the **label's tint, one pale colour per
+> compound**, with the card's glow keyed to match:
+>
+> | Their product | Label + field |
+> |---|---|
+> | BPC-157 | mint |
+> | GHK-Cu | pale blue |
+> | AMP-3 (RT) | lilac |
+>
+> Same bottle every time. Only the colour changes.
+>
+> **This kills option (b) below as the only way to get there.** Nurish solved it
+> with one-colour glass; Amino Club solved it with colour on the label, and
+> Amino Club's solution needs **no product redesign at all** — TrueMG already
+> prints paper labels on clear glass with a crimped cap.
+>
+> **It also explains the flat grid better than "the cap is broken" does.**
+> Seventeen white labels on seventeen identical pale-blue tiles read as a parts
+> bin. `1B.6` already said exactly this — *"Amino Club keys the field to each
+> vial's own colour and it is the single biggest reason their grid looks
+> designed rather than stocked"* — **and it was never done.** The cards are one
+> blue for all seventeen.
+>
+> **So the real job is a colour system:** a pale shade per compound, carried on
+> the label and echoed in the card behind it, with `#1C8CD0` kept as the house
+> colour so the range still reads as TrueMG rather than a rainbow.
+>
+> - [ ] **1B.7 Propose a palette** — one colour per compound, shown on the real
+>   labels and the real cards, for Mila to approve before anything ships.
+>   Consequence to state plainly when proposing: the Canva labels finished
+>   12 Oct are white and would take a tint. That is artwork, not a change to the
+>   physical bottle.
+>
 > That splits the work in two, and it is Mila's call which:
 >
 > **(a) Copy the discipline, keep the product.** Fix the cap junction, lock all
