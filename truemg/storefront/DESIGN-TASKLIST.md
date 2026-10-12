@@ -275,3 +275,41 @@ Ranked by likely commercial impact. Several are owner-side, not design.
   its text cannot be resized, faded or moved.
 - **`customCss` caps at 10,000 characters** (2,029 used) and preview URLs die
   around 8,000.
+
+### 1E. Canva label artwork — the live labels
+
+The print PDFs in `truemg/assets/labels/` are a *different* artifact from the
+labels that actually go on the vials. The live ones are the Canva design
+`DAHXw-xpMJk` ("Copy of TRUEMG Labels", 20 pages, 1654×593). Edits there do not
+come back to this repo — this section is the record.
+
+- [x] **1E.1 Brand blue on all 20 pages — DONE 12 Oct 2026.** Every page carried
+  the legacy `#2365CD` family, confirmed two ways: Canva's stored values read
+  `#2365cd`, and pixel-sampling the rendered label gave `#2467ca` / `#276ac9` /
+  `#3265b2`. The tell is the green channel — 140 on brand blue against 101–130
+  on the legacy one, which is why it passes as "blue" at a glance.
+  Now `#1C8CD0` on **three** elements per page: the product-name text, the Gila
+  mark and the MG half of the vertical wordmark. **TRUE stays black** — it is a
+  separate element and was never wrong. Verified page by page at zoom, then
+  across all 20 thumbnails in grid view. Canva reports all changes saved.
+
+- **How it had to be done.** The Canva *API* refuses this: `recolor_element`
+  returns `not_permitted` on images, so the Gila and the MG block — both images,
+  not text — are unreachable from the connector. The *editor* does both fine.
+  Drive it through Chrome.
+  - Text took one pass: the colour panel offers **"Change all"**, which recolours
+    that text colour across every page at once. There is no equivalent for
+    images.
+  - Images are one element at a time, 36 of them. The loop that works:
+    screenshot → click the element → click the toolbar swatch **as its own tool
+    call** → click the "From your search" swatch → verify by zoom. The hex
+    persists in the picker's search field between elements.
+  - Two traps. The canvas re-zooms and re-scrolls on every selection, so
+    coordinates must be re-read from a fresh screenshot each time — batched
+    clicks land on empty space and fail *silently*. And a swatch click issued in
+    the same batch as the selection click never registers; it needs its own
+    round trip.
+
+- [ ] **1E.2 The batch field.** Still open. Where it goes is a design decision,
+  not a mechanical one, and the Canva API cannot set a typeface — text added
+  that way lands in the default font and will not match. Do it in the editor.
