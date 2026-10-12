@@ -284,6 +284,26 @@ colour *is* their brand colour.
 >
 > Nothing in it touches the glass, the cap, the mark or the blue.
 >
+> **Mila's verdict, same day: warm is right, the browns are wrong.**
+> *"It's right. I don't know if I like that. The Browns. Could we do another?"*
+>
+> The browns came from sampling `hero-spa.jpg` wholesale — but the tan in that
+> picture is the **furniture**, not the thing that makes it calm. What makes it
+> calm is the quality of the light. So v2 keeps the warmth and drops the tan:
+> four grounds at `truemg/assets/web/palette-grounds-v2.jpg`
+> (`palette_grounds.py`), each shown as three real catalog cards rather than as
+> swatches.
+>
+> | Ground | What it is | Risk |
+> |---|---|---|
+> | **Bone** | warm white, warmth carried by light alone | can go blank if the photography is weak |
+> | **Greige** | warm grey, no tan, modern and quiet | the safe one; least distinctive |
+> | **Eucalyptus** | the green off the spa shot's orchids and monstera, taken right down | boldest; nothing else in the category does it |
+> | **Blush** | the skin warmth from the hand shot | leans feminine — right or wrong, no middle |
+>
+> The per-compound tints are unchanged and are **not** what she objected to.
+> Awaiting a pick on the ground.
+>
 > ⚠️ The composites in `web/` all carry the **old smooth lizard and the old label
 > layout**, from before the 12 Oct rebuild. Whatever happens with the palette,
 > every hero and mood image needs re-rendering — which folds neatly into the
