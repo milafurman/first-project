@@ -171,3 +171,46 @@ built-in browser's mobile preset drives `truemglabs.com/?peek=1` at a true
 — a deliberate 1x1 that removes the floating cluster, since `hero-hand.jpg`
 already carries a vial. The selector matches nothing and the `float` animation
 rides nothing.
+
+## Verified live state, 12 Oct 2026 (measured, not assumed)
+
+A full read of the live store before picking up the design work. Four things
+were checked against the running site rather than against these notes:
+
+**The stylesheet is intact.** Live `customCss` is 2,316 characters against the
+repo's 4,700 — but that gap is **only stripped comments**. Parsed into rules,
+both sides give 25 rules and compare byte-equal after whitespace normalisation.
+Nothing has wiped it. Useful calibration: Lapis strips comments on save, so a
+shorter live string is not evidence of loss. Compare rules, never lengths.
+
+**The product images on the store are correct.** The live TESAMORELIN object is
+2000x2000 RGBA and byte-identical (md5 `a5d43bd0…`) to the repo's render. Its
+Gila was cropped out and set beside both candidate drawings: it is the **spiky**
+master, in brand blue — not the archived smooth mark. The worry that the store
+still carried pre-rebrand artwork is settled; it does not. Note the silhouette
+IoU test was useless here (23.8% spiky vs 26.9% smooth, i.e. it pointed the
+wrong way) because the crop was not scale-aligned to the candidates. **The
+side-by-side render decided it in one look.** Prefer looking to scoring when the
+scores are close.
+
+**The catalog serves 14 PNG and 3 JPG,** and the three JPGs are exactly SS-31,
+TMG-2TZ and TMG-3RT — the per-size-photo trap, still open and still showing the
+old ledge photographs.
+
+**The one-in-four empty render is still happening.** The very first catalog load
+of this session returned 17 cards' worth of nothing: zero `img`, zero
+`.lf-card`, HTTP 200. The next load was fine. This is the documented fault and
+it is still live — which is the reason every check above was run twice.
+
+## The descriptions are live, and that created a new fault
+
+All 17 redrafts are applied. But the **catalog card renders only the first
+sentence**, and nine redrafts were written as two, so nine cards now show a
+fragment — "Elamipretide.", "Thirty-nine residues.", "Ala-Glu-Asp-Gly."
+
+This is not a CSS problem and cannot be solved as one: the catalog page's HTML
+**never contains the second sentence**, so the truncation is upstream of
+anything a stylesheet can reach. The product page renders the full text, so
+nothing is lost in storage. Merging each pair into one sentence with a comma or
+an em dash fixes the card and costs nothing elsewhere. See `DESIGN-TASKLIST.md`
+1D.1b.

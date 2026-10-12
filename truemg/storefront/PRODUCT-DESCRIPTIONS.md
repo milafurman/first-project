@@ -1,6 +1,17 @@
 # The 17 product descriptions — redraft
 
-Drafted 12 Oct 2026. Paste into Lapis admin → Products → Catalog → each product
+> **STATUS, 12 Oct 2026: these are LIVE.** All seventeen were applied in the
+> Lapis admin and verified on the rendered catalog. This file is now the record
+> of what was written, not a to-do.
+>
+> ⚠️ **But nine of them truncate on the catalog card,** which renders only the
+> **first sentence**. The nine written as two sentences therefore show sentence
+> one alone — SS-31 as "Elamipretide.", TMG-2TZ as "Thirty-nine residues.",
+> EPITHALON as "Ala-Glu-Asp-Gly." The remedy is to merge each pair into a single
+> sentence, the way GHK-CU and IPAMORELIN already were. Tracked as 1D.1b in
+> `DESIGN-TASKLIST.md`. **The table below still shows the two-sentence form.**
+
+Drafted 12 Oct 2026. Pasted into Lapis admin → Products → Catalog → each product
 → Description. The connector cannot reach product data, so this step is manual.
 
 ## Why they changed

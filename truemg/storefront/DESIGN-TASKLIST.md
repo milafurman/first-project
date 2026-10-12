@@ -140,8 +140,22 @@ colour *is* their brand colour.
   that label and `file_upload` with `paths` — the client reads the file, so no
   base64 passes through context. Staging the file is not enough: click that
   card's own Upload button, then Save.
-- [ ] **1B.3 `BUILD` Re-render at 3× density.** Cards display at 344px, so ship
-  ≥1024×1024 and let Lapis downscale. Current 640px is the softness.
+- [x] **1B.3 `BUILD` Re-rendering would change nothing — CLOSED 12 Oct 2026.**
+  This task rested on a wrong premise and is withdrawn before anyone spends a
+  day on it. The uploaded masters are **already 2000x2000**: the live
+  TESAMORELIN object downloads at 2000px RGBA and is **byte-identical** to
+  `assets/vials/tmg-tesamorelin.png` (same md5, zero differing pixels).
+
+  The 640px is **Lapis's own transform**, requested by the theme's markup as
+  `?width=640&quality=80` on a `/render/image/` URL. The origin serves whatever
+  width is asked for — 1024, 1200 and 2000 all return at full size on request —
+  so the pixels exist and are simply not being asked for. CSS cannot rewrite an
+  `img` `src`, so this is **not reachable from `customCss`**. It belongs with
+  2.5 as a question for Lapis support: ask the theme to request `width=1024`.
+
+  At 344 CSS px on a 2x screen the card needs 688 device px and receives 640 —
+  0.93x. That is the softness, and it is one URL parameter away from fixed, on
+  their side.
 - [ ] **1B.4 `BUILD` Rebuild the label composition.** Product name large and
   centred; `TRUEMG` small above it; mg in a boxed chip; hairline rules.
   **Constraint: the label text itself must come from the approved artwork in
@@ -192,11 +206,42 @@ on the browser tab and the vial, not in the site header."* Its 23px-left /
 
 ### 1D. Overall UI/UX quality
 
-- [ ] **1D.1 `ADMIN` Rewrite all 17 product descriptions.** The one-sentence
-  skeleton is the loudest AI tell and **the MCP cannot reach it** — product data
-  is out of the connector's scope. Target: one specific line each, under
-  ~15 words, no "is a … classified within". Research-use framing intact; no
-  mechanism-in-a-person claims.
+- [x] **1D.1 `ADMIN` All 17 descriptions are LIVE — verified 12 Oct 2026.**
+  Checked against the rendered catalog, not assumed: every one of the seventeen
+  now carries its redraft from `PRODUCT-DESCRIPTIONS.md`. The
+  `[NAME] is a [noun] classified within [family]` skeleton is gone from the
+  site. An earlier note here and the header of `PRODUCT-DESCRIPTIONS.md` both
+  said these were "written but not yet live" — that was stale.
+
+- [ ] **1D.1b `ADMIN` Nine of them truncate to a fragment on the catalog card.**
+  The new fault, created by the fix. The card renders **only the first
+  sentence**; the product page renders the whole thing. Nine redrafts were
+  written as two sentences, so the card shows sentence one alone — and three of
+  those are useless on their own:
+
+  | Product | What the card shows today |
+  |---|---|
+  | **SS-31** | "Elamipretide." |
+  | **TMG-2TZ** | "Thirty-nine residues." |
+  | **EPITHALON** | "Ala-Glu-Asp-Gly." |
+  | SEMAX | "A modified fragment of ACTH." |
+  | MOTS-C · NAD+ · SELANK · THYMOSIN ALPHA-1 · VITAMIN B12 | reads as a sentence, but the second half is lost |
+
+  **Proven, not inferred, on EPITHALON:** the product page at
+  `/catalog/epithalon-f9mh` renders "Ala-Glu-Asp-Gly. Four residues, synthesised
+  after a pineal peptide fraction." in full, while its card shows the first four
+  words. The full text is stored; the card is what truncates. The catalog page's
+  own HTML never contains the second sentence at all, so the truncation happens
+  in the data the catalog receives, not in CSS — **no stylesheet rule can fix
+  this.**
+
+  Fix: replace the first full stop with a comma or an em dash, exactly as was
+  already done for GHK-CU ("…copper(II) ion — three residues and a metal.") and
+  IPAMORELIN ("Five residues, selective at…"), which is why those two read
+  correctly on the card today. Nothing is lost on the product page. Nine edits,
+  one punctuation mark each. Confirm each field's live text at edit time rather
+  than pasting from the markdown — only EPITHALON's stored text has been read
+  back in full.
 - [x] **1D.2 `MCP` Fix the catalog type scale.** Catalog `h1` is 36px with 0px
   top padding and no max-width container, where About, FAQ and Lab Results are
   all 48px / 80px / 768px. The commercial page is the least considered one.
