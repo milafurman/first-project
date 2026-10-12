@@ -282,6 +282,28 @@ on the browser tab and the vial, not in the site header."* Its 23px-left /
 
 ---
 
+### 1F. Two product web addresses carry names the copy rules forbid
+
+Spotted 12 Oct 2026 while reading the live catalog. The descriptions were
+cleaned up; **the URLs were not**, and they are public, indexable and quoted in
+every share link.
+
+| Product | Its address on the store today |
+|---|---|
+| **TMG-BAC** | `/catalog/bacteriostatic-water-tzbc` |
+| **TMG-2TZ** | `/catalog/tirzepatide-k8ms` |
+
+`PRODUCT-DESCRIPTIONS.md` is explicit that TMG-BAC "is deliberately not called
+bacteriostatic water" because that is a specific regulated drug product name —
+and the address says it anyway. `tirzepatide` names the originator molecule
+outright rather than the catalogue designation.
+
+The slug is generated from whatever the product was first called, so these are
+fossils of the pre-rebrand names. **Changing a URL is not cosmetic** — old links
+break and search engines have to be told — so this is Mila's call with whoever
+advises her on the wording, not a tidy-up. Raised here so it is not discovered
+later. `ADMIN`, and likely needs a redirect from the old address.
+
 ## Phase 2 — What Nurish and Amino Club do that we have not attempted
 
 Ranked by likely commercial impact. Several are owner-side, not design.
