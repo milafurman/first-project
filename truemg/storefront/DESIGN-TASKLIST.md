@@ -253,11 +253,41 @@ colour *is* their brand colour.
 > the label and echoed in the card behind it, with `#1C8CD0` kept as the house
 > colour so the range still reads as TrueMG rather than a rainbow.
 >
-> - [ ] **1B.7 Propose a palette** — one colour per compound, shown on the real
->   labels and the real cards, for Mila to approve before anything ships.
->   Consequence to state plainly when proposing: the Canva labels finished
+> - [x] **1B.7 Propose a palette** — DONE 12 Oct 2026, awaiting Mila's approval.
+>   Sheet at `truemg/assets/web/palette-proposal-v1.jpg`, built by
+>   `scratchpad/palette.py`. Consequence stated: the Canva labels finished
 >   12 Oct are white and would take a tint. That is artwork, not a change to the
 >   physical bottle.
+>
+> ### What building it turned up — the warm/cold split
+>
+> Mila said the thing she likes about Nurish is *"the vibe it gives… a really
+> calm vibe. That's why I created that hand."* So the palette was derived from
+> **her own assets** rather than invented. Dominant colours, sampled:
+>
+> | Asset | Hue | Reads as |
+> |---|---|---|
+> | `web/hand-vial-labelled.jpg` | 20–42, sat 18–28% | warm sand, clay, cream |
+> | `web/hero-spa.jpg` | 32–34, sat 19–37% | warm stone, brass, soft green |
+> | `web/hero-float.jpg` | **206–229**, sat 12–44% | cold blue-grey |
+>
+> **The two moods she has are near opposites on the wheel.** The hand and the spa
+> are warm; the floating-vials hero — the one actually carrying product — is
+> cold. That, not the cap, is the biggest reason the store reads clinical while
+> the hand reads calm. In the hand shot the vial is the *only* cool object in a
+> warm room, and that single contrast is doing all the work.
+>
+> So the proposal is: **warm paper as the ground, brand blue as the one cool
+> note, and a pale paper tint per compound.** Five families — repair, signal,
+> metabolic, cofactor, plain — so seventeen labels read as a range rather than a
+> rainbow. TMG-BAC stays white because it is a solution, not a compound.
+>
+> Nothing in it touches the glass, the cap, the mark or the blue.
+>
+> ⚠️ The composites in `web/` all carry the **old smooth lizard and the old label
+> layout**, from before the 12 Oct rebuild. Whatever happens with the palette,
+> every hero and mood image needs re-rendering — which folds neatly into the
+> cap fix at `1I.1`, one render pass for all of it.
 >
 > That splits the work in two, and it is Mila's call which:
 >
