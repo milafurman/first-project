@@ -153,9 +153,17 @@ colour *is* their brand colour.
   `img` `src`, so this is **not reachable from `customCss`**. It belongs with
   2.5 as a question for Lapis support: ask the theme to request `width=1024`.
 
-  At 344 CSS px on a 2x screen the card needs 688 device px and receives 640 —
-  0.93x. That is the softness, and it is one URL parameter away from fixed, on
-  their side.
+  ⚠️ **Correction — there may be no softness at all.** This note first repeated
+  the diagnosis's 344px figure and concluded the card needs 688 device pixels
+  and gets 640, i.e. 0.93x. **That 344 was never measured on the live card.**
+  A parallel session measured the rendered image box at **307px**, which against
+  a 640px source is **2.08x** — above the 2x a retina screen asks for. On that
+  measurement the images are already sharp enough and nothing needs doing.
+
+  Either way the task is withdrawn: re-rendering cannot help, because the
+  masters are already 2000px. The only open question is whether the delivered
+  width is worth raising with Lapis at all, and the live measurement says
+  probably not. Re-measure the box before spending anything on it.
 - [ ] **1B.4 `BUILD` Rebuild the label composition.** Product name large and
   centred; `TRUEMG` small above it; mg in a boxed chip; hairline rules.
   **Constraint: the label text itself must come from the approved artwork in
