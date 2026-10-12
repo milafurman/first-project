@@ -102,6 +102,62 @@ line, hairline rules — one centred axis, top to bottom.
   **Do not ship a countdown we cannot honour** — a timer that resets forever is
   an FTC problem, and theirs works because their rotation is real.
 
+### 1G. ⚠️ The store is unreliably slow, and when it is slow it shows a BLANK page
+
+Measured 12 Oct 2026, five consecutive loads of `/catalog?peek=1`, cache-busted,
+reading `domContentLoadedEventEnd` from the browser's own navigation timing:
+
+| Run | Time to DOM ready |
+|---|---|
+| 1 | **21.1 s** |
+| 2 | 3.8 s |
+| 3 | 1.9 s |
+| 4 | 1.1 s |
+| 5 | **11.8 s** — still 15 characters of text after 10 s of waiting |
+
+**Two of five took over ten seconds.** On the slow runs the page is not a
+spinner or a skeleton — it is blank white. The home page `/store` did the same
+thing twice in a row, then filled in somewhere between 10 s and 15 s.
+
+**It is not the connection and not the hosting.**
+- Control: `example.com` in the same browser, same minute — **0.22 s**.
+- Time to first byte on the slow runs — **93 ms**. The server answers instantly.
+
+So the delay is entirely client-side, after the HTML arrives. No console errors
+were captured.
+
+This almost certainly outranks every cosmetic task in this file: a visitor who
+gets a blank page for ten seconds leaves before seeing any of it. It matches the
+"one-in-four empty render" already noted in `NOTES.md`, but with numbers.
+
+- [ ] **1G.1 Characterise it properly before escalating.** More runs, both
+  pages, and a check of whether it tracks with a particular asset or request.
+  Do not blame `customCss` without evidence — 25 rules do not cost 20 seconds.
+- [ ] **1G.2 Likely a Lapis support question, like 1B.3.** If the delay is in
+  their bundle or their data fetch, nothing in this repo can fix it, and the
+  useful output is a reproducible report with these timings.
+
+### 1H. The three odd catalog cards — DIAGNOSED 12 Oct 2026
+
+The cause is not a per-size photo after all. It is simply an **older upload**.
+
+Reading the live card images, fourteen of the seventeen point at one contiguous
+batch (ids `179178944`–`179179029`). The three that break the grid point at a
+much earlier batch:
+
+| Product | Image id | |
+|---|---|---|
+| SS-31 | `179170427` | photograph |
+| TMG-2TZ | `179170300` | photograph |
+| TMG-3RT | `179170305` | photograph |
+
+They are the pre-render photographs; they were never swapped when the other
+fourteen were. The correct renders already exist and are already right.
+
+- [ ] **1H.1 `ADMIN` Replace those three product images** with the matching
+  renders from `truemg/assets/vials/`. Admin UI work — drivable through the
+  browser, as the earlier vial uploads were. Changes live product images.
+
 ### 1B. The vials (ours look generated, Nurish looks smooth)
 
 The reference is not photography. It is a **repeatable render**: one master
