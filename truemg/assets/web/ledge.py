@@ -120,5 +120,10 @@ if __name__ == "__main__":
         tile(n, o)
         print("  %-40s %-10s %d KB" % (o, family(n)[0], os.path.getsize(o) // 1024))
     print("%d tiles" % len(names))
-    import float as _f
+    # float.py lives in ../vials and is not importable from here by default,
+    # which is why this line used to crash after the 17 tiles were already
+    # written: the tiles looked fine and the contact sheet silently never built.
+    import sys, importlib
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "vials"))
+    _f = importlib.import_module("float")
     _f.contact_sheet(OUT, os.path.join(OUT, "contact-sheet.jpg"), ext=".jpg")

@@ -1,5 +1,49 @@
 # Vial images — transparent, all 17
 
+> **2026-10-12 — the cap is fixed.** All 17 re-rendered. Mila: *"Look at the
+> actual bottle and the cap. The blue doesn't go all the way to the white, and
+> the white looks crooked."* Both of those were one bug.
+>
+> The cap is a cylinder photographed slightly from above, so **both edges of
+> the aluminium band are ellipse arcs.** `recolour_crimp` was painting the blue
+> between two flat fractions of the vial's height (`CRIMP = (0.085, 0.170)`). A
+> straight line can only agree with an arc at one point, so what was left over
+> was a **wedge** of bare metal — 16px under the middle of the white disc,
+> about 10px at the sides. A parallel strip would have read as a design choice.
+> A wedge reads as crooked, which is exactly what she saw.
+>
+> `find_crimp()` now measures both edges **per column** out of the photograph
+> itself — steepest darkening for the top (the shadow seam where the plastic
+> overhangs the metal), last metal row for the bottom (the cap overhangs the
+> glass, so at the outer columns there is background below the band and not
+> glass, and looking for "the first dark row" never finds one). Both edges are
+> median-filtered and fitted low-order, because they are shallow arcs and a
+> wild column is noise. A degree-4 fit to the BOTTOM edge chased its own noise
+> and scalloped the band; it is degree 2.
+>
+> Measured result: top edge 306 under the middle rising to 314 at the sides
+> (a 9px arch), bottom 460 to 466 (6px). Bare aluminium across all 17 fell from
+> 341,904 pixels to 211,055 — and everything remaining is the white plastic
+> disc and the glass neck, which are not the cap band. In the seam itself,
+> rows 312–322 went from ~724 grey pixels to 77, and those 77 are the
+> anti-aliased boundary, which has to be there.
+>
+> Before and after: `../web/cap-before-after.jpg`.
+>
+> **Everything downstream was re-rendered in the same pass** — `float/`,
+> `foil/`, `tinted/`, `ledge/`, both contact sheets, `blue-crimp-detail.jpg`,
+> and in `../web/` the hand composites, the spa composites, the scene plates,
+> the tiles, the cluster hero and all three video pairs with their posters.
+>
+> ⚠️ **This needs numpy, scipy and pillow, and none of them are installed
+> system-wide on this machine.** `render.py` could not run at all until a
+> virtualenv was made for it. If a future session finds `ModuleNotFoundError:
+> scipy`, that is why — make a venv, do not rewrite the script around it.
+>
+> `caps/` was deliberately NOT rebuilt. Those sheets are the exploration that
+> chose the cap colour in the first place; rebuilding them would change what the
+> exploration showed. They are history, not product images.
+
 > **2026-10-09 — the mark on the label changed.** Mila went back to the
 > ORIGINAL Gila, the spiky crest with the feathered mane. No vials had been
 > printed yet, so the label artwork moved with the brand instead of diverging

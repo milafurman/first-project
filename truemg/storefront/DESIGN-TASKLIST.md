@@ -154,11 +154,58 @@ much earlier batch:
 They are the pre-render photographs; they were never swapped when the other
 fourteen were. The correct renders already exist and are already right.
 
-- [ ] **1H.1 `ADMIN` Replace those three product images** — **ON HOLD, see 1I.**
-  The renders that would replace them carry a cap defect. Doing this now spreads
-  the defect to three more cards and means uploading twice.
+- [ ] **1H.1 `ADMIN` Replace those three product images** — **UNBLOCKED
+  12 Oct 2026.** The cap defect is fixed and all 17 are re-rendered, so this is
+  now just the upload. Still `ADMIN`: no connector can put a product image in
+  Lapis, so it is Mila at the keyboard. Do all 17 in the one sitting.
 
-### 1I. ⚠️ THE CAP IS WRONG ON ALL 17 RENDERS
+### 1I. ✅ THE CAP — FIXED 12 OCT 2026
+
+> **Done.** Both faults were one bug, and the second one was misdiagnosed below.
+> Kept as written, with the correction, because the wrong diagnosis is the
+> interesting part.
+>
+> **The actual cause.** The cap is a cylinder photographed slightly from above,
+> so both edges of the aluminium band are **ellipse arcs**. `recolour_crimp()`
+> was painting the blue between two flat fractions of the vial's height. A
+> straight line can only agree with an arc at one point, so the leftover bare
+> metal was a **wedge** — 16px under the middle of the white disc, about 10px
+> at the sides.
+>
+> **Fault 2 was not real.** The white disc is *not* tilted. Its lower edge is an
+> arc: highest at the centre of the cap (row 306) and lower at both sides
+> (317 left, 311 right). The original "10px lower on the right" came from
+> sampling exactly two columns, x=760 and x=1240 — which are 261px and 219px
+> from the cap's centre, so of course they came back at different heights. Two
+> points on a curve, read as a slope. What Mila's eye actually caught was the
+> wedge, and she was right that something was crooked; it was the strip, not the
+> disc.
+>
+> `find_crimp()` measures both edges per column from the photograph now. Bare
+> aluminium across all 17 fell from 341,904 pixels to 211,055, and all of the
+> remainder is white plastic and glass neck rather than cap band. Before and
+> after: `../assets/web/cap-before-after.jpg`. Full write-up in
+> `../assets/vials/README.md`.
+>
+> Everything downstream was re-rendered in the same pass: the floated set, the
+> foil cuts, the tinted mocks, the ledge tiles, both contact sheets, the detail
+> shot, the hand and spa composites, the scene plates, the tiles, the cluster
+> hero and all three video pairs with posters.
+>
+> Three latent bugs surfaced while doing it and are fixed: a hardcoded Linux
+> font path in four scripts (now `assets/_fonts.py`, asked by role) which meant
+> the foil spec card and the vial contact sheet could not be rebuilt on a Mac at
+> all; `web/ledge.py` crashing on `import float` after its tiles were already
+> written, so its contact sheet silently never built; and
+> `web/hero-float-mobile.jpg`, which had no script behind it and so fell out of
+> date invisibly every time the vials changed. `blue-crimp-detail.jpg` had the
+> same problem and was the oldest wrong picture in the project — legacy blue,
+> smooth lizard and the silver strip, all three.
+>
+> ⚠️ numpy, scipy and pillow are **not** installed system-wide here. `render.py`
+> needs all three. Make a virtualenv; do not rewrite the script around it.
+
+#### The original diagnosis, as written
 
 Spotted by Mila 12 Oct 2026, looking at `tmg-ss-31.png` — *"the blue doesn't go
 all the way to the white, and the white looks crooked."* Both are real.
@@ -187,8 +234,9 @@ re-labelled, so every live product image on the store has this.
 error the eye catches before it can name it — a cap that could not be assembled
 that way.
 
-- [ ] **1I.1 Fix the cap in the master, then re-render all 17 and upload all 17
-  once.** Folds 1H.1 into it. This is the big 1B vial job, not a quick pass.
+- [x] **1I.1 Fix the cap in the master, then re-render all 17** — DONE
+  12 Oct 2026. The *upload* half is 1H.1 above and is Mila's, because the Lapis
+  connector cannot reach product images.
 
 ### 1B. The vials (ours look generated, Nurish looks smooth)
 
