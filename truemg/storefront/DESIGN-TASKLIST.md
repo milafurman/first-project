@@ -352,6 +352,23 @@ colour *is* their brand colour.
 > change — that part was true and is not the reason for the hold. The reason is
 > that Mila has not asked for it.
 >
+> **And the labels are not needed for the colour.** Mila asked the right
+> question — *"Why can't it be eucalyptus on the site but not the actual
+> label?"* It can, and it is now proven rather than assumed. Three layers, and
+> only the third reaches a printer:
+>
+> | Layer | Lives in | Reaches a printer? |
+> |---|---|---|
+> | The page ground | the store `background` and the `lf-section-*` bands | no |
+> | The field behind each bottle | `.aspect-square`, keyed per product | no |
+> | The label artwork | the Canva design, 20 pages | **yes — held** |
+>
+> Layers 1 and 2 are the whole visual change. See
+> `live/CARD-TINTS.md` for how the per-product keying works, the verification,
+> and the trap: the rules hang off each product's URL, and **two of the
+> seventeen URLs are already slated to change under `1F`** — so 1F goes first,
+> or those two cards silently fall back to the house blue.
+>
 > **Mila's verdict, same day: warm is right, the browns are wrong.**
 > *"It's right. I don't know if I like that. The Browns. Could we do another?"*
 >
