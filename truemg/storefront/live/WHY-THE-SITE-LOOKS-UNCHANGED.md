@@ -143,3 +143,38 @@ A draft with **7 changes**, unpublished: all six colours
 (`background` `card` `secondary` `border` `muted` `mutedForeground`) plus
 `productImageBg` → `#F1F5F1`. Still outstanding at that point: the Custom CSS
 (her paste had dropped the stylesheet) and the hero images.
+
+---
+
+## "Why is the formatting off" — it was browser zoom, measured
+
+13 Oct 2026. Mila sent a screenshot of the home page: content squeezed into a
+narrow ribbon with a huge white gutter, headline looking tiny against a
+full-bleed hero. Two separate things, and **neither was a broken layout.**
+
+**First: nothing had been published.** Read the live store at that moment —
+`background` `#ffffff`, `productImageBg` `#ffffff`, **0** per-product card
+rules, `customCss` still 2,316 characters, section bands still `#F3F6FC` /
+`#F8F6F1` / `#EDF2FB`, footer still `#0A192F`. The 29 draft changes were
+untouched. She was looking at the old site.
+
+**Second: the zoom.** The theme centres a fixed **1280px** content column, so
+the share of screen it fills is purely a function of render width:
+
+| Render width | Content column | How it reads |
+|---|---|---|
+| 1600px | 1280px = **80%** | correct — hero full-bleed, 3 cards at 394px each, h1 at 60px |
+| 4320px | 1280px = **30%**, 1520px left gutter | a ribbon in a field of white |
+
+Her screenshot had content running roughly 680→1270 of 2000px ≈ **30%**.
+Forcing a 4320px viewport reproduced it to the pixel. So the browser was zoomed
+out to about a third. `Cmd+0` is the fix.
+
+**Worth keeping as a habit:** before diagnosing a layout from a screenshot,
+measure the container against the viewport. A fixed max-width column at low zoom
+looks exactly like a broken grid, and chasing it in CSS would have made the real
+thing worse.
+
+⚠️ Also note the browser pane reports `viewport: 0` and nonsense element widths
+when it has not been given a size. Set a viewport with `resize_window` before
+measuring anything, or the numbers are garbage.
