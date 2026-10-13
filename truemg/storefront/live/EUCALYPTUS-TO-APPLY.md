@@ -1,3 +1,14 @@
+> # ⛔ SUPERSEDED — do not follow this file
+>
+> Written 12 Oct 2026 against an admin that does not work the way it describes.
+> It sends you to a "Design" menu item that **does not exist**, to colour
+> **fields** that **do not exist** (Design studio is a chat box), and it tells
+> you to paste a jsDelivr URL into the hero image fields, which the admin
+> **refuses** — those slots take media-library uploads only.
+>
+> **Use `TONIGHT.md`.** Kept only as the record of how the change was built and
+> validated.
+
 # The eucalyptus site change — built, previewed, NOT saved
 
 > **See `DO-THIS-IN-LAPIS.md` for the keystroke version**, which also covers the
