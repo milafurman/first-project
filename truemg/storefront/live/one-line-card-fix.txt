@@ -1,0 +1,6 @@
+In the Design studio chat box, paste this whole message:
+
+Change one line in the Custom CSS. Find the rule that starts
+.lf-card .aspect-square
+and set its background to #E1EAF4 instead of #EDF4FB. Change nothing else
+in the Custom CSS. Then show me the preview.
