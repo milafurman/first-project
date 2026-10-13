@@ -1,5 +1,9 @@
 # TONIGHT — what is left, in the real admin
 
+> **Status 13 Oct:** the stylesheet is in (draft at 29 changes). What remains is
+> **Publish**, then the seventeen product photos. The hero is deferred on purpose
+> — see Step 2.
+
 > **Rewritten 13 Oct 2026.** The previous version of this file was wrong twice:
 > it sent you to a "Design" menu item that does not exist, and told you to paste
 > hex codes into colour fields that do not exist either. Corrected below against
@@ -39,50 +43,48 @@ Nothing to redo. These are waiting on Publish.
 
 ---
 
-# STEP 1 — the stylesheet (one paste)
+# STEP 1 — the stylesheet — ✅ DONE 13 Oct 2026
 
-Into the chat box, type this line and then paste the whole of
-**`customCss-eucalyptus.css`** under it:
-
-> Replace the Custom CSS entirely with exactly this, nothing added or
-> reformatted:
-
-The last attempt reported *"The stylesheet didn't come through in your message"*
-— the file contents had not been included. Make sure the CSS is actually in the
-message body.
-
-**This paste is what gives each of the seventeen bottles its own card colour.**
-Without it the cards all share one pale green.
+Mila pasted it. The draft went from **7 changes to 29**, and the conversation in
+Design studio is named `customCss-eucalyptus.css`. Nothing more to do here.
 
 ---
 
-# STEP 2 — the two hero pictures (upload, do NOT use a web address)
+# STEP 2 — the hero pictures — ⏸ DEFERRED, and deliberately
 
-The chat will refuse a URL here: *"in this console those image spots only take
-images from your media library, not web addresses."*
+**There is no media library page and no image-upload slot in Design studio.**
+Checked: the sidebar's *Online store* group holds only Design studio, Layouts,
+Journal and A/B tests, and *Sections and pages* lists only custom sections the
+AI built. The chat's own answer:
 
-**That is a better outcome than the plan it replaced** — uploading the pictures
-removes the jsDelivr commit-pin from the store entirely. No seven-character hash
-to mistype, nothing to re-point when an image changes, no dependency on a pushed
-commit. The old `a2e36e7` → `95bbfb1` instruction is **abandoned**; ignore it
-wherever it still appears.
+> *"Product photos, including new vial images, are uploaded on the Products page
+> in the console: open a product and add its photos there. Once they're uploaded,
+> I can see them in your media library and place them in sections or image slots
+> around the store for you."*
 
-Files are staged and labelled in `truemg/assets/web/UPLOAD-HERO/`:
+So a hero image has to be uploaded as **a product's photo** first, which is a
+mess for something that is not a product.
 
-| File | Goes to |
-|---|---|
-| **HERO desktop – hero-hand.jpg** (2560×1150) | "Hero background image URL" |
-| **HERO phone – hero-spa-mobile.jpg** (1080×1500) | "Hero background image URL for phones" |
+**Not worth it tonight.** The live hero is already the hand shot and it reads
+well — checked it. Its only flaw is that the small vial in it carries the old
+cap and the old mark, at hero size, in a hand, slightly soft. Nobody catches
+that. It is a five-minute job on another day.
 
-Upload both to the media library, then tell the chat which is which.
+The two files stay staged in `truemg/assets/web/UPLOAD-HERO/` for whenever that
+day comes.
 
 ---
 
-# STEP 3 — Publish
+# STEP 3 — PUBLISH
 
-Publishes everything together: your 7 colour changes, the stylesheet and the
-heroes. Check it at **https://truemglabs.com/?peek=1** (`?peek=1` gets you past
-the coming-soon curtain).
+The **Publish** button in Design studio ships all 29 draft changes at once: the
+six colours, the product-photo background and the stylesheet.
+
+Every rule in it was dry-run validated against the live store beforehand — `ok`,
+nothing refused. Design studio keeps **History** and per-request **Undo**, so
+this is reversible from inside the tool.
+
+Then check **https://truemglabs.com/?peek=1**.
 
 ---
 
