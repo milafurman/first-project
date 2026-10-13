@@ -1,5 +1,8 @@
 # The eucalyptus site change — built, previewed, NOT saved
 
+> **See `DO-THIS-IN-LAPIS.md` for the keystroke version**, which also covers the
+> hero URLs. The save was refused twice; this file is the background.
+
 Mila said "go ahead" on 12 Oct 2026. Everything is ready. The save itself was
 **refused by this session's safety rule** (it classes a live-store write as a
 production deploy), so the last step needs either Mila's permission or Mila's
