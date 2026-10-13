@@ -302,7 +302,44 @@ colour *is* their brand colour.
 > | **Blush** | the skin warmth from the hand shot | leans feminine — right or wrong, no middle |
 >
 > The per-compound tints are unchanged and are **not** what she objected to.
-> Awaiting a pick on the ground.
+>
+> **Mila picked EUCALYPTUS, 12 Oct 2026** — *"Definitely go with the eucalyptus."*
+> That is the ground. Full build at `truemg/assets/web/palette-eucalyptus-shelf.jpg`
+> and `-hero.jpg`, generator `palette_eucalyptus.py`.
+>
+> ### The tints had to be re-cut for a green ground
+>
+> v1's five families were rose / sage / wheat / lilac / ice. On a **green** page
+> the sage and moss members stopped being a distinction — they just echoed the
+> ground and read as "no colour". So the families were respaced to five hues
+> that are each far from the page's green and from each other:
+>
+> | Family | Hue | Members |
+> |---|---|---|
+> | repair | rose | GHK-CU, BPC-157+TB-500, KLOW |
+> | signal | butter | IPAMORELIN, CJC-1295+IPA, TESAMORELIN |
+> | metabolic | sage — deliberately the house green, worn by the flagships | TMG-2TZ, TMG-3RT, MOTS-C |
+> | neuro | lilac | SEMAX, SELANK |
+> | cofactor | ice blue | NAD+, EPITHALON, THYMOSIN ALPHA-1, SS-31, VITAMIN B12 |
+> | plain | white | TMG-BAC |
+>
+> **`1B.6` is finally answered in the same move.** The card's image field is now
+> a very pale wash of that compound's own tint instead of one pale blue for all
+> seventeen, which is the thing Amino Club does and the single biggest reason
+> their grid looks designed rather than stocked.
+>
+> ### What eucalyptus costs: the hand shot needs a regrade
+>
+> `hand-vial-labelled.jpg` has a **beige** background. On a green page it reads
+> as a photograph from a different room. `-hero.jpg` shows it as-is against a
+> regrade — saturation pulled to about two-thirds and a 12% eucalyptus wash laid
+> over. It works, it is one pass in software, and **no reshoot is needed.** The
+> blue cap actually gains from it, because it is no longer competing with an
+> orange wall.
+>
+> Open: the regrade is a global adjustment, so the skin cools slightly along with
+> the room. A masked version that protects the hand would be better and is a
+> bigger job. Worth doing only once the ground is locked for real.
 >
 > ⚠️ The composites in `web/` all carry the **old smooth lizard and the old label
 > layout**, from before the 12 Oct rebuild. Whatever happens with the palette,
