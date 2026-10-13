@@ -1,6 +1,31 @@
-In the Design studio chat box, paste this whole message:
+Paste this whole message into the Design studio "What should change?" box:
 
-Change one line in the Custom CSS. Find the rule that starts
-.lf-card .aspect-square
-and set its background to #E1EAF4 instead of #EDF4FB. Change nothing else
-in the Custom CSS. Then show me the preview.
+In the Custom CSS there are now TWO rules targeting .lf-card .aspect-square.
+Delete the one that says background:#EDF4FB!important entirely.
+Then change the remaining one to read exactly:
+.lf-card .aspect-square{background:#E1EAF4!important}
+Change nothing else in the Custom CSS and do not change any colour settings.
+
+---
+
+WHY THE FIRST ATTEMPT FAILED (13 Oct 2026)
+
+The first version of this file said only "change its background from #EDF4FB to
+#E1EAF4". The editor did not edit the existing line -- it APPENDED a second rule
+with the same selector and no !important:
+
+    .lf-card .aspect-square{background:#EDF4FB!important}   <- original, still there
+    .lf-card .aspect-square { background: #E1EAF4; }        <- added, no !important
+
+Identical selectors, so !important wins regardless of order. The change
+published and did nothing. Verified on the live page: the field stayed
+rgb(237,244,251).
+
+Two lessons for any instruction given to this editor:
+
+  * say DELETE the old rule, do not say "change the value" -- it appends
+  * carry !important through explicitly; every rule already in this stylesheet
+    has it, so a replacement without it is dead on arrival
+
+Check afterwards by computed style, not by whether the publish succeeded. A
+successful publish of an ineffective rule looks exactly like success.
