@@ -12,14 +12,14 @@ three parts in one save, or do 1 and 2 first and paste 3 last.
 ## 1. Point the hero at the new pictures
 
 Three fields still point at commit `a2e36e7`, which is a snapshot from before
-the cap was fixed. Change `a2e36e7` to `a7ae839` in each. Nothing else about the
+the cap was fixed. Change `a2e36e7` to `95bbfb1` in each. Nothing else about the
 URL changes.
 
 | Field | New value |
 |---|---|
-| `heroBackgroundUrl` | `https://cdn.jsdelivr.net/gh/milafurman/first-project@a7ae839/truemg/assets/web/hero-hand.jpg` |
-| `heroBackgroundMobileUrl` | `https://cdn.jsdelivr.net/gh/milafurman/first-project@a7ae839/truemg/assets/web/hero-spa-mobile.jpg` |
-| `heroMediaUrl` | `https://cdn.jsdelivr.net/gh/milafurman/first-project@a7ae839/truemg/assets/web/pixel.png` |
+| `heroBackgroundUrl` | `https://cdn.jsdelivr.net/gh/milafurman/first-project@95bbfb1/truemg/assets/web/hero-hand.jpg` |
+| `heroBackgroundMobileUrl` | `https://cdn.jsdelivr.net/gh/milafurman/first-project@95bbfb1/truemg/assets/web/hero-spa-mobile.jpg` |
+| `heroMediaUrl` | `https://cdn.jsdelivr.net/gh/milafurman/first-project@95bbfb1/truemg/assets/web/pixel.png` |
 
 **The branch is pushed and the CDN is serving these.** Verified: the new
 `hero-hand.jpg` comes back from the CDN byte-identical to the local file,
