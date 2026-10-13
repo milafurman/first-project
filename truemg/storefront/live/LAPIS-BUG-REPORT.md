@@ -141,3 +141,29 @@ anything Lapis does. Reporting "the API failed" would have them test it, find it
 working, and discount the rest of a report that is otherwise solid. So item 2
 says the API is fine and points the blame at the admin UI, which is where it
 belongs — and that makes the report harder to wave away, not easier.
+
+---
+
+## SENT — 13 Oct 2026, 08:06 UTC
+
+Mila sent it herself, from `mila@girlandthekitchen.com`, to **austin@byaus.co**,
+with Sam on **BCC** (the draft had him on CC; she used BCC, so Austin cannot see
+he is copied).
+
+Subject: *TrueMG Labs — Design studio Custom CSS, and intermittent blank-page
+loads*
+
+**Read back from the sent folder and verified intact** — all four issues, all
+the measured figures, the accuracy note saying their API is fine, and the
+card-processing paragraph flagged as not-a-complaint. Nothing mangled.
+
+Two cosmetic artefacts of plain-text wrapping, neither worth a follow-up: the
+timing table lost its column alignment, and some lines broke mid-phrase.
+
+She then asked for it to be unsent. **It cannot be.** Gmail's undo window is a
+few seconds and there is no recall to an external address. Checked the sent
+folder rather than asserting it, which also confirmed the content was good —
+the useful answer to "unsend it" was "here is exactly what he received, and it
+is fine."
+
+**Awaiting Austin's reply.** He asked Sam to be told when it arrived.
