@@ -1,5 +1,13 @@
 # WHERE THIS ACTUALLY STANDS — 13 Oct 2026
 
+> **Stock is NOT Mila's job.** *"They're telling me to do the fucking stock.
+> That's the inventory guy. They can do that after I'm done with the site."*
+> The finding is real and recorded in `CAN-THE-STORE-TAKE-AN-ORDER.md` — 20
+> variants, 0 units, nobody can check out — but it belongs to whoever runs
+> inventory. Do not put it on her list again.
+>
+> **What is left for Mila is two things: one paste, and three photos.**
+
 > **The eucalyptus is dead.** Mila: *"I don't want the eucalyptus. Like the blue
 > more. The eucalyptus didn't match the logo."* She is right — the mark is
 > `#1C8CD0`, and a green ground puts the only piece of brand colour on the page
