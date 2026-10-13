@@ -88,27 +88,37 @@ Then check **https://truemglabs.com/?peek=1**.
 
 ---
 
-# STEP 4 — the seventeen product photos (~10 min)
+# STEP 4 — the product photos
 
-Admin → **Products** → **Catalog** → each product → image.
-Staged and numbered in the order the catalog grid shows them, in
-`truemg/assets/vials/UPLOAD/`:
+**Where:** Products -> Catalog -> **click the product row** -> the **"Pictures"**
+panel, top left -> the **"+ Add"** tile. Under it: *"The first image is the main
+photo shown on the storefront."* That sentence is the whole mechanism.
 
-| # | Product | # | Product |
-|---|---|---|---|
-| 01 | TESAMORELIN | 10 | NAD+ |
-| 02 | IPAMORELIN | 11 | SELANK |
-| 03 | CJC-1295 (No DAC) + IPAMORELIN | 12 | SEMAX |
-| 04 | BPC-157 + TB-500 | 13 | THYMOSIN ALPHA-1 |
-| 05 | KLOW | 14 | VITAMIN B12 |
-| 06 | GHK-CU | 15 | TMG-2TZ |
-| 07 | EPITHALON | 16 | TMG-3RT |
-| 08 | SS-31 | 17 | TMG-BAC |
-| 09 | MOTS-C | | |
+Files staged in `truemg/assets/vials/UPLOAD/`, numbered in catalog order.
 
-Drop-in: same 2000×2000 canvas, framing and silhouette as what is live, so
-nothing can shift. Also clears the three mismatched cards (SS-31, TMG-2TZ,
-TMG-3RT), which were an older upload batch.
+## This is NOT seventeen equal jobs. It is three, then fourteen.
+
+Opened the products and they are in two different states:
+
+| Product | Pictures it has now | Verified |
+|---|---|---|
+| **SS-31** | two, **both** the grey room photo. No clean cut-out at all. | directly |
+| **TMG-2TZ** | **one**, the grey room photo | directly |
+| **TMG-3RT** | same grey thumbnail in the catalog list and the admin table | from the list |
+| GHK-CU (and the other 13) | clean cut-out **first**, grey room photo second | directly |
+
+So the fourteen look right on the shelf because the good picture happens to be
+first. The three look broken because they have no good picture to be first.
+
+### Do these three tonight — `08 SS-31`, `15 TMG-2TZ`, `16 TMG-3RT`
+
+Add the new photo **and make it first** (drag it, or delete the grey ones).
+That is the fault Mila spotted days ago and it is five minutes of work.
+
+### The other fourteen can wait
+
+They already show a clean cut-out. Replacing them fixes the **cap defect** —
+real, measured, but subtle at card size. Worth a morning, not a 2am.
 
 ---
 
