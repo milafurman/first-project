@@ -332,6 +332,26 @@ colour *is* their brand colour.
 >
 > Nothing in it touches the glass, the cap, the mark or the blue.
 >
+> ### ⛔ THE CANVA LABELS ARE NOT TO BE TINTED — Mila, 12 Oct 2026
+>
+> *"Don't worry about tinting the labels yet. Just leave them."*
+>
+> **Do not open the label design to apply a per-compound tint.** The 20 pages
+> finished on 12 Oct are correct as they stand: official spiked mark, brand
+> blue, one shared left edge, even warning rhythm, the batch field in Inter.
+> They are white and they stay white until Mila says otherwise.
+>
+> This is a hold, not a cancellation — the eucalyptus ground and the
+> per-compound tints are still the approved direction for **the website**. The
+> site can carry the colour in the card field behind each bottle, which is where
+> `1B.6` always said it belonged and which needs no label change at all. The
+> labels are the thing that goes to a printer, so they are the expensive thing
+> to be wrong about and the last thing that should move.
+>
+> If a future session is tempted: the tint would be artwork only, not a bottle
+> change — that part was true and is not the reason for the hold. The reason is
+> that Mila has not asked for it.
+>
 > **Mila's verdict, same day: warm is right, the browns are wrong.**
 > *"It's right. I don't know if I like that. The Browns. Could we do another?"*
 >
