@@ -26,7 +26,15 @@
 > 341,904 pixels to 211,055 — and everything remaining is the white plastic
 > disc and the glass neck, which are not the cap band. In the seam itself,
 > rows 312–322 went from ~724 grey pixels to 77, and those 77 are the
-> anti-aliased boundary, which has to be there.
+> anti-aliased boundary, which has to be there. Measured as a band rather than
+> sampled rows: the metal strip between the plastic and the blue (0.0775–0.0885
+> of vial height) held **4,470** grey pixels and now holds **534**, an 88% cut,
+> and the 534 is that same soft edge.
+>
+> ⚠️ When checking this, do not start the window above 0.0775 of the vial's
+> height. The white plastic disc's own shaded lower edge is grey too and sits
+> just above, so a window starting at 0.074 counts ~2,800 pixels of plastic and
+> makes a fixed cap look broken.
 >
 > Before and after: `../web/cap-before-after.jpg`.
 >
@@ -39,6 +47,14 @@
 > system-wide on this machine.** `render.py` could not run at all until a
 > virtualenv was made for it. If a future session finds `ModuleNotFoundError:
 > scipy`, that is why — make a venv, do not rewrite the script around it.
+>
+> **Build order matters in one place.** `web/spa.py`'s `hero_media()` grades
+> `hero-media.webp`, which `web/compose.py` writes — so compose.py runs first.
+> Backwards, the warm cut is graded from a stale cluster, and the only symptom
+> is a file that will not stop showing up in `git status`. Noted in spa.py too.
+>
+> The 17 renders are **deterministic**: re-running `render.py` produces
+> byte-identical files, which is what makes "is this stale?" answerable at all.
 >
 > `caps/` was deliberately NOT rebuilt. Those sheets are the exploration that
 > chose the cap colour in the first place; rebuilding them would change what the
