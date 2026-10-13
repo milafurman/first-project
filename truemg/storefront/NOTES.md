@@ -66,7 +66,7 @@ second-person "you" in long-form body copy while allowing it in FAQ answers.
 ## Custom CSS
 
 The sanitizer strips the child combinator `>`, so write descendant selectors
-that stay correct when widened. `storefront.css` is the applied string.
+that stay correct when widened. `live/customCss-2026-10-12.css` is the applied string (it was `storefront.css`, a duplicate that drifted; removed 13 Oct 2026).
 
 **It also strips `@keyframes` blocks while keeping the `animation:` property.**
 A custom animation therefore validates, saves, and shows the right
