@@ -6,6 +6,10 @@
 # (all four checked), and poppler is absent too, so a produced PDF cannot be
 # rendered back for inspection. To check it, screenshot the HTML through the
 # same engine instead: add --screenshot=_check.png and drop --print-to-pdf.
+#
+# NOTE: the output is NOT byte-reproducible — Chrome embeds a creation
+# timestamp, so a rebuild always shows as modified in git even when the content
+# is identical. Only commit it when policies.html actually changed.
 set -e
 cd "$(dirname "$0")"
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
