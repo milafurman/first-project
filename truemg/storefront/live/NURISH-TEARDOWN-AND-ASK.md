@@ -29,23 +29,44 @@ binding constraint is not permission, it is **room**.
 needs one. We cannot add a single element, so any technique that needs a wrapper
 is impossible regardless of which properties are allowed.
 
-## Technique-by-technique, against Lapis's current limits
+## Technique-by-technique — every line below was DRY-RUN against Lapis
 
-| Technique | Nurish | Lapis allows now | Verdict |
-|---|---|---|---|
-| `position` | fixed, absolute, relative, sticky | relative, absolute, sticky — **not `fixed`** | **BLOCKED** |
-| `z-index` | 40, 1000, 1001, 99998, 999999, up to 2,147,482,000 | **≤ 9** | **BLOCKED — the worst one** |
-| offsets | max **100px** | ≤ 400px | fine |
-| `transition` | 0.13s – 0.275s | ≤ 3s | fine |
-| `@keyframes` / `animation` | **12 animations**, 0.5s – 9s | **not mentioned in the re-allow** | **UNKNOWN — must ask** |
-| `backdrop-filter` | blur(8px), blur(2px) | ≤ 40px blur | fine |
-| `filter` | `drop-shadow(…)`, `brightness(1.45)` | was refused; **not in the re-allow list** | **BLOCKED** |
-| `mix-blend-mode` | `multiply` | was refused; not re-allowed | **BLOCKED** |
-| `mask-image` | **4 uses**, radial + linear gradients | never mentioned | **UNKNOWN** |
-| `clip-path` | 2 uses | allowed | fine |
-| `will-change`, `backface-visibility` | 2 each | not mentioned | **UNKNOWN** |
-| `@media` | **101 queries** | works | fine |
-| per-page styling | every page has its own template | **no page hook at all** | **BLOCKED** |
+Not inferred from Austin's email. Each property was sent through
+`preview_design_change` and the refusal text below is **Lapis's own wording**.
+
+| Technique | Nurish | Lapis verdict (measured) |
+|---|---|---|
+| `@keyframes` | **12 animations** | ⛔ *"@keyframes is not allowed"* |
+| `animation` | 0.5s – 9s | ⛔ *"not in the allowed property list"* |
+| `filter` | `drop-shadow()`, `brightness(1.45)` | ⛔ *"not in the allowed property list"* |
+| `mix-blend-mode` | `multiply` | ⛔ *"not in the allowed property list"* |
+| `mask-image` (+`-webkit-`) | 4 uses | ⛔ *"not in the allowed property list"* |
+| `will-change` / `backface-visibility` | 2 each | ⛔ both refused |
+| `position: fixed` | used | ⛔ *"can cover the whole page, its disclaimer included; use sticky, or absolute inside a section"* |
+| `z-index` | 40, 1000, 1001, 999999 | ⛔ *"must be auto or a whole number from −1 to 9 (the header, menus and the disclaimer sit above that)"* |
+| `html` / `body` / `main` | styled freely | ⛔ *"html, body, main and form fields cannot be targeted"* |
+| offsets | max **100px** | ✅ ≤ 400px — fine |
+| `transition` | 0.13 – 0.275s | ✅ ≤ 3s — fine |
+| `backdrop-filter` | blur(8px) | ✅ ≤ 40px — fine |
+| `clip-path` | 2 uses | ✅ allowed |
+| `@media` | **101 queries** | ✅ works |
+
+**11 of our probe rules were refused in one pass.**
+
+### Two of those refusals have a stated reason, and it is a good one
+
+`position: fixed` and high `z-index` are refused **to protect the research-use
+disclaimer** — so a stylesheet cannot cover the compliance line. That is a
+legitimate constraint on a site like this and should not be argued with. It
+changes the shape of the ask: not *"let us use fixed"* but *"give us a layer
+below the disclaimer"*.
+
+### The library claim, verified properly
+
+Checked for globals, not just script URLs: `gsap`, `ScrollTrigger`, `Swiper`,
+`AOS`, `Lenis`, `ScrollMagic`, `anime`, `Motion` — **all absent**. Only jQuery.
+No `IntersectionObserver`, no `requestAnimationFrame`. **8 CSS animations were
+running live on the page** when measured. Their motion is pure CSS.
 
 ## The ask, ordered by how much it unlocks
 
@@ -62,20 +83,33 @@ rearranging deck chairs.
 sits at 40 and its overlays at 1000+. **Ask: up to 9,999**, which is plenty and
 still far below anything that could escape the store's own stacking context.
 
-### 3. `position: fixed`
+### 3. A stacking band below the disclaimer — not `fixed` itself
 
-Needed for a sticky cart drawer, a back-to-top, an age gate, any overlay that
-must survive scrolling. Nurish uses it. **Ask: allow `fixed` scoped inside the
-store root**, if the concern is a rule escaping onto the admin chrome.
+Lapis refuses `fixed` and z-index above 9 **to keep the research-use disclaimer
+coverable by nothing.** Right call. So the ask is not to lift the rule, it is:
 
-### 4. Confirm `@keyframes` and `animation`
+> Reserve a range — say z-index 1–900 for store styling, with the header,
+> menus and disclaimer pinned above it — and allow `position: fixed` **only
+> within the store root**, never over the disclaimer element. Then an owner can
+> build a cart drawer or a back-to-top without any route to hiding compliance
+> text.
 
-Austin re-allowed `transition` but never said whether `@keyframes` blocks survive
-the sanitizer. **Nurish's entire sense of life comes from 12 of them.** If they
-are stripped, no amount of `transition` substitutes. **Ask: a direct yes or no,
-and if no, please allow them with the same 3-second cap as transitions.**
+Framing it their way is far more likely to get a yes than asking them to drop a
+safety rule.
 
-### 5. `filter`, `mix-blend-mode`, `mask-image`
+### 4. `@keyframes` and `animation` — confirmed refused, and this is the big one
+
+No longer a question. Lapis says flatly: *"@keyframes is not allowed"*, and
+`animation` is *"not in the allowed property list"*.
+
+**Nurish had 8 CSS animations running on screen at the moment of measurement.**
+That is where the sense of life comes from, and `transition` cannot substitute —
+a transition needs a state change to fire; an animation runs on its own.
+
+**Ask: allow `@keyframes` and `animation` with the same 3-second cap already
+applied to transitions**, and the same honouring of `prefers-reduced-motion`.
+
+### 5. `filter`, `mix-blend-mode`, `mask-image` — all three confirmed refused
 
 - `filter: drop-shadow()` is how a cut-out vial gets a shadow that follows its
   silhouette instead of its bounding box. We hit exactly this and had to bake
@@ -86,15 +120,22 @@ and if no, please allow them with the same 3-second cap as transitions.**
   hard line — four of Nurish's softest edges are this.
 
 **Ask: all three re-allowed, with the same stated caps approach used for the
-others.**
+others.** Also `will-change` and `backface-visibility`, which are refused and are
+only ever performance hints.
 
-### 6. A per-page hook, and section classes on every page
+### 6. Let `html`, `body` and `main` be targeted — or give us an equivalent
+
+Measured: *"html, body, main and form fields cannot be targeted."* So the page's
+own background cannot be set from customCss at all, which is why a site-wide dark
+treatment is not simply a matter of one rule either.
+
+### 7. A per-page hook, and section classes on every page
 
 Already raised separately — see `ASK-AUSTIN-PAGE-HOOKS.md`. Nothing identifies a
 route, and `/about`, `/contact` and `/lab-results` have **zero** `lf-section-*`
 hooks while `/store` and `/catalog` have 35 and 27.
 
-### 7. The honest long-shot: a way to add markup
+### 8. The honest long-shot: a way to add markup
 
 Every remaining gap after the above is "we cannot add an element". A per-section
 HTML block, or theme-level template overrides, would close it. Worth asking even
