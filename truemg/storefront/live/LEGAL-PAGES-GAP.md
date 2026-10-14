@@ -32,11 +32,14 @@ wrong reading of this. Get hrefs from the rendered footer, never guess slugs.
 
 ## What is genuinely worth fixing
 
-> **Status, 14 Oct:** items 1 and 2 are **drafted and validated, awaiting one
-> paste** — see `../copy/APPLY-REFUNDS-UPDATE.md`. The replacement
-> `legalRefundsBody` was dry-run through `preview_design_change` and accepted
-> with no rejections, and the paste block is byte-identical to the validated
-> string. Item 3 remains a human job.
+> **Status, 14 Oct:** items 1 and 2 are **drafted and validated, awaiting two
+> pastes** — see **`../copy/APPLY-REFUNDS-AND-FAQ.md`**, which is the only
+> current instruction file. Mila then rewrote the policy herself, adding
+> made-to-order, a video requirement and a carrier-tracking line, so the FAQ had
+> to change too; policy and FAQ were dry-run **together** and accepted.
+>
+> Item 3 remains a human job, and signature on delivery turned out not to be a
+> Lapis feature at all — see the end of that file.
 
 ### 1. The refund deadline is stated two different ways
 
