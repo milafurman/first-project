@@ -63,8 +63,13 @@ The About **copy** can ship today — `aboutHeading`, `aboutBody`,
 exist. Direction A's words and its image can go in now; only the dark treatment
 waits.
 
-⚠️ There is also content on the live About page that the rewrite did not account
-for: a numbered four-card grid (*01 Documented to the lot*, *Independently
-analysed*, *Out in 48 hours*, *Research use only*). Check whether those are
-editable copy keys before replacing `aboutBody`, or they will sit oddly against
-the new story.
+⚠️ **The four cards are editable — found them.** The numbered grid on the live
+About page is `aboutValue1Title`/`Body` through `aboutValue4Title`/`Body`:
+*Documented to the lot*, *Independently analysed*, *Out in 48 hours*,
+*Research use only*. They are separate from `aboutBody`, so they survive a body
+rewrite and must be edited deliberately.
+
+They matter to Direction A: the new story already **says** three of these four
+things in prose, so left as they are the page argues with itself. Either cut
+them to one or two, or let them carry the detail the story deliberately keeps
+short (the 48-hour turnaround is the one fact the new copy drops).
