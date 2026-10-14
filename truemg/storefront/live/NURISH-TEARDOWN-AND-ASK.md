@@ -161,3 +161,27 @@ if the answer is no, so we stop designing around a wall we think might move.
 
 That is a genuinely good static site. It is not Nurish, and the single reason is
 room plus the ability to layer and animate.
+
+---
+
+## SENT — 14 Oct 2026, 05:13 UTC
+
+Sent to **austin@byaus.co**, Sam on CC, from `mila@girlandthekitchen.com`.
+Gmail message id `1a138d4701a3e01b`. Body at
+`austin-reply-2.txt`.
+
+**Read back from the sent folder and verified intact** — all six asks, the
+eleven quoted refusals, the four things explicitly not asked for, and the
+closing question about markup. No escaped markup.
+
+Two artefacts, neither worth a follow-up:
+
+- It went out as a **new message with a `Re:` subject**, not threaded onto the
+  original (`1a1344a828ed320c`). Gmail will likely group it for Austin by
+  subject, but it is technically a separate thread.
+- The quoted refusal list lost its column alignment in plain text, as the first
+  report's timing table did. Readable, not tabular. **If a third mail needs a
+  table, send it as a list of `key — value` lines rather than aligned columns**;
+  plain-text mail collapses the runs of spaces.
+
+**Awaiting Austin's reply.** He turned the last one round in hours.
