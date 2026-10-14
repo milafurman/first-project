@@ -41,10 +41,16 @@ rules came back refused. In your own words:
 So, in order of what it would unlock:
 
 1. THE 10,000 CHARACTER LIMIT. This outranks everything else put together.
-   My stylesheet is already 3,679 characters and one colour change from
-   cramped; Nurish runs roughly ten times that. No property you allow helps if
-   there's no room to write it. Could this go to something like 50,000, or
-   could a stylesheet be uploaded as a file?
+   I measured the reference site's actual CSS rather than estimating it:
+   311,053 characters across 1,184 readable rules plus its inline blocks —
+   and three of its stylesheets were cross-origin so I couldn't read them,
+   which makes that a floor, not a total. That is 31 times the budget I have.
+   Mine is already at 3,679 characters and one colour change from cramped.
+
+   No property you allow matters if there's nowhere to write it. Ideally:
+   let a stylesheet be uploaded as a file, so the ceiling stops being the
+   constraint. Failing that, 50,000 characters would at least make a
+   designed site possible.
 
 2. @keyframes AND animation. This is where the life comes from, and a
    transition can't substitute — a transition needs a state change to fire, an

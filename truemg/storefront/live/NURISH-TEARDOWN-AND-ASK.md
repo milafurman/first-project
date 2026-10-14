@@ -11,8 +11,12 @@ with **12 named keyframe animations**.
 
 That is good news and bad news. Good: everything they do is reproducible with
 CSS alone — no exotic runtime needed. Bad: **TrueMG's entire CSS budget is
-10,000 characters.** Their 1,360 rules are roughly ten times that. So the
-binding constraint is not permission, it is **room**.
+10,000 characters**, and theirs is **311,053** — measured, not estimated:
+187,416 characters across 1,184 readable rules plus 123,637 in inline blocks,
+with **three cross-origin stylesheets unreadable on top**. So that figure is a
+floor.
+
+**31× the budget.** The binding constraint is not permission, it is **room**.
 
 ## What they are, and what we are
 
@@ -73,9 +77,13 @@ running live on the page** when measured. Their motion is pure CSS.
 ### 1. Raise the customCss limit — this matters more than everything else combined
 
 10,000 characters cannot hold a designed site. TrueMG's current stylesheet is
-3,679 and that is one colour change away from cramped. Nurish runs ten times
-that. **Ask: 50,000, or an uploadable stylesheet file.** Without this the rest is
-rearranging deck chairs.
+3,679 and that is one colour change away from cramped. **Nurish runs 311,053 —
+31× the entire budget, and that is a floor** because three of its stylesheets
+could not be read.
+
+**Ask, in order of preference: an uploadable stylesheet file** (removes the
+ceiling as a design constraint entirely), **or 50,000 characters.** Without one
+of these the rest is rearranging deck chairs.
 
 ### 2. `z-index` above 9
 
