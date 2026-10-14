@@ -32,6 +32,12 @@ wrong reading of this. Get hrefs from the rendered footer, never guess slugs.
 
 ## What is genuinely worth fixing
 
+> **Status, 14 Oct:** items 1 and 2 are **drafted and validated, awaiting one
+> paste** — see `../copy/APPLY-REFUNDS-UPDATE.md`. The replacement
+> `legalRefundsBody` was dry-run through `preview_design_change` and accepted
+> with no rejections, and the paste block is byte-identical to the validated
+> string. Item 3 remains a human job.
+
 ### 1. The refund deadline is stated two different ways
 
 | Where | What it says |
