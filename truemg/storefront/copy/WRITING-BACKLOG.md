@@ -11,7 +11,7 @@ the next one starts.
 | 3 | Technical specifications | per product, Lapis admin | **DONE 15 Oct — all 17 verified** |
 | 4 | Shipping & delivery detail | `legalRefundsBody` + FAQ | **blocked — needs facts from Mila** |
 | 5 | Lab Results page body | `labIntro` | **DONE 15 Oct — verified live** |
-| 6 | Citations | **About page** — see `CITATIONS-PLAN.md` | in progress — scope set 15 Oct: identity + method only |
+| 6 | Citations | **About page** — see `CITATIONS-VERIFIED.md` | **DONE 15 Oct — live, 21 references verified** |
 | 7 | Pairs-well-with curation | per product | to do |
 
 Order note: specs were meant to be #2, but the Chrome tab wedged mid-navigation, and specs are
