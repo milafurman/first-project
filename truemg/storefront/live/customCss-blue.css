@@ -4,7 +4,7 @@
 .lf-section-howItWorks .rounded-2xl:hover{border-color:#1C8CD0;box-shadow:0 20px 40px -20px rgba(14,24,48,.3)}
 .lf-section-comparison{display:none}
 .lf-section-hero .z-0>div.absolute.inset-0{background-image:linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.84) 30%,rgba(255,255,255,.55) 46%,rgba(255,255,255,.18) 62%,rgba(255,255,255,.06) 100%)!important}
-@media(max-width:767px){.lf-section-hero .z-0>div.absolute.inset-0{background-image:linear-gradient(rgba(255,255,255,.8) 0%,rgba(255,255,255,.66) 50%,rgba(255,255,255,.84) 100%)!important}}
+@media(max-width:767px){.lf-section-hero .z-0>div.absolute.inset-0{background-image:linear-gradient(rgba(255,255,255,.96) 0%,rgba(255,255,255,.95) 52%,rgba(255,255,255,.9) 72%,rgba(255,255,255,.42) 86%,rgba(255,255,255,.16) 100%)!important}}
 .lf-announcement-bar{min-height:2rem!important;padding-block:.3rem!important;font-size:.75rem;letter-spacing:.01em}
 header.glass{background:#fff!important;border-bottom:1px solid #E8EBF0!important}
 header .mx-auto.flex{min-height:4.5rem}
