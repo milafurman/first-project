@@ -73,3 +73,43 @@ They matter to Direction A: the new story already **says** three of these four
 things in prose, so left as they are the page argues with itself. Either cut
 them to one or two, or let them carry the detail the story deliberately keeps
 short (the 48-hour turnaround is the one fact the new copy drops).
+
+## Third batch for Austin — found 14–15 Oct 2026, all verified on the live store
+
+1. **The catalog card truncates every product description at the first period.**
+   The product detail page renders the full text; the card drops everything after
+   the first `.`. Verified against all 17 products — card text equalled stored text
+   up to the first period, 17/17. EPITHALON's card showed only `Ala-Glu-Asp-Gly.`
+   Nine products were losing copy; three of them silently, because what survived
+   still read as a sentence. There is no separate card-blurb field.
+
+2. **`pdCoaOnRequest` is ignored by the theme.** The field is documented as
+   "Product page — text shown when no certificate is published", and a write to it
+   is accepted, but the product page still renders the theme default
+   "COA available on request". So the owner cannot tell a buyer *how* to request it.
+
+3. **`pdCoaOnRequest` also has an undocumented 60-character cap that truncates
+   silently, mid-word.** A longer value was accepted with `ok: true`, no warning
+   and no entry in `cssRejected`, and stored cut at 60 characters ending
+   "...with your l". Fields with a `max` should refuse or report, not silently cut.
+
+4. **The catalog filter heading builds an ungrammatical string.** Unfiltered it reads
+   "Research Compound Catalog"; with the Research Peptide filter it becomes
+   "Research Peptide peptides", and with Lab Supplies, "Lab Supplies peptides" — on a
+   page whose only item is a 10 mL solution, which is not a peptide.
+
+5. **The four `/legal/*` pages have no site header and no site footer.** A buyer
+   reading the Terms cannot reach the catalog, FAQ or Contact without going back.
+   `/legal/research-use-only` is not linked from the footer at all, and none of the
+   four legal pages appear in the sitemap.
+
+6. **Category tiles carry generated placeholder copy.** The home page "Pick a lane"
+   tiles read "Research-grade research peptide compounds for laboratory research."
+   — the word research three times, and not grammatical. It is generated from the
+   category name, so the owner cannot edit it. Both tiles also link to the same
+   unfiltered catalog. Hidden via `hide:categories` for now.
+
+7. **Footer colour rule is undocumented.** `footer a{color:...}` is refused with
+   "footer colors must set color and background-color together". Worth documenting,
+   because the obvious consequence is that an owner who darkens the footer gets
+   black-on-navy text until they discover the pairing requirement.
