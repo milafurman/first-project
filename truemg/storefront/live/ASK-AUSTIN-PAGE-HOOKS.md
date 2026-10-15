@@ -98,10 +98,13 @@ short (the 48-hour turnaround is the one fact the new copy drops).
    "Research Peptide peptides", and with Lab Supplies, "Lab Supplies peptides" — on a
    page whose only item is a 10 mL solution, which is not a peptide.
 
-5. **The four `/legal/*` pages have no site header and no site footer.** A buyer
-   reading the Terms cannot reach the catalog, FAQ or Contact without going back.
-   `/legal/research-use-only` is not linked from the footer at all, and none of the
-   four legal pages appear in the sitemap.
+5. ~~**The four `/legal/*` pages have no site header and no site footer.**~~
+   **WITHDRAWN 15 Oct 2026 — do not send this one.** Re-checked `/legal/terms` directly: it
+   has both the site header with full navigation and the site footer. Either this was fixed
+   or the original report was wrong. The page is also a real 1,727-word document, not a stub.
+   What may still hold, and was not re-checked: `/legal/research-use-only` not being linked
+   from the footer, and the legal pages being absent from the sitemap. Verify those before
+   raising them.
 
 6. **Category tiles carry generated placeholder copy.** The home page "Pick a lane"
    tiles read "Research-grade research peptide compounds for laboratory research."
