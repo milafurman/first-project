@@ -14,10 +14,16 @@ Everything left to do on the store, and exactly where. Nothing here needs Austin
 
 ### In the chat box (the one saying "What should change?")
 
-| | What | Where the text is |
+> ⛔ **NEVER give Mila a file path to paste.** She pasted
+> `../copy/APPLY-REFUNDS-AND-FAQ.md` into the chat because this file told her
+> to, and the editor answered *"I can't open files from your computer."* The
+> text itself has to be in the message she is reading. This is the single
+> most repeated mistake of the whole session.
+
+| | What | Note |
 |---|---|---|
-| **1** | The refund policy | `../copy/APPLY-REFUNDS-AND-FAQ.md`, first block |
-| **2** | The FAQ answer | same file, second block |
+| **1** | The refund policy | Paste the **wording itself**. The editor said *"I can't write a refund policy myself, because policies have to come from you, but if you paste your own wording I can help place it."* |
+| **2** | The FAQ answer | Same — the words, not a reference to them. |
 
 Paste one, send. Paste the other, send. **Both, or neither** — doing one
 re-creates the contradiction they were fixing.
@@ -26,11 +32,15 @@ re-creates the contradiction they were fixing.
 
 | | What |
 |---|---|
-| **3** | Open the Custom CSS editor. Find the line starting `.lf-card .aspect-square`. Change `#EDF4FB` to `#E1EAF4`. **Leave the `!important`.** |
+| **3** | Paste the **whole stylesheet** from `customCss-with-card-fix.css` and say "replace the entire Custom CSS with exactly this". |
 
-This one exists because Austin shipped it — the chat agent used to append a
-second rule instead of editing, and drop the `!important`, so the change
-published and did nothing.
+⚠️ **Do not ask it to edit one line.** It replied: *"I can't see the existing
+Custom CSS from here, so I can't delete one rule by itself. My only options are
+adding new rules at the end or replacing the whole Custom CSS."* Replacing
+wholesale is the only route that works, which is why
+`customCss-with-card-fix.css` is the live stylesheet with the single value
+already changed — **dry-run and accepted**, and only one line differs from what
+is live.
 
 ### Then press **Publish**. Once. It ships all three.
 
