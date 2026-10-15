@@ -1,211 +1,115 @@
-# Image specs — hand this to whoever makes the art
+# TrueMG image manifest — everything the site consumes, and who makes it
 
-Every one of these is **Mila-side**. The Lapis design endpoint cannot upload or
-replace a product photo; it can only point at a URL that already exists.
+**Rewritten 15 Oct 2026. This replaces every earlier version of this file.**
+Git history has the old one if you need it.
 
-## The rule that governs all of it
-**A white backdrop is a bug.** Every vial currently sits in a hard white square
-inside a grey card. That single detail is most of why the store reads as a parts
-catalogue instead of a brand. Transparent PNG, always.
+## Ownership
 
-## Product vials — the main job
-| Spec | Value |
-|---|---|
-| Format | PNG with real alpha. Not JPG, not PNG-on-white |
-| Size | 1600 × 1600, vial occupying ~70% of frame height |
-| Angle | 8–15° off vertical. Never dead-straight, never dead-centre |
-| Shadow | Baked soft contact shadow under the vial, on transparency |
-| Label | Legible at 300px wide — that is the real catalogue card size |
-| Lighting | One key from upper left, soft fill right, visible highlight down the glass |
-| File name | `tmg-<compound>-<size>.png`, lowercase, e.g. `tmg-bpc157-tb500-20mg.png` |
+**Codex owns all photo and graphics creation.** Mila, 15 Oct: *"All the photo and graphics
+creations should now be coming from Codex."* Nothing in `truemg/assets/vials/` or
+`truemg/assets/web/` is to be used as final artwork — those are placeholders and they are
+off-brand. Do not render new vials here, do not composite new heroes here, do not stage files
+for upload from here.
 
-Shoot or render **17 products / 20 variants**. Priority six first, so the Friday
-order test has something real to click:
-BPC-157 + TB-500 · GHK-CU · TESAMORELIN · TMG-3RT · IPAMORELIN · NAD+
+**The reference for everything** is Sam's TMG-3RT 10MG cutout in
+`drive.google.com/drive/folders/1RnTchA_5Tiz3tk0KEAhYu85-R3QKdlxq` → `vial/Labels`.
+Match its label design: compound name in blue, strength in black beneath, `TRUE MG LABS`
+vertical up the right side, large pale ghosted lizard behind the mark, solid blue lizard lower
+left, `NOT FOR HUMAN CONSUMPTION` / `RESEARCH USE ONLY` on two lines, DNA-helix motif down the
+right edge, white flip-top cap over a blue crimp.
 
-## Colour field per compound
-The reference site gives every vial its own soft gradient field keyed to that
-vial's label colour — lilac, blue, red, mint. The background *is* the brand.
-
-Two ways to get there, and they stack:
-1. **In the render** — bake the gradient behind the vial. Best result, most work.
-2. **In CSS** — transparent vial over a per-product gradient drawn by `customCss`.
-   Agent-side, no new art needed, and it is how Day 1 ships.
-
-Set `productImageBg` to empty, never to `#ffffff`. The white well is the thing
-we are removing.
-
-## Hero
-| | |
-|---|---|
-| Desktop `heroBackgroundUrl` | 2560 × 1400, under 400KB, WebP |
-| Mobile `heroBackgroundMobileUrl` | 1200 × 1600 portrait crop |
-| Composition | Subject right of centre — `heroAlign` is `left`, so the headline holds the left column |
-| Weight | It is the LCP element. Over 400KB and it costs ranking as well as patience |
-
-## Logo
-SVG preferred. Failing that, transparent PNG at 1000px+ on the long edge. Light
-and dark variants if they exist. `logoScale` (0.5–2) tunes size on the site, so
-supply it large and let the platform scale down.
-
-## Social share
-`seoImageUrl` — 1200 × 630. Currently pointed at the raw brand logo PNG, which
-renders as a small mark on a wide white field in every share preview. Needs a
-real composed card.
+**Never write or alter label text.** The compliance block is fixed and must not be
+AI-generated.
 
 ---
 
-# UPDATE — the white background is baked into the files
+## A. Product vial cutouts — 20 needed, 1 delivered
 
-Verified 2026-10-06 against the live source files, not assumed.
+The main job. **Transparent PNG, square, 1254x1254** to match the delivered reference. A baked-in
+background is a bug: the storefront sits these on a tinted card colour, so any backdrop shows as
+a visible box.
 
-The product images are PNGs at 2000 × 2000 in **RGB mode — no alpha channel at
-all** — with pure `#FFFFFF` in every corner. The white is inside the file.
+Each **size** needs its own, because the storefront swaps the image when a shopper picks a
+strength and the label must show the matching one.
 
-This was tested properly: setting `productImageBg` to the brand's near-black
-turned the card dark and **the white rectangles stayed**. No palette, no CSS, no
-platform setting can remove them. New files are the only fix.
+| Product (store name) | Strength | SKU | Status |
+|---|---|---|---|
+| BPC-157 + TB-500 | 20MG (10+10) | TMG-BPC157TB500-20MG | needed |
+| CJC-1295 (No DAC) + IPAMORELIN | 10MG (5+5) | TMG-CJC1295IPA-10MG | needed |
+| EPITHALON | 10MG | TMG-EPI-10MG | needed |
+| GHK-CU | 50MG | TMG-GHKCU-50MG | needed |
+| IPAMORELIN | 10MG | TMG-IPA-10MG | needed |
+| KLOW | 80MG blend (TB10+BPC10+GHK50+KPV10) | TMG-KLOW-80MG | needed |
+| MOTS-C | 20MG | TMG-MOTSC-20MG | needed |
+| NAD+ | 1000MG | TMG-NAD-1000MG | needed |
+| SELANK | 10MG | TMG-SELANK-10MG | needed |
+| SEMAX | 10MG | TMG-SEMAX-10MG | needed |
+| SS-31 | 10MG | TMG-SS31-10MG | **needed — empty slot on the live site** |
+| SS-31 | 50MG | TMG-SS31-50MG | needed |
+| TESAMORELIN | 20MG | TMG-TESA-20MG | needed |
+| THYMOSIN ALPHA-1 | 10MG | TMG-TA1-10MG | needed |
+| TMG-2TZ | 10MG | TMG-2TZ-10MG | **needed — empty slot on the live site** |
+| TMG-2TZ | 20MG | TMG-2TZ-20MG | needed |
+| TMG-3RT | 10MG | TMG-3RT-10MG | **DELIVERED — the reference** |
+| TMG-3RT | 20MG | TMG-3RT-20MG | **needed — empty slot on the live site** |
+| TMG-BAC | 10ML | TMG-BAC-10ML | needed |
+| VITAMIN B12 | 10ML | TMG-B12-10ML | needed |
 
-**This is why the brand palette cannot go live yet.** On the ink ground, white
-rectangles behind every vial look markedly worse than the current light theme.
-The order is: transparent images first, palette second.
+**Do these three first.** They are the only size-slots with no photo at all, so choosing that
+strength currently shows a mismatched image: **SS-31 10MG · TMG-2TZ 10MG · TMG-3RT 20MG**
 
-## The good news: these cut out cleanly
-
-2000 × 2000 on pure white is close to ideal input. A background removal on
-`TMG-3RT 10MG` produced a real alpha channel (range 0–255) with the glass body,
-the crimped cap and the label all intact and no halo. Composited on `#0A0A0B`
-the vial floats correctly.
-
-So this is **a background-removal pass over existing art, not a reshoot.** All
-17 products already exist at full resolution in the Canva library — the test
-file came back already named "TrueMGLabs Branding - 7", so the set is there.
-
-## What transparency does and does not buy
-
-Removing the white delivers *"clean images without white backdrops."* It does
-**not** deliver *"make the vials look dynamic."* These are shot dead-straight,
-centred and flat. Dynamism comes from one of two places:
-
-1. **CSS** — a cast shadow, a few degrees of rotation, a hover lift, a gold rim
-   light. Agent-reachable, ships this week, works on the existing art once it is
-   transparent.
-2. **New renders** — angled, floating, lit. Better, slower, not a Friday job.
-
-Do 1 now. Schedule 2 after launch.
+**How these reach the site:** product photos are NOT design keys. They are uploaded by hand in
+the Lapis admin, per product and per size, at Products → Catalog → product → Sizes, pricing &
+stock. No agent can do it. Deliver the files; Mila uploads.
 
 ---
 
-# VIAL RENDERS — supersedes the spec above (15 Oct 2026)
+## B. The master images — the five slots the site pulls by URL
 
-**Read this section first. Where it disagrees with the table above, this wins.**
-The spec above was written before any vial was delivered. Sam has now delivered one, and that
-file — not the table above — is the reference.
+All five currently hold a placeholder of mine. Each is a plain URL field: whatever Codex makes
+has to end up at a public URL, then the key gets pointed at it.
 
-## Source of truth
+| Lapis key | What it is | Format needed | Status |
+|---|---|---|---|
+| `heroBackgroundUrl` | Full-bleed hero behind the headline, desktop | **2560x1150 JPG** | placeholder |
+| `heroBackgroundMobileUrl` | Same for screens under 768px | **1080x1500 JPG** | placeholder |
+| `aboutImageUrl` | Photo beside the About story | square-ish, ~1600x1100 | placeholder |
+| `seoImageUrl` | Social share card | **1200x630 JPG** | placeholder |
+| `comingSoonImageUrl` | Full-bleed behind the coming-soon page | 2560x1150 JPG | **empty** |
 
-Mila, 15 Oct: *"Sam created the vials. Use the files in the Drive Sam gave us. Do not use any
-other location to pull or upload from. We are not using the ones you created."*
+`heroMediaUrl` currently holds a 1x1 transparent pixel. That is deliberate — it suppresses the
+theme's default of showing the first featured product. Leave it unless you intend to replace the
+hero visual outright.
 
-- **Only source:** `drive.google.com/drive/folders/1RnTchA_5Tiz3tk0KEAhYu85-R3QKdlxq` → `vial/Labels`
-- **Do not use** `truemg/assets/vials/tmg-*.png` or `~/Desktop/TRUEMG UPLOAD`. Both are earlier
-  renders and are off-brand. All 17 photos currently live on the store came from them and are
-  placeholders to be replaced.
-- Finished files go back into Sam's folder. It is shared "anyone with the link — Viewer", so
-  only Sam can add to it.
+### Hero composition — learned the hard way, do not re-derive
 
-## Reference file
+- **Desktop:** cluster right of centre. The left half must stay clear; the headline sits over a
+  white gradient wash that fades left-to-right.
+- **Phone:** cluster **low in the frame, centre about 88% down**. Above it sit the headline, body
+  copy, two buttons and three trust badges, all over a near-white wash. A centred cluster puts
+  vials behind the body text; a tight crop clips them. Three attempts to get this right.
+- **Background:** the pale blue-white gradient the catalog bands already use, so the hero matches
+  the site instead of fighting it.
 
-`exec-3e56feb1-fab7-426e-a414-f3e85bea3cef.png` — **TMG-3RT 10MG**, 1254x1254, RGBA,
-transparent. Match it.
+The hero cannot be built until enough cutouts exist — the current composition uses five vials.
 
-Note the size: **1254x1254**, not the 1600x1600 in the older table. Match the delivered file.
+---
 
-There is also a marble-worktop lifestyle shot, 1145x1374 RGB, with BATCH 60392 / LOT 60393 on
-the label. **That is a separate, optional deliverable.** It is wrong for a product card — the
-storefront sits the image on a tinted background, so any baked-in backdrop renders as a visible
-box. The transparent cutout is the one the site needs.
+## C. Logo and favicon — already correct, leave alone
 
-## Label elements, observed on the reference
+The header and footer wordmark and the favicon are **uploads**, not URL keys, done in Design
+studio → Manual. They are already right and are not part of this job.
 
-- Compound name in blue; strength beneath it in black
-- `TRUE MG LABS` set vertically up the right side of the label
-- A large pale ghosted lizard filling the label behind the mark
-- The solid blue lizard mark, lower left
-- `NOT FOR HUMAN CONSUMPTION` / `RESEARCH USE ONLY`, on two lines
-- A DNA-helix motif down the right edge
-- White flip-top cap over a blue crimp
-- BATCH / LOT vertical — on the lifestyle shot only
+---
 
-**Do not rewrite any label text.** The compliance block is fixed and must not be AI-generated.
+## Naming rules that apply to every file
 
-## Labels: nothing needed
+- **TMG-BAC is never called bacteriostatic water**, in copy or in a file name.
+- Use store names — **TMG-2TZ, TMG-3RT, TMG-BAC** — not the underlying compound names.
+- Research-use framing only. No dosing, no therapeutic or outcome claims, no before/after, no
+  human-use suggestion, in any image or any file name. The word "performance" never appears.
 
-All 40 label print files already exist in Drive — a `SIDE-` and a `TOP-` PDF for every one of
-the 20 size-slots, reconciled slot by slot on 15 Oct, none missing, no extras. Do not
-regenerate them.
+## Where finished files go
 
-## The 19 still needed
-
-Delivered: TMG-3RT 10MG. Everything below is outstanding.
-
-| Product (store name) | Strength | SKU |
-|---|---|---|
-| BPC-157 + TB-500 | 20MG (10+10) | TMG-BPC157TB500-20MG |
-| CJC-1295 (No DAC) + IPAMORELIN | 10MG (5+5) | TMG-CJC1295IPA-10MG |
-| EPITHALON | 10MG | TMG-EPI-10MG |
-| GHK-CU | 50MG | TMG-GHKCU-50MG |
-| IPAMORELIN | 10MG | TMG-IPA-10MG |
-| KLOW | 80MG blend (TB10+BPC10+GHK50+KPV10) | TMG-KLOW-80MG |
-| MOTS-C | 20MG | TMG-MOTSC-20MG |
-| NAD+ | 1000MG | TMG-NAD-1000MG |
-| SELANK | 10MG | TMG-SELANK-10MG |
-| SEMAX | 10MG | TMG-SEMAX-10MG |
-| SS-31 | 10MG | TMG-SS31-10MG |
-| SS-31 | 50MG | TMG-SS31-50MG |
-| TESAMORELIN | 20MG | TMG-TESA-20MG |
-| THYMOSIN ALPHA-1 | 10MG | TMG-TA1-10MG |
-| TMG-2TZ | 10MG | TMG-2TZ-10MG |
-| TMG-2TZ | 20MG | TMG-2TZ-20MG |
-| TMG-3RT | 20MG | TMG-3RT-20MG |
-| TMG-BAC | 10ML | TMG-BAC-10ML |
-| VITAMIN B12 | 10ML | TMG-B12-10ML |
-
-**These three first.** They are the only size-slots on the live store with no photo at all, so
-until they land, choosing that strength shows a mismatched image:
-
-1. SS-31 10MG
-2. TMG-2TZ 10MG
-3. TMG-3RT 20MG
-
-## Naming
-
-TMG-BAC is **never** called bacteriostatic water, in any field or file name. Use the store
-names — TMG-2TZ, TMG-3RT, TMG-BAC — not the underlying compound names.
-
-## The hero is also affected — added 15 Oct 2026
-
-The live hero (`hero-desktop.jpg`, and the phone crop made from it) is a **composition built
-from the superseded renders**. Its vials read `TRUE MG` with the old lizard mark — no `LABS`,
-no ghosted watermark, no DNA motif. It has the same problem as the 17 product photos and has to
-be rebuilt once Sam's cutouts exist.
-
-**Sam has not supplied a hero.** Searched the whole Drive on 15 Oct: the only hero-named files
-are `18 HERO desktop.jpg` and `19 HERO phone.jpg`, which are the earlier hand photo and beige
-shelf shot that were replaced on 15 Oct. Neither is his.
-
-**It cannot be rebuilt yet.** The current composition uses five vials; Sam has delivered one.
-The hero waits on the cutout set.
-
-When the cutouts land, the hero needs:
-- Desktop 2560x1150, the vial cluster right of centre so the left half stays clear for the
-  headline, which sits over a white gradient wash.
-- Phone 1080x1500, the cluster low in the frame — roughly 88% down — so the headline, body,
-  both buttons and the three trust badges all sit on clean gradient above it. This was arrived
-  at by testing; a centred cluster puts vials behind the body copy and a tight crop clips them.
-- Background: the same pale blue-white gradient the catalog bands use, so the hero matches the
-  rest of the site rather than fighting it.
-
-**Open question for Mila:** whether Codex produces the hero composition, or whether it is
-composited here from Sam's individual cutouts once they exist. Compositing from his cutouts is
-straightforward and does not involve creating any vial artwork.
+Sam's shared folder, above. It is currently shared "anyone with the link — Viewer", so only Sam
+can add to it; if Codex writes elsewhere, say where.
