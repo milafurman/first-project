@@ -10,7 +10,7 @@ the next one starts.
 | 2 | Contact page | 7 `contact*` keys | **DONE 15 Oct — verified live** |
 | 3 | Technical specifications | per product, Lapis admin | **DONE 15 Oct — all 17 verified** |
 | 4 | Shipping & delivery detail | `legalRefundsBody` + FAQ | **blocked — needs facts from Mila** |
-| 5 | Lab Results page body | `labIntro` + surrounding | next |
+| 5 | Lab Results page body | `labIntro` | **DONE 15 Oct — verified live** |
 | 6 | Product-page citations | per product, `Sources & references` | **blocked — needs Mila's scope call** |
 | 7 | Pairs-well-with curation | per product | to do |
 
@@ -92,3 +92,34 @@ verified by page reload. See `SPECS-PURITY-PROGRESS.md`.
 
 Still open from this: citations (scope decision) and pairs-well-with (pure curation). And
 TMG-3RT's specs are nearly empty, which is a real content gap once the rendering is fixed.
+
+
+## 5. Lab Results page — done, and it is a one-field page
+
+**Only `labIntro` is editable.** 600 characters, and that is the entire writable surface. Checked
+every key on the store: the eyebrow "TRANSPARENCY", the "Lab Results" heading, the
+"No Certificates of Analysis are published yet" empty state, the "Browse catalog" button and the
+whole four-step "How documentation is posted" block are all theme-generated with no key behind
+them. Nothing to write there and nothing to fix there.
+
+**What changed.** The previous version — also mine, from earlier today — explained the *process*:
+lots get analysed, certificates get posted, email us if yours is not up. Accurate, and it never
+said what a certificate actually contains. On the one page where a buyer has come specifically to
+judge the paperwork, that is the thing worth saying.
+
+Now live:
+
+> Every lot is analysed by an independent laboratory with no commercial interest in the result.
+> The certificate states identity — confirming the material is the compound named on the label —
+> and purity as a percentage, with the analytical method printed beside it. It is filed against
+> the lot number stamped on your vial, so the document and the material in hand describe the same
+> production run.
+>
+> Certificates are posted here and on the matching product page as they are issued. If the one you
+> need is not up yet, email us the lot number and we will send it to you.
+
+It describes what is on the document rather than asserting a purity figure, which keeps it clear
+of the claim rules, and it still ends with the way to get one today.
+
+**What no amount of writing fixes:** the page says no certificates are published, because none
+are. One COA upload changes that page more than any copy could.
