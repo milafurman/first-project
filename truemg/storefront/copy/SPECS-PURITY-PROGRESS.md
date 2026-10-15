@@ -1,4 +1,4 @@
-# Purity line replacement — 13 of 17 done (15 Oct 2026)
+# Purity line replacement — 14 of 17 done (15 Oct 2026)
 
 Mila: *"Replace the purity line and do the citations."*
 
@@ -22,21 +22,33 @@ for your lot"**. Where a Solubility field said "bacteriostatic water", it was ch
 12. TESAMORELIN — purity + solubility
 13. THYMOSIN ALPHA-1 — purity + solubility
 
-## Not done — 4 left
+14. TMG-2TZ — purity + solubility · **also reload-verified**
 
-TMG-2TZ · TMG-3RT · TMG-BAC · VITAMIN B12
+## Not done — 3 left
 
-The Chrome renderer froze on TMG-2TZ — `Runtime.evaluate` timed out twice at 45s. Not a data
-problem; the tab stopped responding. Resume from TMG-2TZ.
+TMG-3RT · TMG-BAC · VITAMIN B12
+
+**Correction:** TMG-2TZ was first logged as blocked. It was not. The call that appeared to freeze
+had already made the edit and saved; only the result never came back. Confirmed afterwards on a
+fresh page load — purity reads "Reported on the certificate issued for your lot" and solubility
+reads "Soluble in water / TMG-BAC". A timeout on this platform does not mean the write failed;
+always read the value back before re-running.
+
+The renderer then wedged repeatedly on TMG-3RT — `Runtime.evaluate` timed out at 45s, and a
+screenshot could not be captured either. Resume from TMG-3RT, and **check its values before
+editing** in case the same thing happened again.
 
 ## Honest state of the verification
 
 The method was proven properly on EPITHALON: set, save, **reload, and read the value back** — it
 persisted, the old claim was gone and the banned phrase was gone.
 
-For the other twelve I have the save banner and the fact that the script only reports a field as
-changed when it actually found and set it. **But the banner is known to appear on no-op saves on
-this platform**, so twelve are not yet reload-verified. That check still needs running.
+Two are fully reload-verified: EPITHALON and TMG-2TZ.
+
+For the other twelve I have the save banner plus the fact that the script only reports a field as
+changed when it actually found and set it. **The banner is known to appear on no-op saves on this
+platform**, so those twelve are not yet reload-verified. That check still needs running — a single
+pass reading the purity field on each would settle it.
 
 ## Method, for whoever picks this up
 
