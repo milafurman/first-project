@@ -14,7 +14,6 @@ header nav a:hover{color:#1C8CD0!important}
 header a.flex img{height:2.75rem!important}
 footer{background-color:#0A192F!important;color:#FFFFFF!important}
 footer .mx-auto{padding-top:4.5rem!important;padding-bottom:3.25rem!important}
-footer .border-t>p:first-child{border-left:2px solid #C9A227;padding:.1rem 0 .1rem .9rem}
 .lf-section-howItWorks{background-color:#F3F6FC;border-radius:1.5rem;padding-block:4rem!important}
 .lf-section-faq{background-color:#F8F6F1;border-radius:1.5rem;padding-block:4rem!important;padding-inline:3rem!important;max-width:60rem}
 .lf-section-ctaBanner{background-color:#EDF2FB;border-radius:1.5rem;padding-block:4rem!important}
@@ -40,3 +39,8 @@ a[href="/catalog/thymosin-alpha-1-jvna"] .aspect-square{background:#DCE8F7!impor
 a[href="/catalog/ss-31-c73t"] .aspect-square{background:#D4E2F5!important}
 a[href="/catalog/vitamin-b12-vx6i"] .aspect-square{background:#E4EDF9!important}
 a[href="/catalog/bacteriostatic-water-tzbc"] .aspect-square{background:#FCFDFE!important}
+.lf-hero-accent{color:#0F547E!important}
+footer p,footer li,footer span{color:#C3D3E4!important;background-color:#0A192F!important}
+footer a{color:#DCE7F2!important;background-color:#0A192F!important}
+footer a:hover{color:#FFFFFF!important;background-color:#0A192F!important}
+footer .border-t>p:first-child{color:#E8EFF7!important;background-color:#0A192F!important;border-left:2px solid #C9A227;padding:.1rem 0 .1rem .9rem}
