@@ -13,6 +13,12 @@ for upload from here.
 
 **The reference for everything** is Sam's TMG-3RT 10MG cutout in
 `drive.google.com/drive/folders/1RnTchA_5Tiz3tk0KEAhYu85-R3QKdlxq` → `vial/Labels`.
+
+> **A link is not a handoff.** Whoever briefs the artwork agent must give it the reference
+> **image file itself**, plus the side and cap label artworks as files. An agent that cannot
+> open Drive will guess the label from this written description — which is how the first three
+> attempts went wrong. A ready packet of the 40 label SVGs lives at
+> `~/Desktop/CODEX-VIAL-PACKET`; Sam's reference photo has to be dropped into it by hand.
 Match its label design: compound name in blue, strength in black beneath, `TRUE MG LABS`
 vertical up the right side, large pale ghosted lizard behind the mark, solid blue lizard lower
 left, `NOT FOR HUMAN CONSUMPTION` / `RESEARCH USE ONLY` on two lines, DNA-helix motif down the
