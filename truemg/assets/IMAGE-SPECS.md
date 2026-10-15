@@ -182,3 +182,30 @@ until they land, choosing that strength shows a mismatched image:
 
 TMG-BAC is **never** called bacteriostatic water, in any field or file name. Use the store
 names — TMG-2TZ, TMG-3RT, TMG-BAC — not the underlying compound names.
+
+## The hero is also affected — added 15 Oct 2026
+
+The live hero (`hero-desktop.jpg`, and the phone crop made from it) is a **composition built
+from the superseded renders**. Its vials read `TRUE MG` with the old lizard mark — no `LABS`,
+no ghosted watermark, no DNA motif. It has the same problem as the 17 product photos and has to
+be rebuilt once Sam's cutouts exist.
+
+**Sam has not supplied a hero.** Searched the whole Drive on 15 Oct: the only hero-named files
+are `18 HERO desktop.jpg` and `19 HERO phone.jpg`, which are the earlier hand photo and beige
+shelf shot that were replaced on 15 Oct. Neither is his.
+
+**It cannot be rebuilt yet.** The current composition uses five vials; Sam has delivered one.
+The hero waits on the cutout set.
+
+When the cutouts land, the hero needs:
+- Desktop 2560x1150, the vial cluster right of centre so the left half stays clear for the
+  headline, which sits over a white gradient wash.
+- Phone 1080x1500, the cluster low in the frame — roughly 88% down — so the headline, body,
+  both buttons and the three trust badges all sit on clean gradient above it. This was arrived
+  at by testing; a centred cluster puts vials behind the body copy and a tight crop clips them.
+- Background: the same pale blue-white gradient the catalog bands use, so the hero matches the
+  rest of the site rather than fighting it.
+
+**Open question for Mila:** whether Codex produces the hero composition, or whether it is
+composited here from Sam's individual cutouts once they exist. Compositing from his cutouts is
+straightforward and does not involve creating any vial artwork.
