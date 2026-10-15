@@ -169,6 +169,45 @@ all return 404. `legalRefundsBody` is settable through the design endpoint but
 has no interface, and the editor's own advice to "paste it in the console's
 policy settings" points at something that does not exist.
 
+### 7c. The chat enforces content rules the API does not — found twice
+
+The Design studio chat refuses copy that the design endpoint **accepts**. Two
+separate instances, both measured:
+
+**The FAQ.** Asked to replace the ten answers, the chat refused most of them:
+
+> *"Because the store has no certificate of analysis on file, it won't accept
+> questions 2 and 3 (the certificate and testing answers), and it also blocks
+> the 48-hour shipping time, the plain-box packaging wording, and even the
+> 'within 48 hours of delivery' deadline for reporting damage."*
+>
+> *"That claims testing, purity or an analytical method, and this store has no
+> certificate of analysis on file yet."*
+> *"That promises a shipping speed, packaging, handling or hours the store has
+> no setting for."*
+
+**The same FAQ, verbatim, was dry-run through `preview_design_change` and came
+back `ok` with no rejections.** So the API allowed every line the chat refused.
+
+**The hero image fields.** Same disagreement, opposite direction:
+`heroBackgroundUrl` takes a plain https URL through the endpoint — ours are set
+to working URLs — while the chat says those slots accept media-library images
+only.
+
+**Why this matters more than it sounds:** which route a store owner uses
+currently determines what they are allowed to say about their own products. An
+owner editing by hand is held to a stricter standard than an agent hitting the
+API, with no indication that the two differ.
+
+**Ask: make the two agree, and say which is authoritative.** The substantiation
+rule itself is reasonable — refusing a purity claim with no certificate on file
+is the right instinct for this category. The problem is that it is enforced in
+one interface and not the other.
+
+⚠️ Practical consequence for TrueMG: **the FAQ cannot be updated at all until a
+COA is uploaded on the Lab Results page.** Not a copy problem; a substantiation
+gate. One upload clears it.
+
 ### 8. The honest long-shot: a way to add markup
 
 Every remaining gap after the above is "we cannot add an element". A per-section
