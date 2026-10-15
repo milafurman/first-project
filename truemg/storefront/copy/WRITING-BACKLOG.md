@@ -7,10 +7,14 @@ the next one starts.
 | # | Task | Where | Status |
 |---|---|---|---|
 | 1 | Coming-soon page | `comingSoonHeadline/Sub/Cta/Note` | **DONE 15 Oct — verified signed-out** |
-| 2 | Technical specifications | per product, Lapis admin | next |
-| 3 | Shipping & delivery detail | legal + FAQ keys | to do |
-| 4 | Lab Results page body | `labIntro` + surrounding | to do |
-| 5 | Contact page body | `contactBody` | to do |
+| 2 | Contact page | 7 `contact*` keys | **DONE 15 Oct — verified live** |
+| 3 | Technical specifications | per product, Lapis admin | next — needs Chrome |
+| 4 | Shipping & delivery detail | `legalRefundsBody` + FAQ | **blocked — needs facts from Mila** |
+| 5 | Lab Results page body | `labIntro` + surrounding | to do |
+
+Order note: specs were meant to be #2, but the Chrome tab wedged mid-navigation, and specs are
+per-product admin work that needs it. Contact was done instead because it is API-reachable and
+needed no facts from anyone. Specs resume when Chrome recovers.
 
 ## 1. Coming-soon page — done
 
@@ -34,3 +38,42 @@ by clearing the preview cookie and loading the site cold, which is what a strang
 
 Deliberately left alone: `comingSoonBg` and `comingSoonImageUrl`. The background image is
 Codex's now — see `truemg/assets/IMAGE-SPECS.md`.
+
+
+## 2. Contact page — done
+
+Six fields were empty and the intro was generic. Now live and verified:
+
+- **Intro** rewritten to say who the store serves and, deliberately, what it will not answer:
+  *"We do not advise on what to do with research material, and we cannot answer questions about
+  use in a person or an animal."* That limit belongs on the contact page more than anywhere —
+  it is where someone would ask.
+- **"What we can help with"** — seven real topics, rendering as a ticked list: a certificate for
+  a specific lot, documentation questions before ordering, a compound not in the catalog, volume
+  pricing from ten vials, order status and tracking, a damaged parcel or fulfillment error,
+  laboratory and institutional account setup.
+- **Form intro:** asks for the order or lot number up front, which saves a round trip.
+- **Confirmation** after sending, which was previously the theme default.
+- **A second button, "Read the FAQ first"**, pointing at `/faq`, to deflect what the FAQ already
+  answers.
+
+Left empty on purpose: the whole text-us band (`contactBandPhone` and friends). Empty hides it,
+and there is no number to publish. Do not invent one.
+
+## 4. Shipping detail — what is actually blocking it
+
+The QA sweep was right that a buyer gets no shipping information beyond "48 hours". But the
+missing pieces are **business facts, not copy**:
+
+- What shipping costs, and whether it is free over a threshold
+- Which countries are served, and which are excluded
+- Which carrier, and whether signature on delivery is available
+- Who pays customs and duties on an international order
+
+There is no dedicated shipping page on this platform — it all lives in `legalRefundsBody`, which
+is already written with everything that *is* established: 48-hour business-day dispatch, next
+business day over weekends and holidays, tracking at handover, carrier tracking as the record,
+plain packaging, the damage-claim process.
+
+Those four answers are all that stand between it and being complete. Writing a guess there would
+be worse than the gap.
