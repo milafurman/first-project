@@ -1,7 +1,19 @@
-# Product descriptions — the ten to paste
+# Product descriptions — all ten, APPLIED 15 Oct 2026
 
-Where: **Products → Catalog → the product → Description**. Not Design studio; these are
-product fields and the connector cannot reach them.
+**Status: done.** All ten are live and verified on the storefront catalog — 10/10 carry the
+new text and no card shows a fragment any more. Applied through Mila's own Chrome session in
+the Lapis admin at Products -> Catalog -> product -> Description, because product fields are
+not design copy keys and `apply_design_change` cannot reach them.
+
+**How to do this again, because it is fiddly.** Typing into the description box with synthetic
+clicks and keystrokes is unreliable — it landed 3 times out of 10, and the "Saved — storefront
+updated." banner appears even when the save is a no-op, so the banner proves nothing. What works
+every time, in ONE javascript_tool call per product: grab the textarea by its
+"Marketing description" placeholder, set its value through
+`Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set` so React registers
+it, dispatch a bubbling `input` event, then find the button whose text is exactly "Save" and
+call `.click()` on it in the same execution. Then verify by reloading the product page and
+reading the textarea back, or by reading the live catalog card — never by the banner.
 
 Listed in the order the admin lists products (alphabetical), so they can be worked
 top to bottom in one pass.
