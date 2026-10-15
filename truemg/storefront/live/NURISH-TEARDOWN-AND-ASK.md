@@ -143,6 +143,32 @@ Already raised separately — see `ASK-AUSTIN-PAGE-HOOKS.md`. Nothing identifies
 route, and `/about`, `/contact` and `/lab-results` have **zero** `lf-section-*`
 hooks while `/store` and `/catalog` have 35 and 27.
 
+### 7b. The editor cannot see existing content, so every edit is a full rewrite
+
+Found 14 Oct while trying to make three small changes. The Design studio chat
+answered, in its own words:
+
+| Change attempted | What it said |
+|---|---|
+| One CSS value | *"I can't see the existing Custom CSS from here, so I can't delete one rule by itself. My only options are adding new rules at the end or replacing the whole Custom CSS."* |
+| One FAQ answer | *"I can only see the start of that list, and replacing one answer means saving the whole list again, so I could lose or garble the other questions."* |
+| The refund policy | *"That text isn't one of the store texts I can edit."* |
+
+So **changing one line means pasting the entire stylesheet; changing one FAQ
+answer means pasting all ten questions.** Three for three.
+
+**Ask: give the editor read access to the copy and CSS it is being asked to
+change.** It is being asked to edit blind, which is why it either refuses or
+appends a duplicate rule. This is the single thing that makes small edits
+expensive, and it affects every store on the platform, not just this one.
+
+Related: there is **no policy editor in the console at all.** Settings was
+searched and scrolled in full, and `/admin/policies`, `/admin/legal`,
+`/admin/pages`, `/admin/content`, `/admin/store` and `/admin/settings/policies`
+all return 404. `legalRefundsBody` is settable through the design endpoint but
+has no interface, and the editor's own advice to "paste it in the console's
+policy settings" points at something that does not exist.
+
 ### 8. The honest long-shot: a way to add markup
 
 Every remaining gap after the above is "we cannot add an element". A per-section
