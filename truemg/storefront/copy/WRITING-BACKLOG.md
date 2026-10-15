@@ -8,9 +8,11 @@ the next one starts.
 |---|---|---|---|
 | 1 | Coming-soon page | `comingSoonHeadline/Sub/Cta/Note` | **DONE 15 Oct — verified signed-out** |
 | 2 | Contact page | 7 `contact*` keys | **DONE 15 Oct — verified live** |
-| 3 | Technical specifications | per product, Lapis admin | next — needs Chrome |
+| 3 | Technical specifications | per product, Lapis admin | **DONE 15 Oct — all 17 verified** |
 | 4 | Shipping & delivery detail | `legalRefundsBody` + FAQ | **blocked — needs facts from Mila** |
-| 5 | Lab Results page body | `labIntro` + surrounding | to do |
+| 5 | Lab Results page body | `labIntro` + surrounding | next |
+| 6 | Product-page citations | per product, `Sources & references` | **blocked — needs Mila's scope call** |
+| 7 | Pairs-well-with curation | per product | to do |
 
 Order note: specs were meant to be #2, but the Chrome tab wedged mid-navigation, and specs are
 per-product admin work that needs it. Contact was done instead because it is API-reachable and
@@ -77,3 +79,16 @@ plain packaging, the damage-claim process.
 
 Those four answers are all that stand between it and being complete. Writing a guess there would
 be worse than the gap.
+
+
+## 3. Technical specifications — done, and not what the brief said
+
+The QA sweep reported product pages carry no specs. Wrong — the specs were populated all along;
+the storefront simply does not render them. Full detail in `SPECS-FINDING.md`.
+
+What the task turned into: removing an unsupported purity claim from the 15 products that carried
+it, and the banned "bacteriostatic water" phrase from the 7 solubility fields that had it. All 17
+verified by page reload. See `SPECS-PURITY-PROGRESS.md`.
+
+Still open from this: citations (scope decision) and pairs-well-with (pure curation). And
+TMG-3RT's specs are nearly empty, which is a real content gap once the rendering is fixed.
