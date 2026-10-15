@@ -20,8 +20,28 @@ swaps the product image when a shopper picks that size. Sizes without a photo us
 product picture."* So the defect is not a wrong card image; it is that picking 10MG does not
 swap to the 10MG vial.
 
-The artwork matches: `truemg/assets/vials/tmg-ss-31.png` prints **10MG** and is byte-identical
-(sha dcb84bc1054c) to the staged Desktop file `11 SS-31 - DO THIS ONE FIRST.png`.
+## SUPERSEDED 15 Oct 2026 — do NOT use the renders in this repo
+
+Mila: **"Sam created the vials. Use the files in the Drive Sam gave us. Do not use any other
+location to pull or upload from. We are not using the ones you created."**
+
+So `truemg/assets/vials/tmg-*.png` are **not** the artwork for these slots, and neither is the
+Desktop `TRUEMG UPLOAD` folder — all 17 PNGs in it are byte-identical to those renders.
+The only source for vial artwork is Sam's shared folder:
+`drive.google.com/drive/folders/1RnTchA_5Tiz3tk0KEAhYu85-R3QKdlxq` -> `vial/Labels`.
+
+Sam's label is a different design: wordmark reads TRUE MG **LABS**, a large ghosted lizard
+watermark fills the label behind the mark, a DNA-helix motif runs down the right edge, the
+newer cleaner lizard, a deeper blue cap, and the lifestyle shot carries BATCH 60392 / LOT 60393.
+None of that is in the repo renders.
+
+As of 15 Oct his folder holds **one** product in two formats — TMG-3RT 10MG as a transparent
+cutout (the format the storefront needs) and as a marble lifestyle shot — plus a one-page
+labels PDF. The remaining nineteen size-slots have no Sam artwork visible to us; the folder is
+view-only, so he may have more that is simply not shared.
+
+**Every one of the 17 product photos currently live on the store came from the repo renders.**
+If his set replaces them, that is 17 products / 20 size-slots, not three.
 
 ## Why it cannot be automated
 
