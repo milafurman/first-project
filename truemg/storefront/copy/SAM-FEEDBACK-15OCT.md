@@ -64,9 +64,15 @@ as a percentage with the method beside it, filed to the lot on the vial.
 **Needed from Sam:** what he wants to see there. If the answer is "the certificates", that is the
 COA upload, not copy.
 
-## 7. "Design feels too bloggy" — needs one sentence from him
+## 7. "Design feels too bloggy" — needs one sentence from him, but partly answered
 
 Too much text? Too soft a palette? Too little product on screen? Not actionable as written.
+
+**Partly answered since:** the About page now ends with a published reference list — 21
+citations, identity and method papers only, every one checked against PubMed's own record,
+with the five compounds that have no usable citation named as such. Whatever "bloggy" turns
+out to mean, that section is the opposite of it: it is the most checkable thing on the site.
+See `CITATIONS-VERIFIED.md`. His one sentence is still worth having.
 
 ## 8. "All catalog bottle images need replacing" — already with Codex
 
@@ -80,4 +86,5 @@ Nineteen cutouts outstanding, three prioritised. See `truemg/assets/IMAGE-SPECS.
 - **Sam:** what he wants on Lab Results · what "bloggy" means · stock · the vial set
 - **Codex:** the nineteen cutouts
 - **A lawyer:** whether the research-use line is mandatory
-- **Already done:** footer contrast, "analyse lot by lot", Lab Results paragraph
+- **Already done:** footer contrast, "analyse lot by lot", Lab Results paragraph, the
+  About-page reference list
