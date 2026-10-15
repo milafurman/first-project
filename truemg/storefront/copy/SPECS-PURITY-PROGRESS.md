@@ -1,59 +1,64 @@
-# Purity line replacement — 14 of 17 done (15 Oct 2026)
+# Purity line replacement — COMPLETE, all 17 verified (15 Oct 2026)
 
-Mila: *"Replace the purity line and do the citations."*
+Mila: *"Replace the purity line and do the citations."* The purity half is done. Citations are
+still waiting on a scope decision — see the bottom.
 
-**Replacement applied:** `≥99% (validated by HPLC/COA)` → **"Reported on the certificate issued
-for your lot"**. Where a Solubility field said "bacteriostatic water", it was changed to
-**TMG-BAC** in the same pass.
+**Replacement:** `≥99% (validated by HPLC/COA)` → **"Reported on the certificate issued for your
+lot"**. Where a Solubility field said "bacteriostatic water" it became **TMG-BAC** in the same
+pass.
 
-## Done — save confirmed on each
+## Verified by reloading each product page and reading the field back
 
-1. EPITHALON — purity + solubility · **also reload-verified**
-2. GHK-CU — purity
-3. BPC-157 + TB-500 — purity + solubility
-4. CJC-1295 (No DAC) + IPAMORELIN — purity + solubility
-5. IPAMORELIN — purity + solubility
-6. KLOW — purity + solubility
-7. MOTS-C — purity + solubility
-8. NAD+ — purity
-9. SELANK — purity
-10. SEMAX — purity
-11. SS-31 — purity
-12. TESAMORELIN — purity + solubility
-13. THYMOSIN ALPHA-1 — purity + solubility
+Not by the save banner — that banner appears on no-op saves on this platform and cannot be
+trusted. Every row below was confirmed on a fresh page load.
 
-14. TMG-2TZ — purity + solubility · **also reload-verified**
+| # | Product | Purity now | Solubility now |
+|---|---|---|---|
+| 1 | EPITHALON | certificate line | Soluble in water and in TMG-BAC |
+| 2 | GHK-CU | certificate line | Soluble in water |
+| 3 | BPC-157 + TB-500 | certificate line | Soluble in water / TMG-BAC |
+| 4 | CJC-1295 (No DAC) + IPAMORELIN | certificate line | Soluble in water / TMG-BAC |
+| 5 | IPAMORELIN | certificate line | Soluble in water / TMG-BAC |
+| 6 | KLOW | certificate line | Soluble in water / TMG-BAC |
+| 7 | MOTS-C | certificate line | Soluble in water / TMG-BAC |
+| 8 | NAD+ | certificate line | Soluble in water |
+| 9 | SELANK | certificate line | Soluble in water |
+| 10 | SEMAX | certificate line | Soluble in water |
+| 11 | SS-31 | certificate line | Soluble in water |
+| 12 | TESAMORELIN | certificate line | Soluble in water / TMG-BAC |
+| 13 | THYMOSIN ALPHA-1 | certificate line | Soluble in water / TMG-BAC |
+| 14 | TMG-2TZ | certificate line | Soluble in water / TMG-BAC |
+| 15 | VITAMIN B12 | certificate line | Soluble in water |
+| 16 | TMG-3RT | **never had the claim** | (empty) |
+| 17 | TMG-BAC | **never had the claim** | Miscible with aqueous solutions |
 
-## Not done — 3 left
+**On every one of the 17:** the string `validated by HPLC` is gone and the phrase
+`bacteriostatic water` is gone. Checked against the whole page markup, not just the field.
 
-TMG-3RT · TMG-BAC · VITAMIN B12
+**Correction to an earlier assumption:** not all 17 carried the claim. 15 did. TMG-3RT and
+TMG-BAC never did, so there was nothing to replace on those two — `changed: []` was the correct
+result there, not a failure.
 
-**Correction:** TMG-2TZ was first logged as blocked. It was not. The call that appeared to freeze
-had already made the edit and saved; only the result never came back. Confirmed afterwards on a
-fresh page load — purity reads "Reported on the certificate issued for your lot" and solubility
-reads "Soluble in water / TMG-BAC". A timeout on this platform does not mean the write failed;
-always read the value back before re-running.
+## New finding: TMG-3RT's specs are nearly empty
 
-The renderer then wedged repeatedly on TMG-3RT — `Runtime.evaluate` timed out at 45s, and a
-screenshot could not be captured either. Resume from TMG-3RT, and **check its values before
-editing** in case the same thing happened again.
+Its CAS number, molecular formula, molecular weight, amino-acid sequence, purity, endotoxin,
+appearance and solubility are **all blank**. Only Storage is filled. Every other product is
+substantially populated. This is a genuine content gap, not a rendering problem — though it is
+masked today because the storefront does not render the specs block at all.
 
-## Honest state of the verification
+## Two platform behaviours worth not relearning
 
-The method was proven properly on EPITHALON: set, save, **reload, and read the value back** — it
-persisted, the old claim was gone and the banned phrase was gone.
+1. **A timeout does not mean the write failed.** TMG-2TZ's edit appeared to freeze — the call
+   had already written and saved and only the response never returned. Always read the value
+   back before re-running, or you will double-apply.
+2. **Check your own selector before blaming the page.** TMG-3RT looked unpopulated because
+   `document.querySelectorAll('input')[0]` is the admin search box, not the product title.
 
-Two are fully reload-verified: EPITHALON and TMG-2TZ.
+## Still open: the citations
 
-For the other twelve I have the save banner plus the fact that the script only reports a field as
-changed when it actually found and set it. **The banner is known to appear on no-op saves on this
-platform**, so those twelve are not yet reload-verified. That check still needs running — a single
-pass reading the purity field on each would settle it.
+Real papers were pulled from PubMed for Epitalon. Of three, only one is safe for a product page —
+an in-vitro enzyme assay. The others carry effect claims in their titles, and a title sitting
+under a product you sell reads as intended use.
 
-## Method, for whoever picks this up
-
-Per product, one call: navigate, wait ~9s, then in one JS execution — expand Technical
-specifications if collapsed (detect by the `EU/mg` placeholder), set the field through
-`Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set` so React registers it,
-dispatch a bubbling `input` event, then click the button whose text is exactly `Save` **in the
-same execution**. Splitting set and save across calls reverts the field.
+Needs Mila's decision: cite only identity, characterisation and analytical-method work — which
+for several compounds means one citation or none — or take the broader literature knowingly.
