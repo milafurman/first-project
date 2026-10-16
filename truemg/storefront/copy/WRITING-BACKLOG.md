@@ -9,7 +9,7 @@ the next one starts.
 | 1 | Coming-soon page | `comingSoonHeadline/Sub/Cta/Note` | **DONE 15 Oct — verified signed-out** |
 | 2 | Contact page | 7 `contact*` keys | **DONE 15 Oct — verified live** |
 | 3 | Technical specifications | per product, Lapis admin | **DONE 15 Oct — all 17 verified** |
-| 4 | Shipping & delivery detail | `legalRefundsBody` + FAQ | **blocked — needs facts from Mila** |
+| 4 | Shipping & delivery detail | `legalRefundsBody` + FAQ | **CLOSED 15 Oct — Mila's call: lowest priority, stop raising it** |
 | 5 | Lab Results page body | `labIntro` | **DONE 15 Oct — verified live** |
 | 6 | Citations | **About page** — see `CITATIONS-VERIFIED.md` | **DONE 15 Oct — live, 21 references verified** |
 | 7 | Pairs-well-with curation | per product | blocked — needs Mila's choice |
