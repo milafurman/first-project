@@ -12,7 +12,9 @@ the next one starts.
 | 4 | Shipping & delivery detail | `legalRefundsBody` + FAQ | **blocked — needs facts from Mila** |
 | 5 | Lab Results page body | `labIntro` | **DONE 15 Oct — verified live** |
 | 6 | Citations | **About page** — see `CITATIONS-VERIFIED.md` | **DONE 15 Oct — live, 21 references verified** |
-| 7 | Pairs-well-with curation | per product | to do |
+| 7 | Pairs-well-with curation | per product | blocked — needs Mila's choice |
+| 8 | Who makes it / who tests it | hero, `labIntro`, About, coming-soon | **DONE 15 Oct — live, see `WHO-MAKES-AND-WHO-TESTS.md`** |
+| 9 | Truncation sweep | all 145 populated copy fields | **DONE 15 Oct — one defect found and fixed, no others** |
 
 Order note: specs were meant to be #2, but the Chrome tab wedged mid-navigation, and specs are
 per-product admin work that needs it. Contact was done instead because it is API-reachable and
