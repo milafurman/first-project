@@ -7,21 +7,40 @@ is marked, because several are not writing problems at all.
 
 **Checked:** measured every text element in the footer against its background. **Zero** fall below
 the readable threshold; body text runs about 11:1 and links about 14:1. The contrast fix from
-earlier today is holding.
+earlier today is holding. Re-confirmed 15 Oct on the live FAQ page — footer still navy
+`rgb(10,25,47)` with body text `rgb(195,211,228)`.
+
+**A measurement I nearly reported wrong.** A first reading put the footer logo at an effective
+height of **10 pixels**, which would have been a serious defect. A screenshot showed it
+rendering correctly at 182x40 inside its box. The first number came from measuring during a
+transient layout state. **Screenshot before reporting a sizing defect** — the geometry can lie
+mid-layout.
 
 **What he is actually looking at:** the footer logo. It sits in a **white rounded box** with the
 dark wordmark inside it, on the navy footer. It reads as a sticker, and the black letters in it
 are the "black font".
 
-**Fix:** Sam's own logo folder contains a **white version** of the wordmark, made for dark
-backgrounds. Lapis has a separate footer-logo slot, so the header can keep the dark one. One
-upload — **Mila's hands**, since uploads are admin-only.
+**Fix — with one claim corrected, 15 Oct.** I previously wrote that Lapis has a separate
+footer-logo slot so the header could keep the dark mark. **I could not verify that**, and it
+should not be relied on. What is verified: the live site serves **one file to both** header and
+footer, and there is **no logo key in the API at all** — it is an admin upload only.
+
+So before uploading a white wordmark, check the admin for a *second* slot. If there is only
+one, a white logo would disappear against the white header. Options in that case: keep the
+white box as it is (it is legible — see the measurement below), or have me recolour the footer
+mark with CSS, which is mine to do and needs no upload, though it would turn the blue "MG"
+white as well.
 
 ## 2. "Logo is wrong across pages (header and footer, FAQ)" — one file, not three
 
-**Checked:** header, footer and FAQ all pull the **same single image**. So it is one upload to
-correct everywhere, not a per-page problem. It is the older wordmark; the current set is in
-Sam's folder. **Mila's hands.**
+**Checked, and re-verified 15 Oct by reading the image URLs off the live pages.** Header,
+footer, FAQ and the home page all load the identical file:
+`brand-logos/9d58c6be-60d7-4e06-90ff-c93d17e9990e-1791788391380.png`, 1200x231, transparent
+PNG, black `TRUE` / blue `MG` / black `LABS`. **One upload corrects every page.**
+
+Whether it is the *older* wordmark I am taking from Sam, not from my own comparison — I cannot
+reach his folder from here to diff them. **Mila's hands** either way: there is no logo key in
+the API.
 
 ## 3. "A product photo with backdrop may show the wrong vial" — he is right, and here is the one
 
