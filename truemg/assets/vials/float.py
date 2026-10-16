@@ -155,6 +155,27 @@ CLUSTER_MOBILE = [(n, t, s, (x - 0.21), y) for n, t, s, x, y in CLUSTER]
 PANEL = ((247, 248, 252), (235, 239, 248))
 
 
+def cluster_mobile(src, out, size=(1080, 1500)):
+    """The phone cut of the cluster hero.
+
+    This used to be a hand-made file with no script behind it, so it fell out
+    of date every time the vials were re-rendered and nobody could tell. The
+    window is centred on the cluster's own centre of mass rather than on the
+    canvas, because the vials sit well right of centre in the wide crop and a
+    naive middle cut slices them in half.
+    """
+    im = Image.open(src).convert("RGB")
+    a = np.asarray(im.convert("L")).astype(float)
+    w = np.clip(a.std(axis=0) - np.percentile(a.std(axis=0), 25), 0, None)
+    cx = float((np.arange(len(w)) * w).sum() / w.sum())
+    cw = int(round(im.height * size[0] / size[1]))
+    x0 = int(round(min(max(cx - cw / 2, 0), im.width - cw)))
+    cut = im.crop((x0, 0, x0 + cw, im.height)).resize(size, Image.LANCZOS)
+    cut.save(out, quality=88, optimize=True)
+    print("  %-36s %dx%d  %d KB" % (out, size[0], size[1], os.path.getsize(out) // 1024))
+    return cut
+
+
 def cluster(out, size=(2560, 1150), bg=PANEL, cast=None):
     W, H = size
     g = np.linspace(0, 1, H)[:, None, None]
@@ -184,3 +205,11 @@ def cluster(out, size=(2560, 1150), bg=PANEL, cast=None):
 
     frame.convert("RGB").save(out, quality=90, optimize=True)
     print("  %-36s %dx%d  %d KB" % (out, W, H, os.path.getsize(out) // 1024))
+
+
+# The main block above predates cluster() and sits ABOVE its definition, so the
+# hero could not be called from there. Rather than reorder a working file, the
+# hero and its phone cut are built here, where both functions exist.
+if __name__ == "__main__":
+    cluster("../web/hero-float.jpg")
+    cluster_mobile("../web/hero-float.jpg", "../web/hero-float-mobile.jpg")

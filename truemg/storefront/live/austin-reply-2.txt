@@ -1,0 +1,108 @@
+Hi Austin,
+
+The four fixes landed and the page-load one is dramatic. Five cache-busted loads
+of /catalog came back at 0.41, 0.35, 0.32, 0.28 and 0.29 seconds, against 21.1,
+3.8, 1.9, 1.1 and 11.8 before. The worst run now beats the best run before, and
+the product names are in the first response, so the blank screen is structurally
+gone rather than just less likely. Thank you — that was the one that worried me.
+
+Next thing, and it needs a bigger conversation than a bug.
+
+I'm trying to get TrueMG to a particular standard of finish, and my reference is
+trynurishlabs.com. So before asking you for anything I took it apart to see what
+it actually does. Two findings worth sharing, because they're not what I
+expected:
+
+1. There's no clever JavaScript. No GSAP, no Swiper, no AOS, no Lenis, no
+   scroll observers — I checked for the globals, not just the script tags. Just
+   jQuery. Everything that makes that site feel alive is CSS: about 1,360 rules
+   and 12 named keyframe animations, 8 of which were running on screen when I
+   measured.
+
+2. They're on WordPress, so they can add a wrapper element whenever an effect
+   needs one. I can't add a single element, which means some techniques are
+   closed to me no matter which properties you allow.
+
+Then I dry-ran every technique they use through preview_design_change to see
+where Lapis actually stands, rather than guessing from your last email. Eleven
+rules came back refused. In your own words:
+
+  @keyframes                  "@keyframes is not allowed"
+  animation                   "not in the allowed property list"
+  filter                      "not in the allowed property list"
+  mix-blend-mode              "not in the allowed property list"
+  mask-image / -webkit-       "not in the allowed property list"
+  will-change                 "not in the allowed property list"
+  backface-visibility         "not in the allowed property list"
+  position: fixed             "can cover the whole page, its disclaimer included"
+  z-index > 9                 "the header, menus and the disclaimer sit above that"
+  html / body / main          "cannot be targeted"
+
+So, in order of what it would unlock:
+
+1. THE 10,000 CHARACTER LIMIT. This outranks everything else put together.
+   I measured the reference site's actual CSS rather than estimating it:
+   311,053 characters across 1,184 readable rules plus its inline blocks —
+   and three of its stylesheets were cross-origin so I couldn't read them,
+   which makes that a floor, not a total. That is 31 times the budget I have.
+   Mine is already at 3,679 characters and one colour change from cramped.
+
+   No property you allow matters if there's nowhere to write it. Ideally:
+   let a stylesheet be uploaded as a file, so the ceiling stops being the
+   constraint. Failing that, 50,000 characters would at least make a
+   designed site possible.
+
+2. @keyframes AND animation. This is where the life comes from, and a
+   transition can't substitute — a transition needs a state change to fire, an
+   animation runs on its own. Could these be allowed under the same 3-second
+   cap you've already applied to transitions, honouring prefers-reduced-motion?
+
+3. A STACKING BAND BELOW THE DISCLAIMER — not position: fixed itself.
+   Your reason for refusing fixed and high z-index is that a stylesheet
+   mustn't cover the compliance line. That's right and I'm not asking you to
+   drop it. What I'd ask instead: reserve a range — say z-index 1 to 900 for
+   store styling, with the header, menus and disclaimer pinned above — and
+   allow position: fixed only inside the store root, never over the disclaimer
+   element. Then I can build a cart drawer or a back-to-top with no route to
+   hiding compliance text.
+
+4. filter, mix-blend-mode, mask-image. Each does specific work:
+   - filter: drop-shadow() gives a cut-out vial a shadow that follows its
+     silhouette instead of its bounding box. I hit this exactly and had to bake
+     shadows into the PNGs as a workaround.
+   - mix-blend-mode: multiply drops a white-ground product photo onto a tinted
+     panel without a halo.
+   - mask-image with a gradient is how a section fades out instead of ending in
+     a hard line. Four of Nurish's softest edges are exactly this.
+   will-change and backface-visibility too, if they're easy — they're only ever
+   performance hints.
+
+5. A ROUTE HOOK, AND SECTION CLASSES ON EVERY PAGE. Nothing identifies which
+   page I'm on, so any rule hits the whole store. And /about, /contact and
+   /lab-results have zero lf-section-* hooks, while /store and /catalog have 35
+   and 27. The pattern already exists in your code — those three pages just
+   never got it. Something like lf-page-about on the store root would do it.
+
+6. A WAY TO SET THE PAGE BACKGROUND. Since html, body and main can't be
+   targeted, I can't change the page's own background at all — so even a
+   site-wide dark treatment isn't one rule. A theme colour token for it would
+   be enough.
+
+What I'm NOT asking for, so you can see I've checked:
+
+  - offsets: theirs top out at 100px, your cap is 400px. Fine as is.
+  - transition duration: theirs run 0.13 to 0.275s, your cap is 3s. Fine.
+  - backdrop-filter: theirs is blur(8px), your cap is 40px. Fine.
+  - clip-path, grid, flex, @media: all working, no complaints.
+
+And one honest question rather than a request: is there any path to adding
+markup — a per-section HTML block, or template overrides? Every gap left after
+the above is "I can't add an element". A no is useful; it stops me designing
+around a wall I think might move.
+
+Thanks again for yesterday. Happy to jump on a call if any of this is easier
+spoken than written.
+
+Mila Furman
+TrueMG Labs
+truemglabs.com

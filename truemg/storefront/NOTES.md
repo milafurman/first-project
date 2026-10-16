@@ -66,7 +66,7 @@ second-person "you" in long-form body copy while allowing it in FAQ answers.
 ## Custom CSS
 
 The sanitizer strips the child combinator `>`, so write descendant selectors
-that stay correct when widened. `storefront.css` is the applied string.
+that stay correct when widened. `live/customCss-2026-10-12.css` is the applied string (it was `storefront.css`, a duplicate that drifted; removed 13 Oct 2026).
 
 **It also strips `@keyframes` blocks while keeping the `animation:` property.**
 A custom animation therefore validates, saves, and shows the right
@@ -125,3 +125,104 @@ else, no JavaScript error on the page). **The same 6/2 split appears with
 It is worth raising with Lapis. It also means a single page load is not evidence
 of anything: verify through several, or a pass that reports "no logo" is really
 just a load that never rendered.
+
+## The Layouts page: "Meridian" is `revive`
+
+`/admin/templates` and the MCP name the same 21 layouts in two different
+vocabularies — the admin shows **display names**, the MCP takes **template ids**.
+Six coincide (Arcane/`arcane`, Halo/`halo`, Dune/`dune`, Infinity/`infinity`,
+Dispatch/`dispatch`, Modern/`mdrn`); the rest were renamed, which is what makes
+the screen look out of sync with the store.
+
+**Meridian is the display name for `revive`.** Its card reads "Bespoke: clean
+clinical white, brand blue + gold, Poppins display", and the live store's `h1`
+computes to `Poppins, Inter, system-ui, sans-serif`. Meridian is the only
+Poppins layout in the list, and the admin already marks it *Current*. One live
+template, two names. Nothing is broken.
+
+What *is* stale is **"your main design"** — a saved revert target still holding
+`arcane`, the template that was live before the switch. `apply_design_change`
+writes the live template but never updates that bookmark, so the admin reports
+the disagreement as "You're previewing Meridian." It is not a preview and it is
+not an A/B test (`/admin/experiments` says "No tests yet").
+
+So **"Return to my main" really would apply `arcane`** and take out half the copy
+keys and every `.lf-section-*` rule in the stylesheet. The defusing click is the
+one beside it — *"Make this my main design"* on the Meridian card — after which
+main equals current and the dangerous button becomes a no-op. Unknown until
+someone does it: whether that also re-runs a template apply and wipes
+`customCss` the way a Design studio save does. Capture the stylesheet first.
+
+## Two measurements worth keeping
+
+**The whole stylesheet still round-trips clean** (dry-run, 12 Oct 2026): 22
+rules, 2,029 characters, zero rejected — including `display:none` on
+`.lf-section-comparison`, which the tool's own description now says is
+disallowed. Re-dry-run before trusting that again.
+
+**`?peek=1` needs no login.** It bypasses the coming-soon curtain for anyone,
+which is the only practical way to test the real store on a phone: Chrome on
+Mila's machine reports a 4320px viewport and cannot emulate one, while the
+built-in browser's mobile preset drives `truemglabs.com/?peek=1` at a true
+375x812.
+
+**Rule 1 of the stylesheet is dead.** It targets
+`.lf-section-hero img[src*="hero-media"]`, but `heroMediaUrl` is now `pixel.png`
+— a deliberate 1x1 that removes the floating cluster, since `hero-hand.jpg`
+already carries a vial. The selector matches nothing and the `float` animation
+rides nothing.
+
+## Verified live state, 12 Oct 2026 (measured, not assumed)
+
+A full read of the live store before picking up the design work. Four things
+were checked against the running site rather than against these notes:
+
+**The stylesheet is intact.** Live `customCss` is 2,316 characters against the
+repo's 4,700 — but that gap is **only stripped comments**. Parsed into rules,
+both sides give 25 rules and compare byte-equal after whitespace normalisation.
+Nothing has wiped it. Useful calibration: Lapis strips comments on save, so a
+shorter live string is not evidence of loss. Compare rules, never lengths.
+
+**The product images on the store are correct.** The live TESAMORELIN object is
+2000x2000 RGBA and byte-identical (md5 `a5d43bd0…`) to the repo's render. Its
+Gila was cropped out and set beside both candidate drawings: it is the **spiky**
+master, in brand blue — not the archived smooth mark. The worry that the store
+still carried pre-rebrand artwork is settled; it does not. Note the silhouette
+IoU test was useless here (23.8% spiky vs 26.9% smooth, i.e. it pointed the
+wrong way) because the crop was not scale-aligned to the candidates. **The
+side-by-side render decided it in one look.** Prefer looking to scoring when the
+scores are close.
+
+**The catalog serves 14 PNG and 3 JPG,** and the three JPGs are exactly SS-31,
+TMG-2TZ and TMG-3RT — the per-size-photo trap, still open and still showing the
+old ledge photographs.
+
+**The one-in-four empty render is still happening.** The very first catalog load
+of this session returned 17 cards' worth of nothing: zero `img`, zero
+`.lf-card`, HTTP 200. The next load was fine. This is the documented fault and
+it is still live — which is the reason every check above was run twice.
+
+## The descriptions are live, and that created a new fault
+
+All 17 redrafts are applied. But the **catalog card renders only the first
+sentence**, and nine redrafts were written as two, so nine cards now show a
+fragment — "Elamipretide.", "Thirty-nine residues.", "Ala-Glu-Asp-Gly."
+
+This is not a CSS problem and cannot be solved as one: the catalog page's HTML
+**never contains the second sentence**, so the truncation is upstream of
+anything a stylesheet can reach. The product page renders the full text, so
+nothing is lost in storage. Merging each pair into one sentence with a comma or
+an em dash fixes the card and costs nothing elsewhere. See `DESIGN-TASKLIST.md`
+1D.1b.
+
+
+## The slowness is Lapis's, not ours — the admin does it too (12 Oct 2026)
+
+Went into `app.uselapis.io/admin` → Products → Catalog to swap three product
+images. **The product list sat on "Loading…" for over 20 seconds, twice**, on a
+connection that loaded `example.com` in 0.22 s.
+
+That matters for 1G. The storefront being slow could plausibly have been our
+`customCss` or the theme. Their own admin hanging on its own product list
+cannot be. The delay is on Lapis's side of the line, which makes 1G a support
+report rather than something to fix here.

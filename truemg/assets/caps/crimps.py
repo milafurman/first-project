@@ -80,7 +80,13 @@ for i, (name, kw) in enumerate(COMBOS):
 print("crimps:", len(imgs), " combos:", len(combos))
 
 # ---------------- contact sheet ----------------
-F = lambda n, s: ImageFont.truetype("/usr/share/fonts/truetype/dejavu/" + n, s)
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), ".."))
+from _fonts import font as _font
+# Roles, not filenames, and no hardcoded Linux path. See ../_fonts.py
+F = lambda n, s: _font({"DejaVuSansMono.ttf": "mono",
+                        "DejaVuSans.ttf": "sans",
+                        "DejaVuSans-Bold.ttf": "bold"}.get(n, "sans"), s)
 MONO, MONO_S, BOLD, H2 = F("DejaVuSansMono.ttf", 14), F("DejaVuSansMono.ttf", 12), \
                          F("DejaVuSans-Bold.ttf", 23), F("DejaVuSans-Bold.ttf", 19)
 PAGE, TXT, MUT, ACC = (247, 246, 243), (18, 18, 20), (128, 124, 116), tuple(int(BRAND_HEX[i:i+2],16) for i in (1,3,5))

@@ -19,7 +19,13 @@ import json
 BRAND_HEX = json.load(open("../brand.json"))["brand"]   # one source of truth
 
 SRC = "tmg-nad.png"
-CRIMP = (0.085, 0.170)      # the band, as a fraction of the subject's height
+# The band, as a fraction of the subject's height. These were (0.085, 0.170),
+# which cut the top of the skirt off: the band's real top edge is an arc that
+# runs from 0.0744 under the middle of the cap to 0.0794 at either side, so a
+# rectangular cut has to start at the LOWER of the two or it eats white plastic,
+# and starting at 0.085 left a strip of bare metal out of the asset. See
+# find_crimp() in render.py, which is where the arc is measured.
+CRIMP = (0.0794, 0.1753)
 SEAL_BOTTOM = 0.178         # just below the skirt, where the glass shoulder starts
 BRAND = BRAND_HEX
 
@@ -46,8 +52,13 @@ def cut(a, y_from, y_to):
 
 def spec(seal, band):
     """A card the printer or crimp supplier can work from."""
-    F = lambda n, s: ImageFont.truetype("/usr/share/fonts/truetype/dejavu/" + n, s)
-    MONO, BOLD, SMALL = F("DejaVuSansMono.ttf", 15), F("DejaVuSans-Bold.ttf", 26), F("DejaVuSansMono.ttf", 12)
+    # Named faces by ROLE, from the shared lookup in ../_fonts.py. This used to
+    # hardcode a Linux path, so the script could not run on a Mac at all and the
+    # spec card silently stopped being rebuildable.
+    import sys as _sys
+    _sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+    from _fonts import font as F
+    MONO, BOLD, SMALL = F("mono", 15), F("bold", 26), F("mono", 12)
     W, H = 900, 560
     c = Image.new("RGB", (W, H), (255, 255, 255))
     d = ImageDraw.Draw(c)

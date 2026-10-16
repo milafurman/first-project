@@ -1,0 +1,57 @@
+{
+  "v": 3,
+  "createdOnFiles": { "v": 1, "at": "2026-10-14T03:30:00Z" },
+  "title": "TrueMG About page — two directions",
+  "launch": { "view": "canvas" },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 2040,
+      "title": "A — The mark, lit",
+      "expand": "fill"
+    },
+    "Textured.dc.html": {
+      "x": 1360,
+      "y": 0,
+      "w": 1280,
+      "h": 2040,
+      "title": "B — Photographic, calm",
+      "expand": "fill"
+    }
+  },
+  "order": ["Main.dc.html", "Textured.dc.html"],
+  "notes": {
+    "hed": {
+      "x": 0,
+      "y": -300,
+      "text": "Two ways to open the About page",
+      "kind": "title1",
+      "maxW": 2640
+    },
+    "a": {
+      "x": 0,
+      "y": 2100,
+      "w": 1280,
+      "text": "A — THE MARK, LIT.\n\nThe Gila is the hero: deep ground, two light sources, the mark glowing. Dramatic, unmistakably yours, and it reads at any size.\n\nStrength: nobody else in this category looks like this. It is the badass option.\n\nRisk: it is a beautifully lit logo rather than a scene. If the rest of the site stays pale blue, this one dark panel can feel bolted on unless the dark band repeats elsewhere — the footer already is dark, so it has somewhere to rhyme with.",
+      "fill": "blue"
+    },
+    "b": {
+      "x": 1360,
+      "y": 2100,
+      "w": 1280,
+      "text": "B — PHOTOGRAPHIC, CALM.\n\nThe hand shot you made carries the page. The mark appears small, as a signature rather than a billboard. Closer to the calm you liked about Nurish.\n\nStrength: real texture, real light, and a human holding the actual product. It is warmer and more premium.\n\nRisk: the photo's background is beige, so it sits slightly apart from the blue page. It also leans on photography being good — and the vial in this shot still carries the old cap and the old lizard, so it needs re-rendering before it ships.",
+      "fill": "teal"
+    },
+    "note": {
+      "x": 0,
+      "y": 2560,
+      "w": 2640,
+      "text": "Both use the same words — the About copy built around the Gila, with \"Anyone can fill a vial\" kept and the provenance line that stops the history reading as a claim. So you are judging the look, not the writing.",
+      "fill": "gray"
+    }
+  },
+  "designSystems": []
+}

@@ -1,0 +1,57 @@
+Hi Sam,
+
+Two things, and the store is finished apart from them.
+
+1) STOCK — nothing can be sold until this is in
+
+Every size is sitting at zero, so every card on the catalog reads "Out of stock" and every
+buy button reads "Unavailable." The storefront itself is done — copy, descriptions,
+policies, FAQ, the lot — but nobody can spend a dollar until quantities are entered.
+
+It's at app.uselapis.io/admin -> Products -> Inventory. All 20:
+
+  TMG-BPC157TB500-20MG    BPC-157 + TB-500                 20MG (10+10)
+  TMG-CJC1295IPA-10MG     CJC-1295 (No DAC) + IPAMORELIN   10MG (5+5)
+  TMG-EPI-10MG            EPITHALON                        10MG
+  TMG-GHKCU-50MG          GHK-CU                           50MG
+  TMG-IPA-10MG            IPAMORELIN                       10MG
+  TMG-KLOW-80MG           KLOW                             80MG (TB10+BPC10+GHK50+KPV10)
+  TMG-MOTSC-20MG          MOTS-C                           20MG
+  TMG-NAD-1000MG          NAD+                             1000MG
+  TMG-SELANK-10MG         SELANK                           10MG
+  TMG-SEMAX-10MG          SEMAX                            10MG
+  TMG-SS31-10MG           SS-31                            10MG
+  TMG-SS31-50MG           SS-31                            50MG
+  TMG-TESA-20MG           TESAMORELIN                      20MG
+  TMG-TA1-10MG            THYMOSIN ALPHA-1                 10MG
+  TMG-2TZ-10MG            TMG-2TZ                          10MG
+  TMG-2TZ-20MG            TMG-2TZ                          20MG
+  TMG-3RT-10MG            TMG-3RT                          10MG
+  TMG-3RT-20MG            TMG-3RT                          20MG
+  TMG-BAC-10ML            TMG-BAC                          10ML
+  TMG-B12-10ML            VITAMIN B12                      10ML
+
+2) THE VIAL FILES — we're using yours, so I need the full set
+
+Your TMG-3RT 10MG is the standard. The one in the LOGOS/vial/Labels folder, the cutout with
+the transparent background, is exactly the format the storefront wants — it sits on the
+tinted card backgrounds properly. The marble shot is lovely but it's a different job.
+
+Right now that folder has only that one product. Every other photo on the site is a
+placeholder and has to come out, so I need a cutout for each of the twenty above. Each size
+needs its own, because the storefront swaps the image when a shopper picks a strength and
+the label has to show the matching one.
+
+Already done:  TMG-3RT 10MG
+Still needed:  the other nineteen
+
+If you already have them and they just aren't in that folder, drop them in and I'll take it
+from there. If the list is long, do these three first — they're the ones with an empty slot
+on the site today:
+
+  SS-31 10MG
+  TMG-2TZ 10MG
+  TMG-3RT 20MG
+
+Thanks,
+Mila

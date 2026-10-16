@@ -399,6 +399,11 @@ HERO = (
 def hero_media(src="hero-media.webp", out="hero-media-warm.webp"):
     """The floating vial cluster, graded to sit over the warm room.
 
+    BUILD ORDER: `src` is written by `compose.py`, so compose.py has to run
+    BEFORE this. Run it the other way round and the warm cut is graded from a
+    stale cluster, which is a difference you cannot see by looking — it shows up
+    only as a file that will not stop appearing in `git status`.
+
     This one is a much easier problem than the row on the counter, because it
     floats. Nothing has to agree with a measured surface, a horizon or a
     reflection — it only has to be lit like the room it hangs in front of. So

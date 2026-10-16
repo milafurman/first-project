@@ -1,34 +1,25 @@
-.lf-section-hero img[src*="hero-media"]{max-height:560px!important;animation:float 5s ease-in-out infinite;will-change:transform}
-.lf-card .aspect-square{background:#fff!important}
+.lf-card .aspect-square{background:#EDF4FB!important}
 .lf-card:hover{border-color:#1C8CD0;box-shadow:0 22px 44px -20px rgba(14,24,48,.38)}
 .lf-section-quality .rounded-2xl:hover{background-color:rgba(28,140,208,.12);box-shadow:0 20px 40px -20px rgba(28,140,208,.55)}
 .lf-section-howItWorks .rounded-2xl:hover{border-color:#1C8CD0;box-shadow:0 20px 40px -20px rgba(14,24,48,.3)}
 .lf-section-comparison{display:none}
-/* the theme washes the hero photo out under a flat white scrim, enough to hide the product standing in it. Horizontal instead: opaque under the headline on the left, clearing fast so the vial on the right reads at full strength. A phone has no left and right to trade, so it keeps an even scrim. */
 .lf-section-hero .z-0>div.absolute.inset-0{background-image:linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.84) 30%,rgba(255,255,255,.55) 46%,rgba(255,255,255,.18) 62%,rgba(255,255,255,.06) 100%)!important}
 @media(max-width:767px){.lf-section-hero .z-0>div.absolute.inset-0{background-image:linear-gradient(rgba(255,255,255,.8) 0%,rgba(255,255,255,.66) 50%,rgba(255,255,255,.84) 100%)!important}}
 .lf-announcement-bar{min-height:2rem!important;padding-block:.3rem!important;font-size:.75rem;letter-spacing:.01em}
-/* solid white rather than the theme's 72% glass, which smears whatever scrolls under it */
 header.glass{background:#fff!important;border-bottom:1px solid #E8EBF0!important}
 header .mx-auto.flex{min-height:4.5rem}
 header nav{gap:2.25rem!important}
 header nav a{font-size:.875rem!important;letter-spacing:.012em;color:#272C36!important}
 header nav a:hover{color:#1C8CD0!important}
 header a.flex img{height:2.75rem!important}
-/* Navy rather than near-black, to match the quality band. Two things this rule
-   needs that are easy to miss: Lapis requires footer colours to be set as a
-   PAIR (this region carries the research-use disclaimer and its contrast is
-   checked), and it needs !important, because the theme puts its own class on
-   the footer element and a bare element selector loses to it. */
 footer{background-color:#0A192F!important;color:#FFFFFF!important}
 footer .mx-auto{padding-top:4.5rem!important;padding-bottom:3.25rem!important}
-/* the research-use sentence is the one line down here with legal weight, and it was set in the same muted grey as the copyright. Ruled, not restyled — the text itself cannot be resized or faded, and should not be. */
 footer .border-t>p:first-child{border-left:2px solid #C9A227;padding:.1rem 0 .1rem .9rem}
-/* Tinted panels rather than full-bleed bands. Full-bleed needs clip-path or a
-   -50vw margin, and Lapis allows neither; the box-shadow spread that worked
-   this morning now paints over its neighbours unclipped, which is what wiped
-   out the navy section. A rounded panel is honest about what it is. */
 .lf-section-howItWorks{background-color:#F3F6FC;border-radius:1.5rem;padding-block:4rem!important}
 .lf-section-faq{background-color:#F8F6F1;border-radius:1.5rem;padding-block:4rem!important;padding-inline:3rem!important;max-width:60rem}
 .lf-section-ctaBanner{background-color:#EDF2FB;border-radius:1.5rem;padding-block:4rem!important}
 .lf-section-quality{background-color:#0A192F!important}
+h1.font-display.text-3xl{font-size:2.25rem!important;letter-spacing:-.02em}
+@media(min-width:640px){h1.font-display.text-3xl{font-size:3rem!important}}
+h2.uppercase{font-size:.8125rem!important;letter-spacing:.12em!important}
+.max-w-5xl .rounded-2xl.text-center{background-color:#EDF4FB!important;border-color:#1C8CD0!important;border-radius:1.25rem;padding-top:2.75rem!important;padding-bottom:2.75rem!important}

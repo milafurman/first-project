@@ -30,9 +30,47 @@ As silhouettes they overlap 53%, so they are two drawings, not two exports of
 one.
 
 **Mila picked the FIRST — the spiky one — on 2026-10-09**, and because no vials
-had been printed yet the label artwork moved with it rather than diverging from
-it. `../marks/mark-original.png` is the master. The smooth drawing is kept at
+had been printed yet nothing was committed to the wrong drawing.
+`../marks/mark-original.png` is the master. The smooth drawing is kept at
 `../_archive/smooth-mark/` as the record of what the labels used to carry.
+
+> **Correction, 12 Oct 2026.** This section used to say the label artwork
+> "moved with it rather than diverging from it". That was not true. The repo's
+> own assets did move — `../vials/mark-og.png` is the spiky mark in brand blue —
+> but **the live Canva label artwork kept the smooth mark, in the legacy blue,
+> for three more days.** Mila spotted it. It was replaced on all 20 pages on
+> 12 Oct 2026. See "The Canva label artwork" below. The lesson is that this
+> repo being correct says nothing about Canva being correct: they are separate
+> artifacts and nothing syncs them.
+
+## The Canva label artwork
+
+The vial labels that actually go to print are **not** in this repo. They are a
+Canva design, 20 pages, one per product/size:
+
+**https://www.canva.com/design/DAHXw-xpMJk/UoQaA69t3_3A_56nl-mVTg/edit**
+(the file is named "Copy of TRUEMG Labels" — there is an **original** of that
+name somewhere in the account which has **none** of this work in it and still
+carries the old mark and the old blue. Always use the copy.)
+
+As of 12 Oct 2026 all 20 pages carry:
+
+| | |
+|---|---|
+| Mark | The spiky master, uploaded from `truemg-mark-brand.svg`, already `#1C8CD0` |
+| Blue | `#1C8CD0` on the product name and on the MG half of the wordmark |
+| Type | Inter — the design's own face, including the batch field |
+| Alignment | One shared left edge for every element on every label |
+| Batch | `BATCH:` plus a blank rule, deliberately empty — the value is per print run |
+
+**Nothing syncs this to the repo.** Changing a logo file here does not change
+the labels, and vice versa. If the mark changes again, it has to be re-uploaded
+to Canva by hand.
+
+⚠️ **The label wordmark is not one of the files below.** Every lockup in this
+directory is horizontal; the labels use a **vertical** TRUE MG with no LABS,
+built as a stacked two-line image that exists nowhere else. Deliberate or not,
+it is Mila's open decision — see `storefront/DESIGN-TASKLIST.md` 1E.3.
 
 > An earlier version of this file said the second drawing was the master and
 > the storefront favicon had been changed to match. That was true for two days.

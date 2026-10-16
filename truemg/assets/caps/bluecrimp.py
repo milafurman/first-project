@@ -37,7 +37,13 @@ for f in files:
 print("recoloured", len(files))
 
 # ---- contact sheet, checkerboard behind the alpha so a white halo would show ----
-F = lambda n, s: ImageFont.truetype("/usr/share/fonts/truetype/dejavu/" + n, s)
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), ".."))
+from _fonts import font as _font
+# Roles, not filenames, and no hardcoded Linux path. See ../_fonts.py
+F = lambda n, s: _font({"DejaVuSansMono.ttf": "mono",
+                        "DejaVuSans.ttf": "sans",
+                        "DejaVuSans-Bold.ttf": "bold"}.get(n, "sans"), s)
 MONO, BOLD = F("DejaVuSansMono.ttf", 13), F("DejaVuSans-Bold.ttf", 21)
 INK, MUT = (10, 10, 11), (138, 133, 125)
 COLS, CW, CH = 6, 172, 236

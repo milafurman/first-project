@@ -1,0 +1,119 @@
+Hi Austin,
+
+Mila from TrueMG Labs — Sam passed on your address. Thanks for offering to take
+this directly.
+
+Store is TrueMG, truemglabs.com, template `revive`, login support@truemglabs.com.
+Four things, in the order they're costing us. Happy to give you a window to
+reproduce any of them live.
+
+
+1. THE STORE INTERMITTENTLY SERVES A BLANK PAGE FOR 10-20 SECONDS
+
+This is the one that worries me most, because a visitor who waits ten seconds on
+a white screen never sees the shop at all.
+
+Five consecutive cache-busted loads of /catalog, reading
+domContentLoadedEventEnd from the browser's own navigation timing:
+
+    run 1    21.1 s
+    run 2     3.8 s
+    run 3     1.9 s
+    run 4     1.1 s
+    run 5    11.8 s   (still only ~15 characters of text on screen after 10 s)
+
+Two of five took over ten seconds. On the slow runs the page isn't a spinner and
+isn't a skeleton — it's blank white. /store did the same thing twice in a row,
+then filled in somewhere between 10 and 15 seconds.
+
+It isn't our connection and it isn't your hosting:
+
+  - example.com in the same browser in the same minute: 0.22 s
+  - time to first byte on the slow runs: 93 ms — your server answers instantly
+
+So the delay is entirely client-side, after the HTML arrives. No console errors
+captured. Separately, the admin product list at /admin/products sat on
+"Loading…" for over 20 seconds, twice.
+
+Is there a known issue with the client bundle or a data fetch on `revive`?
+
+
+2. CUSTOM CSS CAN'T BE EDITED, AND THE EDITOR FAILS AT IT SILENTLY
+
+Design studio (/admin/appearance) is chat-only. There's no Custom CSS field, no
+colour inputs, no manual mode — "Sections and pages" lists only AI-built
+sections. So the chat agent is the only route to Custom CSS.
+
+It doesn't work for this, in three escalating ways.
+
+  (a) Asked to change one value, it APPENDS a rule instead of editing the
+      existing one, and drops !important. We asked it to change
+
+          .lf-card .aspect-square{background:#EDF4FB!important}
+
+      to #E1EAF4. After publishing, the stylesheet contained both:
+
+          .lf-card .aspect-square{background:#EDF4FB!important}
+          .lf-card .aspect-square { background: #E1EAF4; }
+
+      Identical selectors, so !important wins and the new rule is dead. The
+      publish reported success and nothing changed on the page — confirmed by
+      computed style, still rgb(237,244,251).
+
+      A publish that succeeds and has no effect is worse than an error.
+
+  (b) Told explicitly to delete the old rule and replace it carrying
+      !important, it now says it can't do it. I tried this myself, by hand, in
+      Design studio — not through the API and not through an agent.
+
+  (c) So there's currently no supported way for me to change one line of my own
+      Custom CSS.
+
+For completeness, so you don't chase the wrong thing: the same stylesheet
+validates cleanly through your agent design endpoint — a dry run came back ok
+with no refused rules. Your API is fine. The gap is that the admin offers no
+equivalent, and the chat agent mishandles CSS.
+
+Could you either expose a plain Custom CSS textarea in Design studio, or fix the
+agent so it replaces rules rather than appending them and preserves !important?
+
+
+3. THE API AND THE CHAT DISAGREE ABOUT HERO IMAGE FIELDS
+
+heroBackgroundUrl, heroBackgroundMobileUrl and heroMediaUrl accept a plain https
+URL through the design endpoint — ours are set to working URLs right now.
+
+Asked to change them, the Design studio chat says those slots only accept images
+from the media library, not web addresses. Both can't be true. If URLs are
+supported the chat should accept them; if they aren't, the field shouldn't.
+
+Related: there doesn't seem to be a media library page in the admin at all. The
+chat's own answer is that images only enter the library by being added as a
+product's photo — which is awkward for a hero image, since it isn't a product.
+
+
+4. THE CSS ALLOWLIST CHANGED WITHOUT NOTICE AND DROPPED WORKING RULES
+
+On 11 October a stylesheet that applied cleanly in the morning came back in the
+evening with 33 rules dropped. Nothing changed on our side. The rejections were
+for properties including position, inset, z-index, clip-path and overflow.
+
+I'm not arguing the allowlist — I understand why it's there. The problem is that
+it tightened silently on a live store. Is there a changelog for it, and can rule
+rejections be surfaced in the admin rather than only in an API response?
+
+
+ONE THING THAT ISN'T A COMPLAINT
+
+Sam mentioned you're working on card processing and that it's not in your
+control. Understood, no action needed — I only mention it because it's why we're
+live on Zelle and Venmo as manual payments, which are set up and working fine.
+
+
+Thanks Austin — happy to jump on a call, or give you a window to reproduce any
+of these. The blank-page one especially: we're about to come out of coming-soon
+and that's the one that'll cost us customers.
+
+Mila Furman
+TrueMG Labs
+truemglabs.com

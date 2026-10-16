@@ -87,9 +87,16 @@ MONO    = "IBM Plex Mono, SF Mono, Menlo, monospace"
 # usable front panel: the right-hand WRAP strip curves out of sight on the vial
 PANEL = TRIM_W - 2*SAFE - WRAP
 
-def fit(text, avail, ratio, cap):
-    """Largest font size (mm) at which `text` still fits `avail` mm."""
-    return min(cap, avail / max(1e-6, ratio * len(text)))
+def fit(text, avail, ratio, cap, tracking=0.0):
+    """Largest font size (mm) at which `text` still fits `avail` mm.
+
+    `tracking` is the per-character letter-spacing in mm, and leaving it out of
+    the estimate is what pushed RESEARCH / PURITY / PRECISION past its column:
+    29 characters at 0.1mm each is 2.9mm the old estimate never counted. It did
+    not show while the wordmark sat 2.2mm further right than it should have —
+    the two bugs hid each other."""
+    n = max(1, len(text))
+    return min(cap, max(0.1, (avail / n - tracking) / max(1e-6, ratio)))
 
 def label_side(name, strength, net, lot="__________", guides=False, palette="paper-blue"):
     """Mila's own arrangement, kept: product name top left, strength under it, the
@@ -115,7 +122,14 @@ def label_side(name, strength, net, lot="__________", guides=False, palette="pap
     ASIDE_W  = COL - (MARK_W + 1.2)
 
     # vertical wordmark, reading bottom to top
-    wx, wy = right - 2.2, OY + TRIM_H - SAFE
+    # Derived from the lockup's own depth, not a hand-set 2.2mm. At 2.2 the
+    # block ran from x49.30 to x54.80 against a wrap line at x51.50, so LABS
+    # sat entirely inside the strip that curves out of sight on the cylinder
+    # and TRUEMG lost its last quarter. That is why the vial photograph reads
+    # "TRUE M" and then nothing.
+    _inner, _lw, _lh = lockup_for(P)
+    _depth = (TRIM_H - 2*SAFE) * _lh / _lw
+    wx, wy = right - _depth, OY + TRIM_H - SAFE
     wlen = TRIM_H - 2*SAFE
     inner, lw, _ = lockup_for(P)
     g.append(f'<g transform="translate({wx:.2f},{wy:.2f}) rotate(-90) scale({wlen/lw:.6f})">{inner}</g>')
@@ -134,11 +148,11 @@ def label_side(name, strength, net, lot="__________", guides=False, palette="pap
     g.append(mark(cx, MARK_Y, MARK_W, P['accent']))
 
     SLOG_Y, LOT_Y = OY + 14.6, OY + 17.4
-    sl = min(fit(SLOGAN, ASIDE_W, 0.60, 1.5), 1.5)
+    sl = min(fit(SLOGAN, ASIDE_W, 0.60, 1.5, tracking=0.10), 1.5)
     g.append(f'<text x="{ASIDE_X:.2f}" y="{SLOG_Y:.2f}" font-family="{MONO}" '
              f'font-size="{sl:.2f}" letter-spacing="0.1" fill="{P["accent"]}">{e(SLOGAN)}</text>')
     dl = f"LOT {lot}  MFG __________"
-    dz = min(fit(dl, ASIDE_W, 0.60, 1.35), 1.35)
+    dz = min(fit(dl, ASIDE_W, 0.60, 1.35, tracking=0.05), 1.35)
     g.append(f'<text x="{ASIDE_X:.2f}" y="{LOT_Y:.2f}" font-family="{MONO}" '
              f'font-size="{dz:.2f}" letter-spacing="0.05" fill="{P["muted"]}">{e(dl)}</text>')
 
@@ -146,7 +160,7 @@ def label_side(name, strength, net, lot="__________", guides=False, palette="pap
              "FOR LABORATORY RESEARCH USE ONLY",
              "NOT FOR DIAGNOSTIC USE"]
     CMP_Y, LEAD = OY + 24.2, 1.55
-    cs = min(fit(max(lines, key=len), COL, 0.60, 1.5), 1.5)
+    cs = min(fit(max(lines, key=len), COL, 0.60, 1.5, tracking=0.03), 1.5)
     for i, ln in enumerate(lines):
         g.append(f'<text x="{cx}" y="{CMP_Y + i*LEAD:.2f}" font-family="{MONO}" '
                  f'font-size="{cs:.2f}" letter-spacing="0.03" '
@@ -159,6 +173,9 @@ def label_side(name, strength, net, lot="__________", guides=False, palette="pap
     assert MARK_Y + MARK_W <= CMP_Y - cs, "the mark runs into the compliance block"
     assert MARK_Y >= STR_Y + 0.6, "the mark runs into the strength line"
     assert SLOG_Y - sl >= MARK_Y, "the slogan sits above the mark it should sit beside"
+    assert wx + _depth <= right + 1e-6, "the wordmark runs past the wrap line and off the vial"
+    for _t, _sz, _tr in [(SLOGAN, sl, 0.10), (dl, dz, 0.05)]:
+        assert len(_t)*(0.60*_sz + _tr) <= ASIDE_W + 1e-6, "%r overruns its column" % _t[:18]
 
     if guides:
         g.append(f'<g fill="none" stroke-width="0.12">'
@@ -169,6 +186,11 @@ def label_side(name, strength, net, lot="__________", guides=False, palette="pap
             f'viewBox="0 0 {W} {H}">{"".join(g)}</svg>')
 
 
+# NOTE — the top layout still calls fit() without `tracking`, so its four
+# letter-spaced lines are measured the old, optimistic way. Checked 12 Oct 2026
+# across all 20 products against the 55mm top panel: nothing overruns, because
+# the size caps bind long before the width limit does. It is latent, not live.
+# Pass tracking= here too if a cap is ever raised or a longer name is added.
 def label(name, strength, net, lot="__________", guides=False, palette="ink-gold"):
     P = PALETTES[palette]
     """Explicit vertical budget. Content box is 25mm tall; every baseline is placed,
