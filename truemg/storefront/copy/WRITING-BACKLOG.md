@@ -12,7 +12,7 @@ the next one starts.
 | 4 | Shipping & delivery detail | `legalRefundsBody` + FAQ | **CLOSED 15 Oct — Mila's call: lowest priority, stop raising it** |
 | 5 | Lab Results page body | `labIntro` | **DONE 15 Oct — verified live** |
 | 6 | Citations | **About page** — see `CITATIONS-VERIFIED.md` | **DONE 15 Oct — live, 21 references verified** |
-| 7 | Pairs-well-with curation | per product | blocked — needs Mila's choice |
+| 7 | Pairs-well-with curation | per product | **CLOSED 15 Oct — already hidden by the theme; no action needed, and the hide flag would be harmful** |
 | 8 | Who makes it / who tests it | hero, `labIntro`, About, coming-soon | **DONE 15 Oct — live, see `WHO-MAKES-AND-WHO-TESTS.md`** |
 | 9 | Truncation sweep | all 145 populated copy fields | **DONE 15 Oct — one defect found and fixed, no others** |
 

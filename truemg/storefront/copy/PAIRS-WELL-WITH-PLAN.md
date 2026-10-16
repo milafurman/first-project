@@ -41,3 +41,21 @@ a regulator reads total impression. Three options:
 
 Not started pending that choice. It is 17 products of admin work either way, so worth deciding
 once rather than redoing.
+
+---
+
+## Closed, 15 Oct 2026 — and I nearly did the wrong thing
+
+I told Mila I would hide the section. Then I checked the live product page before writing, and
+**the section does not render at all** when the per-product field is empty, which it is on all
+17. The theme already does exactly what she asked for.
+
+There *is* a `hide:pairsWellWith` flag. **Setting it would be actively harmful.** Left unset,
+the theme shows the section only when a product actually has cross-sells, which is the correct
+behaviour. Set, it would silently suppress them later and quietly waste the time of whoever
+fills those fields wondering why nothing appears.
+
+**So: no change made.** Verified on the live GHK-CU page — headings are `GHK-CU`,
+`Compound class`, `Certificate of Analysis` and the disclaimer. No cross-sell section.
+
+The outcome Mila wanted was already true. The right move was to write nothing.
